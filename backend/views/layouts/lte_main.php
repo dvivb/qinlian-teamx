@@ -188,6 +188,22 @@ if($otherMenu == false){
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+            <li>
+                <a href="#" ><i class="fa fa-clock-o"></i>
+                <?php
+                    $week=array(
+                        "0"=>"星期日",
+                        "1"=>"星期一",
+                        "2"=>"星期二",
+                        "3"=>"星期三",
+                        "4"=>"星期四",
+                        "5"=>"星期五",
+                        "6"=>"星期六"
+                        );
+                    echo date('Y-m-d') . ' ' . $week[date('w')];
+                    ?>
+                    </a>
+            </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user-menu notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -199,7 +215,7 @@ if($otherMenu == false){
              
               <ul class="dropdown-menu">
               <!-- User image -->
-              
+
               <!-- Menu Body -->
               <li class="user-body">
               	<ul class="menu">
@@ -211,9 +227,9 @@ if($otherMenu == false){
               
           </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+<!--          <li>-->
+<!--            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
+<!--          </li>-->
         </ul>
       </div>
     </nav>
