@@ -2,7 +2,10 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 ?>
+<style>
 
+</style>
+<link rel="stylesheet" href="<?=Url::base()?>/dist/css/my.css">
 <div class="login-box">
   <div class="login-logo">
     <a href="<?=Url::toRoute('/')?>"><b>管理后台</b></a>

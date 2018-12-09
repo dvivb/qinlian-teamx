@@ -1,0 +1,8 @@
+.login-box-body, .register-box-body {  background: url(/dist/img/my/login-form-bg.jpg);}
+.login-page, .register-page { background: url(/dist/img/my/login-body-bg.jpg) no-repeat;    width: 100%;    height: 100%;    background-size: 100%;}
+.login-page p.login-box-msg.h3 {
+  font-size: 20px;
+  color: #0c2633;
+}
+
+.main-header .logo .logo-lg {font-size: 14px;font-weight: bolder;}

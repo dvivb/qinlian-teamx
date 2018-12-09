@@ -68,6 +68,7 @@ if($otherMenu == false){
   <link rel="stylesheet" href="<?=Url::base()?>/libs/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=Url::base()?>/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?=Url::base()?>/dist/css/my.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=Url::base()?>/dist/css/skins/_all-skins.min.css">
@@ -563,6 +564,7 @@ if($otherMenu == false){
 <script src="<?=Url::base()?>/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?=Url::base()?>/dist/js/demo.js"></script>
+<script src="<?=Url::base()?>/dist/js/my.js"></script>
 
 
 </body>
