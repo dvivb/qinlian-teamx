@@ -7,3 +7,9 @@
 
 .main-header .logo .logo-lg {font-size: 14px;font-weight: bolder;}
 .sidebar-toggle{display: none}
+
+.skin-green .sidebar-menu>li:hover>a, .skin-green .sidebar-menu>li.active>a {
+  color: #8aa4af;
+  background: #1e282c;
+  border-left-color: #00a65a;
+}

@@ -68,7 +68,6 @@ if($otherMenu == false){
   <link rel="stylesheet" href="<?=Url::base()?>/libs/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=Url::base()?>/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?=Url::base()?>/dist/css/my.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=Url::base()?>/dist/css/skins/_all-skins.min.css">
@@ -86,6 +85,7 @@ if($otherMenu == false){
   <link rel="stylesheet" href="<?=Url::base()?>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?=Url::base()?>/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="<?=Url::base()?>/dist/css/my.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -285,15 +285,15 @@ if($otherMenu == false){
 			    $menuHtml .= '       <i class="fa fa-angle-left pull-right"></i>';
 			    $menuHtml .= '   </span>';
 			    $menuHtml .= '   </a>';
-			   // echo '   <ul class="treeview-menu">';
+//			    echo '   <ul class="treeview-menu">';
 			   if($isTreeView != ""){
 			       $menuHtml .= '<ul class="treeview-menu">';
 			       foreach($funcList as $fun){
 			           $isActive = $fun['url'] == $funInfo['entry_url'] ? 'class="active"' : ''; //'. $isActive .'
 			           $menuHtml .= '<li '. $isActive .'><a href="'.Url::to([$fun['url']]).'"><i class="fa fa-circle-o"></i>'. $fun['label'] .'</a></li>';
-			           if(empty($isMenuActive) == true && $isActive != ""){
+//			           if(empty($isMenuActive) == true && $isActive != ""){
 			               $isMenuActive = 'active ';
-			           }
+//			           }
 			       }
 			       $menuHtml .= '</ul>';
 			   }
