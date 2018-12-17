@@ -463,7 +463,7 @@ class CaseRecordController extends BaseController
 
         ob_end_clean();
         ob_start();
-
+var_dump($phpexcel);echo 1;die;
         header('Content-Type : application/vnd.ms-excel');
         header('Content-Disposition:attachment;filename="'.'案件信息-'.date("Y年m月j日").'.xls"');
         $objWriter = \PHPExcel_IOFactory::createWriter($phpexcel,'Excel5');

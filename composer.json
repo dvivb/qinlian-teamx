@@ -17,7 +17,8 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "phpoffice/phpexcel": "^1.8"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -26,19 +27,12 @@
         "yiisoft/yii2-faker": "*"
     },
     "config": {
-        "process-timeout": 1800
-    },
-    "extra": {
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
-        }
-    },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://packagist.phpcomposer.com"
+        "process-timeout": 1800,
+        "fxp-asset" : {
+            "installer-paths" : {
+                "npm-asset-library" : "vendor/npm",
+                "bower-asset-library" : "vendor/bower"
+            }
         }
     }
-
 }

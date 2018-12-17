@@ -31,16 +31,20 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         array (
             'Faker\\' => 6,
         ),
+        'E' => 
+        array (
+            'Egulias\\EmailValidator\\' => 23,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'yii\\swiftmailer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer/src',
         ),
         'yii\\gii\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-gii/src',
         ),
         'yii\\faker\\' => 
         array (
@@ -48,7 +52,7 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
         'yii\\debug\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-debug',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-debug/src',
         ),
         'yii\\composer\\' => 
         array (
@@ -60,7 +64,7 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
         'yii\\bootstrap\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap/src',
         ),
         'yii\\' => 
         array (
@@ -74,9 +78,20 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
+        'Egulias\\EmailValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
+        ),
     );
 
     public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPExcel' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',
+            ),
+        ),
         'H' => 
         array (
             'HTMLPurifier' => 
@@ -86,6 +101,10 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
         'D' => 
         array (
+            'Doctrine\\Common\\Lexer\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
+            ),
             'Diff' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/php-diff/lib',
