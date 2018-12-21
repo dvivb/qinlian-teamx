@@ -548,7 +548,7 @@ class CaseRecordController extends BaseController
         $objWriter->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/');
     }
 
-    public function actionExport(){
+    public function actionExportsss(){
         $helper = new Sample();
         if ($helper->isCli()) {
             $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
@@ -599,6 +599,197 @@ class CaseRecordController extends BaseController
         header('Pragma: public'); // HTTP/1.0
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        exit;
+    }
+
+    public function actionExport()
+    {
+        $query = CaseRecord::find();
+        $data = $query
+//            ->offset($pagination->offset)
+//            ->limit($pagination->limit)
+            ->all();
+//        echo '<pre>';
+//        var_dump($data);die;
+
+//        $phpexcel = new PHPExcel();
+        $phpexcel = new Spreadsheet();
+
+        $phpexcel->getActiveSheet()->setCellValue('A1', '姓名');
+        $phpexcel->getActiveSheet()->setCellValue('B1', '性别');
+        $phpexcel->getActiveSheet()->setCellValue('C1', '民族');
+        $phpexcel->getActiveSheet()->setCellValue('D1', '年龄');
+        $phpexcel->getActiveSheet()->setCellValue('E1', '政治面貌');
+
+        $phpexcel->getActiveSheet()->setCellValue('F1', '入党时间');
+        $phpexcel->getActiveSheet()->setCellValue('G1', '单位');
+        $phpexcel->getActiveSheet()->setCellValue('H1', '职务');
+        $phpexcel->getActiveSheet()->setCellValue('I1', '职级');
+        $phpexcel->getActiveSheet()->setCellValue('J1', '是否监察对象');
+
+        $phpexcel->getActiveSheet()->setCellValue('K1', '是否公务员');
+        $phpexcel->getActiveSheet()->setCellValue('L1', '线索编码');
+        $phpexcel->getActiveSheet()->setCellValue('M1', '线索人员编码');
+        $phpexcel->getActiveSheet()->setCellValue('N1', '受理时间');
+        $phpexcel->getActiveSheet()->setCellValue('O1', '办理机关');
+
+        $phpexcel->getActiveSheet()->setCellValue('P1', '线索来源');
+        $phpexcel->getActiveSheet()->setCellValue('Q1', '违纪类型');
+        $phpexcel->getActiveSheet()->setCellValue('R1', '违法类型');
+        $phpexcel->getActiveSheet()->setCellValue('S1', '处置方式');
+        $phpexcel->getActiveSheet()->setCellValue('T1', '线索摘要');
+
+        $phpexcel->getActiveSheet()->setCellValue('U1', '初核报告');
+        $phpexcel->getActiveSheet()->setCellValue('V1', '案件编码');
+        $phpexcel->getActiveSheet()->setCellValue('W1', '案件人员编码');
+        $phpexcel->getActiveSheet()->setCellValue('X1', '立案时间');
+        $phpexcel->getActiveSheet()->setCellValue('Y1', '立案机关');
+
+        $phpexcel->getActiveSheet()->setCellValue('Z1', '简要案情');
+        $phpexcel->getActiveSheet()->setCellValue('AA1', '立案报告');
+        $phpexcel->getActiveSheet()->setCellValue('AB1', '立案决定书');
+        $phpexcel->getActiveSheet()->setCellValue('AC1', '审查报告');
+        $phpexcel->getActiveSheet()->setCellValue('AD1', '审理受理时间');
+
+        $phpexcel->getActiveSheet()->setCellValue('AE1', '审理报告');
+        $phpexcel->getActiveSheet()->setCellValue('AF1', '审结时间');
+        $phpexcel->getActiveSheet()->setCellValue('AG1', '结案时间');
+        $phpexcel->getActiveSheet()->setCellValue('AH1', '党纪处分');
+        $phpexcel->getActiveSheet()->setCellValue('AI1', '政纪处分');
+
+        $phpexcel->getActiveSheet()->setCellValue('AJ1', '处分决定');
+        $phpexcel->getActiveSheet()->setCellValue('AK1', '移送司法时间');
+        $phpexcel->getActiveSheet()->setCellValue('AL1', '公检法受理时间');
+        $phpexcel->getActiveSheet()->setCellValue('AM1', '公检法处理内容');
+        $phpexcel->getActiveSheet()->setCellValue('AN1', '删除状态');
+
+        $phpexcel->getActiveSheet()->setCellValue('AO1', '创建时间');
+        $phpexcel->getActiveSheet()->setCellValue('AP1', '更新时间');
+
+        $phpexcel->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $phpexcel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
+        $phpexcel->getActiveSheet()->getColumnDimension('B')->setWidth(12);
+        $phpexcel->getActiveSheet()->getColumnDimension('C')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('E')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+        $phpexcel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
+        $phpexcel->getActiveSheet()->getColumnDimension('H')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('I')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('J')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('K')->setWidth(30);
+        $phpexcel->getActiveSheet()->getColumnDimension('L')->setWidth(12);
+        $phpexcel->getActiveSheet()->getColumnDimension('M')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('N')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('O')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('P')->setWidth(30);
+        $phpexcel->getActiveSheet()->getColumnDimension('Q')->setWidth(12);
+        $phpexcel->getActiveSheet()->getColumnDimension('R')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('S')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('T')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('U')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('V')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('W')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('X')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('Y')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('X')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AA')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AB')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AC')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AD')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('AE')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AF')->setWidth(30);
+        $phpexcel->getActiveSheet()->getColumnDimension('AG')->setWidth(12);
+        $phpexcel->getActiveSheet()->getColumnDimension('AH')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AI')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('AJ')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AK')->setWidth(30);
+        $phpexcel->getActiveSheet()->getColumnDimension('AL')->setWidth(12);
+        $phpexcel->getActiveSheet()->getColumnDimension('AM')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AN')->setWidth(16);
+        $phpexcel->getActiveSheet()->getColumnDimension('AO')->setWidth(16);
+
+        $phpexcel->getActiveSheet()->getColumnDimension('AP')->setWidth(30);
+
+        $i = 2;
+        foreach($data as $key=>$val){
+
+            $phpexcel->getActiveSheet()->setCellValue('A' . $i, $val['name']);
+            $phpexcel->getActiveSheet()->setCellValue('B' . $i, $val['sex']);
+            $phpexcel->getActiveSheet()->setCellValue('C' . $i, $val['nation']);
+            $phpexcel->getActiveSheet()->setCellValue('D' . $i, $val['age']);
+            $phpexcel->getActiveSheet()->setCellValue('E' . $i, $val['politics_status']);
+
+            $phpexcel->getActiveSheet()->setCellValue('F' . $i, $val['join_party_date']);
+            $phpexcel->getActiveSheet()->setCellValue('G' . $i, $val['organization_name']);
+            $phpexcel->getActiveSheet()->setCellValue('H' . $i, $val['duty']);
+            $phpexcel->getActiveSheet()->setCellValue('I' . $i, $val['rank']);
+            $phpexcel->getActiveSheet()->setCellValue('J' . $i, $val['is_monitor']);
+
+            $phpexcel->getActiveSheet()->setCellValue('K' . $i, $val['is_official']);
+            $phpexcel->getActiveSheet()->setCellValue('L' . $i, $val['clue_code']);
+            $phpexcel->getActiveSheet()->setCellValue('M' . $i, $val['clue_people_code']);
+            $phpexcel->getActiveSheet()->setCellValue('N' . $i, $val['clue_accept_time']);
+            $phpexcel->getActiveSheet()->setCellValue('O' . $i, $val['clue_manage_office']);
+
+            $phpexcel->getActiveSheet()->setCellValue('P' . $i, $val['clue_source']);
+            $phpexcel->getActiveSheet()->setCellValue('Q' . $i, $val['clue_violations_type']);
+            $phpexcel->getActiveSheet()->setCellValue('R' . $i, $val['clue_outlawed_type']);
+            $phpexcel->getActiveSheet()->setCellValue('S' . $i, $val['clue_disposition_method']);
+            $phpexcel->getActiveSheet()->setCellValue('T' . $i, $val['clue_summary']);
+
+            $phpexcel->getActiveSheet()->setCellValue('U' . $i, $val['clue_protokaryon_report']);
+            $phpexcel->getActiveSheet()->setCellValue('V' . $i, $val['case_code']);
+            $phpexcel->getActiveSheet()->setCellValue('W' . $i, $val['case_people_code']);
+            $phpexcel->getActiveSheet()->setCellValue('X' . $i, $val['case_register_time']);
+            $phpexcel->getActiveSheet()->setCellValue('Y' . $i, $val['case_register_office']);
+
+            $phpexcel->getActiveSheet()->setCellValue('X' . $i, $val['case_summary']);
+            $phpexcel->getActiveSheet()->setCellValue('AA' . $i, $val['case_register_report']);
+            $phpexcel->getActiveSheet()->setCellValue('AB' . $i, $val['case_register_decision']);
+            $phpexcel->getActiveSheet()->setCellValue('AC' . $i, $val['case_review_report']);
+            $phpexcel->getActiveSheet()->setCellValue('AD' . $i, $val['settle_accept_time']);
+
+            $phpexcel->getActiveSheet()->setCellValue('AE' . $i, $val['settle_accept_report']);
+            $phpexcel->getActiveSheet()->setCellValue('AF' . $i, $val['settle_conclude_time']);
+            $phpexcel->getActiveSheet()->setCellValue('AG' . $i, $val['settle_finish_time']);
+            $phpexcel->getActiveSheet()->setCellValue('AH' . $i, $val['settle_party_disposal']);
+            $phpexcel->getActiveSheet()->setCellValue('AI' . $i, $val['settle_political_disposal']);
+
+            $phpexcel->getActiveSheet()->setCellValue('AJ' . $i, $val['settle_disposal_decision']);
+            $phpexcel->getActiveSheet()->setCellValue('AK' . $i, $val['settle_judiciary_time']);
+            $phpexcel->getActiveSheet()->setCellValue('AL' . $i, $val['settle_prosecutor_time']);
+            $phpexcel->getActiveSheet()->setCellValue('AM' . $i, $val['settle_prosecutor_details']);
+            $phpexcel->getActiveSheet()->setCellValue('AN' . $i, $val['del_status']);
+
+            $phpexcel->getActiveSheet()->setCellValue('AO' . $i, $val['create_date']);
+            $phpexcel->getActiveSheet()->setCellValue('AP' . $i, $val['update_time']);
+
+            $i++;
+        }
+
+        // Redirect output to a client’s web browser (Xlsx)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="01simple.xlsx"');
+        header('Cache-Control: max-age=0');
+// If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+// If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+
+        $writer = IOFactory::createWriter($phpexcel, 'Xlsx');
         $writer->save('php://output');
         exit;
     }
