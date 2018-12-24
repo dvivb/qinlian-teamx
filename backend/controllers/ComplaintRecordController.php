@@ -2,14 +2,12 @@
 
 namespace backend\controllers;
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Yii;
 use yii\data\Pagination;
 use backend\models\ComplaintRecord;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use PHPExcel;
 
 
 /**
@@ -236,56 +234,15 @@ class ComplaintRecordController extends BaseController
      */
     public function actionImport()
     {
-        $query = CaseRecord::find();
-        $querys = Yii::$app->request->get('query');
-        if(count($querys) > 0){
-            $condition = "";
-            $parame = array();
-            foreach($querys as $key=>$value){
-                $value = trim($value);
-                if(empty($value) == false){
-                    $parame[":{$key}"]=$value;
-                    if(empty($condition) == true){
-                        $condition = " {$key}=:{$key} ";
-                    }
-                    else{
-                        $condition = $condition . " AND {$key}=:{$key} ";
-                    }
-                }
-            }
-            if(count($parame) > 0){
-                $query = $query->where($condition, $parame);
-            }
-        }
-
-        $pagination = new Pagination([
-                'totalCount' =>$query->count(),
-                'pageSize' => '10',
-                'pageParam'=>'page',
-                'pageSizeParam'=>'per-page']
-        );
-
-        $orderby = Yii::$app->request->get('orderby', '');
-        if(empty($orderby) == false){
-            $query = $query->orderBy($orderby);
-        }
-
-        $models = $query
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-        return $this->render('statistics', [
-            'models'=>$models,
-            'pages'=>$pagination,
-            'query'=>$querys,
-        ]);
+        $inputFileName = '/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/ComplaintExport.xlsx';
+//        $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
+        $spreadsheet = IOFactory::load($inputFileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        echo '<pre>';
+        print_r($sheetData);die;
     }
 
 
-    /**
-     * Import all CaseRecord models.
-     * @return mixed
-     */
     public function actionExport()
     {
         $query = ComplaintRecord::find();
@@ -294,106 +251,112 @@ class ComplaintRecordController extends BaseController
 //            ->limit($pagination->limit)
             ->all();
 
-        $phpexcel = new \PHPExcel();
+        $spreadsheet = new Spreadsheet();
 
-        $phpexcel->getActiveSheet()->setCellValue('A1', '举报人姓名');
-        $phpexcel->getActiveSheet()->setCellValue('B1', '地址');
-        $phpexcel->getActiveSheet()->setCellValue('C1', '联系电话');
-        $phpexcel->getActiveSheet()->setCellValue('D1', '身份证号码');
-        $phpexcel->getActiveSheet()->setCellValue('E1', '被举报人姓名');
+        $spreadsheet->getActiveSheet()->setCellValue('A1', '举报人姓名');
+        $spreadsheet->getActiveSheet()->setCellValue('B1', '地址');
+        $spreadsheet->getActiveSheet()->setCellValue('C1', '联系电话');
+        $spreadsheet->getActiveSheet()->setCellValue('D1', '身份证号码');
+        $spreadsheet->getActiveSheet()->setCellValue('E1', '被举报人姓名');
 
-        $phpexcel->getActiveSheet()->setCellValue('F1', '单位');
-        $phpexcel->getActiveSheet()->setCellValue('G1', '政治面貌');
-        $phpexcel->getActiveSheet()->setCellValue('H1', '职务');
-        $phpexcel->getActiveSheet()->setCellValue('I1', '职级');
-        $phpexcel->getActiveSheet()->setCellValue('J1', '反映的主要问题');
+        $spreadsheet->getActiveSheet()->setCellValue('F1', '单位');
+        $spreadsheet->getActiveSheet()->setCellValue('G1', '政治面貌');
+        $spreadsheet->getActiveSheet()->setCellValue('H1', '职务');
+        $spreadsheet->getActiveSheet()->setCellValue('I1', '职级');
+        $spreadsheet->getActiveSheet()->setCellValue('J1', '反映的主要问题');
 
-        $phpexcel->getActiveSheet()->setCellValue('K1', '问题属地');
-        $phpexcel->getActiveSheet()->setCellValue('L1', '问题性质');
-        $phpexcel->getActiveSheet()->setCellValue('M1', '关键字');
-        $phpexcel->getActiveSheet()->setCellValue('N1', '领导批示时间');
-        $phpexcel->getActiveSheet()->setCellValue('O1', '批示状态');
+        $spreadsheet->getActiveSheet()->setCellValue('K1', '问题属地');
+        $spreadsheet->getActiveSheet()->setCellValue('L1', '问题性质');
+        $spreadsheet->getActiveSheet()->setCellValue('M1', '关键字');
+        $spreadsheet->getActiveSheet()->setCellValue('N1', '领导批示时间');
+        $spreadsheet->getActiveSheet()->setCellValue('O1', '批示状态');
 
-        $phpexcel->getActiveSheet()->setCellValue('P1', '批示意见');
-        $phpexcel->getActiveSheet()->setCellValue('Q1', '承办单位');
-        $phpexcel->getActiveSheet()->setCellValue('R1', '信访件转出时间');
-        $phpexcel->getActiveSheet()->setCellValue('S1', '删除状态');
-        $phpexcel->getActiveSheet()->setCellValue('T1', '创建时间');
+        $spreadsheet->getActiveSheet()->setCellValue('P1', '批示意见');
+        $spreadsheet->getActiveSheet()->setCellValue('Q1', '承办单位');
+        $spreadsheet->getActiveSheet()->setCellValue('R1', '信访件转出时间');
+        $spreadsheet->getActiveSheet()->setCellValue('S1', '删除状态');
+        $spreadsheet->getActiveSheet()->setCellValue('T1', '创建时间');
 
-        $phpexcel->getActiveSheet()->setCellValue('U1', '更新时间');
+        $spreadsheet->getActiveSheet()->setCellValue('U1', '更新时间');
 
-        $phpexcel->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $phpexcel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
-        $phpexcel->getActiveSheet()->getColumnDimension('B')->setWidth(12);
-        $phpexcel->getActiveSheet()->getColumnDimension('C')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('E')->setWidth(16);
+//        $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+//        $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\Spreadsheet_Style_Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(16);
 
-        $phpexcel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
-        $phpexcel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
-        $phpexcel->getActiveSheet()->getColumnDimension('H')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('I')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('J')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(16);
 
-        $phpexcel->getActiveSheet()->getColumnDimension('K')->setWidth(30);
-        $phpexcel->getActiveSheet()->getColumnDimension('L')->setWidth(12);
-        $phpexcel->getActiveSheet()->getColumnDimension('M')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('N')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('O')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('O')->setWidth(16);
 
-        $phpexcel->getActiveSheet()->getColumnDimension('P')->setWidth(30);
-        $phpexcel->getActiveSheet()->getColumnDimension('Q')->setWidth(12);
-        $phpexcel->getActiveSheet()->getColumnDimension('R')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('S')->setWidth(16);
-        $phpexcel->getActiveSheet()->getColumnDimension('T')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('P')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('Q')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('R')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('S')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('T')->setWidth(16);
 
-        $phpexcel->getActiveSheet()->getColumnDimension('U')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('U')->setWidth(16);
 
         $i = 2;
         foreach($data as $key=>$val){
 
-            $phpexcel->getActiveSheet()->setCellValue('A' . $i, $val['report_name']);
-            $phpexcel->getActiveSheet()->setCellValue('B' . $i, $val['report_address']);
-            $phpexcel->getActiveSheet()->setCellValue('C' . $i, $val['report_moblie']);
-            $phpexcel->getActiveSheet()->setCellValue('D' . $i, $val['report_idcard']);
-            $phpexcel->getActiveSheet()->setCellValue('E' . $i, $val['reported_name']);
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['report_name']);
+            $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $val['report_address']);
+            $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $val['report_moblie']);
+            $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $val['report_idcard']);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $val['reported_name']);
 
-            $phpexcel->getActiveSheet()->setCellValue('F' . $i, $val['reported_organization_name']);
-            $phpexcel->getActiveSheet()->setCellValue('G' . $i, $val['reported_politics_status']);
-            $phpexcel->getActiveSheet()->setCellValue('H' . $i, $val['reported_duty']);
-            $phpexcel->getActiveSheet()->setCellValue('I' . $i, $val['reported_rank']);
-            $phpexcel->getActiveSheet()->setCellValue('J' . $i, $val['reported_question']);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . $i, $val['reported_organization_name']);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . $i, $val['reported_politics_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('H' . $i, $val['reported_duty']);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . $i, $val['reported_rank']);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . $i, $val['reported_question']);
 
-            $phpexcel->getActiveSheet()->setCellValue('K' . $i, $val['reported_location']);
-            $phpexcel->getActiveSheet()->setCellValue('L' . $i, $val['reported_property']);
-            $phpexcel->getActiveSheet()->setCellValue('M' . $i, $val['reported_keyword']);
-            $phpexcel->getActiveSheet()->setCellValue('N' . $i, $val['flow_instructions_time']);
-            $phpexcel->getActiveSheet()->setCellValue('O' . $i, $val['flow_instructions_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $i, $val['reported_location']);
+            $spreadsheet->getActiveSheet()->setCellValue('L' . $i, $val['reported_property']);
+            $spreadsheet->getActiveSheet()->setCellValue('M' . $i, $val['reported_keyword']);
+            $spreadsheet->getActiveSheet()->setCellValue('N' . $i, $val['flow_instructions_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('O' . $i, $val['flow_instructions_status']);
 
-            $phpexcel->getActiveSheet()->setCellValue('P' . $i, $val['flow_instructions_opinion']);
-            $phpexcel->getActiveSheet()->setCellValue('Q' . $i, $val['reported_organizer']);
-            $phpexcel->getActiveSheet()->setCellValue('R' . $i, $val['flow_transferred_out_time']);
-            $phpexcel->getActiveSheet()->setCellValue('S' . $i, $val['del_status']);
-            $phpexcel->getActiveSheet()->setCellValue('T' . $i, $val['create_date']);
+            $spreadsheet->getActiveSheet()->setCellValue('P' . $i, $val['flow_instructions_opinion']);
+            $spreadsheet->getActiveSheet()->setCellValue('Q' . $i, $val['reported_organizer']);
+            $spreadsheet->getActiveSheet()->setCellValue('R' . $i, $val['flow_transferred_out_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('S' . $i, $val['del_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('T' . $i, $val['create_date']);
 
-            $phpexcel->getActiveSheet()->setCellValue('U' . $i, $val['update_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('U' . $i, $val['update_time']);
 
             $i++;
         }
 
-//        ob_end_clean();
-//        header('Content-Type: application/vnd.ms-excel');
-//        header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
-//        header('Cache-Control: max-age=0');
-//        $objWriter = \PHPExcel_IOFactory::createWriter($phpexcel, 'Excel2007');
-//        $objWriter->save('php://output');
+        // Redirect output to a client’s web browser (Xlsx)
+//        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+//        header('Content-Disposition: attachment;filename="01simple.xlsx"');
+//        header('Content-Disposition:attachment;filename="'.'信访档案-'.date("Y年m月j日").'.xls"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
 
-        ob_end_clean();
-        ob_start();
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
 
-        header('Content-Type : application/vnd.ms-excel');
-        header('Content-Disposition:attachment;filename="'.'信访档案-'.date("Y年m月j日").'.xls"');
-        $objWriter = \PHPExcel_IOFactory::createWriter($phpexcel,'Excel5');
-        $objWriter->save('php://output');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+//        $writer->save('php://output');
+
+        $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/ComplaintExport.xlsx');
+        exit;
     }
 }

@@ -2,17 +2,12 @@
 
 namespace backend\controllers;
 
-use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Yii;
 use yii\data\Pagination;
 use backend\models\CaseRecord;
-use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use PHPExcel;
 
 /**
  * CaseRecordController implements the CRUD actions for CaseRecord model.
