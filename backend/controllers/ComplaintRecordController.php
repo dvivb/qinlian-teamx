@@ -232,7 +232,7 @@ class ComplaintRecordController extends BaseController
      * Import all CaseRecord models.
      * @return mixed
      */
-    public function actionImport()
+    public function actionImports()
     {
         $inputFileName = '/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/ComplaintExport.xlsx';
 //        $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
@@ -240,6 +240,25 @@ class ComplaintRecordController extends BaseController
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
         echo '<pre>';
         print_r($sheetData);die;
+    }
+    
+    public function actionImport()
+    {
+        var_dump($_POST);die;
+        //这里同样还是试用$_FILES来接受文件
+        if (Yii::$app->request->isPost && isset($_FILES['importFile']['tmp_name'])) {
+            // $objectphpExcle =new \moonland\phpexcel\Excel;//这里是我Excle的位置
+             $objectphpExcle =new Spreadsheet;//这里是我Excle的位置
+            try{
+                $datas = $objectphpExcle->import($_FILES['importFile']['tmp_name']);
+            } catch (\Exception $e) {
+                return $this->ajaxResponse($e->getMessage(), 'error');
+            }
+               //处理的你的数据
+                return $this->ajaxResponse($re, "ok"); 
+        }
+        return $this->ajaxResponse("文件上传失败或没有找到", "notFound");
+   
     }
 
 
@@ -340,9 +359,8 @@ class ComplaintRecordController extends BaseController
         }
 
         // Redirect output to a client’s web browser (Xlsx)
-//        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-//        header('Content-Disposition: attachment;filename="01simple.xlsx"');
-//        header('Content-Disposition:attachment;filename="'.'信访档案-'.date("Y年m月j日").'.xls"');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition:attachment;filename="'.'信访档案-'.date("Y年m月j日").'.xls"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -354,9 +372,9 @@ class ComplaintRecordController extends BaseController
         header('Pragma: public'); // HTTP/1.0
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-//        $writer->save('php://output');
+        $writer->save('php://output');
 
-        $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/ComplaintExport.xlsx');
+        // $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/ComplaintExport.xlsx');
         exit;
     }
 }
