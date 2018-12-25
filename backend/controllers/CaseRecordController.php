@@ -346,7 +346,7 @@ class CaseRecordController extends BaseController
         $spreadsheet->getActiveSheet()->setCellValue('AO1', '创建时间');
         $spreadsheet->getActiveSheet()->setCellValue('AP1', '更新时间');
 
-        $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(16);
@@ -456,8 +456,8 @@ class CaseRecordController extends BaseController
         }
 
         // Redirect output to a client’s web browser (Xlsx)
-//        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-//        header('Content-Disposition: attachment;filename="01simple.xlsx"');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.'案管问题线索-'.date("Y年m月j日").'.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -469,9 +469,9 @@ class CaseRecordController extends BaseController
         header('Pragma: public'); // HTTP/1.0
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-//        $writer->save('php://output');
+        $writer->save('php://output');
 
-        $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/CaseExport.xlsx');
+        // $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/CaseExport.xlsx');
         exit;
     }
 
