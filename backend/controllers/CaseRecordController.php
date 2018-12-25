@@ -471,7 +471,7 @@ class CaseRecordController extends BaseController
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
 
-        // $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/CaseExport.xlsx');
+//         $writer->save('/home/clown/Hub//teamx/qinlian/qinlian.io/backend/runtime/temp/'.'案管问题线索-'.date("Y年m月j日").'.xlsx');
         exit;
     }
 
