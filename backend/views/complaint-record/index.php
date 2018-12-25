@@ -29,7 +29,8 @@ $modelLabel = new \backend\models\ComplaintRecord();
                 |
                 <a href="/excel/ExcelImport/complaint.xlsx" class="btn btn-xs btn-info">导入模板</a>
                 |
-                <button id="import_btn" type="button" class="btn btn-xs btn-info">导&nbsp;&emsp;入</button>
+                <!--<button id="import_btn" type="button" class="btn btn-xs btn-info">导&nbsp;&emsp;入</button>-->
+                 <input  id="importExcel" name="importExcel" type="file" class="btn btn-xs btn-info"/>
                 |
 <!--                <a href="/excel/ExcelImport/complaint.xlsx" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>-->
                 <a href="/index.php?r=complaint-record/export" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>
@@ -632,6 +633,31 @@ $('#complaint-record-form').bind('submit', function(e) {
     });
 });
 
- 
+//点击事件
+$('#importExcel').on('change', function(){
+    // _this.importExcel();
+    var _this = this;
+    //这里需要使用formData将excle实例送到后台
+    var formData = new FormData();
+    // formData.append("importFile", $('#importFile')[0].files[0]);
+    $.ajax({
+        url: '/index.php?r=complaint-record/import',
+        //禁止对文件进行序列化处理
+        processData:false,
+        contentType:false,
+        //上面两行特别重要哦
+        dataType: 'json',
+        cache: false,
+        data: formData,
+        type: 'get',
+        }).done(function(resp) {
+            if (resp.result == 'ok') {
+                //Do What You Want
+            }
+      });
+          
+});
+
+
 </script>
 <?php $this->endBlock(); ?>
