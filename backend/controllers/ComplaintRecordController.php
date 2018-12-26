@@ -16,6 +16,7 @@ use yii\web\NotFoundHttpException;
 class ComplaintRecordController extends BaseController
 {
 	public $layout = "lte_main";
+    public $enableCsrfValidation = false;
 
     /**
      * Lists all ComplaintRecord models.
@@ -228,37 +229,98 @@ class ComplaintRecordController extends BaseController
         ]);
     }
 
-    /**
-     * Import all CaseRecord models.
-     * @return mixed
-     */
-    public function actionImports()
-    {
-        $inputFileName = '/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/ComplaintExport.xlsx';
-//        $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
-        $spreadsheet = IOFactory::load($inputFileName);
-        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-        echo '<pre>';
-        print_r($sheetData);die;
-    }
-    
     public function actionImport()
     {
-        var_dump($_POST);die;
-        //这里同样还是试用$_FILES来接受文件
-        if (Yii::$app->request->isPost && isset($_FILES['importFile']['tmp_name'])) {
-            // $objectphpExcle =new \moonland\phpexcel\Excel;//这里是我Excle的位置
-             $objectphpExcle =new Spreadsheet;//这里是我Excle的位置
-            try{
-                $datas = $objectphpExcle->import($_FILES['importFile']['tmp_name']);
-            } catch (\Exception $e) {
-                return $this->ajaxResponse($e->getMessage(), 'error');
+        if (Yii::$app->request->isPost && isset($_FILES['importExcelFile']['tmp_name'])) {
+            $inputFileName = $_FILES['importExcelFile']['tmp_name'];
+            $spreadsheet = IOFactory::load($inputFileName);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+//            var_dump($sheetData);die;
+
+            foreach($sheetData as $key => $value) {
+                if ($key>1){
+//                    var_dump($value);die;
+                    $data[] = [
+                        'report_name'       => $value['A'],
+                        'report_address'    => $value['B'],
+                        'report_moblie'     => $value['C'],
+                        'report_idcard'     => $value['D'],
+                        'reported_name'     => $value['E'],
+
+                        'reported_organization_name'    => $value['F'],
+                        'reported_politics_status'      => $value['G'],
+                        'reported_duty'                 => $value['H'],
+                        'reported_rank'                 => $value['I'],
+                        'reported_question'             => $value['J'],
+
+                        'reported_location'             => $value['K'],
+                        'reported_property'             => $value['L'],
+                        'reported_keyword'              => $value['M'],
+                        'flow_instructions_time'        => $value['N'],
+                        'flow_instructions_status'      => $value['O'],
+
+                        'flow_instructions_opinion'     => $value['P'],
+                        'reported_organizer'            => $value['Q'],
+                        'flow_transferred_out_time'     => $value['R'],
+                        'del_status'                    => $value['S'],
+//                        'create_date'                 => $value['T'],
+//
+//                        'update_time'                 => $value['U'],
+                    ];
+
+                }
             }
-               //处理的你的数据
-                return $this->ajaxResponse($re, "ok"); 
+//var_dump($data);die;
+            if (isset($data)) {
+                $transaction = Yii::$app->getDb()->beginTransaction();
+                try {
+                    $model = new ComplaintRecord();
+                    Yii::$app->db->createCommand()
+                        ->batchInsert($model::tableName(),[
+                            'report_name',
+                            'report_address',
+                            'report_moblie',
+                            'report_idcard',
+                            'reported_name',
+
+                            'reported_organization_name',
+                            'reported_politics_status',
+                            'reported_duty',
+                            'reported_rank',
+                            'reported_question',
+
+                            'reported_location',
+                            'reported_property',
+                            'reported_keyword',
+                            'flow_instructions_time',
+                            'flow_instructions_status',
+
+                            'flow_instructions_opinion',
+                            'reported_organizer',
+                            'flow_transferred_out_time',
+                            'del_status',
+//                            'create_date',
+//
+//                            'update_time',
+                            ],
+                            $data)
+                        ->execute();
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                    $msg = array('errno'=>2, 'data'=>$e->getMessage());
+                    return $this->render('index', $msg);
+                }
+            }
+
+        } else {
+            $msg = array('errno'=>2, 'msg'=>'文件上传失败或没有找到');
+            return $this->render('index', $msg);
         }
-        return $this->ajaxResponse("文件上传失败或没有找到", "notFound");
-   
+
+        $transaction->commit();
+        $msg = array('errno'=>0, 'msg'=>'保存成功');
+//                    return json_encode($msg);
+        $this->redirect('/index.php?r=complaint-record/index', '200');
     }
 
 
@@ -373,8 +435,6 @@ class ComplaintRecordController extends BaseController
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
-
-        // $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/ComplaintExport.xlsx');
         exit;
     }
 }

@@ -18,6 +18,7 @@ use yii\filters\VerbFilter;
 class IncorruptRecordController extends BaseController
 {
 	public $layout = "lte_main";
+    public $enableCsrfValidation = false;
 
     /**
      * Lists all IncorruptRecord models.
@@ -232,72 +233,79 @@ class IncorruptRecordController extends BaseController
 
     public function actionImport()
     {
-        $inputFileName = '/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/CaseExport.xlsx';
-//        $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
-        $spreadsheet = IOFactory::load($inputFileName);
-        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-        echo '<pre>';
-        print_r($sheetData);die;
+        if (Yii::$app->request->isPost && isset($_FILES['importExcelFile']['tmp_name'])) {
+            $inputFileName = $_FILES['importExcelFile']['tmp_name'];
+            $spreadsheet = IOFactory::load($inputFileName);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+//            var_dump($sheetData);die;
+
+            foreach($sheetData as $key => $value) {
+                if ($key>1){
+//                    var_dump($value);die;
+                    $data[] = [
+                        'title' => $value['A'],
+                        'type' => $value['B'],
+                        'details' => $value['C'],
+                        'source' => $value['D'],
+                        'del_status' => $value['E'],
+
+                        'create_date' => $value['F'],
+                        'update_time' => $value['G'],
+                    ];
+
+                }
+            }
+//var_dump($data);die;
+            if (isset($data)) {
+                $transaction = Yii::$app->getDb()->beginTransaction();
+                try {
+                    $model = new IncorruptRecord();
+                    Yii::$app->db->createCommand()
+                        ->batchInsert($model::tableName(),[
+                            'title',
+                            'type',
+                            'details',
+                            'del_status',
+//                            'create_date',
+//                            'update_time',
+                        ],
+                            $data)
+                        ->execute();
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                    $msg = array('errno'=>2, 'data'=>$e->getMessage());
+                    return $this->render('index', $msg);
+                }
+            }
+
+        } else {
+            $msg = array('errno'=>2, 'msg'=>'文件上传失败或没有找到');
+            return $this->render('index', $msg);
+        }
+
+        $transaction->commit();
+        $msg = array('errno'=>0, 'msg'=>'保存成功');
+//                    return json_encode($msg);
+        $this->redirect('/index.php?r=complaint-record/index', '200');
     }
 
     public function actionExport()
     {
-        $query = CaseRecord::find();
+        $query = IncorruptRecord::find();
         $data = $query
             ->all();
 
         $spreadsheet = new Spreadsheet();
 
-        $spreadsheet->getActiveSheet()->setCellValue('A1', '姓名');
-        $spreadsheet->getActiveSheet()->setCellValue('B1', '性别');
-        $spreadsheet->getActiveSheet()->setCellValue('C1', '民族');
-        $spreadsheet->getActiveSheet()->setCellValue('D1', '年龄');
-        $spreadsheet->getActiveSheet()->setCellValue('E1', '政治面貌');
+        $spreadsheet->getActiveSheet()->setCellValue('A1', '档案名称');
+        $spreadsheet->getActiveSheet()->setCellValue('B1', '档案类型');
+        $spreadsheet->getActiveSheet()->setCellValue('C1', '档案详细');
+        $spreadsheet->getActiveSheet()->setCellValue('D1', '数据来源');
+        $spreadsheet->getActiveSheet()->setCellValue('E1', '删除状态');
 
-        $spreadsheet->getActiveSheet()->setCellValue('F1', '入党时间');
-        $spreadsheet->getActiveSheet()->setCellValue('G1', '单位');
-        $spreadsheet->getActiveSheet()->setCellValue('H1', '职务');
-        $spreadsheet->getActiveSheet()->setCellValue('I1', '职级');
-        $spreadsheet->getActiveSheet()->setCellValue('J1', '是否监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('F1', '创建时间');
+        $spreadsheet->getActiveSheet()->setCellValue('G1', '更新时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('K1', '是否公务员');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '线索编码');
-        $spreadsheet->getActiveSheet()->setCellValue('M1', '线索人员编码');
-        $spreadsheet->getActiveSheet()->setCellValue('N1', '受理时间');
-        $spreadsheet->getActiveSheet()->setCellValue('O1', '办理机关');
-
-        $spreadsheet->getActiveSheet()->setCellValue('P1', '线索来源');
-        $spreadsheet->getActiveSheet()->setCellValue('Q1', '违纪类型');
-        $spreadsheet->getActiveSheet()->setCellValue('R1', '违法类型');
-        $spreadsheet->getActiveSheet()->setCellValue('S1', '处置方式');
-        $spreadsheet->getActiveSheet()->setCellValue('T1', '线索摘要');
-
-        $spreadsheet->getActiveSheet()->setCellValue('U1', '初核报告');
-        $spreadsheet->getActiveSheet()->setCellValue('V1', '案件编码');
-        $spreadsheet->getActiveSheet()->setCellValue('W1', '案件人员编码');
-        $spreadsheet->getActiveSheet()->setCellValue('X1', '立案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('Y1', '立案机关');
-
-        $spreadsheet->getActiveSheet()->setCellValue('Z1', '简要案情');
-        $spreadsheet->getActiveSheet()->setCellValue('AA1', '立案报告');
-        $spreadsheet->getActiveSheet()->setCellValue('AB1', '立案决定书');
-        $spreadsheet->getActiveSheet()->setCellValue('AC1', '审查报告');
-        $spreadsheet->getActiveSheet()->setCellValue('AD1', '审理受理时间');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AE1', '审理报告');
-        $spreadsheet->getActiveSheet()->setCellValue('AF1', '审结时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AG1', '结案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AH1', '党纪处分');
-        $spreadsheet->getActiveSheet()->setCellValue('AI1', '政纪处分');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AJ1', '处分决定');
-        $spreadsheet->getActiveSheet()->setCellValue('AK1', '移送司法时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AL1', '公检法受理时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AM1', '公检法处理内容');
-        $spreadsheet->getActiveSheet()->setCellValue('AN1', '删除状态');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AO1', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AP1', '更新时间');
 
         $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -308,109 +316,25 @@ class IncorruptRecordController extends BaseController
 
         $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(12);
-        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(16);
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(30);
-        $spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(12);
-        $spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('O')->setWidth(16);
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('P')->setWidth(30);
-        $spreadsheet->getActiveSheet()->getColumnDimension('Q')->setWidth(12);
-        $spreadsheet->getActiveSheet()->getColumnDimension('R')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('S')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('T')->setWidth(16);
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('U')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('V')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('W')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('Y')->setWidth(16);
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AA')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AB')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AC')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AD')->setWidth(16);
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('AE')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(30);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AG')->setWidth(12);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AH')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AI')->setWidth(16);
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('AJ')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AK')->setWidth(30);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AL')->setWidth(12);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AM')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AN')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AO')->setWidth(16);
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('AP')->setWidth(30);
 
         $i = 2;
         foreach($data as $key=>$val){
 
-            $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['name']);
-            $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $val['sex']);
-            $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $val['nation']);
-            $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $val['age']);
-            $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $val['politics_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['title']);
+            $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $val['type']);
+            $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $val['details']);
+            $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $val['source']);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $val['del_status']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('F' . $i, $val['join_party_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('G' . $i, $val['organization_name']);
-            $spreadsheet->getActiveSheet()->setCellValue('H' . $i, $val['duty']);
-            $spreadsheet->getActiveSheet()->setCellValue('I' . $i, $val['rank']);
-            $spreadsheet->getActiveSheet()->setCellValue('J' . $i, $val['is_monitor']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('K' . $i, $val['is_official']);
-            $spreadsheet->getActiveSheet()->setCellValue('L' . $i, $val['clue_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('M' . $i, $val['clue_people_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('N' . $i, $val['clue_accept_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('O' . $i, $val['clue_manage_office']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('P' . $i, $val['clue_source']);
-            $spreadsheet->getActiveSheet()->setCellValue('Q' . $i, $val['clue_violations_type']);
-            $spreadsheet->getActiveSheet()->setCellValue('R' . $i, $val['clue_outlawed_type']);
-            $spreadsheet->getActiveSheet()->setCellValue('S' . $i, $val['clue_disposition_method']);
-            $spreadsheet->getActiveSheet()->setCellValue('T' . $i, $val['clue_summary']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('U' . $i, $val['clue_protokaryon_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('V' . $i, $val['case_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('W' . $i, $val['case_people_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['case_register_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('Y' . $i, $val['case_register_office']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['case_summary']);
-            $spreadsheet->getActiveSheet()->setCellValue('AA' . $i, $val['case_register_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('AB' . $i, $val['case_register_decision']);
-            $spreadsheet->getActiveSheet()->setCellValue('AC' . $i, $val['case_review_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('AD' . $i, $val['settle_accept_time']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('AE' . $i, $val['settle_accept_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('AF' . $i, $val['settle_conclude_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AG' . $i, $val['settle_finish_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AH' . $i, $val['settle_party_disposal']);
-            $spreadsheet->getActiveSheet()->setCellValue('AI' . $i, $val['settle_political_disposal']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('AJ' . $i, $val['settle_disposal_decision']);
-            $spreadsheet->getActiveSheet()->setCellValue('AK' . $i, $val['settle_judiciary_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AL' . $i, $val['settle_prosecutor_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AM' . $i, $val['settle_prosecutor_details']);
-            $spreadsheet->getActiveSheet()->setCellValue('AN' . $i, $val['del_status']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('AO' . $i, $val['create_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('AP' . $i, $val['update_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . $i, $val['create_date']);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . $i, $val['update_time']);
 
             $i++;
         }
 
         // Redirect output to a client’s web browser (Xlsx)
-//        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-//        header('Content-Disposition: attachment;filename="01simple.xlsx"');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.'案管线索-'.date("Y年m月j日").'.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -422,9 +346,7 @@ class IncorruptRecordController extends BaseController
         header('Pragma: public'); // HTTP/1.0
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-//        $writer->save('php://output');
-
-        $writer->save('/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/CaseExport.xlsx');
+        $writer->save('php://output');
         exit;
     }
 }

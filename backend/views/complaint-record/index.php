@@ -24,16 +24,12 @@ $modelLabel = new \backend\models\ComplaintRecord();
         <div class="box-header">
           <h3 class="box-title">数据列表</h3>
           <div class="box-tools">
-            <div class="input-group input-group-sm" style="width: 350px;">
+            <div class="input-group input-group-sm" >
                 <button id="create_btn" type="button" class="btn btn-xs btn-primary">添&nbsp;&emsp;加</button>
                 |
-                <a href="/excel/ExcelImport/complaint.xlsx" class="btn btn-xs btn-info">导入模板</a>
+                <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile">导&nbsp;&emsp;入</button>
                 |
-                <!--<button id="import_btn" type="button" class="btn btn-xs btn-info">导&nbsp;&emsp;入</button>-->
-                 <input  id="importExcel" name="importExcel" type="file" class="btn btn-xs btn-info"/>
-                |
-<!--                <a href="/excel/ExcelImport/complaint.xlsx" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>-->
-                <a href="/index.php?r=complaint-record/export" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>
+                <a href="<?=Url::toRoute('complaint-record/export')?>" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>
                 |
         		<button id="delete_btn" type="button" class="btn btn-xs btn-danger">批量删除</button>
             </div>
@@ -41,7 +37,7 @@ $modelLabel = new \backend\models\ComplaintRecord();
         </div>
         <!-- /.box-header -->
         
-        <div class="box-body">
+        <div class="box-body" style="margin-top: 50px">
           <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap table-responsive">
             <!-- row start search-->
           	<div class="row">
@@ -375,6 +371,28 @@ $modelLabel = new \backend\models\ComplaintRecord();
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form action="<?=Url::toRoute('complaint-record/import')?>" method="post" enctype="multipart/form-data">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><a href="/excel/ExcelImport/complaint.xlsx" class="btn btn-xs btn-info">下载导入模板</a></h4>
+            </div>
+            <div class="modal-body">
+                    <input  name="importExcelFile" type="file" accept=".xls,.xlsx"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary">确认提交</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
 <?php $this->beginBlock('footer');  ?>
 <!-- <body></body>后代码块 -->
  <script>
@@ -631,31 +649,6 @@ $('#complaint-record-form').bind('submit', function(e) {
 
     	}
     });
-});
-
-//点击事件
-$('#importExcel').on('change', function(){
-    // _this.importExcel();
-    var _this = this;
-    //这里需要使用formData将excle实例送到后台
-    var formData = new FormData();
-    // formData.append("importFile", $('#importFile')[0].files[0]);
-    $.ajax({
-        url: '/index.php?r=complaint-record/import',
-        //禁止对文件进行序列化处理
-        processData:false,
-        contentType:false,
-        //上面两行特别重要哦
-        dataType: 'json',
-        cache: false,
-        data: formData,
-        type: 'get',
-        }).done(function(resp) {
-            if (resp.result == 'ok') {
-                //Do What You Want
-            }
-      });
-          
 });
 
 

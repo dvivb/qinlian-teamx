@@ -23,17 +23,17 @@ $modelLabel = new \backend\models\IncorruptRecord();
       
         <div class="box-header">
           <h3 class="box-title">数据列表</h3>
-          <div class="box-tools">
-            <div class="input-group input-group-sm" style="width: 300px;">
-                <button id="create_btn" type="button" class="btn btn-xs btn-primary">添&nbsp;&emsp;加</button>
+            <div class="box-tools">
+                <div class="input-group input-group-sm" >
+                    <button id="create_btn" type="button" class="btn btn-xs btn-primary">添&nbsp;&emsp;加</button>
                     |
-                <button id="import_btn" type="button" class="btn btn-xs btn-info">导&nbsp;&emsp;入</button>
+                    <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile">导&nbsp;&emsp;入</button>
                     |
-                <button id="export_btn" type="button" class="btn btn-xs btn-info">导&nbsp;&emsp;出</button>
-        			|
-        		<button id="delete_btn" type="button" class="btn btn-xs btn-danger">批量删除</button>
+                    <a href="<?=Url::toRoute('incorrupt-record/export')?>" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>
+                    |
+                    <button id="delete_btn" type="button" class="btn btn-xs btn-danger">批量删除</button>
+                </div>
             </div>
-          </div>
         </div>
         <!-- /.box-header -->
         
@@ -231,6 +231,28 @@ $modelLabel = new \backend\models\IncorruptRecord();
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <form action="<?=Url::toRoute('complaint-record/import')?>" method="post" enctype="multipart/form-data">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><a href="/excel/ExcelImport/incorrupt.xlsx" class="btn btn-xs btn-info">下载导入模板</a></h4>
+                </div>
+                <div class="modal-body">
+                    <input  name="importExcelFile" type="file" accept=".xls,.xlsx"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">确认提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <?php $this->beginBlock('footer');  ?>
 <!-- <body></body>后代码块 -->
  <script>

@@ -15,6 +15,7 @@ use yii\web\NotFoundHttpException;
 class CaseRecordController extends BaseController
 {
 	public $layout = "lte_main";
+    public $enableCsrfValidation = false;
 
     /**
      * Lists all CaseRecord models.
@@ -226,65 +227,136 @@ class CaseRecordController extends BaseController
         ]);
     }
 
-    /**
-     * Import all CaseRecord models.
-     * @return mixed
-     */
-    public function actionImports()
-    {
-        $query = CaseRecord::find();
-        $querys = Yii::$app->request->get('query');
-        if(count($querys) > 0){
-            $condition = "";
-            $parame = array();
-            foreach($querys as $key=>$value){
-                $value = trim($value);
-                if(empty($value) == false){
-                    $parame[":{$key}"]=$value;
-                    if(empty($condition) == true){
-                        $condition = " {$key}=:{$key} ";
-                    }
-                    else{
-                        $condition = $condition . " AND {$key}=:{$key} ";
-                    }
-                }
-            }
-            if(count($parame) > 0){
-                $query = $query->where($condition, $parame);
-            }
-        }
-
-        $pagination = new Pagination([
-                'totalCount' =>$query->count(),
-                'pageSize' => '10',
-                'pageParam'=>'page',
-                'pageSizeParam'=>'per-page']
-        );
-
-        $orderby = Yii::$app->request->get('orderby', '');
-        if(empty($orderby) == false){
-            $query = $query->orderBy($orderby);
-        }
-
-        $models = $query
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-        return $this->render('statistics', [
-            'models'=>$models,
-            'pages'=>$pagination,
-            'query'=>$querys,
-        ]);
-    }
-
     public function actionImport()
     {
-        $inputFileName = '/data/x/teamx/qinlian/qinlian.io/backend/runtime/temp/CaseExport.xlsx';
-//        $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
-        $spreadsheet = IOFactory::load($inputFileName);
-        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-        echo '<pre>';
-        print_r($sheetData);die;
+        if (Yii::$app->request->isPost && isset($_FILES['importExcelFile']['tmp_name'])) {
+            $inputFileName = $_FILES['importExcelFile']['tmp_name'];
+            $spreadsheet = IOFactory::load($inputFileName);
+            $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+//            var_dump($sheetData);die;
+
+            foreach($sheetData as $key => $value) {
+                if ($key>1){
+//                    var_dump($value);die;
+                    $data[] = [
+                        'name' =>  $value['A'],
+                        'sex' =>  $value['B'],
+                        'nation' =>  $value['C'],
+                        'age' =>  $value['D'],
+                        'politics_status' =>  $value['E'],
+
+                        'join_party_date' =>  $value['F'],
+                        'organization_name' =>  $value['G'],
+                        'duty' =>  $value['H'],
+                        'rank' =>  $value['I'],
+                        'is_monitor' =>  $value['J'],
+
+                        'is_official' =>  $value['K'],
+                        'clue_code' =>  $value['L'],
+                        'clue_people_code' =>  $value['M'],
+                        'clue_accept_time' =>  $value['N'],
+                        'clue_manage_office' =>  $value['O'],
+
+                        'clue_source' =>  $value['P'],
+                        'clue_violations_type' =>  $value['Q'],
+                        'clue_outlawed_type' =>  $value['R'],
+                        'clue_disposition_method' =>  $value['S'],
+                        'clue_summary' =>  $value['T'],
+
+                        'clue_protokaryon_report' =>  $value['U'],
+                        'case_code' =>  $value['V'],
+                        'case_people_code' =>  $value['W'],
+                        'case_register_time' =>  $value['X'],
+                        'case_register_office' =>  $value['Y'],
+
+                        'case_summary' =>  $value['X'],
+                        'case_register_report' =>  $value['AA'],
+                        'case_register_decision' =>  $value['AB'],
+                        'case_review_report' =>  $value['AC'],
+                        'settle_accept_time' =>  $value['AD'],
+
+                        'settle_accept_report' =>  $value['AE'],
+                        'settle_conclude_time' =>  $value['AF'],
+                        'settle_finish_time' =>  $value['AG'],
+                        'settle_party_disposal' =>  $value['AH'],
+                        'settle_political_disposal' =>  $value['AI'],
+
+                        'settle_disposal_decision' =>  $value['AJ'],
+                        'settle_judiciary_time' =>  $value['AK'],
+                        'settle_prosecutor_time' =>  $value['AL'],
+                        'settle_prosecutor_details' =>  $value['AM'],
+                        'del_status' =>  $value['AN'],
+                    ];
+
+                }
+            }
+//var_dump($data);die;
+            if (isset($data)) {
+                $transaction = Yii::$app->getDb()->beginTransaction();
+                try {
+                    $model = new CaseRecord();
+                    Yii::$app->db->createCommand()
+                        ->batchInsert($model::tableName(),[
+                            'name',
+                            'sex',
+                            'nation',
+                            'age',
+                            'politics_status',
+                            'join_party_date',
+                            'organization_name',
+                            'duty',
+                            'rank',
+                            'is_monitor',
+                            'is_official',
+                            'clue_code',
+                            'clue_people_code',
+                            'clue_accept_time',
+                            'clue_manage_office',
+                            'clue_source',
+                            'clue_violations_type',
+                            'clue_outlawed_type',
+                            'clue_disposition_method',
+                            'clue_summary',
+                            'clue_protokaryon_report',
+                            'case_code',
+                            'case_people_code',
+                            'case_register_time',
+                            'case_register_office',
+                            'case_summary',
+
+                            'case_register_report',
+                            'case_register_decision',
+                            'case_review_report',
+                            'settle_accept_time',
+                            'settle_accept_report',
+                            'settle_conclude_time',
+                            'settle_finish_time',
+                            'settle_party_disposal',
+                            'settle_political_disposal',
+                            'settle_disposal_decision',
+                            'settle_judiciary_time',
+                            'settle_prosecutor_time',
+                            'settle_prosecutor_details',
+                            'del_status',
+                        ],
+                            $data)
+                        ->execute();
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                    $msg = array('errno'=>2, 'data'=>$e->getMessage());
+                    return $this->render('index', $msg);
+                }
+            }
+
+        } else {
+            $msg = array('errno'=>2, 'msg'=>'文件上传失败或没有找到');
+            return $this->render('index', $msg);
+        }
+
+        $transaction->commit();
+        $msg = array('errno'=>0, 'msg'=>'保存成功');
+//                    return json_encode($msg);
+        $this->redirect('/index.php?r=complaint-record/index', '200');
     }
 
     public function actionExport()
@@ -470,8 +542,6 @@ class CaseRecordController extends BaseController
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
-
-//         $writer->save('/home/clown/Hub//teamx/qinlian/qinlian.io/backend/runtime/temp/'.'案管问题线索-'.date("Y年m月j日").'.xlsx');
         exit;
     }
 
