@@ -234,7 +234,7 @@ $modelLabel = new \backend\models\IncorruptRecord();
 
 <!-- Modal -->
 <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <form action="<?=Url::toRoute('complaint-record/import')?>" method="post" enctype="multipart/form-data">
+    <form action="<?=Url::toRoute('incorrupt-record/import')?>" method="post" enctype="multipart/form-data">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

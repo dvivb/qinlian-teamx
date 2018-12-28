@@ -265,9 +265,10 @@ class IncorruptRecordController extends BaseController
                             'title',
                             'type',
                             'details',
+                            'source',
                             'del_status',
-//                            'create_date',
-//                            'update_time',
+                            'create_date',
+                            'update_time',
                         ],
                             $data)
                         ->execute();

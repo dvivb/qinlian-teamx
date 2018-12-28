@@ -5,6 +5,7 @@ use yii\base\Object;
 use yii\bootstrap\ActiveForm;
 use common\utils\CommonFun;
 use yii\helpers\Url;
+use backend\assets\AppAsset;
 
 use backend\models\CaseRecord;
 
@@ -12,7 +13,9 @@ $modelLabel = new \backend\models\CaseRecord();
 ?>
 
 <?php $this->beginBlock('header');  ?>
-<!-- <head></head>中代码块 -->
+<!-- <head>
+</head>中代码块 -->
+
 <?php $this->endBlock(); ?>
 
 <!-- Main content -->
