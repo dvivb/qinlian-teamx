@@ -307,7 +307,7 @@ class IncorruptRecordController extends BaseController
         $spreadsheet->getActiveSheet()->setCellValue('G1', '更新时间');
 
 
-        $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+//        $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(16);
