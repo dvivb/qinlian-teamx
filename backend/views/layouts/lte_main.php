@@ -338,13 +338,13 @@ if($otherMenu == false){
   
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> <?=Yii::$app->params['appVersion']?>
-    </div>
-    <strong>Copyright &copy; 2015-<?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appName']?></a>.</strong> All rights
-    reserved.
-  </footer>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> <?=Yii::$app->params['appVersion']?>
+        </div>
+        <strong>Copyright &copy; <?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appCopyright']?></a>.</strong> All rights
+        reserved.
+    </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
