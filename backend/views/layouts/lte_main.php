@@ -264,25 +264,32 @@ if($otherMenu == false){
     
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">菜单项</li>
+        <li class="header">系统菜单</li>
 
         <li <?=$route == 'site/index' ?  ' class="active" ' : ''?>>
         	<a href="<?=Url::to(['site/index'])?>">
-        	<i class="fa fa-dashboard"></i> 
+        	<i class="fa fa-home"></i>
         	<span>首页</span>
         	</a>
         </li>
         <?php 
         
-			foreach($system_menus as $menu){
+			foreach($system_menus as $menu_index => $menu){
 			    $funcList = $menu['funcList'];
 			    $isMenuActive = '';
 			    $isTreeView = count($funcList) > 0 ? "treeview" : "";
 			    $menuHtml = '<li class="#isMenuActive#'. $isTreeView .'">'; // active 
 			    $menuHtml .= '   <a href="#">';
-			    $menuHtml .= '   <i class="fa fa-table"></i> <span>'. $menu['label'] .'</span>';
+//			    $menuHtml .= '   <i class="fa fa-table"></i> <span>'. $menu['label'] .'</span>';
+                $icon = 'fa-table';
+                switch ($menu_index){
+                    case 0 : $icon = 'fa-list'; break;
+                    case 1 : $icon = 'fa-bar-chart'; break;
+                    case 2 : $icon = 'fa-cogs'; break;
+                }
+                $menuHtml .= '   <b><i class="fa ' . $icon . '"></i> <span>'. $menu['label'] .'</span></b>';
 			    $menuHtml .= '   <span class="pull-right-container">';
-			    $menuHtml .= '       <i class="fa fa-angle-left pull-right"></i>';
+			    $menuHtml .= '       <i class="fa fa-caret-left pull-right"></i>';
 			    $menuHtml .= '   </span>';
 			    $menuHtml .= '   </a>';
 //			    echo '   <ul class="treeview-menu">';
@@ -290,7 +297,7 @@ if($otherMenu == false){
 			       $menuHtml .= '<ul class="treeview-menu">';
 			       foreach($funcList as $fun){
 			           $isActive = $fun['url'] == $funInfo['entry_url'] ? 'class="active"' : ''; //'. $isActive .'
-			           $menuHtml .= '<li '. $isActive .'><a href="'.Url::to([$fun['url']]).'"><i class="fa fa-circle-o"></i>'. $fun['label'] .'</a></li>';
+			           $menuHtml .= '<li '. $isActive .'><a href="'.Url::to([$fun['url']]).'"><i class="fa fa-caret-right"></i>'. $fun['label'] .'</a></li>';
 //			           if(empty($isMenuActive) == true && $isActive != ""){
 			               $isMenuActive = 'active ';
 //			           }
