@@ -224,8 +224,9 @@ class AdminRoleController extends BaseController
     
         }
         $datas = array_values($datas);
-    
-        echo json_encode($datas);
+        echo json_encode($datas);exit();
+//    var_dump($datas);die;
+//        echo json_encode($datas);
     
     }
     
