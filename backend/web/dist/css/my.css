@@ -13,3 +13,7 @@
   background: #1e282c;
   border-left-color: #00a65a;
 }
+
+.modal-content{
+  width: 900px;
+}

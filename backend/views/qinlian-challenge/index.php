@@ -205,291 +205,244 @@ $modelLabel = new \backend\models\QinlianChallenge();
 <!-- /.content -->
 
 <div class="modal fade" id="edit_dialog" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">×</button>
-				<h3>Settings</h3>
-			</div>
-			<div class="modal-body">
-                <?php $form = ActiveForm::begin(["id" => "qinlian-challenge-form", "class"=>"form-horizontal", "action"=>Url::toRoute("qinlian-challenge/save")]); ?>                      
-                 
-          <input type="hidden" class="form-control" id="id" name="id" />
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Settings</h3>
+            </div>
+            <div class="modal-body">
+                <?php $form = ActiveForm::begin(["id" => "qinlian-challenge-form", "class"=>"form-horizontal", "action"=>Url::toRoute("qinlian-challenge/save")]); ?>
 
-          <div id="number_div" class="form-group">
-              <label for="number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("number")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="number" name="QinlianChallenge[number]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
+                <input type="hidden" class="form-control" id="id" name="id" />
 
-          <div id="incoming_time_div" class="form-group">
-              <label for="incoming_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("incoming_time")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="incoming_time" name="QinlianChallenge[incoming_time]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
+                <div id="number_div" class="form-group">
+                    <label for="number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("number")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="number" name="QinlianChallenge[number]" placeholder="" />
+                    </div>
 
-          <div id="clue_level_div" class="form-group">
-              <label for="clue_level" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("clue_level")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="clue_level" name="QinlianChallenge[clue_level]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="clue_category_div" class="form-group">
-              <label for="clue_category" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("clue_category")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="clue_category" name="QinlianChallenge[clue_category]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="clue_source_div" class="form-group">
-              <label for="clue_source" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("clue_source")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="clue_source" name="QinlianChallenge[clue_source]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="letter_number_div" class="form-group">
-              <label for="letter_number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("letter_number")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="letter_number" name="QinlianChallenge[letter_number]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="signature_div" class="form-group">
-              <label for="signature" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("signature")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="signature" name="QinlianChallenge[signature]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="leader_instructions_div" class="form-group">
-              <label for="leader_instructions" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("leader_instructions")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="leader_instructions" name="QinlianChallenge[leader_instructions]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="respondent_unit_div" class="form-group">
-              <label for="respondent_unit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("respondent_unit")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="respondent_unit" name="QinlianChallenge[respondent_unit]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="duty_job_div" class="form-group">
-              <label for="duty_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("duty_job")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="duty_job" name="QinlianChallenge[duty_job]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="rank_job_div" class="form-group">
-              <label for="rank_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("rank_job")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="rank_job" name="QinlianChallenge[rank_job]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="main_issues_div" class="form-group">
-              <label for="main_issues" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("main_issues")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="main_issues" name="QinlianChallenge[main_issues]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="related_unit_div" class="form-group">
-              <label for="related_unit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("related_unit")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="related_unit" name="QinlianChallenge[related_unit]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="heavy_cases_div" class="form-group">
-              <label for="heavy_cases" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("heavy_cases")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="heavy_cases" name="QinlianChallenge[heavy_cases]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="date_receipt_div" class="form-group">
-              <label for="date_receipt" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("date_receipt")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="date_receipt" name="QinlianChallenge[date_receipt]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="transfer_organ_div" class="form-group">
-              <label for="transfer_organ" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("transfer_organ")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="transfer_organ" name="QinlianChallenge[transfer_organ]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="results_div" class="form-group">
-              <label for="results" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("results")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="results" name="QinlianChallenge[results]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="supervisory_leadership_div" class="form-group">
-              <label for="supervisory_leadership" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("supervisory_leadership")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="supervisory_leadership" name="QinlianChallenge[supervisory_leadership]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="host_department_div" class="form-group">
-              <label for="host_department" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("host_department")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="host_department" name="QinlianChallenge[host_department]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="progress_case_div" class="form-group">
-              <label for="progress_case" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("progress_case")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="progress_case" name="QinlianChallenge[progress_case]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="investigation_disposal_div" class="form-group">
-              <label for="investigation_disposal" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("investigation_disposal")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="investigation_disposal" name="QinlianChallenge[investigation_disposal]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="remarks_div" class="form-group">
-              <label for="remarks" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("remarks")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="remarks" name="QinlianChallenge[remarks]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="number_disposals_div" class="form-group">
-              <label for="number_disposals" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("number_disposals")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="number_disposals" name="QinlianChallenge[number_disposals]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="organizations_number_div" class="form-group">
-              <label for="organizations_number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organizations_number")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="organizations_number" name="QinlianChallenge[organizations_number]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="first_form_div" class="form-group">
-              <label for="first_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("first_form")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="first_form" name="QinlianChallenge[first_form]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="second_form_div" class="form-group">
-              <label for="second_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("second_form")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="second_form" name="QinlianChallenge[second_form]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="third_form_div" class="form-group">
-              <label for="third_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("third_form")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="third_form" name="QinlianChallenge[third_form]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="fourth_form_div" class="form-group">
-              <label for="fourth_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("fourth_form")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="fourth_form" name="QinlianChallenge[fourth_form]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="approval_time_div" class="form-group">
-              <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="approval_time" name="QinlianChallenge[approval_time]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="approval_status_div" class="form-group">
-              <label for="approval_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_status")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="approval_status" name="QinlianChallenge[approval_status]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="del_status_div" class="form-group">
-              <label for="del_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("del_status")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="del_status" name="QinlianChallenge[del_status]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="create_date_div" class="form-group">
-              <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="create_date" name="QinlianChallenge[create_date]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="update_time_div" class="form-group">
-              <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="update_time" name="QinlianChallenge[update_time]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-                    
-
-			<?php ActiveForm::end(); ?>          
+                    <label for="incoming_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("incoming_time")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="incoming_time" name="QinlianChallenge[incoming_time]" placeholder="必填" />
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-			<div class="modal-footer">
-				<a href="#" class="btn btn-default" data-dismiss="modal">关闭</a> <a
-					id="edit_dialog_ok" href="#" class="btn btn-primary">确定</a>
-			</div>
-		</div>
-	</div>
+
+                <div id="clue_level_div" class="form-group">
+                    <label for="clue_level" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("clue_level")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="clue_level" name="QinlianChallenge[clue_level]" placeholder="" />
+                    </div>
+
+                    <label for="clue_category" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("clue_category")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="clue_category" name="QinlianChallenge[clue_category]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="clue_source_div" class="form-group">
+                    <label for="clue_source" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("clue_source")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="clue_source" name="QinlianChallenge[clue_source]" placeholder="" />
+                    </div>
+
+                    <label for="letter_number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("letter_number")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="letter_number" name="QinlianChallenge[letter_number]" placeholder="必填" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="signature_div" class="form-group">
+                    <label for="signature" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("signature")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="signature" name="QinlianChallenge[signature]" placeholder="" />
+                    </div>
+
+                    <label for="leader_instructions" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("leader_instructions")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="leader_instructions" name="QinlianChallenge[leader_instructions]" placeholder="必填" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="respondent_unit_div" class="form-group">
+                    <label for="respondent_unit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("respondent_unit")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="respondent_unit" name="QinlianChallenge[respondent_unit]" placeholder="必填" />
+                    </div>
+
+                    <label for="duty_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("duty_job")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="duty_job" name="QinlianChallenge[duty_job]" placeholder="必填" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="rank_job_div" class="form-group">
+                    <label for="rank_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("rank_job")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="rank_job" name="QinlianChallenge[rank_job]" placeholder="必填" />
+                    </div>
+
+                    <label for="main_issues" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("main_issues")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="main_issues" name="QinlianChallenge[main_issues]" placeholder="必填" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="related_unit_div" class="form-group">
+                    <label for="related_unit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("related_unit")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="related_unit" name="QinlianChallenge[related_unit]" placeholder="必填" />
+                    </div>
+
+                    <label for="heavy_cases" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("heavy_cases")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="heavy_cases" name="QinlianChallenge[heavy_cases]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="date_receipt_div" class="form-group">
+                    <label for="date_receipt" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("date_receipt")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="date_receipt" name="QinlianChallenge[date_receipt]" placeholder="" />
+                    </div>
+
+                    <label for="transfer_organ" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("transfer_organ")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="transfer_organ" name="QinlianChallenge[transfer_organ]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="results_div" class="form-group">
+                    <label for="results" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("results")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="results" name="QinlianChallenge[results]" placeholder="" />
+                    </div>
+
+                    <label for="supervisory_leadership" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("supervisory_leadership")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="supervisory_leadership" name="QinlianChallenge[supervisory_leadership]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="host_department_div" class="form-group">
+                    <label for="host_department" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("host_department")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="host_department" name="QinlianChallenge[host_department]" placeholder="" />
+                    </div>
+
+                    <label for="progress_case" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("progress_case")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="progress_case" name="QinlianChallenge[progress_case]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="investigation_disposal_div" class="form-group">
+                    <label for="investigation_disposal" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("investigation_disposal")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="investigation_disposal" name="QinlianChallenge[investigation_disposal]" placeholder="" />
+                    </div>
+
+                    <label for="remarks" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("remarks")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="remarks" name="QinlianChallenge[remarks]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="number_disposals_div" class="form-group">
+                    <label for="number_disposals" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("number_disposals")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="number_disposals" name="QinlianChallenge[number_disposals]" placeholder="" />
+                    </div>
+
+                    <label for="organizations_number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organizations_number")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="organizations_number" name="QinlianChallenge[organizations_number]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="first_form_div" class="form-group">
+                    <label for="first_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("first_form")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="first_form" name="QinlianChallenge[first_form]" placeholder="" />
+                    </div>
+
+                    <label for="second_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("second_form")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="second_form" name="QinlianChallenge[second_form]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="third_form_div" class="form-group">
+                    <label for="third_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("third_form")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="third_form" name="QinlianChallenge[third_form]" placeholder="" />
+                    </div>
+
+                    <label for="fourth_form" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("fourth_form")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="fourth_form" name="QinlianChallenge[fourth_form]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="approval_time_div" class="form-group">
+                    <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="approval_time" name="QinlianChallenge[approval_time]" placeholder="" />
+                    </div>
+
+                    <label for="approval_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_status")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="approval_status" name="QinlianChallenge[approval_status]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="del_status_div" class="form-group">
+                    <label for="del_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("del_status")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="del_status" name="QinlianChallenge[del_status]" placeholder="" />
+                    </div>
+
+                    <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="create_date" name="QinlianChallenge[create_date]" placeholder="必填" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="update_time_div" class="form-group">
+                    <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="update_time" name="QinlianChallenge[update_time]" placeholder="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <?php ActiveForm::end(); ?>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">关闭</a> <a
+                        id="edit_dialog_ok" href="#" class="btn btn-primary">确定</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->

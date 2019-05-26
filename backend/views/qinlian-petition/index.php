@@ -205,15 +205,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="number_div" class="form-group">
               <label for="number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("number")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="number" name="QinlianPetition[number]" placeholder="必填" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="receipt_time_div" class="form-group">
               <label for="receipt_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("receipt_time")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="receipt_time" name="QinlianPetition[receipt_time]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
@@ -221,15 +218,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="turn_number_div" class="form-group">
               <label for="turn_number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("turn_number")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="turn_number" name="QinlianPetition[turn_number]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="transfer_organ_div" class="form-group">
               <label for="transfer_organ" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("transfer_organ")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="transfer_organ" name="QinlianPetition[transfer_organ]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -237,15 +231,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="name_report_div" class="form-group">
               <label for="name_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("name_report")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="name_report" name="QinlianPetition[name_report]" placeholder="必填" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="name_reported_div" class="form-group">
               <label for="name_reported" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("name_reported")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="name_reported" name="QinlianPetition[name_reported]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
@@ -253,15 +244,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="political_appearance_div" class="form-group">
               <label for="political_appearance" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("political_appearance")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="political_appearance" name="QinlianPetition[political_appearance]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="unit_job_div" class="form-group">
               <label for="unit_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("unit_job")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="unit_job" name="QinlianPetition[unit_job]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -269,15 +257,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="duty_job_div" class="form-group">
               <label for="duty_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("duty_job")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="duty_job" name="QinlianPetition[duty_job]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="rank_job_div" class="form-group">
               <label for="rank_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("rank_job")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="rank_job" name="QinlianPetition[rank_job]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -285,15 +270,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="main_issues_div" class="form-group">
               <label for="main_issues" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("main_issues")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="main_issues" name="QinlianPetition[main_issues]" placeholder="必填" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="issues_properties_div" class="form-group">
               <label for="issues_properties" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("issues_properties")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="issues_properties" name="QinlianPetition[issues_properties]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
@@ -301,15 +283,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="petition_office_opinion_div" class="form-group">
               <label for="petition_office_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("petition_office_opinion")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="petition_office_opinion" name="QinlianPetition[petition_office_opinion]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="superior_guidance_opinion_div" class="form-group">
               <label for="superior_guidance_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("superior_guidance_opinion")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="superior_guidance_opinion" name="QinlianPetition[superior_guidance_opinion]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -317,15 +296,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="lu_clerk_opinion_div" class="form-group">
               <label for="lu_clerk_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("lu_clerk_opinion")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="lu_clerk_opinion" name="QinlianPetition[lu_clerk_opinion]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="major_leadership_approval_opinion_div" class="form-group">
               <label for="major_leadership_approval_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("major_leadership_approval_opinion")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="major_leadership_approval_opinion" name="QinlianPetition[major_leadership_approval_opinion]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -333,15 +309,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="charge_leadership_approval_opinion_div" class="form-group">
               <label for="charge_leadership_approval_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("charge_leadership_approval_opinion")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="charge_leadership_approval_opinion" name="QinlianPetition[charge_leadership_approval_opinion]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="host_department_div" class="form-group">
               <label for="host_department" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("host_department")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="host_department" name="QinlianPetition[host_department]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -349,15 +322,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="handle_results_div" class="form-group">
               <label for="handle_results" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("handle_results")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="handle_results" name="QinlianPetition[handle_results]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="heavy_letter_div" class="form-group">
               <label for="heavy_letter" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("heavy_letter")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="heavy_letter" name="QinlianPetition[heavy_letter]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -365,15 +335,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="unit_responsibility_div" class="form-group">
               <label for="unit_responsibility" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("unit_responsibility")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="unit_responsibility" name="QinlianPetition[unit_responsibility]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="approval_time_div" class="form-group">
               <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="approval_time" name="QinlianPetition[approval_time]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -381,15 +348,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="approval_status_div" class="form-group">
               <label for="approval_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_status")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="approval_status" name="QinlianPetition[approval_status]" placeholder="" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="del_status_div" class="form-group">
               <label for="del_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("del_status")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="del_status" name="QinlianPetition[del_status]" placeholder="" />
               </div>
               <div class="clearfix"></div>
@@ -397,15 +361,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="create_date_div" class="form-group">
               <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="create_date" name="QinlianPetition[create_date]" placeholder="必填" />
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="update_time_div" class="form-group">
               <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
-              <div class="col-sm-10">
+              <div class="col-sm-4">
                   <input type="text" class="form-control" id="update_time" name="QinlianPetition[update_time]" placeholder="" />
               </div>
               <div class="clearfix"></div>
