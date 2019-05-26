@@ -246,53 +246,57 @@ class QinlianThreadController extends BaseController
                 if ($key>1){
 //                    var_dump($value);die;
                     $data[] = [
-                        'name' =>  $value['A'],
-                        'sex' =>  $value['B'],
-                        'nation' =>  $value['C'],
-                        'age' =>  $value['D'],
-                        'politics_status' =>  $value['E'],
+                        'is_nuit' =>  $value['A'],
+                        'nuit_name' =>  $value['B'],
+                        'nuit_code' =>  $value['C'],
+                        'statistical_identification' =>  $value['D'],
+                        'clue_code' =>  $value['E'],
+                        'personnel_code' =>  $value['F'],
+                        'person_reflected' =>  $value['G'],
+                        'duty_job' =>  $value['H'],
+                        'is_supervises_object' =>  $value['I'],
+                        'rank_job' =>  $value['J'],
+                        'recovers_economic_loss' =>  $value['K'],
+                        'collects_amount' =>  $value['L'],
+                        'handling_organ' =>  $value['M'],
+                        'main_problem_clues' =>  $value['N'],
+                        'remarks' =>  $value['O'],
+                        'nation' =>  $value['P'],
+                        'date_birth' =>  $value['Q'],
+                        'cpc' =>  $value['R'],
+                        'cppcc' =>  $value['S'],
+                        'disposal_report' =>  $value['T'],
+                        'time_joining_party' =>  $value['U'],
+                        'authority_management' =>  $value['V'],
+                        'acceptance_time' =>  $value['W'],
+                        'approval_time_one' =>  $value['X'],
+                        'statistical_time_one' =>  $value['Y'],
+                        'one_level_first' =>  $value['Z'],
 
-                        'join_party_date' =>  $value['F'],
-                        'organization_name' =>  $value['G'],
-                        'duty' =>  $value['H'],
-                        'rank' =>  $value['I'],
-                        'is_monitor' =>  $value['J'],
-
-                        'is_official' =>  $value['K'],
-                        'clue_code' =>  $value['L'],
-                        'clue_people_code' =>  $value['M'],
-                        'clue_accept_time' =>  $value['N'],
-                        'clue_manage_office' =>  $value['O'],
-
-                        'clue_source' =>  $value['P'],
-                        'clue_violations_type' =>  $value['Q'],
-                        'clue_outlawed_type' =>  $value['R'],
-                        'clue_disposition_method' =>  $value['S'],
-                        'clue_summary' =>  $value['T'],
-
-                        'clue_protokaryon_report' =>  $value['U'],
-                        'case_code' =>  $value['V'],
-                        'case_people_code' =>  $value['W'],
-                        'case_register_time' =>  $value['X'],
-                        'case_register_office' =>  $value['Y'],
-
-                        'case_summary' =>  $value['X'],
-                        'case_register_report' =>  $value['AA'],
-                        'case_register_decision' =>  $value['AB'],
-                        'case_review_report' =>  $value['AC'],
-                        'settle_accept_time' =>  $value['AD'],
-
-                        'settle_accept_report' =>  $value['AE'],
-                        'settle_conclude_time' =>  $value['AF'],
-                        'settle_finish_time' =>  $value['AG'],
-                        'settle_party_disposal' =>  $value['AH'],
-                        'settle_political_disposal' =>  $value['AI'],
-
-                        'settle_disposal_decision' =>  $value['AJ'],
-                        'settle_judiciary_time' =>  $value['AK'],
-                        'settle_prosecutor_time' =>  $value['AL'],
-                        'settle_prosecutor_details' =>  $value['AM'],
-                        'del_status' =>  $value['AN'],
+                        'one_level_second' =>  $value['AA'],
+                        'approval_time_two' =>  $value['AB'],
+                        'statistical_time_two' =>  $value['AC'],
+                        'two_level_first' =>  $value['AD'],
+                        'two_level_second' =>  $value['AE'],
+                        'approval_time_three' =>  $value['AF'],
+                        'statistical_time_three' =>  $value['AG'],
+                        'three_level_first' =>  $value['AH'],
+                        'three_level_second' =>  $value['AI'],
+                        'cases_source' =>  $value['AJ'],
+                        'disciplinary_offence' =>  $value['AK'],
+                        'is_checking_me' =>  $value['AL'],
+                        'is_party' =>  $value['AM'],
+                        'secondary_class_objects' =>  $value['AN'],
+                        'is_supervisory_objects' =>  $value['AO'],
+                        'no_secondary_class_objects' =>  $value['AP'],
+                        'official_offences' =>  $value['AQ'],
+                        'other_offences' =>  $value['AR'],
+                        'organization_measure_time' =>  $value['AS'],
+                        'superiors_assigned' =>  $value['AT'],
+                        'department_charge' =>  $value['AU'],
+                        'del_status' =>  $value['AV'],
+                        'create_date' =>  $value['AW'],
+                        'update_time' =>  $value['AX'],
                     ];
 
                 }
@@ -304,47 +308,58 @@ class QinlianThreadController extends BaseController
                     $model = new QinlianThread();
                     Yii::$app->db->createCommand()
                         ->batchInsert($model::tableName(),[
-                            'name',
-                            'sex',
-                            'nation',
-                            'age',
-                            'politics_status',
-                            'join_party_date',
-                            'organization_name',
-                            'duty',
-                            'rank',
-                            'is_monitor',
-                            'is_official',
+                            'is_nuit',
+                            'nuit_name',
+                            'nuit_code',
+                            'statistical_identification',
                             'clue_code',
-                            'clue_people_code',
-                            'clue_accept_time',
-                            'clue_manage_office',
-                            'clue_source',
-                            'clue_violations_type',
-                            'clue_outlawed_type',
-                            'clue_disposition_method',
-                            'clue_summary',
-                            'clue_protokaryon_report',
-                            'case_code',
-                            'case_people_code',
-                            'case_register_time',
-                            'case_register_office',
-                            'case_summary',
+                            'personnel_code',
+                            'person_reflected',
+                            'duty_job',
+                            'is_supervises_object',
+                            'rank_job',
+                            'recovers_economic_loss',
+                            'collects_amount',
+                            'handling_organ',
+                            'main_problem_clues',
+                            'remarks',
+                            'nation',
+                            'date_birth',
+                            'cpc',
+                            'cppcc',
+                            'disposal_report',
+                            'time_joining_party',
+                            'authority_management',
+                            'acceptance_time',
+                            'approval_time_one',
+                            'statistical_time_one',
+                            'one_level_first',
 
-                            'case_register_report',
-                            'case_register_decision',
-                            'case_review_report',
-                            'settle_accept_time',
-                            'settle_accept_report',
-                            'settle_conclude_time',
-                            'settle_finish_time',
-                            'settle_party_disposal',
-                            'settle_political_disposal',
-                            'settle_disposal_decision',
-                            'settle_judiciary_time',
-                            'settle_prosecutor_time',
-                            'settle_prosecutor_details',
+                            'one_level_second',
+                            'approval_time_two',
+                            'statistical_time_two',
+                            'two_level_first',
+                            'two_level_second',
+                            'approval_time_three',
+                            'statistical_time_three',
+                            'three_level_first',
+                            'three_level_second',
+                            'cases_source',
+                            'disciplinary_offence',
+                            'is_checking_me',
+                            'is_party',
+                            'secondary_class_objects',
+                            'is_supervisory_objects',
+                            'no_secondary_class_objects',
+                            'official_offences',
+                            'other_offences',
+                            'organization_measure_time',
+                            'superiors_assigned',
+                            'department_charge',
                             'del_status',
+                            'create_date',
+                            'update_time',
+
                         ],
                             $data)
                         ->execute();
@@ -374,56 +389,58 @@ class QinlianThreadController extends BaseController
 
         $spreadsheet = new Spreadsheet();
 
-        $spreadsheet->getActiveSheet()->setCellValue('A1', '姓名');
-        $spreadsheet->getActiveSheet()->setCellValue('B1', '性别');
-        $spreadsheet->getActiveSheet()->setCellValue('C1', '民族');
-        $spreadsheet->getActiveSheet()->setCellValue('D1', '年龄');
-        $spreadsheet->getActiveSheet()->setCellValue('E1', '政治面貌');
+        $spreadsheet->getActiveSheet()->setCellValue('A1', '是否单位');
+        $spreadsheet->getActiveSheet()->setCellValue('B1', '填报单位名称');
+        $spreadsheet->getActiveSheet()->setCellValue('C1', '填报单位代码');
+        $spreadsheet->getActiveSheet()->setCellValue('D1', '统计标识');
+        $spreadsheet->getActiveSheet()->setCellValue('E1', '线索编码');
+        $spreadsheet->getActiveSheet()->setCellValue('F1', '人员编码');
+        $spreadsheet->getActiveSheet()->setCellValue('G1', '被反映人');
+        $spreadsheet->getActiveSheet()->setCellValue('H1', '工作单位及职务');
+        $spreadsheet->getActiveSheet()->setCellValue('I1', '是否国家监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('J1', '职级');
+        $spreadsheet->getActiveSheet()->setCellValue('K1', '挽回经济损失');
+        $spreadsheet->getActiveSheet()->setCellValue('L1', '收缴涉案金额（0');
+        $spreadsheet->getActiveSheet()->setCellValue('M1', '办理机关');
+        $spreadsheet->getActiveSheet()->setCellValue('N1', '主要问题线索');
+        $spreadsheet->getActiveSheet()->setCellValue('O1', '备注');
+        $spreadsheet->getActiveSheet()->setCellValue('P1', '民族');
+        $spreadsheet->getActiveSheet()->setCellValue('Q1', '出生年月');
+        $spreadsheet->getActiveSheet()->setCellValue('R1', '人大代表');
+        $spreadsheet->getActiveSheet()->setCellValue('S1', '政协委员');
+        $spreadsheet->getActiveSheet()->setCellValue('T1', '处置情况报告');
+        $spreadsheet->getActiveSheet()->setCellValue('U1', '入党时间');
+        $spreadsheet->getActiveSheet()->setCellValue('V1', '干部管理权限');
+        $spreadsheet->getActiveSheet()->setCellValue('W1', '受理时间');
+        $spreadsheet->getActiveSheet()->setCellValue('X1', '处置方式1批准时间');
+        $spreadsheet->getActiveSheet()->setCellValue('Y1', '处置方式1统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('Z1', '处置方式1一级');
 
-        $spreadsheet->getActiveSheet()->setCellValue('F1', '入党时间');
-        $spreadsheet->getActiveSheet()->setCellValue('G1', '单位');
-        $spreadsheet->getActiveSheet()->setCellValue('H1', '职务');
-        $spreadsheet->getActiveSheet()->setCellValue('I1', '职级');
-        $spreadsheet->getActiveSheet()->setCellValue('J1', '是否监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('AA1', '处置方式1二级');
+        $spreadsheet->getActiveSheet()->setCellValue('AB1', '处置方式2批准时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AC1', '处置方式2统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AD1', '处置方式2一级');
+        $spreadsheet->getActiveSheet()->setCellValue('AE1', '处置方式2二级');
+        $spreadsheet->getActiveSheet()->setCellValue('AF1', '处置方式3批准时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AG1', '处置方式3统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AH1', '处置方式3一级');
+        $spreadsheet->getActiveSheet()->setCellValue('AI1', '处置方式3二级');
+        $spreadsheet->getActiveSheet()->setCellValue('AJ1', '案件来源');
+        $spreadsheet->getActiveSheet()->setCellValue('AK1', '违纪行为');
+        $spreadsheet->getActiveSheet()->setCellValue('AL1', '是否与本人核实');
+        $spreadsheet->getActiveSheet()->setCellValue('AM1', '是否党员');
+        $spreadsheet->getActiveSheet()->setCellValue('AN1', '监察对象二级分类');
+        $spreadsheet->getActiveSheet()->setCellValue('AO1', '是否非党员非监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('AP1', '非党员非监察对象二级分类（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('AQ1', '职务犯罪行为（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('AR1', '其他违犯罪行为');
+        $spreadsheet->getActiveSheet()->setCellValue('AS1', '组织措施统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AT1', '上级交办');
+        $spreadsheet->getActiveSheet()->setCellValue('AU1', '分管科室');
+        $spreadsheet->getActiveSheet()->setCellValue('AV1', '删除状态');
+        $spreadsheet->getActiveSheet()->setCellValue('AW1', '创建时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AX1', '更新时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('K1', '是否公务员');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '线索编码');
-        $spreadsheet->getActiveSheet()->setCellValue('M1', '线索人员编码');
-        $spreadsheet->getActiveSheet()->setCellValue('N1', '受理时间');
-        $spreadsheet->getActiveSheet()->setCellValue('O1', '办理机关');
-
-        $spreadsheet->getActiveSheet()->setCellValue('P1', '线索来源');
-        $spreadsheet->getActiveSheet()->setCellValue('Q1', '违纪类型');
-        $spreadsheet->getActiveSheet()->setCellValue('R1', '违法类型');
-        $spreadsheet->getActiveSheet()->setCellValue('S1', '处置方式');
-        $spreadsheet->getActiveSheet()->setCellValue('T1', '线索摘要');
-
-        $spreadsheet->getActiveSheet()->setCellValue('U1', '初核报告');
-        $spreadsheet->getActiveSheet()->setCellValue('V1', '案件编码');
-        $spreadsheet->getActiveSheet()->setCellValue('W1', '案件人员编码');
-        $spreadsheet->getActiveSheet()->setCellValue('X1', '立案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('Y1', '立案机关');
-
-        $spreadsheet->getActiveSheet()->setCellValue('Z1', '简要案情');
-        $spreadsheet->getActiveSheet()->setCellValue('AA1', '立案报告');
-        $spreadsheet->getActiveSheet()->setCellValue('AB1', '立案决定书');
-        $spreadsheet->getActiveSheet()->setCellValue('AC1', '审查报告');
-        $spreadsheet->getActiveSheet()->setCellValue('AD1', '审理受理时间');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AE1', '审理报告');
-        $spreadsheet->getActiveSheet()->setCellValue('AF1', '审结时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AG1', '结案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AH1', '党纪处分');
-        $spreadsheet->getActiveSheet()->setCellValue('AI1', '政纪处分');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AJ1', '处分决定');
-        $spreadsheet->getActiveSheet()->setCellValue('AK1', '移送司法时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AL1', '公检法受理时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AM1', '公检法处理内容');
-        $spreadsheet->getActiveSheet()->setCellValue('AN1', '删除状态');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AO1', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AP1', '更新时间');
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -431,105 +448,107 @@ class QinlianThreadController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('O')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('P')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('Q')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('R')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('S')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('T')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('U')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('V')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('W')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('Y')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('Z')->setWidth(16);
 
-        $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AA')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AB')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AC')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AD')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('AE')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('AG')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('AH')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AI')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('AJ')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AK')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('AL')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('AM')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AN')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AO')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('AP')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AQ')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AR')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AS')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AT')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AU')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AV')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AW')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AX')->setWidth(16);
 
         $i = 2;
         foreach($data as $key=>$val){
 
-            $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['name']);
-            $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $val['sex']);
-            $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $val['nation']);
-            $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $val['age']);
-            $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $val['politics_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['is_nuit']);
+            $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $val['nuit_name']);
+            $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $val['nuit_code']);
+            $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $val['statistical_identification']);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $val['clue_code']);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . $i, $val['personnel_code']);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . $i, $val['person_reflected']);
+            $spreadsheet->getActiveSheet()->setCellValue('H' . $i, $val['duty_job']);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . $i, $val['is_supervises_object']);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . $i, $val['rank_job']);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $i, $val['recovers_economic_loss']);
+            $spreadsheet->getActiveSheet()->setCellValue('L' . $i, $val['collects_amount']);
+            $spreadsheet->getActiveSheet()->setCellValue('M' . $i, $val['handling_organ']);
+            $spreadsheet->getActiveSheet()->setCellValue('N' . $i, $val['main_problem_clues']);
+            $spreadsheet->getActiveSheet()->setCellValue('O' . $i, $val['remarks']);
+            $spreadsheet->getActiveSheet()->setCellValue('P' . $i, $val['nation']);
+            $spreadsheet->getActiveSheet()->setCellValue('Q' . $i, $val['date_birth']);
+            $spreadsheet->getActiveSheet()->setCellValue('R' . $i, $val['cpc']);
+            $spreadsheet->getActiveSheet()->setCellValue('S' . $i, $val['cppcc']);
+            $spreadsheet->getActiveSheet()->setCellValue('T' . $i, $val['disposal_report']);
+            $spreadsheet->getActiveSheet()->setCellValue('U' . $i, $val['time_joining_party']);
+            $spreadsheet->getActiveSheet()->setCellValue('V' . $i, $val['authority_management']);
+            $spreadsheet->getActiveSheet()->setCellValue('W' . $i, $val['acceptance_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['approval_time_one']);
+            $spreadsheet->getActiveSheet()->setCellValue('Y' . $i, $val['statistical_time_one']);
+            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['one_level_first']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('F' . $i, $val['join_party_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('G' . $i, $val['organization_name']);
-            $spreadsheet->getActiveSheet()->setCellValue('H' . $i, $val['duty']);
-            $spreadsheet->getActiveSheet()->setCellValue('I' . $i, $val['rank']);
-            $spreadsheet->getActiveSheet()->setCellValue('J' . $i, $val['is_monitor']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('K' . $i, $val['is_official']);
-            $spreadsheet->getActiveSheet()->setCellValue('L' . $i, $val['clue_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('M' . $i, $val['clue_people_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('N' . $i, $val['clue_accept_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('O' . $i, $val['clue_manage_office']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('P' . $i, $val['clue_source']);
-            $spreadsheet->getActiveSheet()->setCellValue('Q' . $i, $val['clue_violations_type']);
-            $spreadsheet->getActiveSheet()->setCellValue('R' . $i, $val['clue_outlawed_type']);
-            $spreadsheet->getActiveSheet()->setCellValue('S' . $i, $val['clue_disposition_method']);
-            $spreadsheet->getActiveSheet()->setCellValue('T' . $i, $val['clue_summary']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('U' . $i, $val['clue_protokaryon_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('V' . $i, $val['case_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('W' . $i, $val['case_people_code']);
-            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['case_register_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('Y' . $i, $val['case_register_office']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['case_summary']);
-            $spreadsheet->getActiveSheet()->setCellValue('AA' . $i, $val['case_register_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('AB' . $i, $val['case_register_decision']);
-            $spreadsheet->getActiveSheet()->setCellValue('AC' . $i, $val['case_review_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('AD' . $i, $val['settle_accept_time']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('AE' . $i, $val['settle_accept_report']);
-            $spreadsheet->getActiveSheet()->setCellValue('AF' . $i, $val['settle_conclude_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AG' . $i, $val['settle_finish_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AH' . $i, $val['settle_party_disposal']);
-            $spreadsheet->getActiveSheet()->setCellValue('AI' . $i, $val['settle_political_disposal']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('AJ' . $i, $val['settle_disposal_decision']);
-            $spreadsheet->getActiveSheet()->setCellValue('AK' . $i, $val['settle_judiciary_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AL' . $i, $val['settle_prosecutor_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AM' . $i, $val['settle_prosecutor_details']);
-            $spreadsheet->getActiveSheet()->setCellValue('AN' . $i, $val['del_status']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('AO' . $i, $val['create_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('AP' . $i, $val['update_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('AA' . $i, $val['one_level_second']);
+            $spreadsheet->getActiveSheet()->setCellValue('AB' . $i, $val['approval_time_two']);
+            $spreadsheet->getActiveSheet()->setCellValue('AC' . $i, $val['statistical_time_two']);
+            $spreadsheet->getActiveSheet()->setCellValue('AD' . $i, $val['two_level_first']);
+            $spreadsheet->getActiveSheet()->setCellValue('AE' . $i, $val['two_level_second']);
+            $spreadsheet->getActiveSheet()->setCellValue('AF' . $i, $val['approval_time_three']);
+            $spreadsheet->getActiveSheet()->setCellValue('AG' . $i, $val['statistical_time_three']);
+            $spreadsheet->getActiveSheet()->setCellValue('AH' . $i, $val['three_level_first']);
+            $spreadsheet->getActiveSheet()->setCellValue('AI' . $i, $val['three_level_second']);
+            $spreadsheet->getActiveSheet()->setCellValue('AJ' . $i, $val['cases_source']);
+            $spreadsheet->getActiveSheet()->setCellValue('AK' . $i, $val['disciplinary_offence']);
+            $spreadsheet->getActiveSheet()->setCellValue('AL' . $i, $val['is_checking_me']);
+            $spreadsheet->getActiveSheet()->setCellValue('AM' . $i, $val['is_party']);
+            $spreadsheet->getActiveSheet()->setCellValue('AN' . $i, $val['secondary_class_objects']);
+            $spreadsheet->getActiveSheet()->setCellValue('AO' . $i, $val['is_supervisory_objects']);
+            $spreadsheet->getActiveSheet()->setCellValue('AP' . $i, $val['no_secondary_class_objects']);
+            $spreadsheet->getActiveSheet()->setCellValue('AQ' . $i, $val['official_offences']);
+            $spreadsheet->getActiveSheet()->setCellValue('AR' . $i, $val['other_offences']);
+            $spreadsheet->getActiveSheet()->setCellValue('AS' . $i, $val['organization_measure_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('AT' . $i, $val['superiors_assigned']);
+            $spreadsheet->getActiveSheet()->setCellValue('AU' . $i, $val['department_charge']);
+            $spreadsheet->getActiveSheet()->setCellValue('AV' . $i, $val['del_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('AW' . $i, $val['create_date']);
+            $spreadsheet->getActiveSheet()->setCellValue('AX' . $i, $val['update_time']);
 
             $i++;
         }

@@ -254,41 +254,32 @@ class QinlianPetitionController extends BaseController
                     $data[] = [
                         'id' =>  $value['A'],
                         'number' =>  $value['B'],
-                        'incoming_time' =>  $value['C'],
-                        'clue_level' =>  $value['D'],
-                        'clue_category' =>  $value['E'],
+                        'receipt_time' =>  $value['C'],
+                        'turn_number' =>  $value['D'],
+                        'transfer_organ' =>  $value['E'],
 
-                        'clue_source' =>  $value['F'],
-                        'letter_number' =>  $value['G'],
-                        'signature' =>  $value['H'],
-                        'leader_instructions' =>  $value['I'],
-                        'respondent_unit' =>  $value['J'],
+                        'name_report' =>  $value['F'],
+                        'name_reported' =>  $value['G'],
+                        'political_appearance' =>  $value['H'],
+                        'unit_job' =>  $value['I'],
+                        'duty_job' =>  $value['J'],
 
-                        'duty_job' =>  $value['K'],
-                        'rank_job' =>  $value['L'],
-                        'main_issues' =>  $value['M'],
-                        'related_unit' =>  $value['N'],
-                        'heavy_cases' =>  $value['O'],
+                        'rank_job' =>  $value['K'],
+                        'main_issues' =>  $value['L'],
+                        'issues_properties' =>  $value['M'],
+                        'petition_office_opinion' =>  $value['N'],
+                        'superior_guidance_opinion' =>  $value['O'],
 
-                        'date_receipt' =>  $value['P'],
-                        'transfer_organ' =>  $value['Q'],
-                        'results' =>  $value['R'],
-                        'supervisory_leadership' =>  $value['S'],
-                        'host_department' =>  $value['T'],
+                        'lu_clerk_opinion' =>  $value['P'],
+                        'major_leadership_approval_opinion' =>  $value['Q'],
+                        'charge_leadership_approval_opinion' =>  $value['R'],
+                        'host_department' =>  $value['S'],
+                        'handle_results' =>  $value['T'],
 
-                        'progress_case' =>  $value['U'],
-                        'investigation_disposal' =>  $value['V'],
-                        'remarks' =>  $value['W'],
-                        'number_disposals' =>  $value['X'],
-                        'organizations_number' =>  $value['Y'],
-
-                        'first_form' =>  $value['X'],
-                        'second_form' =>  $value['AA'],
-                        'third_form' =>  $value['AB'],
-                        'fourth_form' =>  $value['AC'],
-                        'approval_time' =>  $value['AD'],
-
-                        'approval_status' =>  $value['AE'],
+                        'heavy_letter' =>  $value['U'],
+                        'unit_responsibility' =>  $value['V'],
+                        'approval_time' =>  $value['W'],
+                        'approval_status' =>  $value['X'],
                     ];
 
                 }
@@ -302,37 +293,28 @@ class QinlianPetitionController extends BaseController
                         ->batchInsert($model::tableName(),[
                             'id',
                             'number',
-                            'incoming_time',
-                            'clue_level',
-                            'clue_category',
-                            'clue_source',
-                            'letter_number',
-                            'signature',
-                            'leader_instructions',
-                            'respondent_unit',
+                            'receipt_time',
+                            'turn_number',
+                            'transfer_organ',
+                            'name_report',
+                            'name_reported',
+                            'political_appearance',
+                            'unit_job',
                             'duty_job',
                             'rank_job',
                             'main_issues',
-                            'related_unit',
-                            'heavy_cases',
-                            'date_receipt',
-                            'transfer_organ',
-                            'results',
-                            'supervisory_leadership',
+                            'issues_properties',
+                            'petition_office_opinion',
+                            'superior_guidance_opinion',
+                            'lu_clerk_opinion',
+                            'major_leadership_approval_opinion',
+                            'charge_leadership_approval_opinion',
                             'host_department',
-                            'progress_case',
-                            'investigation_disposal',
-                            'remarks',
-                            'number_disposals',
-                            'organizations_number',
-                            'first_form',
-
-                            'second_form',
-                            'third_form',
-                            'fourth_form',
+                            'handle_results',
+                            'heavy_letter',
+                            'unit_responsibility',
                             'approval_time',
-                            'approval_status',
-                        ],
+                            'approval_status',],
                             $data)
                         ->execute();
                 } catch (Exception $e) {
@@ -361,45 +343,38 @@ class QinlianPetitionController extends BaseController
 
         $spreadsheet = new Spreadsheet();
 
-        $spreadsheet->getActiveSheet()->setCellValue('A1', '序号');
-        $spreadsheet->getActiveSheet()->setCellValue('B1', '来件时间');
-        $spreadsheet->getActiveSheet()->setCellValue('C1', '线索级别');
-        $spreadsheet->getActiveSheet()->setCellValue('D1', '线索类别');
-        $spreadsheet->getActiveSheet()->setCellValue('E1', '线索来源');
+        $spreadsheet->getActiveSheet()->setCellValue('A1', '编号');
+        $spreadsheet->getActiveSheet()->setCellValue('B1', '收件时间');
+        $spreadsheet->getActiveSheet()->setCellValue('C1', '转来编号');
+        $spreadsheet->getActiveSheet()->setCellValue('D1', '转来机关');
+        $spreadsheet->getActiveSheet()->setCellValue('E1', '举报人姓名');
 
-        $spreadsheet->getActiveSheet()->setCellValue('F1', '信件编号');
-        $spreadsheet->getActiveSheet()->setCellValue('G1', '署名情况');
-        $spreadsheet->getActiveSheet()->setCellValue('H1', '领导批示');
-        $spreadsheet->getActiveSheet()->setCellValue('I1', '被反映人（单位）');
-        $spreadsheet->getActiveSheet()->setCellValue('J1', '职务');
+        $spreadsheet->getActiveSheet()->setCellValue('F1', '被检举人姓名');
+        $spreadsheet->getActiveSheet()->setCellValue('G1', '政治面貌');
+        $spreadsheet->getActiveSheet()->setCellValue('H1', '单位');
+        $spreadsheet->getActiveSheet()->setCellValue('I1', '职务（0（单位）');
+        $spreadsheet->getActiveSheet()->setCellValue('J1', '职务（职级');
 
-        $spreadsheet->getActiveSheet()->setCellValue('K1', '职级');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '反映的主要问题');
-        $spreadsheet->getActiveSheet()->setCellValue('M1', '涉及单位');
-        $spreadsheet->getActiveSheet()->setCellValue('N1', '重件情况');
-        $spreadsheet->getActiveSheet()->setCellValue('O1', '接到日期');
+        $spreadsheet->getActiveSheet()->setCellValue('K1', '反映的主要问题');
+        $spreadsheet->getActiveSheet()->setCellValue('L1', '问题属性');
+        $spreadsheet->getActiveSheet()->setCellValue('M1', '信访室意见');
+        $spreadsheet->getActiveSheet()->setCellValue('N1', '上级领导意见');
+        $spreadsheet->getActiveSheet()->setCellValue('O1', '路书记批示意见');
 
-        $spreadsheet->getActiveSheet()->setCellValue('P1', '处置方式');
-        $spreadsheet->getActiveSheet()->setCellValue('Q1', '要结果情况');
-        $spreadsheet->getActiveSheet()->setCellValue('R1', '督办领导');
-        $spreadsheet->getActiveSheet()->setCellValue('S1', '办理科室');
-        $spreadsheet->getActiveSheet()->setCellValue('T1', '案件进度');
+        $spreadsheet->getActiveSheet()->setCellValue('P1', '主要领导审批意见');
+        $spreadsheet->getActiveSheet()->setCellValue('Q1', '分管领导审批意见');
+        $spreadsheet->getActiveSheet()->setCellValue('R1', '承办科室');
+        $spreadsheet->getActiveSheet()->setCellValue('S1', '办理结果');
+        $spreadsheet->getActiveSheet()->setCellValue('T1', '重信');
 
-        $spreadsheet->getActiveSheet()->setCellValue('U1', '查处情况');
-        $spreadsheet->getActiveSheet()->setCellValue('V1', '备注');
-        $spreadsheet->getActiveSheet()->setCellValue('W1', '处分人数');
-        $spreadsheet->getActiveSheet()->setCellValue('X1', '问题属性');
-        $spreadsheet->getActiveSheet()->setCellValue('Y1', '第一种形态');
+        $spreadsheet->getActiveSheet()->setCellValue('U1', '责任单位');
+        $spreadsheet->getActiveSheet()->setCellValue('V1', '审批时间');
+        $spreadsheet->getActiveSheet()->setCellValue('W1', '审批状态');
+        $spreadsheet->getActiveSheet()->setCellValue('X1', '删除状态');
+        $spreadsheet->getActiveSheet()->setCellValue('Y1', '创建时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('Z1', '第二种形态');
-        $spreadsheet->getActiveSheet()->setCellValue('AA1', '第三种形态');
-        $spreadsheet->getActiveSheet()->setCellValue('AB1', '第四种形态');
-        $spreadsheet->getActiveSheet()->setCellValue('AC1', '审批时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AD1', '审批状态');
+        $spreadsheet->getActiveSheet()->setCellValue('Z1', '更新时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('AE1', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('AF1', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AG1', '更新时间');
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -432,58 +407,43 @@ class QinlianPetitionController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('Y')->setWidth(16);
 
-        $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AA')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AB')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AC')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AD')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('Z')->setWidth(16);
 
-        $spreadsheet->getActiveSheet()->getColumnDimension('AE')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(30);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AG')->setWidth(12);
 
         $i = 2;
         foreach($data as $key=>$val){
 
             $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['number']);
-            $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $val['incoming_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $val['clue_level']);
-            $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $val['clue_category']);
-            $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $val['clue_source']);
+            $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $val['receipt_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $val['turn_number']);
+            $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $val['transfer_organ']);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $val['name_report']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('F' . $i, $val['letter_number']);
-            $spreadsheet->getActiveSheet()->setCellValue('G' . $i, $val['signature']);
-            $spreadsheet->getActiveSheet()->setCellValue('H' . $i, $val['leader_instructions']);
-            $spreadsheet->getActiveSheet()->setCellValue('I' . $i, $val['respondent_unit']);
-            $spreadsheet->getActiveSheet()->setCellValue('J' . $i, $val['duty_job']);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . $i, $val['name_reported']);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . $i, $val['political_appearance']);
+            $spreadsheet->getActiveSheet()->setCellValue('H' . $i, $val['unit_job']);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . $i, $val['duty_job']);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . $i, $val['rank_job']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('K' . $i, $val['rank_job']);
-            $spreadsheet->getActiveSheet()->setCellValue('L' . $i, $val['main_issues']);
-            $spreadsheet->getActiveSheet()->setCellValue('M' . $i, $val['related_unit']);
-            $spreadsheet->getActiveSheet()->setCellValue('N' . $i, $val['heavy_cases']);
-            $spreadsheet->getActiveSheet()->setCellValue('O' . $i, $val['date_receipt']);
+            $spreadsheet->getActiveSheet()->setCellValue('K' . $i, $val['main_issues']);
+            $spreadsheet->getActiveSheet()->setCellValue('L' . $i, $val['issues_properties']);
+            $spreadsheet->getActiveSheet()->setCellValue('M' . $i, $val['petition_office_opinion']);
+            $spreadsheet->getActiveSheet()->setCellValue('N' . $i, $val['superior_guidance_opinion']);
+            $spreadsheet->getActiveSheet()->setCellValue('O' . $i, $val['lu_clerk_opinion']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('P' . $i, $val['transfer_organ']);
-            $spreadsheet->getActiveSheet()->setCellValue('Q' . $i, $val['results']);
-            $spreadsheet->getActiveSheet()->setCellValue('R' . $i, $val['supervisory_leadership']);
-            $spreadsheet->getActiveSheet()->setCellValue('S' . $i, $val['host_department']);
-            $spreadsheet->getActiveSheet()->setCellValue('T' . $i, $val['progress_case']);
+            $spreadsheet->getActiveSheet()->setCellValue('P' . $i, $val['major_leadership_approval_opinion']);
+            $spreadsheet->getActiveSheet()->setCellValue('Q' . $i, $val['charge_leadership_approval_opinion']);
+            $spreadsheet->getActiveSheet()->setCellValue('R' . $i, $val['host_department']);
+            $spreadsheet->getActiveSheet()->setCellValue('S' . $i, $val['handle_results']);
+            $spreadsheet->getActiveSheet()->setCellValue('T' . $i, $val['heavy_letter']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('U' . $i, $val['investigation_disposal']);
-            $spreadsheet->getActiveSheet()->setCellValue('V' . $i, $val['remarks']);
-            $spreadsheet->getActiveSheet()->setCellValue('W' . $i, $val['number_disposals']);
-            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['organizations_number']);
-            $spreadsheet->getActiveSheet()->setCellValue('Y' . $i, $val['first_form']);
+            $spreadsheet->getActiveSheet()->setCellValue('U' . $i, $val['unit_responsibility']);
+            $spreadsheet->getActiveSheet()->setCellValue('V' . $i, $val['approval_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('W' . $i, $val['approval_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['del_status']);
+            $spreadsheet->getActiveSheet()->setCellValue('Y' . $i, $val['create_date']);
+            $spreadsheet->getActiveSheet()->setCellValue('Z' . $i, $val['update_time']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['second_form']);
-            $spreadsheet->getActiveSheet()->setCellValue('AA' . $i, $val['third_form']);
-            $spreadsheet->getActiveSheet()->setCellValue('AB' . $i, $val['fourth_form']);
-            $spreadsheet->getActiveSheet()->setCellValue('AC' . $i, $val['approval_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AD' . $i, $val['approval_status']);
-
-            $spreadsheet->getActiveSheet()->setCellValue('AE' . $i, $val['del_status']);
-            $spreadsheet->getActiveSheet()->setCellValue('AF' . $i, $val['create_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('AG' . $i, $val['update_time']);
 
             $i++;
         }
