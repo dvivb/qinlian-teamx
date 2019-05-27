@@ -211,7 +211,7 @@ $modelLabel = new \backend\models\QinlianPetition();
 
               <label for="receipt_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("receipt_time")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="receipt_time" name="QinlianPetition[receipt_time]" placeholder="必填" />
+                  <input type="text" class="form-control" id="receipt_time" name="QinlianPetition[receipt_time]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>
@@ -341,7 +341,7 @@ $modelLabel = new \backend\models\QinlianPetition();
 
               <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="approval_time" name="QinlianPetition[approval_time]" placeholder="" />
+                  <input type="text" class="form-control" id="approval_time" name="QinlianPetition[approval_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>
@@ -362,12 +362,12 @@ $modelLabel = new \backend\models\QinlianPetition();
           <div id="create_date_div" class="form-group">
               <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="create_date" name="QinlianPetition[create_date]" placeholder="必填" />
+                  <input type="text" class="form-control" id="create_date" name="QinlianPetition[create_date]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
 
               <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="update_time" name="QinlianPetition[update_time]" placeholder="" />
+                  <input type="text" class="form-control" id="update_time" name="QinlianPetition[update_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>

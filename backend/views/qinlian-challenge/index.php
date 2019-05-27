@@ -226,7 +226,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
 
                     <label for="incoming_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("incoming_time")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="incoming_time" name="QinlianChallenge[incoming_time]" placeholder="必填" />
+                        <input type="text" class="form-control" id="incoming_time" name="QinlianChallenge[incoming_time]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -312,7 +312,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 <div id="date_receipt_div" class="form-group">
                     <label for="date_receipt" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("date_receipt")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="date_receipt" name="QinlianChallenge[date_receipt]" placeholder="" />
+                        <input type="text" class="form-control" id="date_receipt" name="QinlianChallenge[date_receipt]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
                     </div>
 
                     <label for="transfer_organ" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("transfer_organ")?></label>
@@ -403,7 +403,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 <div id="approval_time_div" class="form-group">
                     <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="approval_time" name="QinlianChallenge[approval_time]" placeholder="" />
+                        <input type="text" class="form-control" id="approval_time" name="QinlianChallenge[approval_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
                     </div>
 
                     <label for="approval_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_status")?></label>
@@ -421,7 +421,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
 
                     <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="create_date" name="QinlianChallenge[create_date]" placeholder="必填" />
+                        <input type="text" class="form-control" id="create_date" name="QinlianChallenge[create_date]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -429,7 +429,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 <div id="update_time_div" class="form-group">
                     <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="update_time" name="QinlianChallenge[update_time]" placeholder="" />
+                        <input type="text" class="form-control" id="update_time" name="QinlianChallenge[update_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
                     </div>
                     <div class="clearfix"></div>
                 </div>
