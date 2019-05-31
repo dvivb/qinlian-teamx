@@ -95,7 +95,6 @@ if($otherMenu == false){
   <!-- jQuery 2.2.3 -->
   <script src="<?=Url::base()?>/plugins/jQuery/jquery-2.2.3.min.js"></script>
 
-  
   <script>
     $(function($){
         window.admin_tool = function(){
