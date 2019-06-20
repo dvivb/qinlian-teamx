@@ -23,57 +23,114 @@ $modelLabel = new \backend\models\QinlianPetition();
 <!-- Main content -->
 <section class="content">
 
-    <div class="row">
-        <div class="col-md-6">
-            <!-- AREA CHART -->
-            <div class="box box-primary">
+    <div class="col-md-12">
 
-                    <div id="main" style="width: 600px;height:400px;"></div>
+        <!-- Horizontal Form -->
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">搜索条件</h3>
 
-                <!-- /.box-body -->
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
             </div>
-            <!-- /.box -->
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" action="qinlian-petition/statistics" method="get">
+                <div class="box-body">
 
-            <!-- DONUT CHART -->
-            <div class="box box-danger">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="clue_level" class="col-sm-2 control-label">线索级别</label>
 
-                    <div id="chart-panel" style="width: 600px;height:400px;"></div>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="clue_level" id="clue_level" class="form-control">
+                                    <option value="-1">全部</option>
+                                    <option value="1">一级</option>
+                                    <option value="2">二级</option>
+                                    <option value="3">三级</option>
+                                </select>
+                            </div>
+                        </div>
 
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
+                        <div class="form-group">
+                            <label for="clue_category" class="col-sm-2 control-label">线索类别</label>
 
-        </div>
-        <!-- /.col (LEFT) -->
-
-        <div class="col-md-6">
-            <!-- AREA CHART -->
-            <div class="box box-primary">
-
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-
-            <!-- DONUT CHART -->
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Donut Chart</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="clue_category" id="clue_category" class="form-control">
+                                    <option value="-1">全部</option>
+                                    <option value="1">一般</option>
+                                    <option value="2">违纪</option>
+                                    <option value="3">违法</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="duty_job" class="col-sm-2 control-label">职级</label>
+
+                            <div class="col-sm-8">
+                                <select class="form-control" name="duty_job" id="duty_job" class="form-control">
+                                    <option value="-1">全部</option>
+                                    <option value="1">一级</option>
+                                    <option value="2">二级</option>
+                                    <option value="3">三级</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incoming_time" class="col-sm-2 control-label">来件时间</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="incoming_time" id="incoming_time" data-provide="datepicker" data-date-format="yyyy-mm">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="approval_time" name="QinlianChallenge[approval_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="box-body chart-responsive">
-                    <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success pull-right">搜索</button>
                 </div>
+                <!-- /.box-footer -->
+            </form>
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- AREA CHART -->
+            <div class="box box-primary">
+
+                <div id="main" style="width: 1000px;height:600px;"></div>
+
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
 
+
+
         </div>
         <!-- /.col (LEFT) -->
+
     </div>
     <!-- /.row -->
 
@@ -84,139 +141,141 @@ $modelLabel = new \backend\models\QinlianPetition();
 <?php $this->beginBlock('footer');  ?>
 <!-- <body></body>后代码块 -->
 <script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
 
-    // // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        legend: {
-            data:['销量']
-        },
-        xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        },
-        yAxis: {},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
+    var app = echarts.init(document.getElementById('main'));
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-
-
-
-
-
-    var app = echarts.init(document.getElementById('chart-panel'));
-
-    app.title = '嵌套环形图';
+    app.title = '折线图';
 
     option = {
+        title: {
+            text: '演示数据',
+            subtext: '纯属虚构'
+        },
         tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
+            }
         },
         legend: {
-            orient: 'vertical',
-            x: 'left',
-            data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
+            data:['案件进度', '线索数量']
         },
-        series: [
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {readOnly: false},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        dataZoom: {
+            show: false,
+            start: 0,
+            end: 100
+        },
+        xAxis: [
             {
-                name:'访问来源',
-                type:'pie',
-                selectedMode: 'single',
-                radius: [0, '30%'],
-
-                label: {
-                    normal: {
-                        position: 'inner'
+                type: 'category',
+                boundaryGap: true,
+                data: (function (){
+                    var now = new Date();
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                        now = new Date(now - 2000);
                     }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:[
-                    {value:335, name:'直达', selected:true},
-                    {value:679, name:'营销广告'},
-                    {value:1548, name:'搜索引擎'}
-                ]
+                    return res;
+                })()
             },
             {
-                name:'访问来源',
-                type:'pie',
-                radius: ['40%', '55%'],
-                label: {
-                    normal: {
-                        formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-                        backgroundColor: '#eee',
-                        borderColor: '#aaa',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        // shadowBlur:3,
-                        // shadowOffsetX: 2,
-                        // shadowOffsetY: 2,
-                        // shadowColor: '#999',
-                        // padding: [0, 7],
-                        rich: {
-                            a: {
-                                color: '#999',
-                                lineHeight: 22,
-                                align: 'center'
-                            },
-                            // abg: {
-                            //     backgroundColor: '#333',
-                            //     width: '100%',
-                            //     align: 'right',
-                            //     height: 22,
-                            //     borderRadius: [4, 4, 0, 0]
-                            // },
-                            hr: {
-                                borderColor: '#aaa',
-                                width: '100%',
-                                borderWidth: 0.5,
-                                height: 0
-                            },
-                            b: {
-                                fontSize: 16,
-                                lineHeight: 33
-                            },
-                            per: {
-                                color: '#eee',
-                                backgroundColor: '#334455',
-                                padding: [2, 4],
-                                borderRadius: 2
-                            }
-                        }
+                type: 'category',
+                boundaryGap: true,
+                data: (function (){
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.push(10 - len - 1);
                     }
-                },
-                data:[
-                    {value:335, name:'直达'},
-                    {value:310, name:'邮件营销'},
-                    {value:234, name:'联盟广告'},
-                    {value:135, name:'视频广告'},
-                    {value:1048, name:'百度'},
-                    {value:251, name:'谷歌'},
-                    {value:147, name:'必应'},
-                    {value:102, name:'其他'}
-                ]
+                    return res;
+                })()
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                scale: true,
+                name: '价格',
+                max: 30,
+                min: 0,
+                boundaryGap: [0.2, 0.2]
+            },
+            {
+                type: 'value',
+                scale: true,
+                name: '案件数',
+                max: 1200,
+                min: 0,
+                boundaryGap: [0.2, 0.2]
+            }
+        ],
+        series: [
+            {
+                name:'线索数量',
+                type:'bar',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                data:(function (){
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.push(Math.round(Math.random() * 1000));
+                    }
+                    return res;
+                })()
+            },
+            {
+                name:'案件进度',
+                type:'line',
+                data:(function (){
+                    var res = [];
+                    var len = 0;
+                    while (len < 10) {
+                        res.push((Math.random()*10 + 5).toFixed(1) - 0);
+                        len++;
+                    }
+                    return res;
+                })()
             }
         ]
     };
 
+    app.count = 11;
+    setInterval(function (){
+        axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+
+        var data0 = option.series[0].data;
+        var data1 = option.series[1].data;
+        data0.shift();
+        data0.push(Math.round(Math.random() * 1000));
+        data1.shift();
+        data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+
+        option.xAxis[0].data.shift();
+        option.xAxis[0].data.push(axisData);
+        option.xAxis[1].data.shift();
+        option.xAxis[1].data.push(app.count++);
+
+        myChart.setOption(option);
+    }, 2100);
+
+
     // 使用刚指定的配置项和数据显示图表。
     app.setOption(option);
 </script>
-
 
 
 <?php $this->endBlock(); ?>

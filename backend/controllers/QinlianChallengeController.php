@@ -195,49 +195,92 @@ class QinlianChallengeController extends BaseController
      */
     public function actionStatistics()
     {
-        $query = QinlianChallenge::find();
-        $querys = Yii::$app->request->get('query');
-        if(count($querys) > 0){
-            $condition = "";
-            $parame = array();
-            foreach($querys as $key=>$value){
-                $value = trim($value);
-                if(empty($value) == false){
-                    $parame[":{$key}"]=$value;
-                    if(empty($condition) == true){
-                        $condition = " {$key}=:{$key} ";
-                    }
-                    else{
-                        $condition = $condition . " AND {$key}=:{$key} ";
-                    }
-                }
-            }
-            if(count($parame) > 0){
-                $query = $query->where($condition, $parame);
-            }
+////        $data = $_POST;
+////        var_dump($data);die;
+//
+//        $query = QinlianChallenge::find();
+//        $querys = Yii::$app->request->get('query');
+//        if(count($querys) > 0){
+//            $condition = "";
+//            $parame = array();
+//            foreach($querys as $key=>$value){
+//                $value = trim($value);
+//                if(empty($value) == false){
+//                    $parame[":{$key}"]=$value;
+//                    if(empty($condition) == true){
+//                        $condition = " {$key}=:{$key} ";
+//                    }
+//                    else{
+//                        $condition = $condition . " AND {$key}=:{$key} ";
+//                    }
+//                }
+//            }
+//            if(count($parame) > 0){
+//                $query = $query->where($condition, $parame);
+//            }
+//        }
+//
+//        $pagination = new Pagination([
+//                'totalCount' =>$query->count(),
+//                'pageSize' => '10',
+//                'pageParam'=>'page',
+//                'pageSizeParam'=>'per-page']
+//        );
+//
+//        $orderby = Yii::$app->request->get('orderby', '');
+//        if(empty($orderby) == false){
+//            $query = $query->orderBy($orderby);
+//        }
+//
+//        $models = $query
+//            ->offset($pagination->offset)
+//            ->limit($pagination->limit)
+//            ->all();
+//        return $this->render('statistics', [
+//            'models'=>$models,
+//            'pages'=>$pagination,
+//            'query'=>$querys,
+//        ]);
+
+        if (Yii::$app->request->get()){
+
+            $data = Yii::$app->request->get();
+            return $this->render('statistics', [
+//                'models'=>$models,
+//                'pages'=>$pagination,
+//                'query'=>$querys,
+                'data'=>$data,
+            ]);
+        }else{
+            return $this->render('statistics', []);
         }
 
-        $pagination = new Pagination([
-                'totalCount' =>$query->count(),
-                'pageSize' => '10',
-                'pageParam'=>'page',
-                'pageSizeParam'=>'per-page']
-        );
+//        $data = Yii::$app->request->post();
+//        return $this->asJson($data);
 
-        $orderby = Yii::$app->request->get('orderby', '');
-        if(empty($orderby) == false){
-            $query = $query->orderBy($orderby);
-        }
-
-        $models = $query
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-        return $this->render('statistics', [
-            'models'=>$models,
-            'pages'=>$pagination,
-            'query'=>$querys,
-        ]);
+//        $model = new QinlianChallenge();
+//        if ($model->load(Yii::$app->request->post())) {
+//
+//            if(empty($model->incoming_time) == true){
+//                $model->incoming_time = 'CURRENT_TIMESTAMP';
+//            }
+//            if(empty($model->create_date) == true){
+//                $model->create_date = 'CURRENT_TIMESTAMP';
+//            }
+//            $model->create_date = date('Y-m-d H:i:s');
+//
+//            if($model->validate() == true && $model->save()){
+//                $msg = array('errno'=>0, 'msg'=>'保存成功');
+//                return $this->asJson($msg);
+//            }
+//            else{
+//                $msg = array('errno'=>2, 'data'=>$model->getErrors());
+//                return $this->asJson($msg);
+//            }
+//        } else {
+//            $msg = array('errno'=>2, 'msg'=>'数据出错');
+//            return $this->asJson($msg);
+//        }
     }
 
     public function actionImport()

@@ -53,8 +53,36 @@ $modelLabel = new \backend\models\QinlianThread();
                       <label><?=$modelLabel->getAttributeLabel('id')?>:</label>
                       <input type="text" class="form-control" id="query[id]" name="query[id]"  value="<?=isset($query["id"]) ? $query["id"] : "" ?>">
                   </div>
-              <div class="form-group">
-              	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a>
+                <div class="form-group" style="margin: 5px;">
+                    <label><?=$modelLabel->getAttributeLabel('nuit_name')?>:</label>
+                    <input type="text" class="form-control" id="query[nuit_name]" name="query[nuit_name]"  value="<?=isset($query["nuit_name"]) ? $query["nuit_name"] : "" ?>">
+                </div>
+                <div class="form-group" style="margin: 5px;">
+                    <label><?=$modelLabel->getAttributeLabel('nuit_code')?>:</label>
+                    <input type="text" class="form-control" id="query[nuit_code]" name="query[nuit_code]"  value="<?=isset($query["nuit_code"]) ? $query["nuit_code"] : "" ?>">
+                </div>
+                <div class="form-group" style="margin: 5px;">
+                    <label><?=$modelLabel->getAttributeLabel('personnel_code')?>:</label>
+                    <input type="text" class="form-control" id="query[personnel_code]" name="query[personnel_code]"  value="<?=isset($query["personnel_code"]) ? $query["personnel_code"] : "" ?>">
+                </div>
+                <div class="form-group" style="margin: 5px;">
+                    <label><?=$modelLabel->getAttributeLabel('person_reflected')?>:</label>
+                    <input type="text" class="form-control" id="query[person_reflected]" name="query[person_reflected]"  value="<?=isset($query["person_reflected"]) ? $query["person_reflected"] : "" ?>">
+                </div>
+                <div class="form-group" style="margin: 5px;">
+                    <label><?=$modelLabel->getAttributeLabel('handling_organ')?>:</label>
+                    <input type="text" class="form-control" id="query[handling_organ]" name="query[handling_organ]"  value="<?=isset($query["handling_organ"]) ? $query["handling_organ"] : "" ?>">
+                </div>
+                <div class="form-group" style="margin: 5px;">
+                    <label><?=$modelLabel->getAttributeLabel('superiors_assigned')?>:</label>
+                    <input type="text" class="form-control" id="query[superiors_assigned]" name="query[superiors_assigned]"  value="<?=isset($query["superiors_assigned"]) ? $query["superiors_assigned"] : "" ?>">
+                </div>
+                <div class="form-group" style="margin: 5px;">
+                    <label><?=$modelLabel->getAttributeLabel('department_charge')?>:</label>
+                    <input type="text" class="form-control" id="query[department_charge]" name="query[department_charge]"  value="<?=isset($query["department_charge"]) ? $query["department_charge"] : "" ?>">
+                </div>
+              <div class="form-group" style="float: right;">
+              	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i> 搜   索</a>
            	  </div>
                <?php ActiveForm::end(); ?> 
             </div>

@@ -49,12 +49,36 @@ $modelLabel = new \backend\models\QinlianPetition();
           	<div class="col-sm-12">
                 <?php ActiveForm::begin(['id' => 'qinlian-petition-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('qinlian-petition/index')]); ?>     
                 
-                  <div class="form-group" style="margin: 5px;">
+                  <div class="form-group" style="margin: 4px;">
                       <label><?=$modelLabel->getAttributeLabel('id')?>:</label>
                       <input type="text" class="form-control" id="query[id]" name="query[id]"  value="<?=isset($query["id"]) ? $query["id"] : "" ?>">
                   </div>
-              <div class="form-group">
-              	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a>
+                    <div class="form-group" style="margin: 4px;">
+                      <label><?=$modelLabel->getAttributeLabel('name_report')?>:</label>
+                      <input type="text" class="form-control" id="query[name_report]" name="query[name_report]"  value="<?=isset($query["name_report"]) ? $query["name_report"] : "" ?>">
+                  </div>
+                   <div class="form-group" style="margin: 4px;">
+                      <label><?=$modelLabel->getAttributeLabel('transfer_organ')?>:</label>
+                      <input type="text" class="form-control" id="query[transfer_organ]" name="query[transfer_organ]"  value="<?=isset($query["transfer_organ"]) ? $query["transfer_organ"] : "" ?>">
+                  </div>
+                  <div class="form-group" style="margin: 4px;">
+                      <label><?=$modelLabel->getAttributeLabel('name_reported')?>:</label>
+                      <input type="text" class="form-control" id="query[name_reported]" name="query[name_reported]"  value="<?=isset($query["name_reported"]) ? $query["name_reported"] : "" ?>">
+                  </div>
+                  <div class="form-group" style="margin: 4px;">
+                      <label><?=$modelLabel->getAttributeLabel('unit_job')?>:</label>
+                      <input type="text" class="form-control" id="query[unit_job]" name="query[unit_job]"  value="<?=isset($query["unit_job"]) ? $query["unit_job"] : "" ?>">
+                  </div>
+                  <div class="form-group" style="margin: 4px;">
+                      <label><?=$modelLabel->getAttributeLabel('rank_job')?>:</label>
+                      <input type="text" class="form-control" id="query[rank_job]" name="query[rank_job]"  value="<?=isset($query["rank_job"]) ? $query["rank_job"] : "" ?>">
+                  </div>
+                  <div class="form-group" style="margin: 4px;">
+                      <label><?=$modelLabel->getAttributeLabel('host_department')?>:</label>
+                      <input type="text" class="form-control" id="query[host_department]" name="query[host_department]"  value="<?=isset($query["host_department"]) ? $query["host_department"] : "" ?>">
+                  </div>
+              <div class="form-group"  style="float: right;">
+              	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i> 搜   索</a>
            	  </div>
                <?php ActiveForm::end(); ?> 
             </div>
