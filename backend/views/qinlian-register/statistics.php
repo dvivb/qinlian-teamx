@@ -43,23 +43,36 @@ $modelLabel = new \backend\models\QinlianRegister();
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="clue_level" class="col-sm-2 control-label">线索级别</label>
+                            <label for="is_discipline_transfer" class="col-sm-4 control-label">是否其他纪检监察机关立案后移送</label>
 
                             <div class="col-sm-8">
-                                <select class="form-control" name="clue_level" id="clue_level" class="form-control">
+                                <select class="form-control" name="is_discipline_transfer" id="is_discipline_transfer" class="form-control">
                                     <option value="-1">全部</option>
-                                    <option value="1">一级</option>
-                                    <option value="2">二级</option>
-                                    <option value="3">三级</option>
+                                    <option value="0">未知</option>
+                                    <option value="1">党员</option>
+                                    <option value="2">非党员</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="clue_category" class="col-sm-2 control-label">线索类别</label>
+                            <label for="is_supervises_object" class="col-sm-4 control-label">否国家监察对象</label>
 
                             <div class="col-sm-8">
-                                <select class="form-control" name="clue_category" id="clue_category" class="form-control">
+                                <select class="form-control" name="is_supervises_object" id="is_supervises_object" class="form-control">
+                                    <option value="-1">全部</option>
+                                    <option value="0">未知</option>
+                                    <option value="1">是</option>
+                                    <option value="2"> 否</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="disciplinary_offence" class="col-sm-4 control-label">违纪行为</label>
+
+                            <div class="col-sm-8">
+                                <select class="form-control" name="disciplinary_offence" id="disciplinary_offence" class="form-control">
                                     <option value="-1">全部</option>
                                     <option value="1">一般</option>
                                     <option value="2">违纪</option>
@@ -84,20 +97,37 @@ $modelLabel = new \backend\models\QinlianRegister();
                         </div>
 
                         <div class="form-group">
-                            <label for="incoming_time" class="col-sm-2 control-label">来件时间</label>
+                            <label for="academic" class="col-sm-2 control-label">学历</label>
 
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="incoming_time" id="incoming_time" data-provide="datepicker" data-date-format="yyyy-mm">
+                                <select class="form-control" name="academic" id="academic" class="form-control">
+                                    <option value="-1">全部</option>
+                                    <option value="0">未知</option>
+                                    <option value="1">高中</option>
+                                    <option value="2">大专</option>
+                                    <option value="3">本科</option>
+                                    <option value="4">研究</option>
+                                    <option value="5">博士</option>
+                                </select>
                             </div>
-                            <!-- /.input group -->
                         </div>
+
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="approval_time" class="col-sm-2 control-label"></label>
+                            <label for="discipline_organ_time" class="col-sm-2 control-label">纪委立案时间</label>
 
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="approval_time" name="QinlianChallenge[approval_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
+                                <input type="text" class="form-control" name="discipline_organ_time" id="discipline_organ_time" data-provide="datepicker" data-date-format="yyyy-mm">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="seizure_time" class="col-sm-2 control-label">抓获时间</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="seizure_time" name="seizure_time" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
                             </div>
                         </div>
                     </div>
@@ -161,7 +191,7 @@ $modelLabel = new \backend\models\QinlianRegister();
             }
         },
         legend: {
-            data:['案件进度', '线索数量']
+            data:['案管立案数量', '案管结案数量']
         },
         toolbox: {
             show: true,
@@ -208,7 +238,7 @@ $modelLabel = new \backend\models\QinlianRegister();
             {
                 type: 'value',
                 scale: true,
-                name: '价格',
+                name: '案管立案数量',
                 max: 30,
                 min: 0,
                 boundaryGap: [0.2, 0.2]
@@ -216,7 +246,7 @@ $modelLabel = new \backend\models\QinlianRegister();
             {
                 type: 'value',
                 scale: true,
-                name: '案件数',
+                name: '案管结案数量',
                 max: 1200,
                 min: 0,
                 boundaryGap: [0.2, 0.2]
@@ -224,7 +254,7 @@ $modelLabel = new \backend\models\QinlianRegister();
         ],
         series: [
             {
-                name:'线索数量',
+                name:'案管立案数量',
                 type:'bar',
                 xAxisIndex: 1,
                 yAxisIndex: 1,
@@ -238,7 +268,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                 })()
             },
             {
-                name:'案件进度',
+                name:'案管结案数量',
                 type:'line',
                 data:(function (){
                     var res = [];

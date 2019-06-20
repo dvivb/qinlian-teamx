@@ -43,27 +43,30 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="clue_level" class="col-sm-2 control-label">线索级别</label>
+                            <label for="clue_level" class="col-sm-2 control-label">政治面貌</label>
 
                             <div class="col-sm-8">
-                                <select class="form-control" name="clue_level" id="clue_level" class="form-control">
+                                <select class="form-control" name="political_appearance" id="political_appearance" class="form-control">
                                     <option value="-1">全部</option>
-                                    <option value="1">一级</option>
-                                    <option value="2">二级</option>
-                                    <option value="3">三级</option>
+                                    <option value="0">未知</option>
+                                    <option value="1">党员</option>
+                                    <option value="2">非党员</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="clue_category" class="col-sm-2 control-label">线索类别</label>
+                            <label for="clue_category" class="col-sm-2 control-label">职务</label>
 
                             <div class="col-sm-8">
-                                <select class="form-control" name="clue_category" id="clue_category" class="form-control">
+                                <select class="form-control" name="duty_job" id="duty_job" class="form-control">
                                     <option value="-1">全部</option>
-                                    <option value="1">一般</option>
-                                    <option value="2">违纪</option>
-                                    <option value="3">违法</option>
+                                    <option value="0">未知</option>
+                                    <option value="1">一般干部</option>
+                                    <option value="2">乡科级</option>
+                                    <option value="3">农村干部 </option>
+                                    <option value="4">股级 </option>
+                                    <option value="5">农村其他人员 </option>
                                 </select>
                             </div>
                         </div>
@@ -84,23 +87,39 @@ $modelLabel = new \backend\models\QinlianPetition();
                         </div>
 
                         <div class="form-group">
-                            <label for="incoming_time" class="col-sm-2 control-label">来件时间</label>
+                            <label for="duty_job" class="col-sm-2 control-label">承办科室</label>
 
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="incoming_time" id="incoming_time" data-provide="datepicker" data-date-format="yyyy-mm">
+                                <select class="form-control" name="host_department" id="host_department" class="form-control">
+                                    <option value="-1">全部</option>
+                                    <option value="1">科室一</option>
+                                    <option value="2">科室二</option>
+                                    <option value="3">科室三</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="incoming_time" class="col-sm-2 control-label">收件时间</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="receipt_time" id="receipt_time" data-provide="datepicker" data-date-format="yyyy-mm">
                             </div>
                             <!-- /.input group -->
                         </div>
-                    </div>
-                    <div class="col-md-4">
+
                         <div class="form-group">
-                            <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
+                            <label for="approval_time" class="col-sm-2 control-label">审批时间</label>
 
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="approval_time" name="QinlianChallenge[approval_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
+                                <input type="text" class="form-control" id="approval_time" name="approval_time" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
                             </div>
                         </div>
                     </div>
+
 
                 </div>
                 <!-- /.box-body -->
@@ -161,7 +180,7 @@ $modelLabel = new \backend\models\QinlianPetition();
             }
         },
         legend: {
-            data:['案件进度', '线索数量']
+            data:['信访承办科室', '信访件数量']
         },
         toolbox: {
             show: true,
@@ -208,7 +227,7 @@ $modelLabel = new \backend\models\QinlianPetition();
             {
                 type: 'value',
                 scale: true,
-                name: '价格',
+                name: '信访承办科室',
                 max: 30,
                 min: 0,
                 boundaryGap: [0.2, 0.2]
@@ -216,7 +235,7 @@ $modelLabel = new \backend\models\QinlianPetition();
             {
                 type: 'value',
                 scale: true,
-                name: '案件数',
+                name: '信访件数量',
                 max: 1200,
                 min: 0,
                 boundaryGap: [0.2, 0.2]
@@ -224,7 +243,7 @@ $modelLabel = new \backend\models\QinlianPetition();
         ],
         series: [
             {
-                name:'线索数量',
+                name:'信访承办科室',
                 type:'bar',
                 xAxisIndex: 1,
                 yAxisIndex: 1,
@@ -238,7 +257,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                 })()
             },
             {
-                name:'案件进度',
+                name:'信访件数量',
                 type:'line',
                 data:(function (){
                     var res = [];

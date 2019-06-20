@@ -84,6 +84,20 @@ $modelLabel = new \backend\models\QinlianChallenge();
                         </div>
 
                         <div class="form-group">
+                            <label for="transfer_organ" class="col-sm-2 control-label">处置方式</label>
+
+                            <div class="col-sm-8">
+                                <select class="form-control" name="transfer_organ" id="transfer_organ" class="form-control">
+                                    <option value="-1">全部</option>
+                                    <option value="1">处置方式一</option>
+                                    <option value="2">处置方式二</option>
+                                    <option value="3">处置方式三</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="incoming_time" class="col-sm-2 control-label">来件时间</label>
 
                             <div class="col-sm-8">
@@ -91,8 +105,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
                             </div>
                             <!-- /.input group -->
                         </div>
-                    </div>
-                    <div class="col-md-4">
+
                         <div class="form-group">
                             <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
 
@@ -105,7 +118,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-success pull-right">搜索</button>
+                    <button type="submit" class="btn btn-success pull-right"> 搜  索 </button>
                 </div>
                 <!-- /.box-footer -->
             </form>
@@ -208,7 +221,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
             {
                 type: 'value',
                 scale: true,
-                name: '价格',
+                name: '状态',
                 max: 30,
                 min: 0,
                 boundaryGap: [0.2, 0.2]
