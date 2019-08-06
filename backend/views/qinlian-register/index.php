@@ -254,13 +254,36 @@ $modelLabel = new \backend\models\QinlianRegister();
                 echo '  <td>' . $model->person_investigated . '</td>';
                 echo '  <td>' . $model->credentials_type . '</td>';
                 echo '  <td>' . $model->credentials_number . '</td>';
-                echo '  <td>' . $model->sex . '</td>';
+                switch ($model->sex){
+                    case 0: $sex_value = '未知';break;
+                    case 1: $sex_value = '党员';break;
+                    case 2: $sex_value = '非党员';break;
+                }
+                echo '  <td>' . $sex_value . '</td>';
                 echo '  <td>' . $model->age . '</td>';
                 echo '  <td>' . $model->date_birth . '</td>';
-                echo '  <td>' . $model->academic . '</td>';
+                switch ($model->academic){
+                    case 0: $academic_value = '未知';break;
+                    case 1: $academic_value = '高中以下';break;
+                    case 2: $academic_value = '大专';break;
+                    case 2: $academic_value = '本科';break;
+                    case 2: $academic_value = '研究';break;
+                    case 2: $academic_value = ' 博士';break;
+                }
+                echo '  <td>' . $academic_value . '</td>';
                 echo '  <td>' . $model->nation . '</td>';
-                echo '  <td>' . $model->is_supervises_object . '</td>';
-                echo '  <td>' . $model->supervises_object_details . '</td>';
+                switch ($model->is_supervises_object){
+                    case 0: $is_supervises_object_value = '未知';break;
+                    case 1: $is_supervises_object_value = '党员';break;
+                    case 2: $is_supervises_object_value = '非党员';break;
+                }
+                echo '  <td>' . $is_supervises_object_value . '</td>';
+                switch ($model->supervises_object_details){
+                    case 0: $supervises_object_details_value = '未知';break;
+                    case 1: $supervises_object_details_value = '党员';break;
+                    case 2: $supervises_object_details_value = '非党员';break;
+                }
+                echo '  <td>' . $supervises_object_details_value . '</td>';
                 echo '  <td>' . $model->is_party . '</td>';
                 echo '  <td>' . $model->party_delegate . '</td>';
                 echo '  <td>' . $model->disposal_report . '</td>';
@@ -297,15 +320,30 @@ $modelLabel = new \backend\models\QinlianRegister();
                 echo '  <td>' . $model->supervise_register_organ . '</td>';
                 echo '  <td>' . $model->supervise_register_time . '</td>';
                 echo '  <td>' . $model->supervise_register_statistics_time . '</td>';
-                echo '  <td>' . $model->is_discipline_transfer . '</td>';
+                switch ($model->is_discipline_transfer){
+                    case 0: $is_discipline_transfer_value = '未知';break;
+                    case 1: $is_discipline_transfer_value = '党员';break;
+                    case 2: $is_discipline_transfer_value = '非党员';break;
+                }
+                echo '  <td>' . $is_discipline_transfer_value . '</td>';
                 echo '  <td>' . $model->other_discipline_method . '</td>';
                 echo '  <td>' . $model->transfer_unit . '</td>';
                 echo '  <td>' . $model->brief_case_report . '</td>';
                 echo '  <td>' . $model->register_report . '</td>';
                 echo '  <td>' . $model->register_decide_book . '</td>';
                 echo '  <td>' . $model->remarks . '</td>';
-                echo '  <td>' . $model->is_violate_stipulate . '</td>';
-                echo '  <td>' . $model->is_accountabilitye . '</td>';
+                switch ($model->is_violate_stipulate){
+                    case 0: $is_violate_stipulate_value = '未知';break;
+                    case 1: $is_violate_stipulate_value = '党员';break;
+                    case 2: $is_violate_stipulate_value = '非党员';break;
+                }
+                echo '  <td>' . $is_violate_stipulate_value . '</td>';;
+                switch ($model->is_accountabilitye){
+                    case 0: $is_accountabilitye_value = '未知';break;
+                    case 1: $is_accountabilitye_value = '党员';break;
+                    case 2: $is_accountabilitye_value = '非党员';break;
+                }
+                echo '  <td>' . $is_accountabilitye_value . '</td>';
                 echo '  <td>' . $model->end_case_stat_time . '</td>';
                 echo '  <td>' . $model->close_case_time . '</td>';
                 echo '  <td>' . $model->end_case_time . '</td>';
@@ -367,7 +405,12 @@ $modelLabel = new \backend\models\QinlianRegister();
                 echo '  <td>' . $model->lien_end_time . '</td>';
                 echo '  <td>' . $model->lien_end_stats_time . '</td>';
                 echo '  <td>' . $model->lien_number_days . '</td>';
-                echo '  <td>' . $model->is_delay . '</td>';
+                switch ($model->is_delay){
+                    case 0: $is_delay_value = '未知';break;
+                    case 1: $is_delay_value = '党员';break;
+                    case 2: $is_delay_value = '非党员';break;
+                }
+                echo '  <td>' . $is_delay_value . '</td>';
                 echo '  <td>' . $model->delay_number_days . '</td>';
                 echo '  <td>' . $model->delay_approval_situation . '</td>';
                 echo '  <td>' . $model->organization_measure . '</td>';
@@ -504,7 +547,12 @@ $modelLabel = new \backend\models\QinlianRegister();
           <div id="sex_div" class="form-group">
               <label for="sex" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("sex")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="sex" name="QinlianRegister[sex]" placeholder="" />
+                  <select class="form-control" id="sex" name="QinlianRegister[sex]" >
+                      <option value="0">未知</option>
+                      <option value="1">男</option>
+                      <option value="2">女</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="sex" name="QinlianRegister[sex]" placeholder="" />-->
               </div>
 
               <label for="age" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("age")?></label>
@@ -522,7 +570,15 @@ $modelLabel = new \backend\models\QinlianRegister();
 
               <label for="academic" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("academic")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="academic" name="QinlianRegister[academic]" placeholder="" />
+                  <select class="form-control" id="academic" name="QinlianRegister[academic]" >
+                      <option value="0">未知</option>
+                      <option value="1">高中以下</option>
+                      <option value="2">大专</option>
+                      <option value="3">本科</option>
+                      <option value="4">研究</option>
+                      <option value="5"> 博士</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="academic" name="QinlianRegister[academic]" placeholder="" />-->
               </div>
               <div class="clearfix"></div>
           </div>
@@ -535,7 +591,12 @@ $modelLabel = new \backend\models\QinlianRegister();
 
               <label for="is_supervises_object" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervises_object")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="is_supervises_object" name="QinlianRegister[is_supervises_object]" placeholder="" />
+                  <select class="form-control" id="is_supervises_object" name="QinlianRegister[is_supervises_object]" >
+                      <option value="0">未知</option>
+                      <option value="1">党员</option>
+                      <option value="2">非党员</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="is_supervises_object" name="QinlianRegister[is_supervises_object]" placeholder="" />-->
               </div>
               <div class="clearfix"></div>
           </div>
@@ -543,7 +604,12 @@ $modelLabel = new \backend\models\QinlianRegister();
           <div id="supervises_object_details_div" class="form-group">
               <label for="supervises_object_details" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("supervises_object_details")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="supervises_object_details" name="QinlianRegister[supervises_object_details]" placeholder="必填" />
+                  <select class="form-control" id="supervises_object_details" name="QinlianRegister[supervises_object_details]" >
+                      <option value="0">未知</option>
+                      <option value="1">党员</option>
+                      <option value="2">非党员</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="supervises_object_details" name="QinlianRegister[supervises_object_details]" placeholder="必填" />-->
               </div>
 
               <label for="is_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_party")?></label>
@@ -782,7 +848,12 @@ $modelLabel = new \backend\models\QinlianRegister();
 
               <label for="is_discipline_transfer" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_discipline_transfer")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="is_discipline_transfer" name="QinlianRegister[is_discipline_transfer]" placeholder="必填" />
+                  <select class="form-control" id="is_discipline_transfer" name="QinlianRegister[is_discipline_transfer]" >
+                      <option value="0">未知</option>
+                      <option value="1">党员</option>
+                      <option value="2">非党员</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="is_discipline_transfer" name="QinlianRegister[is_discipline_transfer]" placeholder="必填" />-->
               </div>
               <div class="clearfix"></div>
           </div>
@@ -829,12 +900,22 @@ $modelLabel = new \backend\models\QinlianRegister();
           <div id="is_violate_stipulate_div" class="form-group">
               <label for="is_violate_stipulate" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_violate_stipulate")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="is_violate_stipulate" name="QinlianRegister[is_violate_stipulate]" placeholder="必填" />
+                  <select class="form-control" id="is_violate_stipulate" name="QinlianRegister[is_violate_stipulate]" >
+                      <option value="0">未知</option>
+                      <option value="1">党员</option>
+                      <option value="2">非党员</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="is_violate_stipulate" name="QinlianRegister[is_violate_stipulate]" placeholder="必填" />-->
               </div>
 
               <label for="is_accountabilitye" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_accountabilitye")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="is_accountabilitye" name="QinlianRegister[is_accountabilitye]" placeholder="必填" />
+                  <select class="form-control" id="is_accountabilitye" name="QinlianRegister[is_accountabilitye]" >
+                      <option value="0">未知</option>
+                      <option value="1">党员</option>
+                      <option value="2">非党员</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="is_accountabilitye" name="QinlianRegister[is_accountabilitye]" placeholder="必填" />-->
               </div>
               <div class="clearfix"></div>
           </div>
@@ -1236,7 +1317,12 @@ $modelLabel = new \backend\models\QinlianRegister();
 
               <label for="is_delay" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_delay")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="is_delay" name="QinlianRegister[is_delay]" placeholder="必填" />
+                  <select class="form-control" id="is_delay" name="QinlianRegister[is_delay]" >
+                      <option value="0">未知</option>
+                      <option value="1">党员</option>
+                      <option value="2">非党员</option>
+                  </select>
+                      <!--                  <input type="text" class="form-control" id="is_delay" name="QinlianRegister[is_delay]" placeholder="必填" />-->
               </div>
               <div class="clearfix"></div>
           </div>

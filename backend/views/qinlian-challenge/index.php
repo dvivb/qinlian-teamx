@@ -155,7 +155,15 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 echo '  <td>' . $model->signature . '</td>';
                 echo '  <td>' . $model->leader_instructions . '</td>';
                 echo '  <td>' . $model->respondent_unit . '</td>';
-                echo '  <td>' . $model->duty_job . '</td>';
+                switch ($model->duty_job){
+                    case 0: $duty_job_value = '未知';break;
+                    case 1: $duty_job_value = ' 一般干部';break;
+                    case 2: $duty_job_value = '乡科级';break;
+                    case 3: $duty_job_value = '农村干部';break;
+                    case 4: $duty_job_value = '股级';break;
+                    case 5: $duty_job_value = '农村其他人员';break;
+                }
+                echo '  <td>' . $duty_job_value . '</td>';
                 echo '  <td>' . $model->rank_job . '</td>';
                 echo '  <td>' . $model->main_issues . '</td>';
                 echo '  <td>' . $model->related_unit . '</td>';
@@ -306,7 +314,15 @@ $modelLabel = new \backend\models\QinlianChallenge();
 
                     <label for="duty_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("duty_job")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="duty_job" name="QinlianChallenge[duty_job]" placeholder="必填" />
+                        <select class="form-control" id="duty_job" name="QinlianChallenge[duty_job]">
+                            <option value="0">未知</option>
+                            <option value="1">一般干部</option>
+                            <option value="2">乡科级</option>
+                            <option value="3">农村干部 </option>
+                            <option value="4">股级</option>
+                            <option value="5">农村其他人员</option>
+                        </select>
+<!--                        <input type="text" class="form-control" id="duty_job" name="QinlianChallenge[duty_job]" placeholder="必填" />-->
                     </div>
                     <div class="clearfix"></div>
                 </div>

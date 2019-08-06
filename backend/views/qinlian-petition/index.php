@@ -141,9 +141,22 @@ $modelLabel = new \backend\models\QinlianPetition();
                 echo '  <td>' . $model->transfer_organ . '</td>';
                 echo '  <td>' . $model->name_report . '</td>';
                 echo '  <td>' . $model->name_reported . '</td>';
-                echo '  <td>' . $model->political_appearance . '</td>';
+                switch ($model->political_appearance){
+                    case 0: $political_appearance_value = '未知';break;
+                    case 1: $political_appearance_value = '党员';break;
+                    case 2: $political_appearance_value = '非党员';break;
+                }
+                echo '  <td>' . $political_appearance_value . '</td>';
                 echo '  <td>' . $model->unit_job . '</td>';
-                echo '  <td>' . $model->duty_job . '</td>';
+                switch ($model->duty_job){
+                    case 0: $duty_job_value = '未知';break;
+                    case 1: $duty_job_value = ' 一般干部';break;
+                    case 2: $duty_job_value = '乡科级';break;
+                    case 3: $duty_job_value = '农村干部';break;
+                    case 4: $duty_job_value = '股级';break;
+                    case 5: $duty_job_value = '农村其他人员';break;
+                }
+                echo '  <td>' . $duty_job_value . '</td>';
                 echo '  <td>' . $model->rank_job . '</td>';
                 echo '  <td>' . $model->main_issues . '</td>';
                 echo '  <td>' . $model->issues_properties . '</td>';
@@ -269,7 +282,12 @@ $modelLabel = new \backend\models\QinlianPetition();
           <div id="political_appearance_div" class="form-group">
               <label for="political_appearance" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("political_appearance")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="political_appearance" name="QinlianPetition[political_appearance]" placeholder="" />
+                  <select class="form-control" id="political_appearance" name="QinlianPetition[political_appearance]" >
+                      <option value="0">未知</option>
+                      <option value="1">党员</option>
+                      <option value="2">非党员</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="political_appearance" name="QinlianPetition[political_appearance]" placeholder="" />-->
               </div>
 
               <label for="unit_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("unit_job")?></label>
@@ -282,7 +300,15 @@ $modelLabel = new \backend\models\QinlianPetition();
           <div id="duty_job_div" class="form-group">
               <label for="duty_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("duty_job")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="duty_job" name="QinlianPetition[duty_job]" placeholder="" />
+                  <select class="form-control" id="duty_job" name="QinlianPetition[duty_job]">
+                      <option value="0">未知</option>
+                      <option value="1">一般干部</option>
+                      <option value="2">乡科级</option>
+                      <option value="3">农村干部 </option>
+                      <option value="4">股级</option>
+                      <option value="5">农村其他人员</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="duty_job" name="QinlianPetition[duty_job]" placeholder="" />-->
               </div>
 
               <label for="rank_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("rank_job")?></label>
