@@ -12,12 +12,12 @@
                 <div class="inner">
                     <h3>150</h3>
 
-                    <p>案件信息</p>
+                    <p>信访信息</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-table"></i>
                 </div>
-                <a href="/index.php?r=case-record%2Findex" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/index.php?r=qinlian-challenge/index" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -27,12 +27,12 @@
                 <div class="inner">
                     <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                    <p>信访资料</p>
+                    <p>案管问题</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-table"></i>
                 </div>
-                <a href="/index.php?r=complaint-record%2Findex" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/index.php?r=qinlian-challenge/index" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -42,12 +42,12 @@
                 <div class="inner">
                     <h3>44</h3>
 
-                    <p>廉政信息</p>
+                    <p>案管线索</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-table"></i>
                 </div>
-                <a href="/index.php?r=incorrupt-record%2Findex" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/index.php?r=qinlian-thread/index" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -57,12 +57,12 @@
                 <div class="inner">
                     <h3>65</h3>
 
-                    <p>信访资料</p>
+                    <p>案管立案</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-table"></i>
                 </div>
-                <a href="/index.php?r=complaint-record%2Findex" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/index.php?r=qinlian-register/index" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -76,7 +76,7 @@
                 <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=case-record%2Fstatistics" class="small-box-footer">案件统计 <i class="fa fa-arrow-circle-right"></i></a></span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-petition/statistics" class="small-box-footer">信访信息数据 <i class="fa fa-arrow-circle-right"></i></a></span>
 
                     <span class="info-box-number">90<small>%</small></span>
                 </div>
@@ -93,7 +93,7 @@
                 <span class="info-box-icon bg-green"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=complaint-record%2Fstatistics" class="small-box-footer">信访统计 <i class="fa fa-arrow-circle-right"></i></a></span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-challenge/statistics" class="small-box-footer">案管问题数据 <i class="fa fa-arrow-circle-right"></i></a></span>
                     <span class="info-box-number">760</span>
                 </div>
                 <!-- /.info-box-content -->
@@ -106,7 +106,7 @@
                 <span class="info-box-icon bg-yellow"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=incorrupt-record%2Fstatistics" class="small-box-footer">廉政统计 <i class="fa fa-arrow-circle-right"></i></a></span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-thread/statistics" class="small-box-footer">案管线索数据 <i class="fa fa-arrow-circle-right"></i></a></span>
                     <span class="info-box-number">2,000</span>
                 </div>
                 <!-- /.info-box-content -->
@@ -120,7 +120,7 @@
                 <span class="info-box-icon bg-red"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=case-record%2Fstatistics" class="small-box-footer">案件统计 <i class="fa fa-arrow-circle-right"></i></a></span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-register/statistics" class="small-box-footer">案管立案数据 <i class="fa fa-arrow-circle-right"></i></a></span>
                     <span class="info-box-number">41,410</span>
                 </div>
                 <!-- /.info-box-content -->
