@@ -582,7 +582,7 @@ class QinlianRegisterController extends BaseController
         $spreadsheet->getActiveSheet()->setCellValue('I1', '性别');
         $spreadsheet->getActiveSheet()->setCellValue('J1', '年龄');
         $spreadsheet->getActiveSheet()->setCellValue('K1', '出生年月');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '学历（0');
+        $spreadsheet->getActiveSheet()->setCellValue('L1', '学历');
         $spreadsheet->getActiveSheet()->setCellValue('M1', '民族');
         $spreadsheet->getActiveSheet()->setCellValue('N1', '是否国家监察对象');
         $spreadsheet->getActiveSheet()->setCellValue('O1', '国家监察对象详情情况');
@@ -1009,7 +1009,7 @@ class QinlianRegisterController extends BaseController
 
         // Redirect output to a client’s web browser (Xlsx)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="'.'案管问题线索-'.date("Y年m月j日").'.xlsx"');
+        header('Content-Disposition: attachment;filename="'.'案管立案-'.date("Y年m月j日").'.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');

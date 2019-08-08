@@ -246,6 +246,7 @@ class QinlianPetitionController extends BaseController
             $inputFileName = $_FILES['importExcelFile']['tmp_name'];
             $spreadsheet = IOFactory::load($inputFileName);
             $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+
 //            var_dump($sheetData);die;
 
             foreach($sheetData as $key => $value) {
