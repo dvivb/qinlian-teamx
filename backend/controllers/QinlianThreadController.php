@@ -18,6 +18,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 class QinlianThreadController extends BaseController
 {
 	public $layout = "lte_main";
+    public $enableCsrfValidation = false;
 
     /**
      * Lists all QinlianThread models.
@@ -377,8 +378,7 @@ class QinlianThreadController extends BaseController
 
         $transaction->commit();
         $msg = array('errno'=>0, 'msg'=>'保存成功');
-//                    return json_encode($msg);
-        $this->redirect('/index.php?r=complaint-record/index', '200');
+        return $this->asJson($msg);
     }
 
     public function actionExport()

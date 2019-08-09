@@ -667,7 +667,7 @@ $modelLabel = new \backend\models\QinlianThread();
 
 <!-- Modal -->
 <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <form action="<?=Url::toRoute('qinlian-thread/import')?>" method="post" enctype="multipart/form-data">
+    <form action="<?=Url::toRoute('qinlian-thread/import')?>" method="post" id="qinlian-thread-import-form" enctype="multipart/form-data">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1059,6 +1059,31 @@ $('#qinlian-thread-form').bind('submit', function(e) {
         	}
 
     	}
+    });
+});
+
+$('#qinlian-thread-import-form').bind('submit', function(e) {
+    e.preventDefault();
+    var action = "<?=Url::toRoute('qinlian-thread/import')?>";
+    $(this).ajaxSubmit({
+        type: "post",
+        dataType:"json",
+        url: action,
+        success: function(value)
+        {
+            if(value.errno == 0){
+                admin_tool.alert('msg_info', '添加成功', 'success');
+                window.location.reload();
+            }
+            else{
+                var json = value.data;
+                for(var key in json){
+                    $('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
+
+                }
+            }
+
+        }
     });
 });
 

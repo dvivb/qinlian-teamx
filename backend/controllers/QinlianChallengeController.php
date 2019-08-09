@@ -18,6 +18,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 class QinlianChallengeController extends BaseController
 {
 	public $layout = "lte_main";
+    public $enableCsrfValidation = false;
 
     /**
      * Lists all QinlianChallenge models.
@@ -392,8 +393,7 @@ class QinlianChallengeController extends BaseController
 
         $transaction->commit();
         $msg = array('errno'=>0, 'msg'=>'保存成功');
-//                    return json_encode($msg);
-        $this->redirect('/index.php?r=qinlian-challenge/index', '200');
+        return $this->asJson($msg);
     }
 
     public function actionExport()

@@ -18,6 +18,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 class QinlianPetitionController extends BaseController
 {
 	public $layout = "lte_main";
+    public $enableCsrfValidation = false;
 
     /**
      * Lists all QinlianPetition models.
@@ -332,8 +333,7 @@ class QinlianPetitionController extends BaseController
 
         $transaction->commit();
         $msg = array('errno'=>0, 'msg'=>'保存成功');
-//                    return json_encode($msg);
-        $this->redirect('/index.php?r=qinlian-petition/index', '200');
+        return $this->asJson($msg);
     }
 
     public function actionExport()

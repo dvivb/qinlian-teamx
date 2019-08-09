@@ -435,7 +435,7 @@ $modelLabel = new \backend\models\QinlianPetition();
 
 <!-- Modal -->
 <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <form action="<?=Url::toRoute('qinlian-petition/import')?>" method="post" enctype="multipart/form-data">
+    <form action="<?=Url::toRoute('qinlian-petition/import')?>" method="post" id="qinlian-petition-form-import" enctype="multipart/form-data">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -733,6 +733,32 @@ $('#qinlian-petition-form').bind('submit', function(e) {
     	}
     });
 });
+
+$('#qinlian-petition-form-import').bind('submit', function(e) {
+    e.preventDefault();
+    var action = "<?=Url::toRoute('qinlian-petition/import')?>";
+    $(this).ajaxSubmit({
+        type: "post",
+        dataType:"json",
+        url: action,
+        success: function(value)
+        {
+            if(value.errno == 0){
+                admin_tool.alert('msg_info', '添加成功', 'success');
+                window.location.reload();
+            }
+            else{
+                var json = value.data;
+                for(var key in json){
+                    $('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
+
+                }
+            }
+
+        }
+    });
+});
+
 
 </script>
 <?php $this->endBlock(); ?>

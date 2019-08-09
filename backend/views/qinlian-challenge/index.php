@@ -491,7 +491,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
 
 <!-- Modal -->
 <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <form action="<?=Url::toRoute('qinlian-challenge/import')?>" method="post" enctype="multipart/form-data">
+    <form action="<?=Url::toRoute('qinlian-challenge/import')?>" method="post" id="qinlian-challenge-import-form" enctype="multipart/form-data">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -815,6 +815,31 @@ $('#qinlian-challenge-form').bind('submit', function(e) {
         	}
 
     	}
+    });
+});
+
+$('#qinlian-challenge-import-form').bind('submit', function(e) {
+    e.preventDefault();
+    var action = "<?=Url::toRoute('qinlian-challenge/import')?>";
+    $(this).ajaxSubmit({
+        type: "post",
+        dataType:"json",
+        url: action,
+        success: function(value)
+        {
+            if(value.errno == 0){
+                admin_tool.alert('msg_info', '添加成功', 'success');
+                window.location.reload();
+            }
+            else{
+                var json = value.data;
+                for(var key in json){
+                    $('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
+
+                }
+            }
+
+        }
     });
 });
 
