@@ -13,9 +13,9 @@ use Yii;
  * @property string $transfer_organ
  * @property string $name_report
  * @property string $name_reported
- * @property integer $political_appearance
+ * @property string $political_appearance
  * @property string $unit_job
- * @property integer $duty_job
+ * @property string $duty_job
  * @property string $rank_job
  * @property string $main_issues
  * @property string $issues_properties
@@ -52,8 +52,7 @@ class QinlianPetition extends \backend\models\BaseModel
         return [
             [['receipt_time', 'approval_time', 'create_date', 'update_time'], 'safe'],
             [['approval_status', 'del_status'], 'integer'],
-            [['number', 'turn_number', 'transfer_organ', 'name_report', 'name_reported', 'unit_job', 'rank_job', 'host_department', 'unit_responsibility'], 'string', 'max' => 25],
-            [['political_appearance', 'duty_job'], 'string', 'max' => 1],
+            [['number', 'turn_number', 'transfer_organ', 'name_report', 'name_reported', 'political_appearance', 'unit_job', 'duty_job', 'rank_job', 'host_department', 'unit_responsibility'], 'string', 'max' => 25],
             [['main_issues', 'handle_results'], 'string', 'max' => 500],
             [['issues_properties'], 'string', 'max' => 200],
             [['petition_office_opinion', 'superior_guidance_opinion', 'lu_clerk_opinion', 'major_leadership_approval_opinion', 'charge_leadership_approval_opinion'], 'string', 'max' => 100],
@@ -281,14 +280,14 @@ class QinlianPetition extends \backend\models\BaseModel
 //                         'autoIncrement' => false,
 //                         'comment' => '政治面貌(0 未知，1 党员，2 非党员)',
 //                         'dbType' => "tinyint(1)",
-                        'defaultValue' => '0',
+                        'defaultValue' => '未知',
                         'enumValues' => null,
                         'isPrimaryKey' => false,
-                        'phpType' => 'integer',
-                        'precision' => '1',
+                        'phpType' => 'string',
+                        'precision' => '25',
                         'scale' => '',
-                        'size' => '1',
-                        'type' => 'tinyint',
+                        'size' => '25',
+                        'type' => 'string',
                         'unsigned' => false,
                         'label'=>$this->getAttributeLabel('political_appearance'),
                         'inputType' => 'text',
@@ -327,14 +326,14 @@ class QinlianPetition extends \backend\models\BaseModel
 //                         'autoIncrement' => false,
 //                         'comment' => '职务（0 未知，1 一般干部，2 乡科级，3 农村干部 ，4  股级， 5，农村其他人员）',
 //                         'dbType' => "tinyint(1)",
-                        'defaultValue' => '0',
+                        'defaultValue' => '未知',
                         'enumValues' => null,
                         'isPrimaryKey' => false,
-                        'phpType' => 'integer',
-                        'precision' => '1',
+                        'phpType' => 'string',
+                        'precision' => '25',
                         'scale' => '',
-                        'size' => '1',
-                        'type' => 'tinyint',
+                        'size' => '25',
+                        'type' => 'string',
                         'unsigned' => false,
                         'label'=>$this->getAttributeLabel('duty_job'),
                         'inputType' => 'text',

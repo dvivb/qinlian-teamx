@@ -38,7 +38,7 @@ $modelLabel = new \backend\models\QinlianPetition();
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" action="qinlian-petition/statistics" method="get">
+            <form class="form-horizontal" action="<?=Url::toRoute('qinlian-petition/statistics')?>" method="post">
                 <div class="box-body">
 
                     <div class="col-md-4">
@@ -47,10 +47,9 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="political_appearance" id="political_appearance" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="0">未知</option>
-                                    <option value="1">党员</option>
-                                    <option value="2">非党员</option>
+                                    <option value="">全部</option>
+                                    <option>党员</option>
+                                    <option>非党员</option>
                                 </select>
                             </div>
                         </div>
@@ -60,13 +59,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="duty_job" id="duty_job" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="0">未知</option>
-                                    <option value="1">一般干部</option>
-                                    <option value="2">乡科级</option>
-                                    <option value="3">农村干部 </option>
-                                    <option value="4">股级 </option>
-                                    <option value="5">农村其他人员 </option>
+                                    <option value="">全部</option>
+                                    <option>一般干部</option>
+                                    <option>乡科级</option>
+                                    <option>农村干部 </option>
+                                    <option>股级 </option>
+                                    <option>农村其他人员 </option>
                                 </select>
                             </div>
                         </div>
@@ -74,14 +72,14 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="duty_job" class="col-sm-2 control-label">职级</label>
+                            <label for="rank_job" class="col-sm-2 control-label">职级</label>
 
                             <div class="col-sm-8">
-                                <select class="form-control" name="duty_job" id="duty_job" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="1">一级</option>
-                                    <option value="2">二级</option>
-                                    <option value="3">三级</option>
+                                <select class="form-control" name="rank_job" id="rank_job" class="form-control">
+                                    <option value="">全部</option>
+                                    <option>一级</option>
+                                    <option>二级</option>
+                                    <option>三级</option>
                                 </select>
                             </div>
                         </div>
@@ -91,10 +89,10 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="host_department" id="host_department" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="1">科室一</option>
-                                    <option value="2">科室二</option>
-                                    <option value="3">科室三</option>
+                                    <option value="">全部</option>
+                                    <option>科室一</option>
+                                    <option>科室二</option>
+                                    <option>科室三</option>
                                 </select>
                             </div>
                         </div>
@@ -136,20 +134,19 @@ $modelLabel = new \backend\models\QinlianPetition();
 
     <div class="row">
         <div class="col-md-12">
-            <!-- AREA CHART -->
             <div class="box box-primary">
-
                 <div id="main" style="width: 1000px;height:600px;"></div>
-
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
-
-
-
         </div>
-        <!-- /.col (LEFT) -->
+    </div>
+    <!-- /.row -->
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div id="main-b" style="width: 1000px;height:600px;"></div>
+            </div>
+        </div>
     </div>
     <!-- /.row -->
 
@@ -166,134 +163,155 @@ $modelLabel = new \backend\models\QinlianPetition();
     app.title = '折线图';
 
     option = {
-        title: {
-            text: '演示数据',
-            subtext: '纯属虚构'
+        title : {
+            text: '信访承办科室柱状图',
+            // subtext: '纯属虚构'
         },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross',
-                label: {
-                    backgroundColor: '#283b56'
-                }
-            }
+        tooltip : {
+            trigger: 'axis'
         },
         legend: {
-            data:['信访承办科室', '信访件数量']
+            data:['科室一','科室二','科室三']
         },
         toolbox: {
-            show: true,
-            feature: {
-                dataView: {readOnly: false},
-                restore: {},
-                saveAsImage: {}
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
             }
         },
-        dataZoom: {
-            show: false,
-            start: 0,
-            end: 100
-        },
-        xAxis: [
+        calculable : true,
+        xAxis : [
             {
-                type: 'category',
-                boundaryGap: true,
-                data: (function (){
-                    var now = new Date();
-                    var res = [];
-                    var len = 10;
-                    while (len--) {
-                        res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                        now = new Date(now - 2000);
-                    }
-                    return res;
-                })()
-            },
-            {
-                type: 'category',
-                boundaryGap: true,
-                data: (function (){
-                    var res = [];
-                    var len = 10;
-                    while (len--) {
-                        res.push(10 - len - 1);
-                    }
-                    return res;
-                })()
+                type : 'category',
+                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
             }
         ],
-        yAxis: [
+        yAxis : [
             {
-                type: 'value',
-                scale: true,
-                name: '信访承办科室',
-                max: 30,
-                min: 0,
-                boundaryGap: [0.2, 0.2]
-            },
-            {
-                type: 'value',
-                scale: true,
-                name: '信访件数量',
-                max: 1200,
-                min: 0,
-                boundaryGap: [0.2, 0.2]
+                type : 'value'
             }
         ],
-        series: [
+        series : [
             {
-                name:'信访承办科室',
+                name:'科室一',
                 type:'bar',
-                xAxisIndex: 1,
-                yAxisIndex: 1,
-                data:(function (){
-                    var res = [];
-                    var len = 10;
-                    while (len--) {
-                        res.push(Math.round(Math.random() * 1000));
-                    }
-                    return res;
-                })()
+                data:[2, 5, 12, 26, 28, 60, 165, 162, 68, 18, 6, 4],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
             },
             {
-                name:'信访件数量',
-                type:'line',
-                data:(function (){
-                    var res = [];
-                    var len = 0;
-                    while (len < 10) {
-                        res.push((Math.random()*10 + 5).toFixed(1) - 0);
-                        len++;
-                    }
-                    return res;
-                })()
+                name:'科室二',
+                type:'bar',
+                data:[3, 7, 9, 29, 28, 70, 175, 182, 48, 18, 6, 2],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'科室三',
+                type:'bar',
+                data:[2, 5, 7, 22, 26, 40, 135, 162, 38, 28, 16, 12],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
             }
         ]
     };
 
-    app.count = 11;
-    setInterval(function (){
-        axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
-
-        var data0 = option.series[0].data;
-        var data1 = option.series[1].data;
-        data0.shift();
-        data0.push(Math.round(Math.random() * 1000));
-        data1.shift();
-        data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
-
-        option.xAxis[0].data.shift();
-        option.xAxis[0].data.push(axisData);
-        option.xAxis[1].data.shift();
-        option.xAxis[1].data.push(app.count++);
-
-        myChart.setOption(option);
-    }, 2100);
 
 
     // 使用刚指定的配置项和数据显示图表。
     app.setOption(option);
+
+
+    var appb = echarts.init(document.getElementById('main-b'));
+
+    appb.title = '折线图';
+
+    option = {
+        title: {
+            text: '信访件数量折线图'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['科室一','科室二','科室三']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name:'科室一',
+                type:'line',
+                stack: '总量',
+                data:[120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name:'科室二',
+                type:'line',
+                stack: '总量',
+                data:[220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name:'科室三',
+                type:'line',
+                stack: '总量',
+                data:[150, 232, 201, 154, 190, 330, 410]
+            },
+        ]
+    };
+
+
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    appb.setOption(option);
 </script>
 
 

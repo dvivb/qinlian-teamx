@@ -307,7 +307,7 @@ $modelLabel = new \backend\models\QinlianThread();
           <div id="is_nuit_div" class="form-group">
               <label for="is_nuit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_nuit")?></label>
               <div class="col-sm-4">
-                  <select class="form-control" id="is_nuit" name="QinlianPetition[is_nuit]" >
+                  <select class="form-control" id="is_nuit" name="QinlianThread[is_nuit]" >
                       <option value="0">未知</option>
                       <option value="1">是</option>
                       <option value="2">否</option>
@@ -364,7 +364,7 @@ $modelLabel = new \backend\models\QinlianThread();
           <div id="is_supervises_object_div" class="form-group">
               <label for="is_supervises_object" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervises_object")?></label>
               <div class="col-sm-4">
-                  <select class="form-control" id="is_supervises_object" name="QinlianPetition[is_supervises_object]" >
+                  <select class="form-control" id="is_supervises_object" name="QinlianThread[is_supervises_object]" >
                       <option value="0">未知</option>
                       <option value="1">是</option>
                       <option value="2">否</option>
@@ -556,7 +556,7 @@ $modelLabel = new \backend\models\QinlianThread();
 
               <label for="is_checking_me" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_checking_me")?></label>
               <div class="col-sm-4">
-                  <select class="form-control" id="is_checking_me" name="QinlianPetition[is_checking_me]" >
+                  <select class="form-control" id="is_checking_me" name="QinlianThread[is_checking_me]" >
                       <option value="0">未知</option>
                       <option value="1">是</option>
                       <option value="2">否</option>
@@ -569,7 +569,7 @@ $modelLabel = new \backend\models\QinlianThread();
           <div id="is_party_div" class="form-group">
               <label for="is_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_party")?></label>
               <div class="col-sm-4">
-                  <select class="form-control" id="is_party" name="QinlianPetition[is_party]" >
+                  <select class="form-control" id="is_party" name="QinlianThread[is_party]" >
                       <option value="0">未知</option>
                       <option value="1">是</option>
                       <option value="2">否</option>
@@ -587,7 +587,7 @@ $modelLabel = new \backend\models\QinlianThread();
           <div id="is_supervisory_objects_div" class="form-group">
               <label for="is_supervisory_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervisory_objects")?></label>
               <div class="col-sm-4">
-                  <select class="form-control" id="is_supervisory_objects" name="QinlianPetition[is_supervisory_objects]" >
+                  <select class="form-control" id="is_supervisory_objects" name="QinlianThread[is_supervisory_objects]" >
                       <option value="0">未知</option>
                       <option value="1">是</option>
                       <option value="2">否</option>
@@ -623,7 +623,12 @@ $modelLabel = new \backend\models\QinlianThread();
 
               <label for="superiors_assigned" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("superiors_assigned")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="superiors_assigned" name="QinlianThread[superiors_assigned]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+                  <select class="form-control" id="superiors_assigned" name="QinlianThread[superiors_assigned]">
+                      <option>一级</option>
+                      <option>二级</option>
+                      <option>三级</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="superiors_assigned" name="QinlianThread[superiors_assigned]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />-->
               </div>
               <div class="clearfix"></div>
           </div>

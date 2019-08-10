@@ -71,11 +71,23 @@ $modelLabel = new \backend\models\QinlianPetition();
                   </div>
                   <div class="form-group" style="margin: 4px;">
                       <label><?=$modelLabel->getAttributeLabel('rank_job')?>:</label>
-                      <input type="text" class="form-control" id="query[rank_job]" name="query[rank_job]"  value="<?=isset($query["rank_job"]) ? $query["rank_job"] : "" ?>">
+                      <select class="form-control" id="duty_job" id="query[rank_job]" name="query[rank_job]">
+                          <option value="">全部</option>
+                          <option>一级</option>
+                          <option>二级</option>
+                          <option>三级</option>
+                      </select>
+<!--                      <input type="text" class="form-control" id="query[rank_job]" name="query[rank_job]"  value="--><?//=isset($query["rank_job"]) ? $query["rank_job"] : "" ?><!--">-->
                   </div>
                   <div class="form-group" style="margin: 4px;">
                       <label><?=$modelLabel->getAttributeLabel('host_department')?>:</label>
-                      <input type="text" class="form-control" id="query[host_department]" name="query[host_department]"  value="<?=isset($query["host_department"]) ? $query["host_department"] : "" ?>">
+                      <select class="form-control" name="query[host_department]" id="query[host_department]" class="form-control">
+                          <option value="">全部</option>
+                          <option>科室一</option>
+                          <option>科室二</option>
+                          <option>科室三</option>
+                      </select>
+<!--                      <input type="text" class="form-control" id="query[host_department]" name="query[host_department]"  value="--><?//=isset($query["host_department"]) ? $query["host_department"] : "" ?><!--">-->
                   </div>
               <div class="form-group"  style="float: right;">
               	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i> 搜   索</a>
@@ -141,22 +153,9 @@ $modelLabel = new \backend\models\QinlianPetition();
                 echo '  <td>' . $model->transfer_organ . '</td>';
                 echo '  <td>' . $model->name_report . '</td>';
                 echo '  <td>' . $model->name_reported . '</td>';
-                switch ($model->political_appearance){
-                    case 0: $political_appearance_value = '未知';break;
-                    case 1: $political_appearance_value = '党员';break;
-                    case 2: $political_appearance_value = '非党员';break;
-                }
-                echo '  <td>' . $political_appearance_value . '</td>';
+                echo '  <td>' . $model->political_appearance . '</td>';
                 echo '  <td>' . $model->unit_job . '</td>';
-                switch ($model->duty_job){
-                    case 0: $duty_job_value = '未知';break;
-                    case 1: $duty_job_value = ' 一般干部';break;
-                    case 2: $duty_job_value = '乡科级';break;
-                    case 3: $duty_job_value = '农村干部';break;
-                    case 4: $duty_job_value = '股级';break;
-                    case 5: $duty_job_value = '农村其他人员';break;
-                }
-                echo '  <td>' . $duty_job_value . '</td>';
+                echo '  <td>' . $model->duty_job . '</td>';
                 echo '  <td>' . $model->rank_job . '</td>';
                 echo '  <td>' . $model->main_issues . '</td>';
                 echo '  <td>' . $model->issues_properties . '</td>';
@@ -283,9 +282,8 @@ $modelLabel = new \backend\models\QinlianPetition();
               <label for="political_appearance" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("political_appearance")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="political_appearance" name="QinlianPetition[political_appearance]" >
-                      <option value="0">未知</option>
-                      <option value="1">党员</option>
-                      <option value="2">非党员</option>
+                      <option selected="selected">党员</option>
+                      <option >非党员</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="political_appearance" name="QinlianPetition[political_appearance]" placeholder="" />-->
               </div>
@@ -301,19 +299,23 @@ $modelLabel = new \backend\models\QinlianPetition();
               <label for="duty_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("duty_job")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="duty_job" name="QinlianPetition[duty_job]">
-                      <option value="0">未知</option>
-                      <option value="1">一般干部</option>
-                      <option value="2">乡科级</option>
-                      <option value="3">农村干部 </option>
-                      <option value="4">股级</option>
-                      <option value="5">农村其他人员</option>
+                      <option selected="selected">一般干部</option>
+                      <option>乡科级</option>
+                      <option>农村干部 </option>
+                      <option>股级</option>
+                      <option>农村其他人员</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="duty_job" name="QinlianPetition[duty_job]" placeholder="" />-->
               </div>
 
               <label for="rank_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("rank_job")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="rank_job" name="QinlianPetition[rank_job]" placeholder="" />
+                  <select class="form-control" id="rank_job" name="QinlianPetition[rank_job]">
+                      <option>一级</option>
+                      <option>二级</option>
+                      <option>三级</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="rank_job" name="QinlianPetition[rank_job]" placeholder="" />-->
               </div>
               <div class="clearfix"></div>
           </div>
@@ -365,7 +367,12 @@ $modelLabel = new \backend\models\QinlianPetition();
 
               <label for="host_department" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("host_department")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="host_department" name="QinlianPetition[host_department]" placeholder="" />
+                  <select class="form-control" id="host_department" name="QinlianPetition[host_department]">
+                      <option>科室一</option>
+                      <option>科室二</option>
+                      <option>科室三</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="host_department" name="QinlianPetition[host_department]" placeholder="" />-->
               </div>
               <div class="clearfix"></div>
           </div>

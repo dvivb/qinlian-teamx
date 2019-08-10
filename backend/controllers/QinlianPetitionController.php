@@ -197,7 +197,8 @@ class QinlianPetitionController extends BaseController
     public function actionStatistics()
     {
         $query = QinlianPetition::find();
-        $querys = Yii::$app->request->get('query');
+        $querys = Yii::$app->request->post();
+//        var_dump($querys);die;
         if(count($querys) > 0){
             $condition = "";
             $parame = array();
@@ -234,6 +235,7 @@ class QinlianPetitionController extends BaseController
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
+//        var_dump($models);die;
         return $this->render('statistics', [
             'models'=>$models,
             'pages'=>$pagination,

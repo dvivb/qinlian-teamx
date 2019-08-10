@@ -387,7 +387,11 @@ $modelLabel = new \backend\models\QinlianChallenge();
 
                     <label for="progress_case" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("progress_case")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="progress_case" name="QinlianChallenge[progress_case]" placeholder="" />
+                        <select class="form-control" id="progress_case" name="QinlianChallenge[progress_case]">
+                            <option>完成</option>
+                            <option>未完成</option>
+                        </select>
+<!--                        <input type="text" class="form-control" id="progress_case" name="QinlianChallenge[progress_case]" placeholder="" />-->
                     </div>
                     <div class="clearfix"></div>
                 </div>
