@@ -1,7 +1,10 @@
 <?php
 namespace backend\controllers;
 
-use backend\services\SoldierRecordService;
+use backend\services\QinlianChallengeService;
+use backend\services\QinlianPetitionService;
+use backend\services\QinlianRegisterService;
+use backend\services\QinlianThreadService;
 use Yii;
 use yii\web\Controller;
 use backend\models\AdminUser;
@@ -33,10 +36,29 @@ class SiteController extends BaseController
             return $this->render('login');
         }
         else{
+            $QinlianPetitionService = new QinlianPetitionService();
+            $petition_count = $QinlianPetitionService->getCount();
+
+            $QinlianChallengeService = new QinlianChallengeService();
+            $challenge_count = $QinlianChallengeService->getCount();;
+
+            $QinlianThreadService = new QinlianThreadService();
+            $thread_count = $QinlianThreadService->getCount();
+
+            $QinlianRegisterService = new QinlianRegisterService();
+            $register_count = $QinlianRegisterService->getCount();
+
+            $statistics = [
+                'petition_count'    => $petition_count,
+                'challenge_count'   => $challenge_count,
+                'thread_count'      => $thread_count,
+                'register_count'    => $register_count,
+            ];
+
 //             $this->layout = "lte_main";
             $menus = Yii::$app->user->identity->getSystemMenus();
             $sysInfo = [
-                ['name'=> '操作系统', 'value'=>php_uname('s')],  //'value'=>php_uname('s').' '.php_uname('r').' '.php_uname('v')],
+                ['name'=> '操作系统', 'value'=>php_uname('s')], // 'value'=>php_uname('s').' '.php_uname('r').' '.php_uname('v')],
                 ['name'=>'PHP版本', 'value'=>phpversion()],
                 ['name'=>'Yii版本', 'value'=>Yii::getVersion()],
                 ['name'=>'数据库', 'value'=>$this->getDbVersion()],
@@ -45,8 +67,9 @@ class SiteController extends BaseController
             ];
 
             return $this->render('index', [
-                'system_menus' => $menus,
-                'sysInfo'=>$sysInfo,
+                'system_menus'  => $menus,
+                'sysInfo'       =>$sysInfo,
+                'statistics'    =>$statistics,
             ]);
         }
     }

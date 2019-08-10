@@ -10,14 +10,14 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3><?= $statistics['petition_count'];?></h3>
 
                     <p>信访信息</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-table"></i>
                 </div>
-                <a href="/index.php?r=qinlian-challenge/index" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/index.php?r=qinlian-petition/index" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -25,7 +25,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3><?= $statistics['challenge_count'];?></h3>
 
                     <p>案管问题</p>
                 </div>
@@ -40,7 +40,7 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>44</h3>
+                    <h3><?= $statistics['thread_count'];?></h3>
 
                     <p>案管线索</p>
                 </div>
@@ -55,7 +55,7 @@
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3><?= $statistics['register_count'];?></h3>
 
                     <p>案管立案</p>
                 </div>
@@ -76,9 +76,7 @@
                 <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=qinlian-petition/statistics" class="small-box-footer">信访信息数据 <i class="fa fa-arrow-circle-right"></i></a></span>
-
-                    <span class="info-box-number">90<small>%</small></span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-petition/statistics" class="small-box-footer"><h2>信访信息数据</h2> </a></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -93,8 +91,7 @@
                 <span class="info-box-icon bg-green"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=qinlian-challenge/statistics" class="small-box-footer">案管问题数据 <i class="fa fa-arrow-circle-right"></i></a></span>
-                    <span class="info-box-number">760</span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-challenge/statistics" class="small-box-footer"><h2>案管问题数据</h2></a></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -106,8 +103,7 @@
                 <span class="info-box-icon bg-yellow"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=qinlian-thread/statistics" class="small-box-footer">案管线索数据 <i class="fa fa-arrow-circle-right"></i></a></span>
-                    <span class="info-box-number">2,000</span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-thread/statistics" class="small-box-footer"><h2>案管线索数据</h2></a></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -120,8 +116,7 @@
                 <span class="info-box-icon bg-red"><i class="fa fa-table"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="/index.php?r=qinlian-register/statistics" class="small-box-footer">案管立案数据 <i class="fa fa-arrow-circle-right"></i></a></span>
-                    <span class="info-box-number">41,410</span>
+                    <span class="info-box-text"><a href="/index.php?r=qinlian-register/statistics" class="small-box-footer"><h2>案管立案数据</h2></a></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
