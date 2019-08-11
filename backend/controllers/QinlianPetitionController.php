@@ -198,20 +198,29 @@ class QinlianPetitionController extends BaseController
     {
         $query = QinlianPetition::find();
         $querys = Yii::$app->request->post();
-//        var_dump($querys);die;
+
+        $start = empty($querys['start'])? '2019-7-1' : $querys['start'];
+        $end = empty($querys['end'])? '2019-8-31' : $querys['end'];
+
+        unset($querys['start']);
+        unset($querys['end']);
+//        var_dump($start);die;
         if(count($querys) > 0){
             $condition = "";
             $parame = array();
             foreach($querys as $key=>$value){
                 $value = trim($value);
-                if(empty($value) == false){
-                    $parame[":{$key}"]=$value;
-                    if(empty($condition) == true){
-                        $condition = " {$key}=:{$key} ";
+                if($value != 'start' || $value != 'end'){
+                    if(empty($value) == false){
+                        $parame[":{$key}"]=$value;
+                        if(empty($condition) == true){
+                            $condition = " {$key}=:{$key} ";
+                        }
+                        else{
+                            $condition = $condition . " AND {$key}=:{$key} ";
+                        }
                     }
-                    else{
-                        $condition = $condition . " AND {$key}=:{$key} ";
-                    }
+                }else{
                 }
             }
             if(count($parame) > 0){
@@ -219,26 +228,22 @@ class QinlianPetitionController extends BaseController
             }
         }
 
-        $pagination = new Pagination([
-                'totalCount' =>$query->count(),
-                'pageSize' => '10',
-                'pageParam'=>'page',
-                'pageSizeParam'=>'per-page']
-        );
+        $query = $query->andwhere('receipt_time between '. $start .' and ' . $end );
 
-        $orderby = Yii::$app->request->get('orderby', '');
-        if(empty($orderby) == false){
-            $query = $query->orderBy($orderby);
-        }
 
-        $models = $query
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
+//        $orderby = Yii::$app->request->get('orderby', '');
+//        if(empty($orderby) == false){
+//            $query = $query->orderBy($orderby);
+//        }
+
+        $data = $query->select('count(id) as total, host_department')->groupBy('host_department')->one();
+//        $sql = $query->createCommand()->getSql();var_dump($sql);die();
+//        var_dump($data);die;
+
+//        $sql = $query->createCommand()->getSql();
+//        var_dump($sql);die();
 //        var_dump($models);die;
         return $this->render('statistics', [
-            'models'=>$models,
-            'pages'=>$pagination,
             'query'=>$querys,
         ]);
     }

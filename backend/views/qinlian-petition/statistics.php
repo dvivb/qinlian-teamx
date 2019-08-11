@@ -103,8 +103,14 @@ $modelLabel = new \backend\models\QinlianPetition();
                         <div class="form-group">
                             <label for="incoming_time" class="col-sm-2 control-label">收件时间</label>
 
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="receipt_time" id="receipt_time" data-provide="datepicker" data-date-format="yyyy-mm">
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="text" class="form-control" name="receipt_time" id="receipt_time" data-provide="datepicker" data-date-format="yyyy-mm">-->
+<!--                                -->
+<!--                            </div>-->
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" class="input-sm form-control" name="start" data-provide="datepicker" data-date-format="yyyy-mm"/>
+                                <span class="input-group-addon">to</span>
+                                <input type="text" class="input-sm form-control" name="end" data-provide="datepicker" data-date-format="yyyy-mm"/>
                             </div>
                             <!-- /.input group -->
                         </div>
@@ -157,6 +163,10 @@ $modelLabel = new \backend\models\QinlianPetition();
 <?php $this->beginBlock('footer');  ?>
 <!-- <body></body>后代码块 -->
 <script type="text/javascript">
+    $('#sandbox-container .input-daterange').datepicker({
+        language: "zh-CN",
+        autoclose: true
+    });
 
     var app = echarts.init(document.getElementById('main'));
 
