@@ -17,7 +17,7 @@ return [
 //         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=teamx.mysql.com;dbname=teamx_qinlian_v4',
+            'dsn' => 'mysql:host=teamx.mysql.com;dbname=teamx_qinlian_v6',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
