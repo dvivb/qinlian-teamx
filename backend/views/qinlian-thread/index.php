@@ -163,12 +163,7 @@ $modelLabel = new \backend\models\QinlianThread();
                 echo '<tr id="rowid_' . $model->id . '">';
                 echo '  <td><label><input type="checkbox" value="' . $model->id . '"></label></td>';
                 echo '  <td>' . $model->id . '</td>';
-                switch ($model->is_nuit){
-                    case 0: $is_nuit_value = '未知';break;
-                    case 1: $is_nuit_value = '是';break;
-                    case 2: $is_nuit_value = '否';break;
-                }
-                echo '  <td>' . $is_nuit_value . '</td>';
+                echo '  <td>' . $model->is_nuit . '</td>';
                 echo '  <td>' . $model->nuit_name . '</td>';
                 echo '  <td>' . $model->nuit_code . '</td>';
                 echo '  <td>' . $model->statistical_identification . '</td>';
@@ -176,12 +171,7 @@ $modelLabel = new \backend\models\QinlianThread();
                 echo '  <td>' . $model->personnel_code . '</td>';
                 echo '  <td>' . $model->person_reflected . '</td>';
                 echo '  <td>' . $model->duty_job . '</td>';
-                switch ($model->is_supervises_object){
-                    case 0: $is_supervises_object_value = '未知';break;
-                    case 1: $is_supervises_object_value = '是';break;
-                    case 2: $is_supervises_object_value = '否';break;
-                }
-                echo '  <td>' . $is_supervises_object_value . '</td>';
+                echo '  <td>' . $model->is_supervises_object . '</td>';
                 echo '  <td>' . $model->rank_job . '</td>';
                 echo '  <td>' . $model->recovers_economic_loss . '</td>';
                 echo '  <td>' . $model->collects_amount . '</td>';
@@ -210,25 +200,10 @@ $modelLabel = new \backend\models\QinlianThread();
                 echo '  <td>' . $model->three_level_second . '</td>';
                 echo '  <td>' . $model->cases_source . '</td>';
                 echo '  <td>' . $model->disciplinary_offence . '</td>';
-                switch ($model->is_checking_me){
-                    case 0: $is_checking_me_value = '未知';break;
-                    case 1: $is_checking_me_value = '是';break;
-                    case 2: $is_checking_me_value = '否';break;
-                }
-                echo '  <td>' . $is_checking_me_value . '</td>';
-                switch ($model->is_party){
-                    case 0: $is_party_value = '未知';break;
-                    case 1: $is_party_value = '是';break;
-                    case 2: $is_party_value = '否';break;
-                }
-                echo '  <td>' . $is_party_value . '</td>';
+                echo '  <td>' . $model->is_checking_me . '</td>';
+                echo '  <td>' . $model->is_party . '</td>';
                 echo '  <td>' . $model->secondary_class_objects . '</td>';
-                switch ($model->is_supervisory_objects){
-                    case 0: $is_supervisory_objects_value = '未知';break;
-                    case 1: $is_supervisory_objects_value = '是';break;
-                    case 2: $is_supervisory_objects_value = '否';break;
-                }
-                echo '  <td>' . $is_supervisory_objects_value . '</td>';
+                echo '  <td>' . $model->is_supervisory_objects . '</td>';
                 echo '  <td>' . $model->no_secondary_class_objects . '</td>';
                 echo '  <td>' . $model->official_offences . '</td>';
                 echo '  <td>' . $model->other_offences . '</td>';
@@ -308,9 +283,8 @@ $modelLabel = new \backend\models\QinlianThread();
               <label for="is_nuit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_nuit")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_nuit" name="QinlianThread[is_nuit]" >
-                      <option value="0">未知</option>
-                      <option value="1">是</option>
-                      <option value="2">否</option>
+                      <option>是</option>
+                      <option>否</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="is_nuit" name="QinlianThread[is_nuit]" placeholder="必填" />-->
               </div>
@@ -365,9 +339,8 @@ $modelLabel = new \backend\models\QinlianThread();
               <label for="is_supervises_object" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervises_object")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_supervises_object" name="QinlianThread[is_supervises_object]" >
-                      <option value="0">未知</option>
-                      <option value="1">是</option>
-                      <option value="2">否</option>
+                      <option>是</option>
+                      <option>否</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="is_supervises_object" name="QinlianThread[is_supervises_object]" placeholder="必填" />-->
               </div>
@@ -426,7 +399,11 @@ $modelLabel = new \backend\models\QinlianThread();
 
               <label for="cpc" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("cpc")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="cpc" name="QinlianThread[cpc]" placeholder="" />
+                  <select class="form-control" id="is_party" name="QinlianThread[cpc]" >
+                      <option>是</option>
+                      <option>否</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="cpc" name="QinlianThread[cpc]" placeholder="" />-->
               </div>
               <div class="clearfix"></div>
           </div>
@@ -434,7 +411,11 @@ $modelLabel = new \backend\models\QinlianThread();
           <div id="cppcc_div" class="form-group">
               <label for="cppcc" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("cppcc")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="cppcc" name="QinlianThread[cppcc]" placeholder="" />
+                  <select class="form-control" id="is_party" name="QinlianThread[cppcc]" >
+                      <option>是</option>
+                      <option>否</option>
+                  </select>
+<!--                  <input type="text" class="form-control" id="cppcc" name="QinlianThread[cppcc]" placeholder="" />-->
               </div>
 
               <label for="disposal_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disposal_report")?></label>
@@ -557,9 +538,8 @@ $modelLabel = new \backend\models\QinlianThread();
               <label for="is_checking_me" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_checking_me")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_checking_me" name="QinlianThread[is_checking_me]" >
-                      <option value="0">未知</option>
-                      <option value="1">是</option>
-                      <option value="2">否</option>
+                      <option>是</option>
+                      <option>否</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="is_checking_me" name="QinlianThread[is_checking_me]" placeholder="必填" />-->
               </div>
@@ -570,9 +550,8 @@ $modelLabel = new \backend\models\QinlianThread();
               <label for="is_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_party")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_party" name="QinlianThread[is_party]" >
-                      <option value="0">未知</option>
-                      <option value="1">是</option>
-                      <option value="2">否</option>
+                      <option>是</option>
+                      <option>否</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="is_party" name="QinlianThread[is_party]" placeholder="必填" />-->
               </div>
@@ -588,9 +567,8 @@ $modelLabel = new \backend\models\QinlianThread();
               <label for="is_supervisory_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervisory_objects")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_supervisory_objects" name="QinlianThread[is_supervisory_objects]" >
-                      <option value="0">未知</option>
-                      <option value="1">是</option>
-                      <option value="2">否</option>
+                      <option>是</option>
+                      <option>否</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="is_supervisory_objects" name="QinlianThread[is_supervisory_objects]" placeholder="必填" />-->
               </div>

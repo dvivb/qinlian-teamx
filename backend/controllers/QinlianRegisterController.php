@@ -244,153 +244,154 @@ class QinlianRegisterController extends BaseController
 //            var_dump($sheetData);die;
 
             foreach($sheetData as $key => $value) {
-                if ($key>1){
+                if ($key>3){
 //                    var_dump($value);die;
-                    $data[] = [
-                        'nuit_name' =>  $value['A'],
-                        'nuit_code' =>  $value['B'],
-                        'is_nuit' =>  $value['C'],
-                        'case_code' =>  $value['D'],
-                        'personnel_code' =>  $value['E'],
-                        'person_investigated' =>  $value['F'],
-                        'credentials_type' =>  $value['G'],
-                        'credentials_number' =>  $value['H'],
-                        'sex' =>  $value['I'],
-                        'age' =>  $value['J'],
-                        'date_birth' =>  $value['K'],
-                        'academic' =>  $value['L'],
-                        'nation' =>  $value['M'],
-                        'is_supervises_object' =>  $value['N'],
-                        'supervises_object_details' =>  $value['O'],
-                        'is_party' =>  $value['P'],
-                        'party_delegate' =>  $value['Q'],
-                        'disposal_report' =>  $value['R'],
-                        'time_joining_party' =>  $value['S'],
-                        'no_party_objects' =>  $value['T'],
-                        'no_party_objects_details' =>  $value['U'],
-                        'cpc' =>  $value['V'],
-                        'cppcc' =>  $value['W'],
-                        'discipline_commission' =>  $value['X'],
-                        'party_commission' =>  $value['Y'],
-                        'on_job_time' =>  $value['Z'],
+                    if(!empty( $value['A'])) {
+                        $data[] = [
+                            'nuit_name' => $value['A'],
+                            'nuit_code' => $value['B'],
+                            'is_nuit' => $value['C'],
+                            'case_code' => $value['D'],
+                            'personnel_code' => $value['E'],
+                            'person_investigated' => $value['F'],
+                            'credentials_type' => $value['G'],
+                            'credentials_number' => $value['H'],
+                            'sex' => $value['I'],
+                            'age' => $value['J'],
+                            'date_birth' => $value['K'],
+                            'academic' => $value['L'],
+                            'nation' => $value['M'],
+                            'is_supervises_object' => $value['N'],
+                            'supervises_object_details' => $value['O'],
+                            'is_party' => $value['P'],
+                            'party_delegate' => $value['Q'],
+                            'disposal_report' => $value['R'],
+                            'time_joining_party' => $value['S'],
+                            'no_party_objects' => $value['T'],
+                            'no_party_objects_details' => $value['U'],
+                            'cpc' => $value['V'],
+                            'cppcc' => $value['W'],
+                            'discipline_commission' => $value['X'],
+                            'party_commission' => $value['Y'],
+                            'on_job_time' => $value['Z'],
 
-                        'head_violating' =>  $value['AA'],
-                        'head_details' =>  $value['AB'],
-                        'head_details_two' =>  $value['AC'],
-                        'rank_job' =>  $value['AD'],
-                        'deputy_rank_job' =>  $value['AE'],
-                        'duty_job' =>  $value['AF'],
-                        'authority_management' =>  $value['AG'],
-                        'department_class' =>  $value['AH'],
-                        'department_class_one' =>  $value['AI'],
-                        'department_classtwo' =>  $value['AJ'],
-                        'nature_enterprise' =>  $value['AK'],
-                        'nature_enterprise_one' =>  $value['AL'],
-                        'category_enterprise_personnel' =>  $value['AM'],
-                        'enterprise_post' =>  $value['AN'],
-                        'jobbery_lose' =>  $value['AO'],
-                        'discipline_amount' =>  $value['AP'],
-                        'case_amount' =>  $value['AQ'],
-                        'filing_time' =>  $value['AR'],
-                        'source_case' =>  $value['AS'],
-                        'discipline_organ' =>  $value['AT'],
-                        'discipline_organ_time' =>  $value['AU'],
-                        'discipline_organ_stats_time' =>  $value['AV'],
-                        'supervise_register_organ' =>  $value['AW'],
-                        'supervise_register_time' =>  $value['AX'],
-                        'supervise_register_statistics_time' =>  $value['AY'],
-                        'is_discipline_transfer' =>  $value['AZ'],
+                            'head_violating' => $value['AA'],
+                            'head_details' => $value['AB'],
+                            'head_details_two' => $value['AC'],
+                            'rank_job' => $value['AD'],
+                            'deputy_rank_job' => $value['AE'],
+                            'duty_job' => $value['AF'],
+                            'authority_management' => $value['AG'],
+                            'department_class' => $value['AH'],
+                            'department_class_one' => $value['AI'],
+                            'department_classtwo' => $value['AJ'],
+                            'nature_enterprise' => $value['AK'],
+                            'nature_enterprise_one' => $value['AL'],
+                            'category_enterprise_personnel' => $value['AM'],
+                            'enterprise_post' => $value['AN'],
+                            'jobbery_lose' => $value['AO'],
+                            'discipline_amount' => $value['AP'],
+                            'case_amount' => $value['AQ'],
+                            'filing_time' => $value['AR'],
+                            'source_case' => $value['AS'],
+                            'discipline_organ' => $value['AT'],
+                            'discipline_organ_time' => $value['AU'],
+                            'discipline_organ_stats_time' => $value['AV'],
+                            'supervise_register_organ' => $value['AW'],
+                            'supervise_register_time' => $value['AX'],
+                            'supervise_register_statistics_time' => $value['AY'],
+                            'is_discipline_transfer' => $value['AZ'],
 
-                        'other_discipline_method' =>  $value['BA'],
-                        'transfer_unit' =>  $value['BB'],
-                        'brief_case_report' =>  $value['BC'],
-                        'register_report' =>  $value['BD'],
-                        'register_decide_book' =>  $value['BE'],
-                        'remarks' =>  $value['BF'],
-                        'is_violate_stipulate' =>  $value['BG'],
-                        'is_accountabilitye' =>  $value['BH'],
-                        'end_case_stat_time' =>  $value['BI'],
-                        'close_case_time' =>  $value['BJ'],
-                        'end_case_time' =>  $value['BK'],
-                        'accountability' =>  $value['BL'],
-                        'party_discipline' =>  $value['BM'],
-                        'party_discipline_stats_time' =>  $value['BN'],
-                        'administrative_sanction' =>  $value['BO'],
-                        'administrative_sanction_stats_time' =>  $value['BP'],
-                        'other_treatments' =>  $value['BQ'],
-                        'other_treatments_stats_time' =>  $value['BR'],
-                        'transfer_justice_time' =>  $value['BS'],
-                        'transfer_justice_stats_time' =>  $value['BT'],
-                        'public_inspection_processing' =>  $value['BU'],
-                        'public_inspection_processing_detail' =>  $value['BV'],
-                        'punishments_number_years' =>  $value['BW'],
-                        'punishments_number_month' =>  $value['BX'],
-                        'probation_number_years' =>  $value['BY'],
-                        'probation_number_month' =>  $value['BZ'],
+                            'other_discipline_method' => $value['BA'],
+                            'transfer_unit' => $value['BB'],
+                            'brief_case_report' => $value['BC'],
+                            'register_report' => $value['BD'],
+                            'register_decide_book' => $value['BE'],
+                            'remarks' => $value['BF'],
+                            'is_violate_stipulate' => $value['BG'],
+                            'is_accountabilitye' => $value['BH'],
+                            'end_case_stat_time' => $value['BI'],
+                            'close_case_time' => $value['BJ'],
+                            'end_case_time' => $value['BK'],
+                            'accountability' => $value['BL'],
+                            'party_discipline' => $value['BM'],
+                            'party_discipline_stats_time' => $value['BN'],
+                            'administrative_sanction' => $value['BO'],
+                            'administrative_sanction_stats_time' => $value['BP'],
+                            'other_treatments' => $value['BQ'],
+                            'other_treatments_stats_time' => $value['BR'],
+                            'transfer_justice_time' => $value['BS'],
+                            'transfer_justice_stats_time' => $value['BT'],
+                            'public_inspection_processing' => $value['BU'],
+                            'public_inspection_processing_detail' => $value['BV'],
+                            'punishments_number_years' => $value['BW'],
+                            'punishments_number_month' => $value['BX'],
+                            'probation_number_years' => $value['BY'],
+                            'probation_number_month' => $value['BZ'],
 
-                        'public_inspection_processing_stats_time' =>  $value['CA'],
-                        'retrieve_loss' =>  $value['CB'],
-                        'capture_amount' =>  $value['CC'],
-                        'first_violations_discipline_time' =>  $value['CD'],
-                        'last_violations_discipline_time' =>  $value['CE'],
-                        'violation_discipline_happen_time' =>  $value['CF'],
-                        'desert_time' =>  $value['CG'],
-                        'desert_stats_time' =>  $value['CH'],
-                        'hear_accept_time' =>  $value['CI'],
-                        'hear_accept_stats_time' =>  $value['CJ'],
-                        'hear_office' =>  $value['CK'],
-                        'hear_end_time' =>  $value['CL'],
-                        'hear_end_stats_time' =>  $value['CM'],
-                        'punish_decide' =>  $value['CN'],
-                        'police_handle_time' =>  $value['CO'],
-                        'judicial_judgment_amount' =>  $value['CP'],
-                        'investigation_report' =>  $value['CQ'],
-                        'trial_report' =>  $value['CR'],
-                        'case_analysis' =>  $value['CS'],
-                        'party_watch_limit' =>  $value['CT'],
-                        'enterprise_level' =>  $value['CU'],
-                        'flight_direction' =>  $value['CV'],
-                        'flight_direction_details' =>  $value['CW'],
-                        'investigation_suspension_time' =>  $value['CX'],
-                        'investigation_suspension_stats_time' =>  $value['CY'],
-                        'administrative_sanctions_suspension_time' =>  $value['CZ'],
+                            'public_inspection_processing_stats_time' => $value['CA'],
+                            'retrieve_loss' => $value['CB'],
+                            'capture_amount' => $value['CC'],
+                            'first_violations_discipline_time' => $value['CD'],
+                            'last_violations_discipline_time' => $value['CE'],
+                            'violation_discipline_happen_time' => $value['CF'],
+                            'desert_time' => $value['CG'],
+                            'desert_stats_time' => $value['CH'],
+                            'hear_accept_time' => $value['CI'],
+                            'hear_accept_stats_time' => $value['CJ'],
+                            'hear_office' => $value['CK'],
+                            'hear_end_time' => $value['CL'],
+                            'hear_end_stats_time' => $value['CM'],
+                            'punish_decide' => $value['CN'],
+                            'police_handle_time' => $value['CO'],
+                            'judicial_judgment_amount' => $value['CP'],
+                            'investigation_report' => $value['CQ'],
+                            'trial_report' => $value['CR'],
+                            'case_analysis' => $value['CS'],
+                            'party_watch_limit' => $value['CT'],
+                            'enterprise_level' => $value['CU'],
+                            'flight_direction' => $value['CV'],
+                            'flight_direction_details' => $value['CW'],
+                            'investigation_suspension_time' => $value['CX'],
+                            'investigation_suspension_stats_time' => $value['CY'],
+                            'administrative_sanctions_suspension_time' => $value['CZ'],
 
-                        'administrative_sanctions_suspension_stats_time' =>  $value['DA'],
-                        'seizure_time' =>  $value['DB'],
-                        'seizure_stats_time' =>  $value['DC'],
-                        'case_analysis_time' =>  $value['DD'],
-                        'disciplinary_offence' =>  $value['DE'],
-                        'post_disciplinary_offence' =>  $value['DF'],
-                        'other_disciplinary_offence' =>  $value['DG'],
-                        'organs_take_measures' =>  $value['DH'],
-                        'organs_take_measures_name' =>  $value['DI'],
-                        'starting_detention_time' =>  $value['DJ'],
-                        'starting_detention_stats_time' =>  $value['DK'],
-                        'location_measures_taken' =>  $value['DL'],
-                        'location_measures_taken_class' =>  $value['DM'],
-                        'lien_approval_situation' =>  $value['DN'],
-                        'lien_end_time' =>  $value['DO'],
-                        'lien_end_stats_time' =>  $value['DP'],
-                        'lien_number_days' =>  $value['DQ'],
-                        'is_delay' =>  $value['DR'],
-                        'delay_number_days' =>  $value['DS'],
-                        'delay_approval_situation' =>  $value['DT'],
-                        'organization_measure' =>  $value['DU'],
-                        'organization_measure_stats_time' =>  $value['DV'],
-                        'amount_transferred_judicial_organs' =>  $value['DW'],
-                        'two_rule_start_time' =>  $value['DX'],
-                        'two_rule_stats_time' =>  $value['DY'],
-                        'two_rule_remove_time' =>  $value['DZ'],
+                            'administrative_sanctions_suspension_stats_time' => $value['DA'],
+                            'seizure_time' => $value['DB'],
+                            'seizure_stats_time' => $value['DC'],
+                            'case_analysis_time' => $value['DD'],
+                            'disciplinary_offence' => $value['DE'],
+                            'post_disciplinary_offence' => $value['DF'],
+                            'other_disciplinary_offence' => $value['DG'],
+                            'organs_take_measures' => $value['DH'],
+                            'organs_take_measures_name' => $value['DI'],
+                            'starting_detention_time' => $value['DJ'],
+                            'starting_detention_stats_time' => $value['DK'],
+                            'location_measures_taken' => $value['DL'],
+                            'location_measures_taken_class' => $value['DM'],
+                            'lien_approval_situation' => $value['DN'],
+                            'lien_end_time' => $value['DO'],
+                            'lien_end_stats_time' => $value['DP'],
+                            'lien_number_days' => $value['DQ'],
+                            'is_delay' => $value['DR'],
+                            'delay_number_days' => $value['DS'],
+                            'delay_approval_situation' => $value['DT'],
+                            'organization_measure' => $value['DU'],
+                            'organization_measure_stats_time' => $value['DV'],
+                            'amount_transferred_judicial_organs' => $value['DW'],
+                            'two_rule_start_time' => $value['DX'],
+                            'two_rule_stats_time' => $value['DY'],
+                            'two_rule_remove_time' => $value['DZ'],
 
-                        'two_rule_remove_stats_time' =>  $value['EA'],
-                        'confessional_books' =>  $value['EB'],
-                        'department_charge' =>  $value['EC'],
-                        'superiors_assigned' =>  $value['ED'],
-                        'del_status' =>  $value['EE'],
-                        'create_date' =>  $value['EF'],
-                        'update_time' =>  $value['EG'],
-                    ];
-
+                            'two_rule_remove_stats_time' => $value['EA'],
+                            'confessional_books' => $value['EB'],
+                            'department_charge' => $value['EC'],
+                            'superiors_assigned' => $value['ED'],
+                            'del_status' => $value['EE'],
+                            'create_date' => $value['EF'],
+                            'update_time' => $value['EG'],
+                        ];
+                    }
                 }
             }
 //var_dump($data);die;
@@ -570,149 +571,149 @@ class QinlianRegisterController extends BaseController
             ->all();
 
         $spreadsheet = new Spreadsheet();
+        $spreadsheet->getActiveSheet()->mergeCells('A1:EG2')->setCellValue('A1', date('Y'). '案管立案导出数据');
+        $spreadsheet->getActiveSheet()->setCellValue('A3', '填报单位名称');
+        $spreadsheet->getActiveSheet()->setCellValue('B3', '填报单位代码');
+        $spreadsheet->getActiveSheet()->setCellValue('C3', '是否单位或事故');
+        $spreadsheet->getActiveSheet()->setCellValue('D3', '案件编码');
+        $spreadsheet->getActiveSheet()->setCellValue('E3', '涉案人员编码');
+        $spreadsheet->getActiveSheet()->setCellValue('F3', '被调查人');
+        $spreadsheet->getActiveSheet()->setCellValue('G3', '证件类型');
+        $spreadsheet->getActiveSheet()->setCellValue('H3', '证件号码');
+        $spreadsheet->getActiveSheet()->setCellValue('I3', '性别');
+        $spreadsheet->getActiveSheet()->setCellValue('J3', '年龄');
+        $spreadsheet->getActiveSheet()->setCellValue('K3', '出生年月');
+        $spreadsheet->getActiveSheet()->setCellValue('L3', '学历');
+        $spreadsheet->getActiveSheet()->setCellValue('M3', '民族');
+        $spreadsheet->getActiveSheet()->setCellValue('N3', '是否国家监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('O3', '国家监察对象详情情况');
+        $spreadsheet->getActiveSheet()->setCellValue('P3', '是否中共党员');
+        $spreadsheet->getActiveSheet()->setCellValue('Q3', '中共党代表');
+        $spreadsheet->getActiveSheet()->setCellValue('R3', '处置情况报告');
+        $spreadsheet->getActiveSheet()->setCellValue('S3', '入党时间');
+        $spreadsheet->getActiveSheet()->setCellValue('T3', '非党员非监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('U3', '非党员非监察对象详情情况');
+        $spreadsheet->getActiveSheet()->setCellValue('V3', '人大代表');
+        $spreadsheet->getActiveSheet()->setCellValue('W3', '政协委员');
+        $spreadsheet->getActiveSheet()->setCellValue('X3', '纪委委员');
+        $spreadsheet->getActiveSheet()->setCellValue('Y3', '党委委员');
+        $spreadsheet->getActiveSheet()->setCellValue('Z3', '任现职时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('A1', '填报单位名称');
-        $spreadsheet->getActiveSheet()->setCellValue('B1', '填报单位代码');
-        $spreadsheet->getActiveSheet()->setCellValue('C1', '是否单位或事故');
-        $spreadsheet->getActiveSheet()->setCellValue('D1', '案件编码');
-        $spreadsheet->getActiveSheet()->setCellValue('E1', '涉案人员编码');
-        $spreadsheet->getActiveSheet()->setCellValue('F1', '被调查人');
-        $spreadsheet->getActiveSheet()->setCellValue('G1', '证件类型');
-        $spreadsheet->getActiveSheet()->setCellValue('H1', '证件号码');
-        $spreadsheet->getActiveSheet()->setCellValue('I1', '性别');
-        $spreadsheet->getActiveSheet()->setCellValue('J1', '年龄');
-        $spreadsheet->getActiveSheet()->setCellValue('K1', '出生年月');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '学历');
-        $spreadsheet->getActiveSheet()->setCellValue('M1', '民族');
-        $spreadsheet->getActiveSheet()->setCellValue('N1', '是否国家监察对象');
-        $spreadsheet->getActiveSheet()->setCellValue('O1', '国家监察对象详情情况');
-        $spreadsheet->getActiveSheet()->setCellValue('P1', '是否中共党员');
-        $spreadsheet->getActiveSheet()->setCellValue('Q1', '中共党代表');
-        $spreadsheet->getActiveSheet()->setCellValue('R1', '处置情况报告');
-        $spreadsheet->getActiveSheet()->setCellValue('S1', '入党时间');
-        $spreadsheet->getActiveSheet()->setCellValue('T1', '非党员非监察对象');
-        $spreadsheet->getActiveSheet()->setCellValue('U1', '非党员非监察对象详情情况');
-        $spreadsheet->getActiveSheet()->setCellValue('V1', '人大代表');
-        $spreadsheet->getActiveSheet()->setCellValue('W1', '政协委员');
-        $spreadsheet->getActiveSheet()->setCellValue('X1', '纪委委员');
-        $spreadsheet->getActiveSheet()->setCellValue('Y1', '党委委员');
-        $spreadsheet->getActiveSheet()->setCellValue('Z1', '任现职时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AA3', '一把手违纪违法');
+        $spreadsheet->getActiveSheet()->setCellValue('AB3', '一把手细节');
+        $spreadsheet->getActiveSheet()->setCellValue('AC3', '一把手细节2');
+        $spreadsheet->getActiveSheet()->setCellValue('AD3', '职级');
+        $spreadsheet->getActiveSheet()->setCellValue('AE3', '正副职级');
+        $spreadsheet->getActiveSheet()->setCellValue('AF3', '工作单位及职务');
+        $spreadsheet->getActiveSheet()->setCellValue('AG3', '干部管理权限');
+        $spreadsheet->getActiveSheet()->setCellValue('AH3', '部门分类');
+        $spreadsheet->getActiveSheet()->setCellValue('AI3', '部门分类1');
+        $spreadsheet->getActiveSheet()->setCellValue('AJ3', '部门分类2');
+        $spreadsheet->getActiveSheet()->setCellValue('AK3', '企业性质');
+        $spreadsheet->getActiveSheet()->setCellValue('AL3', '企业性质1');
+        $spreadsheet->getActiveSheet()->setCellValue('AM3', '企业人员类别');
+        $spreadsheet->getActiveSheet()->setCellValue('AN3', '企业岗位');
+        $spreadsheet->getActiveSheet()->setCellValue('AO3', '渎职侵权损失');
+        $spreadsheet->getActiveSheet()->setCellValue('AP3', '违纪总金额（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('AQ3', '案件总金额（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('AR3', '立案统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AS3', '案件来源');
+        $spreadsheet->getActiveSheet()->setCellValue('AT3', '纪委立案机关');
+        $spreadsheet->getActiveSheet()->setCellValue('AU3', '纪委立案时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AV3', '纪委立案统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AW3', '监委立案机关');
+        $spreadsheet->getActiveSheet()->setCellValue('AX3', '监委立案时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AY3', '监委立案统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AZ3', '是否其他纪检监察机关立案后移送');
 
-        $spreadsheet->getActiveSheet()->setCellValue('AA1', '一把手违纪违法');
-        $spreadsheet->getActiveSheet()->setCellValue('AB1', '一把手细节');
-        $spreadsheet->getActiveSheet()->setCellValue('AC1', '一把手细节2');
-        $spreadsheet->getActiveSheet()->setCellValue('AD1', '职级');
-        $spreadsheet->getActiveSheet()->setCellValue('AE1', '正副职级');
-        $spreadsheet->getActiveSheet()->setCellValue('AF1', '工作单位及职务');
-        $spreadsheet->getActiveSheet()->setCellValue('AG1', '干部管理权限');
-        $spreadsheet->getActiveSheet()->setCellValue('AH1', '部门分类');
-        $spreadsheet->getActiveSheet()->setCellValue('AI1', '部门分类1');
-        $spreadsheet->getActiveSheet()->setCellValue('AJ1', '部门分类2');
-        $spreadsheet->getActiveSheet()->setCellValue('AK1', '企业性质');
-        $spreadsheet->getActiveSheet()->setCellValue('AL1', '企业性质1');
-        $spreadsheet->getActiveSheet()->setCellValue('AM1', '企业人员类别');
-        $spreadsheet->getActiveSheet()->setCellValue('AN1', '企业岗位');
-        $spreadsheet->getActiveSheet()->setCellValue('AO1', '渎职侵权损失');
-        $spreadsheet->getActiveSheet()->setCellValue('AP1', '违纪总金额（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('AQ1', '案件总金额（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('AR1', '立案统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AS1', '案件来源');
-        $spreadsheet->getActiveSheet()->setCellValue('AT1', '纪委立案机关');
-        $spreadsheet->getActiveSheet()->setCellValue('AU1', '纪委立案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AV1', '纪委立案统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AW1', '监委立案机关');
-        $spreadsheet->getActiveSheet()->setCellValue('AX1', '监委立案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AY1', '监委立案统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AZ1', '是否其他纪检监察机关立案后移送');
+        $spreadsheet->getActiveSheet()->setCellValue('BA3', '其他纪检监察机关立案后移送方式');
+        $spreadsheet->getActiveSheet()->setCellValue('BB3', '移送单位');
+        $spreadsheet->getActiveSheet()->setCellValue('BC3', '简要案情');
+        $spreadsheet->getActiveSheet()->setCellValue('BD3', '立案报告');
+        $spreadsheet->getActiveSheet()->setCellValue('BE3', '立案决定书');
+        $spreadsheet->getActiveSheet()->setCellValue('BF3', '备注');
+        $spreadsheet->getActiveSheet()->setCellValue('BG3', '是否违反中央八项规定精神');
+        $spreadsheet->getActiveSheet()->setCellValue('BH3', '是否属于问责');
+        $spreadsheet->getActiveSheet()->setCellValue('BI3', '结案统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BJ3', '销案时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BK3', '结案时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BL3', '责任追究');
+        $spreadsheet->getActiveSheet()->setCellValue('BM3', '党纪处分');
+        $spreadsheet->getActiveSheet()->setCellValue('BN3', '党纪处分统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BO3', '政务处分');
+        $spreadsheet->getActiveSheet()->setCellValue('BP3', '政务处分统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BQ3', '其他处理');
+        $spreadsheet->getActiveSheet()->setCellValue('BR3', '其他处理统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BS3', '移送司法机关时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BT3', '移送司法机关统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('BU3', '公检法处理');
+        $spreadsheet->getActiveSheet()->setCellValue('BV3', '公检法处理详情情况');
+        $spreadsheet->getActiveSheet()->setCellValue('BW3', '主刑年数');
+        $spreadsheet->getActiveSheet()->setCellValue('BX3', '主刑月数');
+        $spreadsheet->getActiveSheet()->setCellValue('BY3', '缓刑年数');
+        $spreadsheet->getActiveSheet()->setCellValue('BZ3', '缓刑月数');
 
-        $spreadsheet->getActiveSheet()->setCellValue('BA1', '其他纪检监察机关立案后移送方式');
-        $spreadsheet->getActiveSheet()->setCellValue('BB1', '移送单位');
-        $spreadsheet->getActiveSheet()->setCellValue('BC1', '简要案情');
-        $spreadsheet->getActiveSheet()->setCellValue('BD1', '立案报告');
-        $spreadsheet->getActiveSheet()->setCellValue('BE1', '立案决定书');
-        $spreadsheet->getActiveSheet()->setCellValue('BF1', '备注');
-        $spreadsheet->getActiveSheet()->setCellValue('BG1', '是否违反中央八项规定精神');
-        $spreadsheet->getActiveSheet()->setCellValue('BH1', '是否属于问责');
-        $spreadsheet->getActiveSheet()->setCellValue('BI1', '结案统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BJ1', '销案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BK1', '结案时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BL1', '责任追究');
-        $spreadsheet->getActiveSheet()->setCellValue('BM1', '党纪处分');
-        $spreadsheet->getActiveSheet()->setCellValue('BN1', '党纪处分统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BO1', '政务处分');
-        $spreadsheet->getActiveSheet()->setCellValue('BP1', '政务处分统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BQ1', '其他处理');
-        $spreadsheet->getActiveSheet()->setCellValue('BR1', '其他处理统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BS1', '移送司法机关时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BT1', '移送司法机关统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('BU1', '公检法处理');
-        $spreadsheet->getActiveSheet()->setCellValue('BV1', '公检法处理详情情况');
-        $spreadsheet->getActiveSheet()->setCellValue('BW1', '主刑年数');
-        $spreadsheet->getActiveSheet()->setCellValue('BX1', '主刑月数');
-        $spreadsheet->getActiveSheet()->setCellValue('BY1', '缓刑年数');
-        $spreadsheet->getActiveSheet()->setCellValue('BZ1', '缓刑月数');
+        $spreadsheet->getActiveSheet()->setCellValue('CA3', '公检法处理统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CB3', '挽回经济损失（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('CC3', '收缴涉案金额（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('CD3', '首次违纪违法时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CE3', '末次违纪违法时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CF3', '主要违纪问题发生时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CG3', '潜逃时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CH3', '潜逃统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CI3', '审理受理时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CJ3', '审理受理统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CK3', '审理机关');
+        $spreadsheet->getActiveSheet()->setCellValue('CL3', '审结时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CM3', '审结统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CN3', '处分决定');
+        $spreadsheet->getActiveSheet()->setCellValue('CO3', '公检法处理时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CP3', '司法判决金额（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('CQ3', '调查报告');
+        $spreadsheet->getActiveSheet()->setCellValue('CR3', '审理报告');
+        $spreadsheet->getActiveSheet()->setCellValue('CS3', '案件剖析');
+        $spreadsheet->getActiveSheet()->setCellValue('CT3', '留党察看年限');
+        $spreadsheet->getActiveSheet()->setCellValue('CU3', '企业级别');
+        $spreadsheet->getActiveSheet()->setCellValue('CV3', '潜逃去向');
+        $spreadsheet->getActiveSheet()->setCellValue('CW3', '潜逃去向细节');
+        $spreadsheet->getActiveSheet()->setCellValue('CX3', '调查中止时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CY3', '调查中止统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('CZ3', '解除政务处分时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('CA1', '公检法处理统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CB1', '挽回经济损失（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('CC1', '收缴涉案金额（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('CD1', '首次违纪违法时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CE1', '末次违纪违法时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CF1', '主要违纪问题发生时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CG1', '潜逃时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CH1', '潜逃统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CI1', '审理受理时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CJ1', '审理受理统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CK1', '审理机关');
-        $spreadsheet->getActiveSheet()->setCellValue('CL1', '审结时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CM1', '审结统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CN1', '处分决定');
-        $spreadsheet->getActiveSheet()->setCellValue('CO1', '公检法处理时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CP1', '司法判决金额（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('CQ1', '调查报告');
-        $spreadsheet->getActiveSheet()->setCellValue('CR1', '审理报告');
-        $spreadsheet->getActiveSheet()->setCellValue('CS1', '案件剖析');
-        $spreadsheet->getActiveSheet()->setCellValue('CT1', '留党察看年限');
-        $spreadsheet->getActiveSheet()->setCellValue('CU1', '企业级别');
-        $spreadsheet->getActiveSheet()->setCellValue('CV1', '潜逃去向');
-        $spreadsheet->getActiveSheet()->setCellValue('CW1', '潜逃去向细节');
-        $spreadsheet->getActiveSheet()->setCellValue('CX1', '调查中止时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CY1', '调查中止统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('CZ1', '解除政务处分时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DA3', '解除政务处分统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DB3', '抓获时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DC3', '抓获统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DD3', '案件剖析报告统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DE3', '违纪行为');
+        $spreadsheet->getActiveSheet()->setCellValue('DF3', '职务违法犯罪行为');
+        $spreadsheet->getActiveSheet()->setCellValue('DG3', '其他违法犯罪行为');
+        $spreadsheet->getActiveSheet()->setCellValue('DH3', '采取措施机关');
+        $spreadsheet->getActiveSheet()->setCellValue('DI3', '采取措施机关名称');
+        $spreadsheet->getActiveSheet()->setCellValue('DJ3', '留置起始时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DK3', '留置起始统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DL3', '采取措施地点');
+        $spreadsheet->getActiveSheet()->setCellValue('DM3', '采取措施地点分类');
+        $spreadsheet->getActiveSheet()->setCellValue('DN3', '留置审批情况');
+        $spreadsheet->getActiveSheet()->setCellValue('DO3', '留置结束时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DP3', '留置结束统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DQ3', '留置天数');
+        $spreadsheet->getActiveSheet()->setCellValue('DR3', '是否延期');
+        $spreadsheet->getActiveSheet()->setCellValue('DS3', '延期天数');
+        $spreadsheet->getActiveSheet()->setCellValue('DT3', '延期审批情况');
+        $spreadsheet->getActiveSheet()->setCellValue('DU3', '组织措施');
+        $spreadsheet->getActiveSheet()->setCellValue('DV3', '组织措施统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DW3', '移送司法机关金额（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('DX3', '两规两指起始时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DY3', '两规两指统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('DZ3', '两规两指解除时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('DA1', '解除政务处分统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DB1', '抓获时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DC1', '抓获统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DD1', '案件剖析报告统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DE1', '违纪行为');
-        $spreadsheet->getActiveSheet()->setCellValue('DF1', '职务违法犯罪行为');
-        $spreadsheet->getActiveSheet()->setCellValue('DG1', '其他违法犯罪行为');
-        $spreadsheet->getActiveSheet()->setCellValue('DH1', '采取措施机关');
-        $spreadsheet->getActiveSheet()->setCellValue('DI1', '采取措施机关名称');
-        $spreadsheet->getActiveSheet()->setCellValue('DJ1', '留置起始时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DK1', '留置起始统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DL1', '采取措施地点');
-        $spreadsheet->getActiveSheet()->setCellValue('DM1', '采取措施地点分类');
-        $spreadsheet->getActiveSheet()->setCellValue('DN1', '留置审批情况');
-        $spreadsheet->getActiveSheet()->setCellValue('DO1', '留置结束时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DP1', '留置结束统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DQ1', '留置天数');
-        $spreadsheet->getActiveSheet()->setCellValue('DR1', '是否延期');
-        $spreadsheet->getActiveSheet()->setCellValue('DS1', '延期天数');
-        $spreadsheet->getActiveSheet()->setCellValue('DT1', '延期审批情况');
-        $spreadsheet->getActiveSheet()->setCellValue('DU1', '组织措施');
-        $spreadsheet->getActiveSheet()->setCellValue('DV1', '组织措施统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DW1', '移送司法机关金额（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('DX1', '两规两指起始时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DY1', '两规两指统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('DZ1', '两规两指解除时间');
-
-        $spreadsheet->getActiveSheet()->setCellValue('EA1', '两规两指解除统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('EB1', '忏悔书');
-        $spreadsheet->getActiveSheet()->setCellValue('EC1', '分管科室');
-        $spreadsheet->getActiveSheet()->setCellValue('ED1', '上级交办');
-        $spreadsheet->getActiveSheet()->setCellValue('EE1', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('EF1', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('EG1', '更新时间');
+        $spreadsheet->getActiveSheet()->setCellValue('EA3', '两规两指解除统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('EB3', '忏悔书');
+        $spreadsheet->getActiveSheet()->setCellValue('EC3', '分管科室');
+        $spreadsheet->getActiveSheet()->setCellValue('ED3', '上级交办');
+        $spreadsheet->getActiveSheet()->setCellValue('EE3', '删除状态');
+        $spreadsheet->getActiveSheet()->setCellValue('EF3', '创建时间');
+        $spreadsheet->getActiveSheet()->setCellValue('EG3', '更新时间');
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -858,7 +859,7 @@ class QinlianRegisterController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('EF')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('EG')->setWidth(12);
 
-        $i = 2;
+        $i = 4;
         foreach($data as $key=>$val){
 
             $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['nuit_name']);

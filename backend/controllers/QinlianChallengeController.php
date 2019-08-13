@@ -196,93 +196,6 @@ class QinlianChallengeController extends BaseController
      */
     public function actionStatistics()
     {
-//////        $data = $_POST;
-//////        var_dump($data);die;
-////
-////        $query = QinlianChallenge::find();
-////        $querys = Yii::$app->request->get('query');
-////        if(count($querys) > 0){
-////            $condition = "";
-////            $parame = array();
-////            foreach($querys as $key=>$value){
-////                $value = trim($value);
-////                if(empty($value) == false){
-////                    $parame[":{$key}"]=$value;
-////                    if(empty($condition) == true){
-////                        $condition = " {$key}=:{$key} ";
-////                    }
-////                    else{
-////                        $condition = $condition . " AND {$key}=:{$key} ";
-////                    }
-////                }
-////            }
-////            if(count($parame) > 0){
-////                $query = $query->where($condition, $parame);
-////            }
-////        }
-////
-////        $pagination = new Pagination([
-////                'totalCount' =>$query->count(),
-////                'pageSize' => '10',
-////                'pageParam'=>'page',
-////                'pageSizeParam'=>'per-page']
-////        );
-////
-////        $orderby = Yii::$app->request->get('orderby', '');
-////        if(empty($orderby) == false){
-////            $query = $query->orderBy($orderby);
-////        }
-////
-////        $models = $query
-////            ->offset($pagination->offset)
-////            ->limit($pagination->limit)
-////            ->all();
-////        return $this->render('statistics', [
-////            'models'=>$models,
-////            'pages'=>$pagination,
-////            'query'=>$querys,
-////        ]);
-//
-//        if (Yii::$app->request->get()){
-//
-//            $data = Yii::$app->request->get();
-//            return $this->render('statistics', [
-////                'models'=>$models,
-////                'pages'=>$pagination,
-////                'query'=>$querys,
-//                'data'=>$data,
-//            ]);
-//        }else{
-//            return $this->render('statistics', []);
-//        }
-//
-////        $data = Yii::$app->request->post();
-////        return $this->asJson($data);
-//
-////        $model = new QinlianChallenge();
-////        if ($model->load(Yii::$app->request->post())) {
-////
-////            if(empty($model->incoming_time) == true){
-////                $model->incoming_time = 'CURRENT_TIMESTAMP';
-////            }
-////            if(empty($model->create_date) == true){
-////                $model->create_date = 'CURRENT_TIMESTAMP';
-////            }
-////            $model->create_date = date('Y-m-d H:i:s');
-////
-////            if($model->validate() == true && $model->save()){
-////                $msg = array('errno'=>0, 'msg'=>'保存成功');
-////                return $this->asJson($msg);
-////            }
-////            else{
-////                $msg = array('errno'=>2, 'data'=>$model->getErrors());
-////                return $this->asJson($msg);
-////            }
-////        } else {
-////            $msg = array('errno'=>2, 'msg'=>'数据出错');
-////            return $this->asJson($msg);
-////        }
-
         $query = QinlianChallenge::find();
         $querys = Yii::$app->request->post();
 //        var_dump($querys);die;
@@ -339,48 +252,48 @@ class QinlianChallengeController extends BaseController
 //            var_dump($sheetData);die;
 
             foreach($sheetData as $key => $value) {
-                if ($key>1){
-//                    var_dump($value);die;
-                    $data[] = [
-                        'id' =>  $value['A'],
-                        'number' =>  $value['B'],
-                        'incoming_time' =>  $value['C'],
-                        'clue_level' =>  $value['D'],
-                        'clue_category' =>  $value['E'],
+                if ($key>3){
+                    if(!empty( $value['A'])){
+                        $data[] = [
+    //                        'id' =>  $value['A'],
+                            'number' =>  $value['A'],
+                            'incoming_time' =>  $value['B'],
+                            'clue_level' =>  $value['C'],
+                            'clue_category' =>  $value['D'],
 
-                        'clue_source' =>  $value['F'],
-                        'letter_number' =>  $value['G'],
-                        'signature' =>  $value['H'],
-                        'leader_instructions' =>  $value['I'],
-                        'respondent_unit' =>  $value['J'],
+                            'clue_source' =>  $value['E'],
+                            'letter_number' =>  $value['F'],
+                            'signature' =>  $value['G'],
+                            'leader_instructions' =>  $value['H'],
+                            'respondent_unit' =>  $value['I'],
 
-                        'duty_job' =>  $value['K'],
-                        'rank_job' =>  $value['L'],
-                        'main_issues' =>  $value['M'],
-                        'related_unit' =>  $value['N'],
-                        'heavy_cases' =>  $value['O'],
+                            'duty_job' =>  $value['J'],
+                            'rank_job' =>  $value['K'],
+                            'main_issues' =>  $value['L'],
+                            'related_unit' =>  $value['M'],
+                            'heavy_cases' =>  $value['N'],
 
-                        'date_receipt' =>  $value['P'],
-                        'transfer_organ' =>  $value['Q'],
-                        'results' =>  $value['R'],
-                        'supervisory_leadership' =>  $value['S'],
-                        'host_department' =>  $value['T'],
+                            'date_receipt' =>  $value['O'],
+                            'transfer_organ' =>  $value['P'],
+                            'results' =>  $value['Q'],
+                            'supervisory_leadership' =>  $value['R'],
+                            'host_department' =>  $value['S'],
 
-                        'progress_case' =>  $value['U'],
-                        'investigation_disposal' =>  $value['V'],
-                        'remarks' =>  $value['W'],
-                        'number_disposals' =>  $value['X'],
-                        'organizations_number' =>  $value['Y'],
+                            'progress_case' =>  $value['T'],
+                            'investigation_disposal' =>  $value['U'],
+                            'remarks' =>  $value['V'],
+                            'number_disposals' =>  $value['W'],
+                            'organizations_number' =>  $value['X'],
 
-                        'first_form' =>  $value['X'],
-                        'second_form' =>  $value['AA'],
-                        'third_form' =>  $value['AB'],
-                        'fourth_form' =>  $value['AC'],
-                        'approval_time' =>  $value['AD'],
-
-                        'approval_status' =>  $value['AE'],
-                    ];
-
+                            'first_form' =>  $value['Y'],
+                            'second_form' =>  $value['Z'],
+                            'third_form' =>  $value['AA'],
+                            'fourth_form' =>  $value['AB'],
+    //                        'approval_time' =>  $value['AC'],
+    //
+    //                        'approval_status' =>  $value['AD'],
+                        ];
+                    }
                 }
             }
 //var_dump($data);die;
@@ -390,7 +303,7 @@ class QinlianChallengeController extends BaseController
                     $model = new QinlianChallenge();
                     Yii::$app->db->createCommand()
                         ->batchInsert($model::tableName(),[
-                            'id',
+//                            'id',
                             'number',
                             'incoming_time',
                             'clue_level',
@@ -420,8 +333,8 @@ class QinlianChallengeController extends BaseController
                             'second_form',
                             'third_form',
                             'fourth_form',
-                            'approval_time',
-                            'approval_status',
+//                            'approval_time',
+//                            'approval_status',
                         ],
                             $data)
                         ->execute();
@@ -449,46 +362,46 @@ class QinlianChallengeController extends BaseController
             ->all();
 
         $spreadsheet = new Spreadsheet();
+        $spreadsheet->getActiveSheet()->mergeCells('A1:AG2')->setCellValue('A1', date('Y'). '案管问题导出数据');
+        $spreadsheet->getActiveSheet()->setCellValue('A3', '序号');
+        $spreadsheet->getActiveSheet()->setCellValue('B3', '来件时间');
+        $spreadsheet->getActiveSheet()->setCellValue('C3', '线索级别');
+        $spreadsheet->getActiveSheet()->setCellValue('D3', '线索类别');
+        $spreadsheet->getActiveSheet()->setCellValue('E3', '线索来源');
 
-        $spreadsheet->getActiveSheet()->setCellValue('A1', '序号');
-        $spreadsheet->getActiveSheet()->setCellValue('B1', '来件时间');
-        $spreadsheet->getActiveSheet()->setCellValue('C1', '线索级别');
-        $spreadsheet->getActiveSheet()->setCellValue('D1', '线索类别');
-        $spreadsheet->getActiveSheet()->setCellValue('E1', '线索来源');
+        $spreadsheet->getActiveSheet()->setCellValue('F3', '信件编号');
+        $spreadsheet->getActiveSheet()->setCellValue('G3', '署名情况');
+        $spreadsheet->getActiveSheet()->setCellValue('H3', '领导批示');
+        $spreadsheet->getActiveSheet()->setCellValue('I3', '被反映人（单位）');
+        $spreadsheet->getActiveSheet()->setCellValue('J3', '职务');
 
-        $spreadsheet->getActiveSheet()->setCellValue('F1', '信件编号');
-        $spreadsheet->getActiveSheet()->setCellValue('G1', '署名情况');
-        $spreadsheet->getActiveSheet()->setCellValue('H1', '领导批示');
-        $spreadsheet->getActiveSheet()->setCellValue('I1', '被反映人（单位）');
-        $spreadsheet->getActiveSheet()->setCellValue('J1', '职务');
+        $spreadsheet->getActiveSheet()->setCellValue('K3', '职级');
+        $spreadsheet->getActiveSheet()->setCellValue('L3', '反映的主要问题');
+        $spreadsheet->getActiveSheet()->setCellValue('M3', '涉及单位');
+        $spreadsheet->getActiveSheet()->setCellValue('N3', '重件情况');
+        $spreadsheet->getActiveSheet()->setCellValue('O3', '接到日期');
 
-        $spreadsheet->getActiveSheet()->setCellValue('K1', '职级');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '反映的主要问题');
-        $spreadsheet->getActiveSheet()->setCellValue('M1', '涉及单位');
-        $spreadsheet->getActiveSheet()->setCellValue('N1', '重件情况');
-        $spreadsheet->getActiveSheet()->setCellValue('O1', '接到日期');
+        $spreadsheet->getActiveSheet()->setCellValue('P3', '处置方式');
+        $spreadsheet->getActiveSheet()->setCellValue('Q3', '要结果情况');
+        $spreadsheet->getActiveSheet()->setCellValue('R3', '督办领导');
+        $spreadsheet->getActiveSheet()->setCellValue('S3', '办理科室');
+        $spreadsheet->getActiveSheet()->setCellValue('T3', '案件进度');
 
-        $spreadsheet->getActiveSheet()->setCellValue('P1', '处置方式');
-        $spreadsheet->getActiveSheet()->setCellValue('Q1', '要结果情况');
-        $spreadsheet->getActiveSheet()->setCellValue('R1', '督办领导');
-        $spreadsheet->getActiveSheet()->setCellValue('S1', '办理科室');
-        $spreadsheet->getActiveSheet()->setCellValue('T1', '案件进度');
+        $spreadsheet->getActiveSheet()->setCellValue('U3', '查处情况');
+        $spreadsheet->getActiveSheet()->setCellValue('V3', '备注');
+        $spreadsheet->getActiveSheet()->setCellValue('W3', '处分人数');
+        $spreadsheet->getActiveSheet()->setCellValue('X3', '问题属性');
+        $spreadsheet->getActiveSheet()->setCellValue('Y3', '第一种形态');
 
-        $spreadsheet->getActiveSheet()->setCellValue('U1', '查处情况');
-        $spreadsheet->getActiveSheet()->setCellValue('V1', '备注');
-        $spreadsheet->getActiveSheet()->setCellValue('W1', '处分人数');
-        $spreadsheet->getActiveSheet()->setCellValue('X1', '问题属性');
-        $spreadsheet->getActiveSheet()->setCellValue('Y1', '第一种形态');
+        $spreadsheet->getActiveSheet()->setCellValue('Z3', '第二种形态');
+        $spreadsheet->getActiveSheet()->setCellValue('AA3', '第三种形态');
+        $spreadsheet->getActiveSheet()->setCellValue('AB3', '第四种形态');
+        $spreadsheet->getActiveSheet()->setCellValue('AC3', '审批时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AD3', '审批状态');
 
-        $spreadsheet->getActiveSheet()->setCellValue('Z1', '第二种形态');
-        $spreadsheet->getActiveSheet()->setCellValue('AA1', '第三种形态');
-        $spreadsheet->getActiveSheet()->setCellValue('AB1', '第四种形态');
-        $spreadsheet->getActiveSheet()->setCellValue('AC1', '审批时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AD1', '审批状态');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AE1', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('AF1', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AG1', '更新时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AE3', '删除状态');
+        $spreadsheet->getActiveSheet()->setCellValue('AF3', '创建时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AG3', '更新时间');
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -531,7 +444,7 @@ class QinlianChallengeController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('AG')->setWidth(12);
 
-        $i = 2;
+        $i = 4;
         foreach($data as $key=>$val){
 
             $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['number']);

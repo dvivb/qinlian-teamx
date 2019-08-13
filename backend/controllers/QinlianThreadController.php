@@ -244,62 +244,63 @@ class QinlianThreadController extends BaseController
 //            var_dump($sheetData);die;
 
             foreach($sheetData as $key => $value) {
-                if ($key>1){
+                if ($key>3){
 //                    var_dump($value);die;
-                    $data[] = [
-                        'is_nuit' =>  $value['A'],
-                        'nuit_name' =>  $value['B'],
-                        'nuit_code' =>  $value['C'],
-                        'statistical_identification' =>  $value['D'],
-                        'clue_code' =>  $value['E'],
-                        'personnel_code' =>  $value['F'],
-                        'person_reflected' =>  $value['G'],
-                        'duty_job' =>  $value['H'],
-                        'is_supervises_object' =>  $value['I'],
-                        'rank_job' =>  $value['J'],
-                        'recovers_economic_loss' =>  $value['K'],
-                        'collects_amount' =>  $value['L'],
-                        'handling_organ' =>  $value['M'],
-                        'main_problem_clues' =>  $value['N'],
-                        'remarks' =>  $value['O'],
-                        'nation' =>  $value['P'],
-                        'date_birth' =>  $value['Q'],
-                        'cpc' =>  $value['R'],
-                        'cppcc' =>  $value['S'],
-                        'disposal_report' =>  $value['T'],
-                        'time_joining_party' =>  $value['U'],
-                        'authority_management' =>  $value['V'],
-                        'acceptance_time' =>  $value['W'],
-                        'approval_time_one' =>  $value['X'],
-                        'statistical_time_one' =>  $value['Y'],
-                        'one_level_first' =>  $value['Z'],
+                    if(!empty( $value['A'])){
+                        $data[] = [
+                            'is_nuit' =>  $value['A'],
+                            'nuit_name' =>  $value['B'],
+                            'nuit_code' =>  $value['C'],
+                            'statistical_identification' =>  $value['D'],
+                            'clue_code' =>  $value['E'],
+                            'personnel_code' =>  $value['F'],
+                            'person_reflected' =>  $value['G'],
+                            'duty_job' =>  $value['H'],
+                            'is_supervises_object' =>  $value['I'],
+                            'rank_job' =>  $value['J'],
+                            'recovers_economic_loss' =>  $value['K'],
+                            'collects_amount' =>  $value['L'],
+                            'handling_organ' =>  $value['M'],
+                            'main_problem_clues' =>  $value['N'],
+                            'remarks' =>  $value['O'],
+                            'nation' =>  $value['P'],
+                            'date_birth' =>  $value['Q'],
+                            'cpc' =>  $value['R'],
+                            'cppcc' =>  $value['S'],
+                            'disposal_report' =>  $value['T'],
+                            'time_joining_party' =>  $value['U'],
+                            'authority_management' =>  $value['V'],
+                            'acceptance_time' =>  $value['W'],
+                            'approval_time_one' =>  $value['X'],
+                            'statistical_time_one' =>  $value['Y'],
+                            'one_level_first' =>  $value['Z'],
 
-                        'one_level_second' =>  $value['AA'],
-                        'approval_time_two' =>  $value['AB'],
-                        'statistical_time_two' =>  $value['AC'],
-                        'two_level_first' =>  $value['AD'],
-                        'two_level_second' =>  $value['AE'],
-                        'approval_time_three' =>  $value['AF'],
-                        'statistical_time_three' =>  $value['AG'],
-                        'three_level_first' =>  $value['AH'],
-                        'three_level_second' =>  $value['AI'],
-                        'cases_source' =>  $value['AJ'],
-                        'disciplinary_offence' =>  $value['AK'],
-                        'is_checking_me' =>  $value['AL'],
-                        'is_party' =>  $value['AM'],
-                        'secondary_class_objects' =>  $value['AN'],
-                        'is_supervisory_objects' =>  $value['AO'],
-                        'no_secondary_class_objects' =>  $value['AP'],
-                        'official_offences' =>  $value['AQ'],
-                        'other_offences' =>  $value['AR'],
-                        'organization_measure_time' =>  $value['AS'],
-                        'superiors_assigned' =>  $value['AT'],
-                        'department_charge' =>  $value['AU'],
-                        'del_status' =>  $value['AV'],
-                        'create_date' =>  $value['AW'],
-                        'update_time' =>  $value['AX'],
-                    ];
-
+                            'one_level_second' =>  $value['AA'],
+                            'approval_time_two' =>  $value['AB'],
+                            'statistical_time_two' =>  $value['AC'],
+                            'two_level_first' =>  $value['AD'],
+                            'two_level_second' =>  $value['AE'],
+                            'approval_time_three' =>  $value['AF'],
+                            'statistical_time_three' =>  $value['AG'],
+                            'three_level_first' =>  $value['AH'],
+                            'three_level_second' =>  $value['AI'],
+                            'cases_source' =>  $value['AJ'],
+                            'disciplinary_offence' =>  $value['AK'],
+                            'is_checking_me' =>  $value['AL'],
+                            'is_party' =>  $value['AM'],
+                            'secondary_class_objects' =>  $value['AN'],
+                            'is_supervisory_objects' =>  $value['AO'],
+                            'no_secondary_class_objects' =>  $value['AP'],
+                            'official_offences' =>  $value['AQ'],
+                            'other_offences' =>  $value['AR'],
+                            'organization_measure_time' =>  $value['AS'],
+                            'superiors_assigned' =>  $value['AT'],
+                            'department_charge' =>  $value['AU'],
+                            'del_status' =>  $value['AV'],
+                            'create_date' =>  $value['AW'],
+                            'update_time' =>  $value['AX'],
+                        ];
+                    }
                 }
             }
 //var_dump($data);die;
@@ -388,58 +389,58 @@ class QinlianThreadController extends BaseController
             ->all();
 
         $spreadsheet = new Spreadsheet();
+        $spreadsheet->getActiveSheet()->mergeCells('A1:AX2')->setCellValue('A1', date('Y'). '案管线索导出数据');
+        $spreadsheet->getActiveSheet()->setCellValue('A3', '是否单位');
+        $spreadsheet->getActiveSheet()->setCellValue('B3', '填报单位名称');
+        $spreadsheet->getActiveSheet()->setCellValue('C3', '填报单位代码');
+        $spreadsheet->getActiveSheet()->setCellValue('D3', '统计标识');
+        $spreadsheet->getActiveSheet()->setCellValue('E3', '线索编码');
+        $spreadsheet->getActiveSheet()->setCellValue('F3', '人员编码');
+        $spreadsheet->getActiveSheet()->setCellValue('G3', '被反映人');
+        $spreadsheet->getActiveSheet()->setCellValue('H3', '工作单位及职务');
+        $spreadsheet->getActiveSheet()->setCellValue('I3', '是否国家监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('J3', '职级');
+        $spreadsheet->getActiveSheet()->setCellValue('K3', '挽回经济损失');
+        $spreadsheet->getActiveSheet()->setCellValue('L3', '收缴涉案金额（0');
+        $spreadsheet->getActiveSheet()->setCellValue('M3', '办理机关');
+        $spreadsheet->getActiveSheet()->setCellValue('N3', '主要问题线索');
+        $spreadsheet->getActiveSheet()->setCellValue('O3', '备注');
+        $spreadsheet->getActiveSheet()->setCellValue('P3', '民族');
+        $spreadsheet->getActiveSheet()->setCellValue('Q3', '出生年月');
+        $spreadsheet->getActiveSheet()->setCellValue('R3', '人大代表');
+        $spreadsheet->getActiveSheet()->setCellValue('S3', '政协委员');
+        $spreadsheet->getActiveSheet()->setCellValue('T3', '处置情况报告');
+        $spreadsheet->getActiveSheet()->setCellValue('U3', '入党时间');
+        $spreadsheet->getActiveSheet()->setCellValue('V3', '干部管理权限');
+        $spreadsheet->getActiveSheet()->setCellValue('W3', '受理时间');
+        $spreadsheet->getActiveSheet()->setCellValue('X3', '处置方式1批准时间');
+        $spreadsheet->getActiveSheet()->setCellValue('Y3', '处置方式1统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('Z3', '处置方式1一级');
 
-        $spreadsheet->getActiveSheet()->setCellValue('A1', '是否单位');
-        $spreadsheet->getActiveSheet()->setCellValue('B1', '填报单位名称');
-        $spreadsheet->getActiveSheet()->setCellValue('C1', '填报单位代码');
-        $spreadsheet->getActiveSheet()->setCellValue('D1', '统计标识');
-        $spreadsheet->getActiveSheet()->setCellValue('E1', '线索编码');
-        $spreadsheet->getActiveSheet()->setCellValue('F1', '人员编码');
-        $spreadsheet->getActiveSheet()->setCellValue('G1', '被反映人');
-        $spreadsheet->getActiveSheet()->setCellValue('H1', '工作单位及职务');
-        $spreadsheet->getActiveSheet()->setCellValue('I1', '是否国家监察对象');
-        $spreadsheet->getActiveSheet()->setCellValue('J1', '职级');
-        $spreadsheet->getActiveSheet()->setCellValue('K1', '挽回经济损失');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '收缴涉案金额（0');
-        $spreadsheet->getActiveSheet()->setCellValue('M1', '办理机关');
-        $spreadsheet->getActiveSheet()->setCellValue('N1', '主要问题线索');
-        $spreadsheet->getActiveSheet()->setCellValue('O1', '备注');
-        $spreadsheet->getActiveSheet()->setCellValue('P1', '民族');
-        $spreadsheet->getActiveSheet()->setCellValue('Q1', '出生年月');
-        $spreadsheet->getActiveSheet()->setCellValue('R1', '人大代表');
-        $spreadsheet->getActiveSheet()->setCellValue('S1', '政协委员');
-        $spreadsheet->getActiveSheet()->setCellValue('T1', '处置情况报告');
-        $spreadsheet->getActiveSheet()->setCellValue('U1', '入党时间');
-        $spreadsheet->getActiveSheet()->setCellValue('V1', '干部管理权限');
-        $spreadsheet->getActiveSheet()->setCellValue('W1', '受理时间');
-        $spreadsheet->getActiveSheet()->setCellValue('X1', '处置方式1批准时间');
-        $spreadsheet->getActiveSheet()->setCellValue('Y1', '处置方式1统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('Z1', '处置方式1一级');
-
-        $spreadsheet->getActiveSheet()->setCellValue('AA1', '处置方式1二级');
-        $spreadsheet->getActiveSheet()->setCellValue('AB1', '处置方式2批准时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AC1', '处置方式2统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AD1', '处置方式2一级');
-        $spreadsheet->getActiveSheet()->setCellValue('AE1', '处置方式2二级');
-        $spreadsheet->getActiveSheet()->setCellValue('AF1', '处置方式3批准时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AG1', '处置方式3统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AH1', '处置方式3一级');
-        $spreadsheet->getActiveSheet()->setCellValue('AI1', '处置方式3二级');
-        $spreadsheet->getActiveSheet()->setCellValue('AJ1', '案件来源');
-        $spreadsheet->getActiveSheet()->setCellValue('AK1', '违纪行为');
-        $spreadsheet->getActiveSheet()->setCellValue('AL1', '是否与本人核实');
-        $spreadsheet->getActiveSheet()->setCellValue('AM1', '是否党员');
-        $spreadsheet->getActiveSheet()->setCellValue('AN1', '监察对象二级分类');
-        $spreadsheet->getActiveSheet()->setCellValue('AO1', '是否非党员非监察对象');
-        $spreadsheet->getActiveSheet()->setCellValue('AP1', '非党员非监察对象二级分类（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('AQ1', '职务犯罪行为（万元）');
-        $spreadsheet->getActiveSheet()->setCellValue('AR1', '其他违犯罪行为');
-        $spreadsheet->getActiveSheet()->setCellValue('AS1', '组织措施统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AT1', '上级交办');
-        $spreadsheet->getActiveSheet()->setCellValue('AU1', '分管科室');
-        $spreadsheet->getActiveSheet()->setCellValue('AV1', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('AW1', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AX1', '更新时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AA3', '处置方式1二级');
+        $spreadsheet->getActiveSheet()->setCellValue('AB3', '处置方式2批准时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AC3', '处置方式2统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AD3', '处置方式2一级');
+        $spreadsheet->getActiveSheet()->setCellValue('AE3', '处置方式2二级');
+        $spreadsheet->getActiveSheet()->setCellValue('AF3', '处置方式3批准时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AG3', '处置方式3统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AH3', '处置方式3一级');
+        $spreadsheet->getActiveSheet()->setCellValue('AI3', '处置方式3二级');
+        $spreadsheet->getActiveSheet()->setCellValue('AJ3', '案件来源');
+        $spreadsheet->getActiveSheet()->setCellValue('AK3', '违纪行为');
+        $spreadsheet->getActiveSheet()->setCellValue('AL3', '是否与本人核实');
+        $spreadsheet->getActiveSheet()->setCellValue('AM3', '是否党员');
+        $spreadsheet->getActiveSheet()->setCellValue('AN3', '监察对象二级分类');
+        $spreadsheet->getActiveSheet()->setCellValue('AO3', '是否非党员非监察对象');
+        $spreadsheet->getActiveSheet()->setCellValue('AP3', '非党员非监察对象二级分类（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('AQ3', '职务犯罪行为（万元）');
+        $spreadsheet->getActiveSheet()->setCellValue('AR3', '其他违犯罪行为');
+        $spreadsheet->getActiveSheet()->setCellValue('AS3', '组织措施统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AT3', '上级交办');
+        $spreadsheet->getActiveSheet()->setCellValue('AU3', '分管科室');
+        $spreadsheet->getActiveSheet()->setCellValue('AV3', '删除状态');
+        $spreadsheet->getActiveSheet()->setCellValue('AW3', '创建时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AX3', '更新时间');
 
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -495,7 +496,7 @@ class QinlianThreadController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('AW')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AX')->setWidth(16);
 
-        $i = 2;
+        $i = 4;
         foreach($data as $key=>$val){
 
             $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['is_nuit']);

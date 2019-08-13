@@ -258,39 +258,40 @@ class QinlianPetitionController extends BaseController
 //            var_dump($sheetData);die;
 
             foreach($sheetData as $key => $value) {
-                if ($key>1){
+                if ($key>2){
 //                    var_dump($value);die;
-                    $data[] = [
-                        'id' =>  $value['A'],
-                        'number' =>  $value['B'],
-                        'receipt_time' =>  $value['C'],
-                        'turn_number' =>  $value['D'],
-                        'transfer_organ' =>  $value['E'],
+                    if(!empty( $value['A'])){
+                        $data[] = [
+    //                        'id' =>  $value['A'],
+                            'number' =>  $value['A'],
+                            'receipt_time' =>  $value['B'],
+                            'turn_number' =>  $value['C'],
+                            'transfer_organ' =>  $value['D'],
 
-                        'name_report' =>  $value['F'],
-                        'name_reported' =>  $value['G'],
-                        'political_appearance' =>  $value['H'],
-                        'unit_job' =>  $value['I'],
-                        'duty_job' =>  $value['J'],
+                            'name_report' =>  $value['E'],
+                            'name_reported' =>  $value['F'],
+                            'political_appearance' =>  $value['G'],
+                            'unit_job' =>  $value['H'],
+                            'duty_job' =>  $value['I'],
 
-                        'rank_job' =>  $value['K'],
-                        'main_issues' =>  $value['L'],
-                        'issues_properties' =>  $value['M'],
-                        'petition_office_opinion' =>  $value['N'],
-                        'superior_guidance_opinion' =>  $value['O'],
+                            'rank_job' =>  $value['J'],
+                            'main_issues' =>  $value['K'],
+                            'issues_properties' =>  $value['L'],
+                            'petition_office_opinion' =>  $value['M'],
+                            'superior_guidance_opinion' =>  $value['N'],
 
-                        'lu_clerk_opinion' =>  $value['P'],
-                        'major_leadership_approval_opinion' =>  $value['Q'],
-                        'charge_leadership_approval_opinion' =>  $value['R'],
-                        'host_department' =>  $value['S'],
-                        'handle_results' =>  $value['T'],
+                            'lu_clerk_opinion' =>  $value['O'],
+                            'major_leadership_approval_opinion' =>  $value['P'],
+                            'charge_leadership_approval_opinion' =>  $value['Q'],
+                            'host_department' =>  $value['R'],
+                            'handle_results' =>  $value['S'],
 
-                        'heavy_letter' =>  $value['U'],
-                        'unit_responsibility' =>  $value['V'],
-                        'approval_time' =>  $value['W'],
-                        'approval_status' =>  $value['X'],
-                    ];
-
+                            'heavy_letter' =>  $value['T'],
+                            'unit_responsibility' =>  $value['U'],
+    //                        'approval_time' =>  $value['W'],
+    //                        'approval_status' =>  $value['X'],
+                        ];
+                    }
                 }
             }
 //var_dump($data);die;
@@ -300,7 +301,7 @@ class QinlianPetitionController extends BaseController
                     $model = new QinlianPetition();
                     Yii::$app->db->createCommand()
                         ->batchInsert($model::tableName(),[
-                            'id',
+//                            'id',
                             'number',
                             'receipt_time',
                             'turn_number',
@@ -322,8 +323,9 @@ class QinlianPetitionController extends BaseController
                             'handle_results',
                             'heavy_letter',
                             'unit_responsibility',
-                            'approval_time',
-                            'approval_status',],
+//                            'approval_time',
+//                            'approval_status',
+                            ],
                             $data)
                         ->execute();
                 } catch (Exception $e) {
@@ -350,41 +352,41 @@ class QinlianPetitionController extends BaseController
             ->all();
 
         $spreadsheet = new Spreadsheet();
+        $spreadsheet->getActiveSheet()->mergeCells('A1:Z1')->setCellValue('A1', date('Y'). '信访信息导出数据');
+        $spreadsheet->getActiveSheet()->setCellValue('A2', '编号');
+        $spreadsheet->getActiveSheet()->setCellValue('B2', '收件时间');
+        $spreadsheet->getActiveSheet()->setCellValue('C2', '转来编号');
+        $spreadsheet->getActiveSheet()->setCellValue('D2', '转来机关');
+        $spreadsheet->getActiveSheet()->setCellValue('E2', '举报人姓名');
 
-        $spreadsheet->getActiveSheet()->setCellValue('A1', '编号');
-        $spreadsheet->getActiveSheet()->setCellValue('B1', '收件时间');
-        $spreadsheet->getActiveSheet()->setCellValue('C1', '转来编号');
-        $spreadsheet->getActiveSheet()->setCellValue('D1', '转来机关');
-        $spreadsheet->getActiveSheet()->setCellValue('E1', '举报人姓名');
+        $spreadsheet->getActiveSheet()->setCellValue('F2', '被检举人姓名');
+        $spreadsheet->getActiveSheet()->setCellValue('G2', '政治面貌');
+        $spreadsheet->getActiveSheet()->setCellValue('H2', '单位');
+        $spreadsheet->getActiveSheet()->setCellValue('I2', '职务');
+        $spreadsheet->getActiveSheet()->setCellValue('J2', '职级');
 
-        $spreadsheet->getActiveSheet()->setCellValue('F1', '被检举人姓名');
-        $spreadsheet->getActiveSheet()->setCellValue('G1', '政治面貌');
-        $spreadsheet->getActiveSheet()->setCellValue('H1', '单位');
-        $spreadsheet->getActiveSheet()->setCellValue('I1', '职务（0（单位）');
-        $spreadsheet->getActiveSheet()->setCellValue('J1', '职务（职级');
+        $spreadsheet->getActiveSheet()->setCellValue('K2', '反映的主要问题');
+        $spreadsheet->getActiveSheet()->setCellValue('L2', '问题属性');
+        $spreadsheet->getActiveSheet()->setCellValue('M2', '信访室意见');
+        $spreadsheet->getActiveSheet()->setCellValue('N2', '上级领导意见');
+        $spreadsheet->getActiveSheet()->setCellValue('O2', '路书记批示意见');
 
-        $spreadsheet->getActiveSheet()->setCellValue('K1', '反映的主要问题');
-        $spreadsheet->getActiveSheet()->setCellValue('L1', '问题属性');
-        $spreadsheet->getActiveSheet()->setCellValue('M1', '信访室意见');
-        $spreadsheet->getActiveSheet()->setCellValue('N1', '上级领导意见');
-        $spreadsheet->getActiveSheet()->setCellValue('O1', '路书记批示意见');
+        $spreadsheet->getActiveSheet()->setCellValue('P2', '主要领导审批意见');
+        $spreadsheet->getActiveSheet()->setCellValue('Q2', '分管领导审批意见');
+        $spreadsheet->getActiveSheet()->setCellValue('R2', '承办科室');
+        $spreadsheet->getActiveSheet()->setCellValue('S2', '办理结果');
+        $spreadsheet->getActiveSheet()->setCellValue('T2', '重信');
 
-        $spreadsheet->getActiveSheet()->setCellValue('P1', '主要领导审批意见');
-        $spreadsheet->getActiveSheet()->setCellValue('Q1', '分管领导审批意见');
-        $spreadsheet->getActiveSheet()->setCellValue('R1', '承办科室');
-        $spreadsheet->getActiveSheet()->setCellValue('S1', '办理结果');
-        $spreadsheet->getActiveSheet()->setCellValue('T1', '重信');
+        $spreadsheet->getActiveSheet()->setCellValue('U2', '责任单位');
+        $spreadsheet->getActiveSheet()->setCellValue('V2', '审批时间');
+        $spreadsheet->getActiveSheet()->setCellValue('W2', '审批状态');
+        $spreadsheet->getActiveSheet()->setCellValue('X2', '删除状态');
+        $spreadsheet->getActiveSheet()->setCellValue('Y2', '创建时间');
 
-        $spreadsheet->getActiveSheet()->setCellValue('U1', '责任单位');
-        $spreadsheet->getActiveSheet()->setCellValue('V1', '审批时间');
-        $spreadsheet->getActiveSheet()->setCellValue('W1', '审批状态');
-        $spreadsheet->getActiveSheet()->setCellValue('X1', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('Y1', '创建时间');
-
-        $spreadsheet->getActiveSheet()->setCellValue('Z1', '更新时间');
+        $spreadsheet->getActiveSheet()->setCellValue('Z2', '更新时间');
 
 
-        // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+//         $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(16);
@@ -418,7 +420,7 @@ class QinlianPetitionController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('Z')->setWidth(16);
 
 
-        $i = 2;
+        $i = 3;
         foreach($data as $key=>$val){
 
             $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $val['number']);
