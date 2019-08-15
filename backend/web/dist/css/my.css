@@ -17,3 +17,67 @@
 .modal-content{
   width: 900px;
 }
+
+@media print {.notprint{display: none;}}
+
+/** Print Page
+*/
+.print-page .font-center{ text-align:center}
+.print-page .btbg{background:#ffffff !important;}
+.print-page .tabtop13 {
+  padding-top: 20px;
+}
+.print-page .tabtop13 td{
+  background-color:#ffffff;
+  height:40px;
+}
+
+.print-page .biaoti{
+  font-family: SimSun;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.print-page .tabtop13 .tdrows-1{
+  background-color:#ffffff;
+  height:80px;
+}
+.print-page .tabtop13 .tdrows-2{
+  background-color:#ffffff;
+  height:120px;
+}
+.print-page .tabtop13 .tdrows-3{
+  background-color:#ffffff;
+  height:220px;
+}
+.print-page .tabtop13 .tdrows-4{
+  background-color:#ffffff;
+  height:260px;
+}
+.print-page .tabtop13 .tdrows-5{
+  background-color:#ffffff;
+  height:280px;
+}
+.print-page .tabtop13 .tdrows-6{
+  background-color:#ffffff;
+  height:320px;
+}.print-page .tabtop13 .tdrows-7{
+   background-color:#ffffff;
+   height:360px;
+ }
+.print-page .tabtop13 .tdrows-8{
+  background-color:#ffffff;
+  height:400px;
+}
+
+
+
+
+.print-page .titfont {
+
+  font-family: SimSun;
+  font-size: 12px;
+  color: #000000;
+  background-color:#e9faff;
+}

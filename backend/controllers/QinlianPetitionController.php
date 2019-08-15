@@ -475,4 +475,44 @@ class QinlianPetitionController extends BaseController
         $writer->save('php://output');
         exit;
     }
+
+
+    /**
+     * Displays a single QinlianPetition model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrint($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('print', [
+            'model'=>$model,
+        ]);
+    }
+
+    /**
+     * Displays a single QinlianPetition model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrintb($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('printb', [
+            'model'=>$model,
+        ]);
+    }
+
+    /**
+     * Displays a single QinlianPetition model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrintc($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('printc', [
+            'model'=>$model,
+        ]);
+    }
 }
