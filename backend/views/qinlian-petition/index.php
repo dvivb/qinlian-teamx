@@ -453,7 +453,6 @@ $modelLabel = new \backend\models\QinlianPetition();
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-<!--                    <h4 class="modal-title" id="myModalLabel"><a href="/excel/ExcelImport/case.xlsx" class="btn btn-xs btn-info">下载导入模板</a></h4>-->
                 </div>
                 <div class="modal-body">
                     <input  name="importExcelFile" type="file" accept=".xls,.xlsx"/>

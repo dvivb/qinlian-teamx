@@ -319,12 +319,12 @@ $modelLabel = new \backend\models\QinlianChallenge();
                     <label for="duty_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("duty_job")?></label>
                     <div class="col-sm-4">
                         <select class="form-control" id="duty_job" name="QinlianChallenge[duty_job]">
-                            <option value="0">未知</option>
-                            <option value="1">一般干部</option>
-                            <option value="2">乡科级</option>
-                            <option value="3">农村干部 </option>
-                            <option value="4">股级</option>
-                            <option value="5">农村其他人员</option>
+                            <option >未知</option>
+                            <option >一般干部</option>
+                            <option >乡科级</option>
+                            <option >农村干部 </option>
+                            <option >股级</option>
+                            <option >农村其他人员</option>
                         </select>
 <!--                        <input type="text" class="form-control" id="duty_job" name="QinlianChallenge[duty_job]" placeholder="必填" />-->
                     </div>
@@ -504,7 +504,6 @@ $modelLabel = new \backend\models\QinlianChallenge();
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><a href="/excel/ExcelImport/case.xlsx" class="btn btn-xs btn-info">下载导入模板</a></h4>
                 </div>
                 <div class="modal-body">
                     <input  name="importExcelFile" type="file" accept=".xls,.xlsx"/>
