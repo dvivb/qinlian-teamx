@@ -23,6 +23,14 @@ table.dataTable thead > tr > th {
   padding: 8px 40px;
 }
 
+table.dataTable thead > tr > th.th-width-1 {
+  padding: 8px 180px;
+}
+
+table.dataTable thead > tr > th.th-width-2 {
+  padding: 8px 500px;
+}
+
 .btn-group-sm>.btn, .btn-sm {
   margin: 4px 2px;
 }
