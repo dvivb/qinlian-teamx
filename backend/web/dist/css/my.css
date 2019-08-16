@@ -18,10 +18,21 @@
   width: 900px;
 }
 
-@media print {.notprint{display: none;}}
+
+table.dataTable thead > tr > th {
+  padding: 8px 40px;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+  margin: 4px 2px;
+}
+
+
 
 /** Print Page
 */
+@media print {.notprint{display: none;}}
+
 .print-page .font-center{ text-align:center}
 .print-page .btbg{background:#ffffff !important;}
 .print-page .tabtop13 {

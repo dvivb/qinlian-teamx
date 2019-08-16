@@ -131,7 +131,6 @@ $modelLabel = new \backend\models\QinlianPetition();
               echo '<th onclick="orderby(\'unit_responsibility\', \'desc\')" '.CommonFun::sortClass($orderby, 'unit_responsibility').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('unit_responsibility').'</th>';
               echo '<th onclick="orderby(\'approval_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'approval_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('approval_time').'</th>';
               echo '<th onclick="orderby(\'approval_status\', \'desc\')" '.CommonFun::sortClass($orderby, 'approval_status').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('approval_status').'</th>';
-              echo '<th onclick="orderby(\'del_status\', \'desc\')" '.CommonFun::sortClass($orderby, 'del_status').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('del_status').'</th>';
               echo '<th onclick="orderby(\'create_date\', \'desc\')" '.CommonFun::sortClass($orderby, 'create_date').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('create_date').'</th>';
               echo '<th onclick="orderby(\'update_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'update_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('update_time').'</th>';
          
@@ -157,40 +156,37 @@ $modelLabel = new \backend\models\QinlianPetition();
                 echo '  <td>' . $model->unit_job . '</td>';
                 echo '  <td>' . $model->duty_job . '</td>';
                 echo '  <td>' . $model->rank_job . '</td>';
-                echo '  <td>' . $model->main_issues . '</td>';
-                echo '  <td>' . $model->issues_properties . '</td>';
-                echo '  <td>' . $model->petition_office_opinion . '</td>';
-                echo '  <td>' . $model->superior_guidance_opinion . '</td>';
-                echo '  <td>' . $model->lu_clerk_opinion . '</td>';
-                echo '  <td>' . $model->major_leadership_approval_opinion . '</td>';
-                echo '  <td>' . $model->charge_leadership_approval_opinion . '</td>';
+                echo '  <td>' . mb_substr($model->main_issues, 0, 57) . '</td>';
+                echo '  <td>' . mb_substr($model->issues_properties, 0, 57) . '</td>';
+                echo '  <td>' . mb_substr($model->petition_office_opinion, 0, 57) . '</td>';
+                echo '  <td>' . mb_substr($model->superior_guidance_opinion, 0, 57) . '</td>';
+                echo '  <td>' . mb_substr($model->lu_clerk_opinion, 0, 57) . '</td>';
+                echo '  <td>' . mb_substr($model->major_leadership_approval_opinion, 0, 57) . '</td>';
+                echo '  <td>' . mb_substr($model->charge_leadership_approval_opinion, 0, 57) . '</td>';
                 echo '  <td>' . $model->host_department . '</td>';
-                echo '  <td>' . $model->handle_results . '</td>';
-                echo '  <td>' . $model->heavy_letter . '</td>';
+                echo '  <td>' . mb_substr($model->handle_results, 0, 57) . '</td>';
+                echo '  <td>' . mb_substr($model->heavy_letter, 0, 57) . '</td>';
                 echo '  <td>' . $model->unit_responsibility . '</td>';
                 echo '  <td>' . $model->approval_time . '</td>';
                 echo '  <td>' . $model->approval_status . '</td>';
-                echo '  <td>' . $model->del_status . '</td>';
                 echo '  <td>' . $model->create_date . '</td>';
                 echo '  <td>' . $model->update_time . '</td>';
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                 echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
+                echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 $url = Url::toRoute('qinlian-petition/print');
                 echo '      <a id="print_btn"  class="btn btn-primary btn-sm" href="'. $url  .'&id='. $model->id .'" target="_self"> <i class="glyphicon glyphicon-print icon-white"></i>纪检监察机关来信来访登记卡</a>';
                 $url = Url::toRoute('qinlian-petition/printb');
                 echo '      <a id="print_btn"  class="btn btn-primary btn-sm" href="'. $url  .'&id='. $model->id .'" target="_self"> <i class="glyphicon glyphicon-print icon-white"></i>纪检监察机关来信来访来电批办单</a>';
                 $url = Url::toRoute('qinlian-petition/printc');
                 echo '      <a id="print_btn"  class="btn btn-primary btn-sm" href="'. $url  .'&id='. $model->id .'" target="_self"> <i class="glyphicon glyphicon-print icon-white"></i>纪检监察机关来信来访来电批办单(已了结重复件)</a>';
-                echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 echo '  </td>';
                 echo '</tr>';
             }
             
             ?>
-            
-           
-           
+
             </tbody>
             <!-- <tfoot></tfoot> -->
           </table>
