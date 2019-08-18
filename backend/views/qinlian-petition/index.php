@@ -324,49 +324,67 @@ $modelLabel = new \backend\models\QinlianPetition();
 
           <div id="main_issues_div" class="form-group">
               <label for="main_issues" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("main_issues")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="main_issues" name="QinlianPetition[main_issues]" placeholder="必填" />
+              <div class="col-xs-10">
+                  <textarea  type="text" class="form-control" id="main_issues" name="QinlianPetition[main_issues]" placeholder="必填" ></textarea>
+<!--                  <input type="text" class="form-control" id="main_issues" name="QinlianPetition[main_issues]" placeholder="必填" />-->
               </div>
 
               <label for="issues_properties" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("issues_properties")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="issues_properties" name="QinlianPetition[issues_properties]" placeholder="必填" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="issues_properties" name="QinlianPetition[issues_properties]" placeholder="必填" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="petition_office_opinion_div" class="form-group">
               <label for="petition_office_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("petition_office_opinion")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="petition_office_opinion" name="QinlianPetition[petition_office_opinion]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="petition_office_opinion" name="QinlianPetition[petition_office_opinion]" placeholder="" ></textarea>
               </div>
 
               <label for="superior_guidance_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("superior_guidance_opinion")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="superior_guidance_opinion" name="QinlianPetition[superior_guidance_opinion]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="superior_guidance_opinion" name="QinlianPetition[superior_guidance_opinion]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="lu_clerk_opinion_div" class="form-group">
               <label for="lu_clerk_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("lu_clerk_opinion")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="lu_clerk_opinion" name="QinlianPetition[lu_clerk_opinion]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="lu_clerk_opinion" name="QinlianPetition[lu_clerk_opinion]" placeholder="" ></textarea>
               </div>
 
               <label for="major_leadership_approval_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("major_leadership_approval_opinion")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="major_leadership_approval_opinion" name="QinlianPetition[major_leadership_approval_opinion]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="major_leadership_approval_opinion" name="QinlianPetition[major_leadership_approval_opinion]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="charge_leadership_approval_opinion_div" class="form-group">
               <label for="charge_leadership_approval_opinion" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("charge_leadership_approval_opinion")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="charge_leadership_approval_opinion" name="QinlianPetition[charge_leadership_approval_opinion]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="charge_leadership_approval_opinion" name="QinlianPetition[charge_leadership_approval_opinion]" placeholder="" ></textarea>
               </div>
 
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="handle_results_div" class="form-group">
+              <label for="handle_results" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("handle_results")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="handle_results" name="QinlianPetition[handle_results]" placeholder="" ></textarea>
+              </div>
+
+              <label for="heavy_letter" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("heavy_letter")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="heavy_letter" name="QinlianPetition[heavy_letter]" placeholder="" ></textarea>
+              </div>
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="unit_responsibility_div" class="form-group">
               <label for="host_department" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("host_department")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="host_department" name="QinlianPetition[host_department]">
@@ -374,47 +392,28 @@ $modelLabel = new \backend\models\QinlianPetition();
                       <option>科室二</option>
                       <option>科室三</option>
                   </select>
-<!--                  <input type="text" class="form-control" id="host_department" name="QinlianPetition[host_department]" placeholder="" />-->
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="handle_results_div" class="form-group">
-              <label for="handle_results" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("handle_results")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="handle_results" name="QinlianPetition[handle_results]" placeholder="" />
+                  <!--                  <input type="text" class="form-control" id="host_department" name="QinlianPetition[host_department]" placeholder="" />-->
               </div>
 
-              <label for="heavy_letter" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("heavy_letter")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="heavy_letter" name="QinlianPetition[heavy_letter]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="unit_responsibility_div" class="form-group">
               <label for="unit_responsibility" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("unit_responsibility")?></label>
               <div class="col-sm-4">
                   <input type="text" class="form-control" id="unit_responsibility" name="QinlianPetition[unit_responsibility]" placeholder="" />
-              </div>
-
-              <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="approval_time" name="QinlianPetition[approval_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="approval_status_div" class="form-group">
+              <label for="approval_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="approval_time" name="QinlianPetition[approval_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+              </div>
+
               <label for="approval_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_status")?></label>
               <div class="col-sm-4">
                   <input type="text" class="form-control" id="approval_status" name="QinlianPetition[approval_status]" placeholder="" />
               </div>
 
-              <label for="del_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("del_status")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="del_status" name="QinlianPetition[del_status]" placeholder="" />
-              </div>
               <div class="clearfix"></div>
           </div>
 

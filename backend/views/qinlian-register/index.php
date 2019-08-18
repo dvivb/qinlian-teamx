@@ -311,7 +311,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                 echo '  <td>' . mb_substr($model->accountability, 0, 400) . '</td>';
                 echo '  <td>' . mb_substr($model->party_discipline, 0, 400) . '</td>';
                 echo '  <td>' . $model->party_discipline_stats_time . '</td>';
-                echo '  <td>' . $model->administrative_sanction . '</td>';
+                echo '  <td>' . mb_substr($model->administrative_sanction, 0, 400) . '</td>';
                 echo '  <td>' . $model->administrative_sanction_stats_time . '</td>';
                 echo '  <td>' . $model->other_treatments . '</td>';
                 echo '  <td>' . $model->other_treatments_stats_time . '</td>';
@@ -558,15 +558,6 @@ $modelLabel = new \backend\models\QinlianRegister();
           </div>
 
           <div id="supervises_object_details_div" class="form-group">
-              <label for="supervises_object_details" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("supervises_object_details")?></label>
-              <div class="col-sm-4">
-                  <select class="form-control" id="supervises_object_details" name="QinlianRegister[supervises_object_details]" >
-                      <option>党员</option>
-                      <option>非党员</option>
-                  </select>
-<!--                  <input type="text" class="form-control" id="supervises_object_details" name="QinlianRegister[supervises_object_details]" placeholder="必填" />-->
-              </div>
-
               <label for="is_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_party")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_party" name="QinlianRegister[is_party]" >
@@ -575,18 +566,24 @@ $modelLabel = new \backend\models\QinlianRegister();
                   </select>
 <!--                  <input type="text" class="form-control" id="is_party" name="QinlianRegister[is_party]" placeholder="必填" />-->
               </div>
-              <div class="clearfix"></div>
-          </div>
 
-          <div id="party_delegate_div" class="form-group">
               <label for="party_delegate" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("party_delegate")?></label>
               <div class="col-sm-4">
                   <input type="text" class="form-control" id="party_delegate" name="QinlianRegister[party_delegate]" placeholder="" />
               </div>
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="party_delegate_div" class="form-group">
+
+              <label for="supervises_object_details" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("supervises_object_details")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="supervises_object_details" name="QinlianRegister[supervises_object_details]" placeholder="必填" ></textarea>
+              </div>
 
               <label for="disposal_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disposal_report")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="disposal_report" name="QinlianRegister[disposal_report]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="disposal_report" name="QinlianRegister[disposal_report]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -606,14 +603,10 @@ $modelLabel = new \backend\models\QinlianRegister();
 
           <div id="no_party_objects_details_div" class="form-group">
               <label for="no_party_objects_details" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("no_party_objects_details")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="no_party_objects_details" name="QinlianRegister[no_party_objects_details]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="no_party_objects_details" name="QinlianRegister[no_party_objects_details]" placeholder="" ></textarea>
               </div>
 
-              <label for="cpc" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("cpc")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="cpc" name="QinlianRegister[cpc]" placeholder="" />
-              </div>
               <div class="clearfix"></div>
           </div>
 
@@ -645,21 +638,26 @@ $modelLabel = new \backend\models\QinlianRegister();
 
           <div id="head_violating_div" class="form-group">
               <label for="head_violating" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("head_violating")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="head_violating" name="QinlianRegister[head_violating]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="head_violating" name="QinlianRegister[head_violating]" placeholder="" ></textarea>
               </div>
 
               <label for="head_details" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("head_details")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="head_details" name="QinlianRegister[head_details]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="head_details" name="QinlianRegister[head_details]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="head_details_two_div" class="form-group">
               <label for="head_details_two" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("head_details_two")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="head_details_two" name="QinlianRegister[head_details_two]" placeholder="" ></textarea>
+              </div>
+
+              <label for="cpc" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("cpc")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="head_details_two" name="QinlianRegister[head_details_two]" placeholder="" />
+                  <input type="text" class="form-control" id="cpc" name="QinlianRegister[cpc]" placeholder="" />
               </div>
 
               <label for="rank_job" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("rank_job")?></label>
@@ -736,34 +734,36 @@ $modelLabel = new \backend\models\QinlianRegister();
 
           <div id="jobbery_lose_div" class="form-group">
               <label for="jobbery_lose" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("jobbery_lose")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="jobbery_lose" name="QinlianRegister[jobbery_lose]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="jobbery_lose" name="QinlianRegister[jobbery_lose]" placeholder="" ></textarea>
               </div>
 
-              <label for="discipline_amount" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("discipline_amount")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="discipline_amount" name="QinlianRegister[discipline_amount]" placeholder="" />
-              </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="case_amount_div" class="form-group">
+              <label for="discipline_amount" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("discipline_amount")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="discipline_amount" name="QinlianRegister[discipline_amount]" placeholder="" />
+              </div>
+
               <label for="case_amount" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("case_amount")?></label>
               <div class="col-sm-4">
                   <input type="text" class="form-control" id="case_amount" name="QinlianRegister[case_amount]" placeholder="" />
               </div>
 
-              <label for="filing_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("filing_time")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="filing_time" name="QinlianRegister[filing_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="source_case_div" class="form-group">
               <label for="source_case" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("source_case")?></label>
-              <div class="col-sm-4">
+              <div class="col-sm-10">
                   <input type="text" class="form-control" id="source_case" name="QinlianRegister[source_case]" placeholder="" />
+              </div>
+
+              <label for="filing_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("filing_time")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="filing_time" name="QinlianRegister[filing_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
 
               <label for="discipline_organ" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("discipline_organ")?></label>
@@ -831,26 +831,26 @@ $modelLabel = new \backend\models\QinlianRegister();
 
           <div id="brief_case_report_div" class="form-group">
               <label for="brief_case_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("brief_case_report")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="brief_case_report" name="QinlianRegister[brief_case_report]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="brief_case_report" name="QinlianRegister[brief_case_report]" placeholder="" ></textarea>
               </div>
 
               <label for="register_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("register_report")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="register_report" name="QinlianRegister[register_report]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="register_report" name="QinlianRegister[register_report]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="register_decide_book_div" class="form-group">
               <label for="register_decide_book" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("register_decide_book")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="register_decide_book" name="QinlianRegister[register_decide_book]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="register_decide_book" name="QinlianRegister[register_decide_book]" placeholder="" ></textarea>
               </div>
 
               <label for="remarks" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("remarks")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="remarks" name="QinlianRegister[remarks]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="remarks" name="QinlianRegister[remarks]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -895,29 +895,35 @@ $modelLabel = new \backend\models\QinlianRegister();
                   <input type="text" class="form-control" id="end_case_time" name="QinlianRegister[end_case_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
 
-              <label for="accountability" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("accountability")?></label>
+              <label for="party_watch_limit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("party_watch_limit")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="accountability" name="QinlianRegister[accountability]" placeholder="" />
+                  <input type="text" class="form-control" id="party_watch_limit" name="QinlianRegister[party_watch_limit]" placeholder="" />
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="party_discipline_div" class="form-group">
-              <label for="party_discipline" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("party_discipline")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="party_discipline" name="QinlianRegister[party_discipline]" placeholder="" />
+              <label for="accountability" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("accountability")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="accountability" name="QinlianRegister[accountability]" placeholder="" ></textarea>
               </div>
-              <label for="party_discipline_stats_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("party_discipline_stats_time")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="party_discipline_stats_time" name="QinlianRegister[party_discipline_stats_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+
+              <label for="party_discipline" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("party_discipline")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="party_discipline" name="QinlianRegister[party_discipline]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="administrative_sanction_div" class="form-group">
               <label for="administrative_sanction" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("administrative_sanction")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="administrative_sanction" name="QinlianRegister[administrative_sanction]" placeholder="" ></textarea>
+              </div>
+
+              <label for="party_discipline_stats_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("party_discipline_stats_time")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="administrative_sanction" name="QinlianRegister[administrative_sanction]" placeholder="" />
+                  <input type="text" class="form-control" id="party_discipline_stats_time" name="QinlianRegister[party_discipline_stats_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
 
               <label for="administrative_sanction_stats_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("administrative_sanction_stats_time")?></label>
@@ -955,13 +961,13 @@ $modelLabel = new \backend\models\QinlianRegister();
 
           <div id="public_inspection_processing_div" class="form-group">
               <label for="public_inspection_processing" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("public_inspection_processing")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="public_inspection_processing" name="QinlianRegister[public_inspection_processing]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="public_inspection_processing" name="QinlianRegister[public_inspection_processing]" placeholder="" ></textarea>
               </div>
 
               <label for="public_inspection_processing_detail" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("public_inspection_processing_detail")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="public_inspection_processing_detail" name="QinlianRegister[public_inspection_processing_detail]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="public_inspection_processing_detail" name="QinlianRegister[public_inspection_processing_detail]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -1098,27 +1104,23 @@ $modelLabel = new \backend\models\QinlianRegister();
 
           <div id="investigation_report_div" class="form-group">
               <label for="investigation_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("investigation_report")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="investigation_report" name="QinlianRegister[investigation_report]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="investigation_report" name="QinlianRegister[investigation_report]" placeholder="" ></textarea>
               </div>
 
               <label for="trial_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("trial_report")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="trial_report" name="QinlianRegister[trial_report]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="trial_report" name="QinlianRegister[trial_report]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="case_analysis_div" class="form-group">
               <label for="case_analysis" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("case_analysis")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="case_analysis" name="QinlianRegister[case_analysis]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="case_analysis" name="QinlianRegister[case_analysis]" placeholder="" ></textarea>
               </div>
 
-              <label for="party_watch_limit" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("party_watch_limit")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="party_watch_limit" name="QinlianRegister[party_watch_limit]" placeholder="" />
-              </div>
               <div class="clearfix"></div>
           </div>
 
@@ -1151,7 +1153,7 @@ $modelLabel = new \backend\models\QinlianRegister();
           <div id="investigation_suspension_stats_time_div" class="form-group">
               <label for="investigation_suspension_stats_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("investigation_suspension_stats_time")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="investigation_suspension_stats_time" name="QinlianRegister[investigation_suspension_stats_time]" placeholder=" data-provide="datepicker" data-date-format="yyyy-mm-dd"" />
+                  <input type="text" class="form-control" id="investigation_suspension_stats_time" name="QinlianRegister[investigation_suspension_stats_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"" />
               </div>
 
               <label for="administrative_sanctions_suspension_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("administrative_sanctions_suspension_time")?></label>
@@ -1288,22 +1290,28 @@ $modelLabel = new \backend\models\QinlianRegister();
                   <input type="text" class="form-control" id="delay_number_days" name="QinlianRegister[delay_number_days]" placeholder="" />
               </div>
 
-              <label for="delay_approval_situation" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("delay_approval_situation")?></label>
+              <label for="organization_measure_stats_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organization_measure_stats_time")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="delay_approval_situation" name="QinlianRegister[delay_approval_situation]" placeholder="" />
+                  <input type="text" class="form-control" id="organization_measure_stats_time" name="QinlianRegister[organization_measure_stats_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
+
               <div class="clearfix"></div>
           </div>
 
           <div id="organization_measure_div" class="form-group">
-              <label for="organization_measure" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organization_measure")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="organization_measure" name="QinlianRegister[organization_measure]" placeholder="" />
+              <label for="delay_approval_situation" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("delay_approval_situation")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="delay_approval_situation" name="QinlianRegister[delay_approval_situation]" placeholder="" ></textarea>
               </div>
 
-              <label for="organization_measure_stats_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organization_measure_stats_time")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="organization_measure_stats_time" name="QinlianRegister[organization_measure_stats_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+              <label for="organization_measure" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organization_measure")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="organization_measure" name="QinlianRegister[organization_measure]" placeholder="" ></textarea>
+              </div>
+
+              <label for="confessional_books" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("confessional_books")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="confessional_books" name="QinlianRegister[confessional_books]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -1340,30 +1348,18 @@ $modelLabel = new \backend\models\QinlianRegister();
                   <input type="text" class="form-control" id="two_rule_remove_stats_time" name="QinlianRegister[two_rule_remove_stats_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
 
-              <label for="confessional_books" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("confessional_books")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="confessional_books" name="QinlianRegister[confessional_books]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="department_charge_div" class="form-group">
               <label for="department_charge" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("department_charge")?></label>
               <div class="col-sm-4">
                   <input type="text" class="form-control" id="department_charge" name="QinlianRegister[department_charge]" placeholder="" />
               </div>
 
-              <label for="superiors_assigned" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("superiors_assigned")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="superiors_assigned" name="QinlianRegister[superiors_assigned]" placeholder="" />
-              </div>
               <div class="clearfix"></div>
           </div>
 
-          <div id="del_status_div" class="form-group">
-              <label for="del_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("del_status")?></label>
+          <div id="department_charge_div" class="form-group">
+              <label for="superiors_assigned" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("superiors_assigned")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="del_status" name="QinlianRegister[del_status]" placeholder="" />
+                  <input type="text" class="form-control" id="superiors_assigned" name="QinlianRegister[superiors_assigned]" placeholder="" />
               </div>
 
               <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
@@ -1372,6 +1368,7 @@ $modelLabel = new \backend\models\QinlianRegister();
               </div>
               <div class="clearfix"></div>
           </div>
+
 
           <div id="update_time_div" class="form-group">
               <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>

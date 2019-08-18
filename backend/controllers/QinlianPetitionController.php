@@ -34,12 +34,12 @@ class QinlianPetitionController extends BaseController
             foreach($querys as $key=>$value){
                 $value = trim($value);
                 if(empty($value) == false){
-                    $parame[":{$key}"]=$value;
-                    if(empty($condition) == true){
-                        $condition = " {$key}=:{$key} ";
+                    $parame[":{$key}"]= '%'.$value.'%';
+                    if(empty($condition) == true){//
+                        $condition = " {$key} LIKE :{$key} ";
                     }
                     else{
-                        $condition = $condition . " AND {$key}=:{$key} ";
+                        $condition = $condition . " AND {$key} LIKE :{$key} ";
                     }
                 }
             }
@@ -65,6 +65,7 @@ class QinlianPetitionController extends BaseController
         ->offset($pagination->offset)
         ->limit($pagination->limit)
         ->all();
+
         return $this->render('index', [
             'models'=>$models,
             'pages'=>$pagination,

@@ -369,31 +369,36 @@ $modelLabel = new \backend\models\QinlianThread();
                   <input type="text" class="form-control" id="handling_organ" name="QinlianThread[handling_organ]" placeholder="" />
               </div>
 
-              <label for="main_problem_clues" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("main_problem_clues")?></label>
+              <label for="authority_management" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("authority_management")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="main_problem_clues" name="QinlianThread[main_problem_clues]" placeholder="" />
+                  <input type="text" class="form-control" id="authority_management" name="QinlianThread[authority_management]" placeholder="" />
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="remarks_div" class="form-group">
-              <label for="remarks" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("remarks")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="remarks" name="QinlianThread[remarks]" placeholder="" />
-              </div>
-
               <label for="nation" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("nation")?></label>
               <div class="col-sm-4">
                   <input type="text" class="form-control" id="nation" name="QinlianThread[nation]" placeholder="" />
+              </div>
+
+              <label for="date_birth" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("date_birth")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="date_birth" name="QinlianThread[date_birth]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="date_birth_div" class="form-group">
-              <label for="date_birth" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("date_birth")?></label>
+              <label for="is_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_party")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="date_birth" name="QinlianThread[date_birth]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+                  <select class="form-control" id="is_party" name="QinlianThread[is_party]" >
+                      <option>是</option>
+                      <option>否</option>
+                  </select>
+                  <!--                  <input type="text" class="form-control" id="is_party" name="QinlianThread[is_party]" placeholder="必填" />-->
               </div>
+
 
               <label for="cpc" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("cpc")?></label>
               <div class="col-sm-4">
@@ -416,23 +421,24 @@ $modelLabel = new \backend\models\QinlianThread();
 <!--                  <input type="text" class="form-control" id="cppcc" name="QinlianThread[cppcc]" placeholder="" />-->
               </div>
 
-              <label for="disposal_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disposal_report")?></label>
+              <label for="time_joining_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("time_joining_party")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="disposal_report" name="QinlianThread[disposal_report]" placeholder="" />
+                  <input type="text" class="form-control" id="time_joining_party" name="QinlianThread[time_joining_party]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="time_joining_party_div" class="form-group">
-              <label for="time_joining_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("time_joining_party")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="time_joining_party" name="QinlianThread[time_joining_party]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+              <label for="main_problem_clues" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("main_problem_clues")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="main_problem_clues" name="QinlianThread[main_problem_clues]" placeholder="" ></textarea>
               </div>
 
-              <label for="authority_management" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("authority_management")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="authority_management" name="QinlianThread[authority_management]" placeholder="" />
+              <label for="disposal_report" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disposal_report")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="disposal_report" name="QinlianThread[disposal_report]" placeholder="" ></textarea>
               </div>
+
               <div class="clearfix"></div>
           </div>
 
@@ -442,185 +448,173 @@ $modelLabel = new \backend\models\QinlianThread();
                   <input type="text" class="form-control" id="acceptance_time" name="QinlianThread[acceptance_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
 
-              <label for="approval_time_one" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time_one")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="approval_time_one" name="QinlianThread[approval_time_one]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="statistical_time_one_div" class="form-group">
-              <label for="statistical_time_one" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("statistical_time_one")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="statistical_time_one" name="QinlianThread[statistical_time_one]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
-
-              <label for="one_level_first" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("one_level_first")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="one_level_first" name="QinlianThread[one_level_first]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="one_level_second_div" class="form-group">
-              <label for="one_level_second" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("one_level_second")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="one_level_second" name="QinlianThread[one_level_second]" placeholder="" />
-              </div>
-
-              <label for="approval_time_two" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time_two")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="approval_time_two" name="QinlianThread[approval_time_two]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="statistical_time_two_div" class="form-group">
-              <label for="statistical_time_two" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("statistical_time_two")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="statistical_time_two" name="QinlianThread[statistical_time_two]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
-
-              <label for="two_level_first" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("two_level_first")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="two_level_first" name="QinlianThread[two_level_first]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="two_level_second_div" class="form-group">
-              <label for="two_level_second" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("two_level_second")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="two_level_second" name="QinlianThread[two_level_second]" placeholder="" />
-              </div>
-
-              <label for="approval_time_three" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time_three")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="approval_time_three" name="QinlianThread[approval_time_three]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="statistical_time_three_div" class="form-group">
-              <label for="statistical_time_three" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("statistical_time_three")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="statistical_time_three" name="QinlianThread[statistical_time_three]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
-
-              <label for="three_level_first" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("three_level_first")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="three_level_first" name="QinlianThread[three_level_first]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="three_level_second_div" class="form-group">
-              <label for="three_level_second" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("three_level_second")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="three_level_second" name="QinlianThread[three_level_second]" placeholder="" />
-              </div>
-
-              <label for="cases_source" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("cases_source")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="cases_source" name="QinlianThread[cases_source]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
-
-          <div id="disciplinary_offence_div" class="form-group">
-              <label for="disciplinary_offence" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disciplinary_offence")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="disciplinary_offence" name="QinlianThread[disciplinary_offence]" placeholder="" />
-              </div>
-
               <label for="is_checking_me" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_checking_me")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_checking_me" name="QinlianThread[is_checking_me]" >
                       <option>是</option>
                       <option>否</option>
                   </select>
-<!--                  <input type="text" class="form-control" id="is_checking_me" name="QinlianThread[is_checking_me]" placeholder="必填" />-->
+                  <!--                  <input type="text" class="form-control" id="is_checking_me" name="QinlianThread[is_checking_me]" placeholder="必填" />-->
+              </div>
+
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="statistical_time_one_div" class="form-group">
+              <label for="approval_time_one" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time_one")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="approval_time_one" name="QinlianThread[approval_time_one]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+              </div>
+
+              <label for="statistical_time_one" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("statistical_time_one")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="statistical_time_one" name="QinlianThread[statistical_time_one]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>
 
-          <div id="is_party_div" class="form-group">
-              <label for="is_party" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_party")?></label>
+          <div id="one_level_second_div" class="form-group">
+              <label for="approval_time_two" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time_two")?></label>
               <div class="col-sm-4">
-                  <select class="form-control" id="is_party" name="QinlianThread[is_party]" >
-                      <option>是</option>
-                      <option>否</option>
-                  </select>
-<!--                  <input type="text" class="form-control" id="is_party" name="QinlianThread[is_party]" placeholder="必填" />-->
+                  <input type="text" class="form-control" id="approval_time_two" name="QinlianThread[approval_time_two]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
 
-              <label for="secondary_class_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("secondary_class_objects")?></label>
+              <label for="statistical_time_two" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("statistical_time_two")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="secondary_class_objects" name="QinlianThread[secondary_class_objects]" placeholder="" />
+                  <input type="text" class="form-control" id="statistical_time_two" name="QinlianThread[statistical_time_two]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+              </div>
+
+              <div class="clearfix"></div>
+          </div>
+
+          <div id="statistical_time_two_div" class="form-group">
+              <label for="approval_time_three" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("approval_time_three")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="approval_time_three" name="QinlianThread[approval_time_three]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+              </div>
+
+              <label for="statistical_time_three" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("statistical_time_three")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="statistical_time_three" name="QinlianThread[statistical_time_three]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
               <div class="clearfix"></div>
           </div>
 
-          <div id="is_supervisory_objects_div" class="form-group">
-              <label for="is_supervisory_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervisory_objects")?></label>
-              <div class="col-sm-4">
-                  <select class="form-control" id="is_supervisory_objects" name="QinlianThread[is_supervisory_objects]" >
-                      <option>是</option>
-                      <option>否</option>
-                  </select>
-<!--                  <input type="text" class="form-control" id="is_supervisory_objects" name="QinlianThread[is_supervisory_objects]" placeholder="必填" />-->
+          <div id="three_level_second_div" class="form-group">
+              <label for="one_level_first" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("one_level_first")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="one_level_first" name="QinlianThread[one_level_first]" placeholder="" ></textarea>
               </div>
 
-              <label for="no_secondary_class_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("no_secondary_class_objects")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="no_secondary_class_objects" name="QinlianThread[no_secondary_class_objects]" placeholder="" />
+              <label for="one_level_second" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("one_level_second")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="one_level_second" name="QinlianThread[one_level_second]" placeholder="" ></textarea>
+              </div>
+
+              <label for="two_level_first" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("two_level_first")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="two_level_first" name="QinlianThread[two_level_first]" placeholder="" ></textarea>
+              </div>
+
+              <label for="two_level_second" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("two_level_second")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="two_level_second" name="QinlianThread[two_level_second]" placeholder="" ></textarea>
+              </div>
+
+              <label for="three_level_first" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("three_level_first")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="three_level_first" name="QinlianThread[three_level_first]" placeholder="" ></textarea>
+              </div>
+
+              <label for="three_level_second" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("three_level_second")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="three_level_second" name="QinlianThread[three_level_second]" placeholder="" ></textarea>
+              </div>
+
+              <label for="cases_source" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("cases_source")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="cases_source" name="QinlianThread[cases_source]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
           <div id="official_offences_div" class="form-group">
               <label for="official_offences" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("official_offences")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="official_offences" name="QinlianThread[official_offences]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="official_offences" name="QinlianThread[official_offences]" placeholder="" ></textarea>
               </div>
 
               <label for="other_offences" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("other_offences")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="other_offences" name="QinlianThread[other_offences]" placeholder="" />
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="other_offences" name="QinlianThread[other_offences]" placeholder="" ></textarea>
+              </div>
+
+              <label for="remarks" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("remarks")?></label>
+              <div class="col-xs-10">
+                  <textarea type="text" class="form-control" id="remarks" name="QinlianThread[remarks]" placeholder="" ></textarea>
               </div>
               <div class="clearfix"></div>
           </div>
 
-          <div id="organization_measure_time_div" class="form-group">
-              <label for="organization_measure_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organization_measure_time")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="organization_measure_time" name="QinlianThread[organization_measure_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
+            <div id="disciplinary_offence_div" class="form-group">
+                <label for="disciplinary_offence" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disciplinary_offence")?></label>
+                <div class="col-xs-10">
+                    <textarea type="text" class="form-control" id="disciplinary_offence" name="QinlianThread[disciplinary_offence]" placeholder="" ></textarea>
+                </div>
 
-              <label for="superiors_assigned" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("superiors_assigned")?></label>
-              <div class="col-sm-4">
-                  <select class="form-control" id="superiors_assigned" name="QinlianThread[superiors_assigned]">
-                      <option>一级</option>
-                      <option>二级</option>
-                      <option>三级</option>
-                  </select>
-<!--                  <input type="text" class="form-control" id="superiors_assigned" name="QinlianThread[superiors_assigned]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />-->
-              </div>
-              <div class="clearfix"></div>
-          </div>
+                <div class="clearfix"></div>
+            </div>
 
-          <div id="department_charge_div" class="form-group">
-              <label for="department_charge" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("department_charge")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="department_charge" name="QinlianThread[department_charge]" placeholder="" />
-              </div>
+            <div id="organization_measure_time_div" class="form-group">
+                <label for="organization_measure_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organization_measure_time")?></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="organization_measure_time" name="QinlianThread[organization_measure_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+                </div>
 
-              <label for="del_status" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("del_status")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="del_status" name="QinlianThread[del_status]" placeholder="" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
+                <label for="superiors_assigned" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("superiors_assigned")?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="superiors_assigned" name="QinlianThread[superiors_assigned]">
+                        <option>一级</option>
+                        <option>二级</option>
+                        <option>三级</option>
+                    </select>
+                    <!--                  <input type="text" class="form-control" id="superiors_assigned" name="QinlianThread[superiors_assigned]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />-->
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+
+            <div id="is_supervisory_objects_div" class="form-group">
+                <label for="is_supervisory_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervisory_objects")?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="is_supervisory_objects" name="QinlianThread[is_supervisory_objects]" >
+                        <option>是</option>
+                        <option>否</option>
+                    </select>
+                    <!--                  <input type="text" class="form-control" id="is_supervisory_objects" name="QinlianThread[is_supervisory_objects]" placeholder="必填" />-->
+                </div>
+
+                <label for="department_charge" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("department_charge")?></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="department_charge" name="QinlianThread[department_charge]" placeholder="" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="is_party_div" class="form-group">
+
+
+                <label for="secondary_class_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("secondary_class_objects")?></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="secondary_class_objects" name="QinlianThread[secondary_class_objects]" placeholder="" />
+                </div>
+
+                <label for="no_secondary_class_objects" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("no_secondary_class_objects")?></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="no_secondary_class_objects" name="QinlianThread[no_secondary_class_objects]" placeholder="" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
 
           <div id="create_date_div" class="form-group">
               <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
@@ -634,7 +628,7 @@ $modelLabel = new \backend\models\QinlianThread();
               </div>
               <div class="clearfix"></div>
           </div>
-                    
+
 
 			<?php ActiveForm::end(); ?>          
                 </div>
