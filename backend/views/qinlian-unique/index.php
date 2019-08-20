@@ -40,7 +40,7 @@ $RegisterModelLabel = new \backend\models\QinlianRegister();
 
                         <div class="form-group" style="margin: 4px;">
                             <label><?=$ChallengeModelLabel->getAttributeLabel('disposal_year')?>:</label>
-                            <input type="text" class="form-control" id="query[disposal_year]" name="query[disposal_year]"  value="<?=isset($query["disposal_year"]) ? $query["disposal_year"] : "" ?>">
+                            <input type="text" class="form-control" id="query[disposal_year]" name="query[disposal_year]"  value="<?=isset($query["disposal_year"]) ? $query["disposal_year"] : "" ?>" data-provide="datepicker" data-date-format="yyyy">
                         </div>
 
                         <div class="form-group" style="margin: 4px;">
