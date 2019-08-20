@@ -5,6 +5,15 @@
   color: #0c2633;
 }
 
+.row {
+   margin-right: 0px;
+   margin-left: 0px;
+}
+
+.box {
+  background: #e0e2e1;
+}
+
 .main-header .logo .logo-lg {font-size: 14px;font-weight: bolder;}
 .sidebar-toggle{display: none}
 
