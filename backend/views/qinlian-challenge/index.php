@@ -30,13 +30,13 @@ $modelLabel = new \backend\models\QinlianChallenge();
 <!--        		<button id="delete_btn" type="button" class="btn btn-xs btn-danger">批量删除</button>-->
 <!--            </div>-->
             <div class="input-group input-group-sm" >
-              <button id="create_btn" type="button" class="btn btn-xs btn-primary">添&nbsp;&emsp;加</button>
+              <button id="create_btn" type="button" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus icon-white"></i>&nbsp;&nbsp;添&nbsp;&emsp;加</button>
               |
-              <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile">导&nbsp;&emsp;入</button>
+              <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile"><i class="glyphicon glyphicon-import icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;入</button>
               |
-              <a href="<?=Url::toRoute('qinlian-challenge/export')?>" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>
+              <a href="<?=Url::toRoute('qinlian-challenge/export')?>" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-export icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;出</a>
               |
-              <button id="delete_btn" type="button" class="btn btn-xs btn-danger">批量删除</button>
+              <button id="delete_btn" type="button" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;&nbsp;批量删除</button>
             </div>
           </div>
         </div>
@@ -50,8 +50,8 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 <?php ActiveForm::begin(['id' => 'qinlian-challenge-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('qinlian-challenge/index')]); ?>     
                 
                   <div class="form-group" style="margin: 4px;">
-                      <label><?=$modelLabel->getAttributeLabel('id')?>:</label>
-                      <input type="text" class="form-control" id="query[id]" name="query[id]"  value="<?=isset($query["id"]) ? $query["id"] : "" ?>">
+                      <label><?=$modelLabel->getAttributeLabel('number')?>:</label>
+                      <input type="text" class="form-control" id="query[number]" name="query[number]"  value="<?=isset($query["number"]) ? $query["number"] : "" ?>">
                   </div>
 
                 <div class="form-group" style="margin: 4px;">
@@ -99,7 +99,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
             <?php 
               $orderby = isset($_GET['orderby']) ? $_GET['orderby'] : '';
 		      echo '<th><input id="data_table_check" type="checkbox"></th>';
-              echo '<th onclick="orderby(\'id\', \'desc\')" '.CommonFun::sortClass($orderby, 'id').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id').'</th>';
+//              echo '<th onclick="orderby(\'id\', \'desc\')" '.CommonFun::sortClass($orderby, 'id').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id').'</th>';
               echo '<th onclick="orderby(\'number\', \'desc\')" '.CommonFun::sortClass($orderby, 'number').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('number').'</th>';
               echo '<th onclick="orderby(\'incoming_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'incoming_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('incoming_time').'</th>';
               echo '<th onclick="orderby(\'clue_level\', \'desc\')" '.CommonFun::sortClass($orderby, 'clue_level').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('clue_level').'</th>';
@@ -130,12 +130,19 @@ $modelLabel = new \backend\models\QinlianChallenge();
               echo '<th onclick="orderby(\'fourth_form\', \'desc\')" '.CommonFun::sortClass($orderby, 'fourth_form').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('fourth_form').'</th>';
               echo '<th onclick="orderby(\'approval_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'approval_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('approval_time').'</th>';
               echo '<th onclick="orderby(\'approval_status\', \'desc\')" '.CommonFun::sortClass($orderby, 'approval_status').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('approval_status').'</th>';
+
+              echo '<th onclick="orderby(\'is_thread_disposal\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_thread_disposal').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_thread_disposal').'</th>';
+              echo '<th onclick="orderby(\'disposal_method\', \'desc\')" '.CommonFun::sortClass($orderby, 'disposal_method').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disposal_method').'</th>';
+              echo '<th onclick="orderby(\'volume_number\', \'desc\')" '.CommonFun::sortClass($orderby, 'volume_number').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('volume_number').'</th>';
+              echo '<th onclick="orderby(\'id_card\', \'desc\')" '.CommonFun::sortClass($orderby, 'id_card').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id_card').'</th>';
+              echo '<th onclick="orderby(\'disposal_year\', \'desc\')" '.CommonFun::sortClass($orderby, 'disposal_year').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disposal_year').'</th>';
+
               echo '<th onclick="orderby(\'create_date\', \'desc\')" '.CommonFun::sortClass($orderby, 'create_date').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('create_date').'</th>';
               echo '<th onclick="orderby(\'update_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'update_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('update_time').'</th>';
          
 			?>
 	
-            <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >操作</th>
+            <th tabindex="0" class="th-width-0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >操作</th>
             </tr>
             </thead>
             <tbody>
@@ -144,7 +151,7 @@ $modelLabel = new \backend\models\QinlianChallenge();
             foreach ($models as $model) {
                 echo '<tr id="rowid_' . $model->id . '">';
                 echo '  <td><label><input type="checkbox" value="' . $model->id . '"></label></td>';
-                echo '  <td>' . $model->id . '</td>';
+//                echo '  <td>' . $model->id . '</td>';
                 echo '  <td>' . $model->number . '</td>';
                 echo '  <td>' . $model->incoming_time . '</td>';
                 echo '  <td>' . $model->clue_level . '</td>';
@@ -175,11 +182,19 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 echo '  <td>' . $model->fourth_form . '</td>';
                 echo '  <td>' . $model->approval_time . '</td>';
                 echo '  <td>' . $model->approval_status . '</td>';
+
+                echo '  <td>' . $model->is_thread_disposal . '</td>';
+                echo '  <td>' . $model->disposal_method . '</td>';
+                echo '  <td>' . $model->volume_number . '</td>';
+                echo '  <td>' . $model->id_card . '</td>';
+                echo '  <td>' . $model->disposal_year . '</td>';
+
                 echo '  <td>' . $model->create_date . '</td>';
                 echo '  <td>' . $model->update_time . '</td>';
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                 echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
+                echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-book icon-white"></i>归档</a>';
                 echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 $url = Url::toRoute('qinlian-challenge/print');
                 echo '      <a id="print_btn"  class="btn btn-primary btn-sm" href="'. $url  .'&id='. $model->id .'" target="_self"> <i class="glyphicon glyphicon-print icon-white"></i>案管室问题线索拟办单(排查会404)</a>';
@@ -457,12 +472,23 @@ $modelLabel = new \backend\models\QinlianChallenge();
                     <div class="clearfix"></div>
                 </div>
 
-                <div id="update_time_div" class="form-group">
+                <div id="is_thread_disposal_div" class="form-group">
+                    <label for="is_thread_disposal" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_thread_disposal")?></label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="is_thread_disposal" name="QinlianChallenge[is_thread_disposal]">
+                            <option>是</option>
+                            <option>否</option>
+                        </select>
+                    </div>
+
                     <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="create_date" name="QinlianChallenge[create_date]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
                     </div>
+                    <div class="clearfix"></div>
+                </div>
 
+                <div id="update_time_div" class="form-group">
                     <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="update_time" name="QinlianChallenge[update_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
@@ -564,6 +590,7 @@ function orderby(field, op){
         $("#fourth_form").val("");
         $("#approval_time").val("");
         $("#approval_status").val("");
+        $("#is_thread_disposal").val("");
         $("#del_status").val("");
         $("#create_date").val("");
         $("#update_time").val("");
@@ -601,6 +628,7 @@ function orderby(field, op){
         $("#fourth_form").val(data.fourth_form)
         $("#approval_time").val(data.approval_time)
         $("#approval_status").val(data.approval_status)
+        $("#is_thread_disposal").val(data.is_thread_disposal)
         $("#del_status").val(data.del_status)
         $("#create_date").val(data.create_date)
         $("#update_time").val(data.update_time)
@@ -637,6 +665,7 @@ function orderby(field, op){
       $("#fourth_form").attr({readonly:true,disabled:true});
       $("#approval_time").attr({readonly:true,disabled:true});
       $("#approval_status").attr({readonly:true,disabled:true});
+      $("#is_thread_disposal").attr({readonly:true,disabled:true});
       $("#del_status").attr({readonly:true,disabled:true});
       $("#create_date").attr({readonly:true,disabled:true});
       $("#update_time").attr({readonly:true,disabled:true});
@@ -674,6 +703,7 @@ function orderby(field, op){
       $("#fourth_form").attr({readonly:false,disabled:false});
       $("#approval_time").attr({readonly:false,disabled:false});
       $("#approval_status").attr({readonly:false,disabled:false});
+      $("#is_thread_disposal").attr({readonly:false,disabled:false});
       $("#del_status").attr({readonly:false,disabled:false});
       $("#create_date").attr({readonly:false,disabled:false});
       $("#update_time").attr({readonly:false,disabled:false});

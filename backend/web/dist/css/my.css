@@ -26,6 +26,10 @@ table.dataTable thead > tr > th {
   padding: 8px 40px;
 }
 
+table.dataTable thead > tr > th.th-width-0 {
+  padding: 8px 130px;
+}
+
 table.dataTable thead > tr > th.th-width-1 {
   padding: 8px 180px;
 }

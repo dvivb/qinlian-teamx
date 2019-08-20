@@ -30,13 +30,13 @@ $modelLabel = new \backend\models\QinlianRegister();
 <!--        		<button id="delete_btn" type="button" class="btn btn-xs btn-danger">批量删除</button>-->
 <!--            </div>-->
               <div class="input-group input-group-sm" >
-                  <button id="create_btn" type="button" class="btn btn-xs btn-primary">添&nbsp;&emsp;加</button>
+                  <button id="create_btn" type="button" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus icon-white"></i>&nbsp;&nbsp;添&nbsp;&emsp;加</button>
                   |
-                  <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile">导&nbsp;&emsp;入</button>
+                  <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile"><i class="glyphicon glyphicon-import icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;入</button>
                   |
-                  <a href="<?=Url::toRoute('qinlian-register/export')?>" class="btn btn-xs btn-info">导&nbsp;&emsp;出</a>
+                  <a href="<?=Url::toRoute('qinlian-register/export')?>" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-export icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;出</a>
                   |
-                  <button id="delete_btn" type="button" class="btn btn-xs btn-danger">批量删除</button>
+                  <button id="delete_btn" type="button" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;&nbsp;批量删除</button>
               </div>
           </div>
         </div>
@@ -50,8 +50,8 @@ $modelLabel = new \backend\models\QinlianRegister();
                 <?php ActiveForm::begin(['id' => 'qinlian-register-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('qinlian-register/index')]); ?>     
                 
                   <div class="form-group" style="margin: 4px;">
-                      <label><?=$modelLabel->getAttributeLabel('id')?>:</label>
-                      <input type="text" class="form-control" id="query[id]" name="query[id]"  value="<?=isset($query["id"]) ? $query["id"] : "" ?>">
+                      <label><?=$modelLabel->getAttributeLabel('number')?>:</label>
+                      <input type="text" class="form-control" id="query[number]" name="query[id]"  value="<?=isset($query["number"]) ? $query["number"] : "" ?>">
                   </div>
                 <div class="form-group" style="margin: 4px;">
                     <label><?=$modelLabel->getAttributeLabel('nuit_name')?>:</label>
@@ -95,7 +95,7 @@ $modelLabel = new \backend\models\QinlianRegister();
             <?php 
               $orderby = isset($_GET['orderby']) ? $_GET['orderby'] : '';
 		      echo '<th><input id="data_table_check" type="checkbox"></th>';
-              echo '<th onclick="orderby(\'id\', \'desc\')" '.CommonFun::sortClass($orderby, 'id').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id').'</th>';
+              echo '<th onclick="orderby(\'number\', \'desc\')" '.CommonFun::sortClass($orderby, 'number').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('number').'</th>';
               echo '<th onclick="orderby(\'nuit_name\', \'desc\')" '.CommonFun::sortClass($orderby, 'nuit_name').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('nuit_name').'</th>';
               echo '<th onclick="orderby(\'nuit_code\', \'desc\')" '.CommonFun::sortClass($orderby, 'nuit_code').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('nuit_code').'</th>';
               echo '<th onclick="orderby(\'is_nuit\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_nuit').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_nuit').'</th>';
@@ -230,12 +230,18 @@ $modelLabel = new \backend\models\QinlianRegister();
               echo '<th onclick="orderby(\'confessional_books\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('confessional_books').'</th>';
               echo '<th onclick="orderby(\'department_charge\', \'desc\')" '.CommonFun::sortClass($orderby, 'department_charge').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('department_charge').'</th>';
               echo '<th onclick="orderby(\'superiors_assigned\', \'desc\')" '.CommonFun::sortClass($orderby, 'superiors_assigned').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('superiors_assigned').'</th>';
-              echo '<th onclick="orderby(\'create_date\', \'desc\')" '.CommonFun::sortClass($orderby, 'create_date').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('create_date').'</th>';
+
+            echo '<th onclick="orderby(\'disposal_method\', \'desc\')" '.CommonFun::sortClass($orderby, 'disposal_method').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disposal_method').'</th>';
+            echo '<th onclick="orderby(\'volume_number\', \'desc\')" '.CommonFun::sortClass($orderby, 'volume_number').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('volume_number').'</th>';
+            echo '<th onclick="orderby(\'id_card\', \'desc\')" '.CommonFun::sortClass($orderby, 'id_card').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id_card').'</th>';
+            echo '<th onclick="orderby(\'disposal_year\', \'desc\')" '.CommonFun::sortClass($orderby, 'disposal_year').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disposal_year').'</th>';
+
+            echo '<th onclick="orderby(\'create_date\', \'desc\')" '.CommonFun::sortClass($orderby, 'create_date').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('create_date').'</th>';
               echo '<th onclick="orderby(\'update_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'update_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('update_time').'</th>';
          
 			?>
 	
-            <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >操作</th>
+            <th tabindex="0" class="th-width-0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >操作</th>
             </tr>
             </thead>
             <tbody>
@@ -244,7 +250,7 @@ $modelLabel = new \backend\models\QinlianRegister();
             foreach ($models as $model) {
                 echo '<tr id="rowid_' . $model->id . '">';
                 echo '  <td><label><input type="checkbox" value="' . $model->id . '"></label></td>';
-                echo '  <td>' . $model->id . '</td>';
+                echo '  <td>' . $model->number . '</td>';
                 echo '  <td>' . $model->nuit_name . '</td>';
                 echo '  <td>' . $model->nuit_code . '</td>';
                 echo '  <td>' . $model->is_nuit . '</td>';
@@ -379,11 +385,16 @@ $modelLabel = new \backend\models\QinlianRegister();
                 echo '  <td>' . mb_substr($model->confessional_books, 0, 400) . '</td>';
                 echo '  <td>' . $model->department_charge . '</td>';
                 echo '  <td>' . $model->superiors_assigned . '</td>';
+                echo '  <td>' . $model->disposal_method . '</td>';
+                echo '  <td>' . $model->volume_number . '</td>';
+                echo '  <td>' . $model->id_card . '</td>';
+                echo '  <td>' . $model->disposal_year . '</td>';
                 echo '  <td>' . $model->create_date . '</td>';
                 echo '  <td>' . $model->update_time . '</td>';
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                 echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
+                echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-book icon-white"></i>归档</a>';
                 echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 echo '  </td>';
                 echo '</tr>';
