@@ -394,7 +394,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                 echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
-                echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-book icon-white"></i>归档</a>';
+                echo '      <a id="archives_btn" onclick="archivesAction(' . $model->id . ')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#archives" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>归档</a>';
                 echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 echo '  </td>';
                 echo '</tr>';
@@ -405,7 +405,161 @@ $modelLabel = new \backend\models\QinlianRegister();
            
            
             </tbody>
-            <!-- <tfoot></tfoot> -->
+             <tfoot>
+                <tr role="row">
+
+                 <?php
+                 $orderby = isset($_GET['orderby']) ? $_GET['orderby'] : '';
+                 echo '<th><input id="data_table_check" type="checkbox"></th>';
+                 echo '<th onclick="orderby(\'number\', \'desc\')" '.CommonFun::sortClass($orderby, 'number').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('number').'</th>';
+                 echo '<th onclick="orderby(\'nuit_name\', \'desc\')" '.CommonFun::sortClass($orderby, 'nuit_name').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('nuit_name').'</th>';
+                 echo '<th onclick="orderby(\'nuit_code\', \'desc\')" '.CommonFun::sortClass($orderby, 'nuit_code').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('nuit_code').'</th>';
+                 echo '<th onclick="orderby(\'is_nuit\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_nuit').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_nuit').'</th>';
+                 echo '<th onclick="orderby(\'case_code\', \'desc\')" '.CommonFun::sortClass($orderby, 'case_code').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('case_code').'</th>';
+                 echo '<th onclick="orderby(\'personnel_code\', \'desc\')" '.CommonFun::sortClass($orderby, 'personnel_code').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('personnel_code').'</th>';
+                 echo '<th onclick="orderby(\'person_investigated\', \'desc\')" '.CommonFun::sortClass($orderby, 'person_investigated').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('person_investigated').'</th>';
+                 echo '<th onclick="orderby(\'credentials_type\', \'desc\')" '.CommonFun::sortClass($orderby, 'credentials_type').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('credentials_type').'</th>';
+                 echo '<th onclick="orderby(\'credentials_number\', \'desc\')" '.CommonFun::sortClass($orderby, 'credentials_number').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('credentials_number').'</th>';
+                 echo '<th onclick="orderby(\'sex\', \'desc\')" '.CommonFun::sortClass($orderby, 'sex').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('sex').'</th>';
+                 echo '<th onclick="orderby(\'age\', \'desc\')" '.CommonFun::sortClass($orderby, 'age').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('age').'</th>';
+                 echo '<th onclick="orderby(\'date_birth\', \'desc\')" '.CommonFun::sortClass($orderby, 'date_birth').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('date_birth').'</th>';
+                 echo '<th onclick="orderby(\'academic\', \'desc\')" '.CommonFun::sortClass($orderby, 'academic').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('academic').'</th>';
+                 echo '<th onclick="orderby(\'nation\', \'desc\')" '.CommonFun::sortClass($orderby, 'nation').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('nation').'</th>';
+                 echo '<th onclick="orderby(\'is_supervises_object\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_supervises_object').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_supervises_object').'</th>';
+                 echo '<th onclick="orderby(\'supervises_object_details\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('supervises_object_details').'</th>';
+                 echo '<th onclick="orderby(\'is_party\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_party').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_party').'</th>';
+                 echo '<th onclick="orderby(\'party_delegate\', \'desc\')" '.CommonFun::sortClass($orderby, 'party_delegate').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('party_delegate').'</th>';
+                 echo '<th onclick="orderby(\'disposal_report\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disposal_report').'</th>';
+                 echo '<th onclick="orderby(\'time_joining_party\', \'desc\')" '.CommonFun::sortClass($orderby, 'time_joining_party').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('time_joining_party').'</th>';
+                 echo '<th onclick="orderby(\'no_party_objects\', \'desc\')" '.CommonFun::sortClass($orderby, 'no_party_objects').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('no_party_objects').'</th>';
+                 echo '<th onclick="orderby(\'no_party_objects_details\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('no_party_objects_details').'</th>';
+                 echo '<th onclick="orderby(\'cpc\', \'desc\')" '.CommonFun::sortClass($orderby, 'cpc').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('cpc').'</th>';
+                 echo '<th onclick="orderby(\'cppcc\', \'desc\')" '.CommonFun::sortClass($orderby, 'cppcc').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('cppcc').'</th>';
+                 echo '<th onclick="orderby(\'discipline_commission\', \'desc\')" '.CommonFun::sortClass($orderby, 'discipline_commission').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('discipline_commission').'</th>';
+                 echo '<th onclick="orderby(\'party_commission\', \'desc\')" '.CommonFun::sortClass($orderby, 'party_commission').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('party_commission').'</th>';
+                 echo '<th onclick="orderby(\'on_job_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'on_job_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('on_job_time').'</th>';
+                 echo '<th onclick="orderby(\'head_violating\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('head_violating').'</th>';
+                 echo '<th onclick="orderby(\'head_details\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('head_details').'</th>';
+                 echo '<th onclick="orderby(\'head_details_two\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('head_details_two').'</th>';
+                 echo '<th onclick="orderby(\'rank_job\', \'desc\')" '.CommonFun::sortClass($orderby, 'rank_job').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('rank_job').'</th>';
+                 echo '<th onclick="orderby(\'deputy_rank_job\', \'desc\')" '.CommonFun::sortClass($orderby, 'deputy_rank_job').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('deputy_rank_job').'</th>';
+                 echo '<th onclick="orderby(\'duty_job\', \'desc\')" '.CommonFun::sortClass($orderby, 'duty_job').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('duty_job').'</th>';
+                 echo '<th onclick="orderby(\'authority_management\', \'desc\')" '.CommonFun::sortClass($orderby, 'authority_management').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('authority_management').'</th>';
+                 echo '<th onclick="orderby(\'department_class\', \'desc\')" '.CommonFun::sortClass($orderby, 'department_class').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('department_class').'</th>';
+                 echo '<th onclick="orderby(\'department_class_one\', \'desc\')" '.CommonFun::sortClass($orderby, 'department_class_one').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('department_class_one').'</th>';
+                 echo '<th onclick="orderby(\'department_classtwo\', \'desc\')" '.CommonFun::sortClass($orderby, 'department_classtwo').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('department_classtwo').'</th>';
+                 echo '<th onclick="orderby(\'nature_enterprise\', \'desc\')" '.CommonFun::sortClass($orderby, 'nature_enterprise').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('nature_enterprise').'</th>';
+                 echo '<th onclick="orderby(\'nature_enterprise_one\', \'desc\')" '.CommonFun::sortClass($orderby, 'nature_enterprise_one').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('nature_enterprise_one').'</th>';
+                 echo '<th onclick="orderby(\'category_enterprise_personnel\', \'desc\')" '.CommonFun::sortClass($orderby, 'category_enterprise_personnel').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('category_enterprise_personnel').'</th>';
+                 echo '<th onclick="orderby(\'enterprise_post\', \'desc\')" '.CommonFun::sortClass($orderby, 'enterprise_post').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('enterprise_post').'</th>';
+                 echo '<th onclick="orderby(\'jobbery_lose\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('jobbery_lose').'</th>';
+                 echo '<th onclick="orderby(\'discipline_amount\', \'desc\')" '.CommonFun::sortClass($orderby, 'discipline_amount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('discipline_amount').'</th>';
+                 echo '<th onclick="orderby(\'case_amount\', \'desc\')" '.CommonFun::sortClass($orderby, 'case_amount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('case_amount').'</th>';
+                 echo '<th onclick="orderby(\'filing_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'filing_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('filing_time').'</th>';
+                 echo '<th onclick="orderby(\'source_case\', \'desc\')" '.CommonFun::sortClass($orderby, 'source_case').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('source_case').'</th>';
+                 echo '<th onclick="orderby(\'discipline_organ\', \'desc\')" '.CommonFun::sortClass($orderby, 'discipline_organ').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('discipline_organ').'</th>';
+                 echo '<th onclick="orderby(\'discipline_organ_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'discipline_organ_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('discipline_organ_time').'</th>';
+                 echo '<th onclick="orderby(\'discipline_organ_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'discipline_organ_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('discipline_organ_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'supervise_register_organ\', \'desc\')" '.CommonFun::sortClass($orderby, 'supervise_register_organ').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('supervise_register_organ').'</th>';
+                 echo '<th onclick="orderby(\'supervise_register_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'supervise_register_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('supervise_register_time').'</th>';
+                 echo '<th onclick="orderby(\'supervise_register_statistics_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'supervise_register_statistics_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('supervise_register_statistics_time').'</th>';
+                 echo '<th onclick="orderby(\'is_discipline_transfer\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_discipline_transfer').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_discipline_transfer').'</th>';
+                 echo '<th onclick="orderby(\'other_discipline_method\', \'desc\')" '.CommonFun::sortClass($orderby, 'other_discipline_method').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('other_discipline_method').'</th>';
+                 echo '<th onclick="orderby(\'transfer_unit\', \'desc\')" '.CommonFun::sortClass($orderby, 'transfer_unit').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('transfer_unit').'</th>';
+                 echo '<th onclick="orderby(\'brief_case_report\', \'desc\')" class="th-width-2" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('brief_case_report').'</th>';
+                 echo '<th onclick="orderby(\'register_report\', \'desc\')" class="th-width-2" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('register_report').'</th>';
+                 echo '<th onclick="orderby(\'register_decide_book\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('register_decide_book').'</th>';
+                 echo '<th onclick="orderby(\'remarks\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('remarks').'</th>';
+                 echo '<th onclick="orderby(\'is_violate_stipulate\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_violate_stipulate').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_violate_stipulate').'</th>';
+                 echo '<th onclick="orderby(\'is_accountabilitye\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_accountabilitye').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_accountabilitye').'</th>';
+                 echo '<th onclick="orderby(\'end_case_stat_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'end_case_stat_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('end_case_stat_time').'</th>';
+                 echo '<th onclick="orderby(\'close_case_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'close_case_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('close_case_time').'</th>';
+                 echo '<th onclick="orderby(\'end_case_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'end_case_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('end_case_time').'</th>';
+                 echo '<th onclick="orderby(\'accountability\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('accountability').'</th>';
+                 echo '<th onclick="orderby(\'party_discipline\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('party_discipline').'</th>';
+                 echo '<th onclick="orderby(\'party_discipline_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'party_discipline_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('party_discipline_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'administrative_sanction\', \'desc\')" '.CommonFun::sortClass($orderby, 'administrative_sanction').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('administrative_sanction').'</th>';
+                 echo '<th onclick="orderby(\'administrative_sanction_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'administrative_sanction_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('administrative_sanction_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'other_treatments\', \'desc\')" '.CommonFun::sortClass($orderby, 'other_treatments').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('other_treatments').'</th>';
+                 echo '<th onclick="orderby(\'other_treatments_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'other_treatments_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('other_treatments_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'transfer_justice_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'transfer_justice_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('transfer_justice_time').'</th>';
+                 echo '<th onclick="orderby(\'transfer_justice_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'transfer_justice_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('transfer_justice_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'public_inspection_processing\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('public_inspection_processing').'</th>';
+                 echo '<th onclick="orderby(\'public_inspection_processing_detail\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('public_inspection_processing_detail').'</th>';
+                 echo '<th onclick="orderby(\'punishments_number_years\', \'desc\')" '.CommonFun::sortClass($orderby, 'punishments_number_years').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('punishments_number_years').'</th>';
+                 echo '<th onclick="orderby(\'punishments_number_month\', \'desc\')" '.CommonFun::sortClass($orderby, 'punishments_number_month').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('punishments_number_month').'</th>';
+                 echo '<th onclick="orderby(\'probation_number_years\', \'desc\')" '.CommonFun::sortClass($orderby, 'probation_number_years').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('probation_number_years').'</th>';
+                 echo '<th onclick="orderby(\'probation_number_month\', \'desc\')" '.CommonFun::sortClass($orderby, 'probation_number_month').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('probation_number_month').'</th>';
+                 echo '<th onclick="orderby(\'public_inspection_processing_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'public_inspection_processing_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('public_inspection_processing_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'retrieve_loss\', \'desc\')" '.CommonFun::sortClass($orderby, 'retrieve_loss').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('retrieve_loss').'</th>';
+                 echo '<th onclick="orderby(\'capture_amount\', \'desc\')" '.CommonFun::sortClass($orderby, 'capture_amount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('capture_amount').'</th>';
+                 echo '<th onclick="orderby(\'first_violations_discipline_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'first_violations_discipline_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('first_violations_discipline_time').'</th>';
+                 echo '<th onclick="orderby(\'last_violations_discipline_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'last_violations_discipline_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('last_violations_discipline_time').'</th>';
+                 echo '<th onclick="orderby(\'violation_discipline_happen_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'violation_discipline_happen_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('violation_discipline_happen_time').'</th>';
+                 echo '<th onclick="orderby(\'desert_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'desert_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('desert_time').'</th>';
+                 echo '<th onclick="orderby(\'desert_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'desert_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('desert_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'hear_accept_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'hear_accept_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('hear_accept_time').'</th>';
+                 echo '<th onclick="orderby(\'hear_accept_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'hear_accept_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('hear_accept_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'hear_office\', \'desc\')" '.CommonFun::sortClass($orderby, 'hear_office').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('hear_office').'</th>';
+                 echo '<th onclick="orderby(\'hear_end_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'hear_end_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('hear_end_time').'</th>';
+                 echo '<th onclick="orderby(\'hear_end_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'hear_end_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('hear_end_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'punish_decide\', \'desc\')" '.CommonFun::sortClass($orderby, 'punish_decide').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('punish_decide').'</th>';
+                 echo '<th onclick="orderby(\'police_handle_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'police_handle_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('police_handle_time').'</th>';
+                 echo '<th onclick="orderby(\'judicial_judgment_amount\', \'desc\')" '.CommonFun::sortClass($orderby, 'judicial_judgment_amount').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('judicial_judgment_amount').'</th>';
+                 echo '<th onclick="orderby(\'investigation_report\', \'desc\')" class="th-width-2" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('investigation_report').'</th>';
+                 echo '<th onclick="orderby(\'trial_report\', \'desc\')" class="th-width-2" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('trial_report').'</th>';
+                 echo '<th onclick="orderby(\'case_analysis\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('case_analysis').'</th>';
+                 echo '<th onclick="orderby(\'party_watch_limit\', \'desc\')" '.CommonFun::sortClass($orderby, 'party_watch_limit').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('party_watch_limit').'</th>';
+                 echo '<th onclick="orderby(\'enterprise_level\', \'desc\')" '.CommonFun::sortClass($orderby, 'enterprise_level').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('enterprise_level').'</th>';
+                 echo '<th onclick="orderby(\'flight_direction\', \'desc\')" '.CommonFun::sortClass($orderby, 'flight_direction').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('flight_direction').'</th>';
+                 echo '<th onclick="orderby(\'flight_direction_details\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('flight_direction_details').'</th>';
+                 echo '<th onclick="orderby(\'investigation_suspension_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'investigation_suspension_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('investigation_suspension_time').'</th>';
+                 echo '<th onclick="orderby(\'investigation_suspension_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'investigation_suspension_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('investigation_suspension_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'administrative_sanctions_suspension_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'administrative_sanctions_suspension_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('administrative_sanctions_suspension_time').'</th>';
+                 echo '<th onclick="orderby(\'administrative_sanctions_suspension_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'administrative_sanctions_suspension_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('administrative_sanctions_suspension_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'seizure_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'seizure_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('seizure_time').'</th>';
+                 echo '<th onclick="orderby(\'seizure_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'seizure_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('seizure_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'case_analysis_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'case_analysis_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('case_analysis_time').'</th>';
+                 echo '<th onclick="orderby(\'disciplinary_offence\', \'desc\')" '.CommonFun::sortClass($orderby, 'disciplinary_offence').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disciplinary_offence').'</th>';
+                 echo '<th onclick="orderby(\'post_disciplinary_offence\', \'desc\')" '.CommonFun::sortClass($orderby, 'post_disciplinary_offence').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('post_disciplinary_offence').'</th>';
+                 echo '<th onclick="orderby(\'other_disciplinary_offence\', \'desc\')" '.CommonFun::sortClass($orderby, 'other_disciplinary_offence').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('other_disciplinary_offence').'</th>';
+                 echo '<th onclick="orderby(\'organs_take_measures\', \'desc\')" '.CommonFun::sortClass($orderby, 'organs_take_measures').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organs_take_measures').'</th>';
+                 echo '<th onclick="orderby(\'organs_take_measures_name\', \'desc\')" '.CommonFun::sortClass($orderby, 'organs_take_measures_name').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organs_take_measures_name').'</th>';
+                 echo '<th onclick="orderby(\'starting_detention_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'starting_detention_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('starting_detention_time').'</th>';
+                 echo '<th onclick="orderby(\'starting_detention_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'starting_detention_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('starting_detention_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'location_measures_taken\', \'desc\')" '.CommonFun::sortClass($orderby, 'location_measures_taken').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('location_measures_taken').'</th>';
+                 echo '<th onclick="orderby(\'location_measures_taken_class\', \'desc\')" '.CommonFun::sortClass($orderby, 'location_measures_taken_class').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('location_measures_taken_class').'</th>';
+                 echo '<th onclick="orderby(\'lien_approval_situation\', \'desc\')" '.CommonFun::sortClass($orderby, 'lien_approval_situation').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('lien_approval_situation').'</th>';
+                 echo '<th onclick="orderby(\'lien_end_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'lien_end_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('lien_end_time').'</th>';
+                 echo '<th onclick="orderby(\'lien_end_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'lien_end_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('lien_end_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'lien_number_days\', \'desc\')" '.CommonFun::sortClass($orderby, 'lien_number_days').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('lien_number_days').'</th>';
+                 echo '<th onclick="orderby(\'is_delay\', \'desc\')" '.CommonFun::sortClass($orderby, 'is_delay').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('is_delay').'</th>';
+                 echo '<th onclick="orderby(\'delay_number_days\', \'desc\')" '.CommonFun::sortClass($orderby, 'delay_number_days').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('delay_number_days').'</th>';
+                 echo '<th onclick="orderby(\'delay_approval_situation\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('delay_approval_situation').'</th>';
+                 echo '<th onclick="orderby(\'organization_measure\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organization_measure').'</th>';
+                 echo '<th onclick="orderby(\'organization_measure_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'organization_measure_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organization_measure_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'amount_transferred_judicial_organs\', \'desc\')" '.CommonFun::sortClass($orderby, 'amount_transferred_judicial_organs').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('amount_transferred_judicial_organs').'</th>';
+                 echo '<th onclick="orderby(\'two_rule_start_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'two_rule_start_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('two_rule_start_time').'</th>';
+                 echo '<th onclick="orderby(\'two_rule_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'two_rule_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('two_rule_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'two_rule_remove_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'two_rule_remove_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('two_rule_remove_time').'</th>';
+                 echo '<th onclick="orderby(\'two_rule_remove_stats_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'two_rule_remove_stats_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('two_rule_remove_stats_time').'</th>';
+                 echo '<th onclick="orderby(\'confessional_books\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('confessional_books').'</th>';
+                 echo '<th onclick="orderby(\'department_charge\', \'desc\')" '.CommonFun::sortClass($orderby, 'department_charge').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('department_charge').'</th>';
+                 echo '<th onclick="orderby(\'superiors_assigned\', \'desc\')" '.CommonFun::sortClass($orderby, 'superiors_assigned').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('superiors_assigned').'</th>';
+
+                 echo '<th onclick="orderby(\'disposal_method\', \'desc\')" '.CommonFun::sortClass($orderby, 'disposal_method').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disposal_method').'</th>';
+                 echo '<th onclick="orderby(\'volume_number\', \'desc\')" '.CommonFun::sortClass($orderby, 'volume_number').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('volume_number').'</th>';
+                 echo '<th onclick="orderby(\'id_card\', \'desc\')" '.CommonFun::sortClass($orderby, 'id_card').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id_card').'</th>';
+                 echo '<th onclick="orderby(\'disposal_year\', \'desc\')" '.CommonFun::sortClass($orderby, 'disposal_year').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('disposal_year').'</th>';
+
+                 echo '<th onclick="orderby(\'create_date\', \'desc\')" '.CommonFun::sortClass($orderby, 'create_date').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('create_date').'</th>';
+                 echo '<th onclick="orderby(\'update_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'update_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('update_time').'</th>';
+
+                 ?>
+
+                 <th tabindex="0" class="th-width-0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >操作</th>
+             </tr>
+             </tfoot>
           </table>
           </div>
           </div>
@@ -461,7 +615,7 @@ $modelLabel = new \backend\models\QinlianRegister();
           <div id="nuit_name_div" class="form-group">
               <label for="nuit_name" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("nuit_name")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="nuit_name" name="QinlianRegister[nuit_name]" placeholder="" />
+                  <input type="text" class="form-control" id="nuit_name" name="department_charge[nuit_name]" placeholder="" />
               </div>
 
               <label for="nuit_code" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("nuit_code")?></label>
@@ -1420,6 +1574,76 @@ $modelLabel = new \backend\models\QinlianRegister();
     </form>
 </div>
 
+
+<!-- archives（Modal） -->
+<div class="modal fade" id="archives" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>归档</h3>
+            </div>
+            <div class="modal-body">
+                <?php $form = ActiveForm::begin(["id" => "qinlian-register-archives-form", "class"=>"form-horizontal", "action"=>Url::toRoute("qinlian-register/save")]); ?>
+
+                <input type="hidden" class="form-control" id="archives-id" name="id" />
+
+                <div id="number_div" class="form-group">
+                    <label for="disposal_method" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disposal_method")?></label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="disposal_method" name="QinlianRegister[disposal_method]" >
+                            <option>谈话函询</option>
+                            <option>初步核实</option>
+                            <option>暂存待查</option>
+                            <option>予以了结</option>
+                            <option>立案调查</option>
+                        </select>
+                    </div>
+
+                    <label for="number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("number")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="archives-number" name="QinlianRegister[number]" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div id="is_thread_disposal_div" class="form-group">
+                    <label for="volume_number" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("volume_number")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="volume_number" name="QinlianRegister[volume_number]"/>
+                    </div>
+
+                    <label for="disposal_year" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("disposal_year")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="disposal_year" name="QinlianRegister[disposal_year]" data-provide="datepicker" data-date-format="yyyy" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="create_date_div" class="form-group">
+                    <label for="department_charge" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("department_charge")?></label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="archives-department_charge" name="QinlianRegister[department_charge]">
+                            <option>科室一</option>
+                            <option>科室二</option>
+                            <option>科室三</option>
+                        </select>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <?php ActiveForm::end(); ?>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">关闭</a>
+                <a id="archives_dialog_ok" href="#" class="btn btn-primary">确定</a>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
+
 <?php $this->beginBlock('footer');  ?>
 <!-- <body></body>后代码块 -->
  <script>
@@ -2169,5 +2393,65 @@ $('#qinlian-register-import-form').bind('submit', function(e) {
     });
 });
 
+</script>
+
+<script>
+    function archivesAction(id){
+        $.ajax({
+            type: "GET",
+            url: "<?=Url::toRoute('qinlian-register/view')?>",
+            data: {"id":id},
+            cache: false,
+            dataType:"json",
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                alert("出错了，" + textStatus);
+            },
+            success: function(data){
+                console.log(data)
+                initArchivesmModule(data);
+            }
+        });
+    }
+
+    function initArchivesmModule(data) {
+        $("#archives-id").val(data.id)
+        $("#disposal_method").val(data.disposal_method)
+        $("#volume_number").val(data.volume_number)
+        $("#disposal_year").val(data.disposal_year)
+        $("#archives-department_charge").val(data.department_charge)
+        $("#archives-number").val(data.number)
+    }
+
+    $('#archives_dialog_ok').click(function (e) {
+        e.preventDefault();
+        $('#qinlian-register-archives-form').submit();
+    });
+
+    $('#qinlian-register-archives-form').bind('submit', function(e) {
+        e.preventDefault();
+        var id = $("#archives-id").val();
+        var action = "<?=Url::toRoute('qinlian-register/update')?>";
+        $(this).ajaxSubmit({
+            type: "post",
+            dataType:"json",
+            url: action,
+            success: function(value)
+            {
+                if(value.errno == 0){
+                    $('#edit_dialog').modal('hide');
+                    admin_tool.alert('msg_info', '添加成功', 'success');
+                    window.location.reload();
+                }
+                else{
+                    var json = value.data;
+                    for(var key in json){
+                        $('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
+
+                    }
+                }
+
+            }
+        });
+    });
 </script>
 <?php $this->endBlock(); ?>

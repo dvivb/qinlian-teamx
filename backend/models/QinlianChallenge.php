@@ -58,11 +58,11 @@ class QinlianChallenge extends \backend\models\BaseModel
     {
         return [
             [['incoming_time', 'date_receipt', 'approval_time', 'create_date', 'update_time', 'disposal_year'], 'safe'],
-            [['volume_number', 'approval_status', 'del_status'], 'integer'],
+            [['number_disposals', 'volume_number', 'approval_status', 'del_status'], 'integer'],
             [['number', 'clue_level', 'clue_category', 'letter_number', 'leader_instructions', 'respondent_unit', 'duty_job', 'rank_job', 'transfer_organ', 'supervisory_leadership', 'host_department', 'progress_case', 'first_form', 'second_form', 'third_form', 'fourth_form', 'is_thread_disposal', 'disposal_method'], 'string', 'max' => 25],
             [['clue_source', 'related_unit', 'organizations_number'], 'string', 'max' => 100],
             [['signature', 'main_issues', 'heavy_cases', 'results', 'investigation_disposal', 'remarks'], 'string', 'max' => 500],
-            [['number_disposals'], 'string', 'max' => 3],
+//            [['number_disposals'], 'string', 'max' => 3],
             [['id_card'], 'string', 'max' => 18]
         ];
     }
