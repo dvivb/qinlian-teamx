@@ -291,6 +291,15 @@ class QinlianPetitionController extends BaseController
                             'unit_responsibility' =>  $value['U'],
     //                        'approval_time' =>  $value['W'],
     //                        'approval_status' =>  $value['X'],
+//
+//                        if(!empty($value['AA'])){
+                            'is_thread_disposal' =>  empty($value['AB']) ? '' : $value['AB'],
+                            'disposal_method' =>  empty($value['AA']) ? '' : $value['AA'],
+                            'volume_number' =>  empty($value['AC']) ? '' : $value['AC'],
+                            'id_card' =>  empty($value['AD']) ? '' : $value['AD'],
+                            'disposal_year' =>  empty($value['AE']) ? '' : $value['AE'],
+//                        }
+
                         ];
                     }
                 }
@@ -326,6 +335,12 @@ class QinlianPetitionController extends BaseController
                             'unit_responsibility',
 //                            'approval_time',
 //                            'approval_status',
+                            'is_thread_disposal',
+                            'disposal_method',
+                            'volume_number',
+                            'id_card',
+                            'disposal_year'
+
                             ],
                             $data)
                         ->execute();
@@ -386,6 +401,12 @@ class QinlianPetitionController extends BaseController
 
         $spreadsheet->getActiveSheet()->setCellValue('Z2', '更新时间');
 
+        $spreadsheet->getActiveSheet()->setCellValue('AA2', '作为线索处置');
+        $spreadsheet->getActiveSheet()->setCellValue('AB2', '处置方式');
+        $spreadsheet->getActiveSheet()->setCellValue('AC2', '卷本数');
+        $spreadsheet->getActiveSheet()->setCellValue('AD2', '身份证号');
+        $spreadsheet->getActiveSheet()->setCellValue('AE2', '处置年份');
+
 
 //         $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -419,6 +440,11 @@ class QinlianPetitionController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('Y')->setWidth(16);
 
         $spreadsheet->getActiveSheet()->getColumnDimension('Z')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AA')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AB')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AC')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AD')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AE')->setWidth(16);
 
 
         $i = 3;
@@ -454,6 +480,12 @@ class QinlianPetitionController extends BaseController
             $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['del_status']);
             $spreadsheet->getActiveSheet()->setCellValue('Y' . $i, $val['create_date']);
             $spreadsheet->getActiveSheet()->setCellValue('Z' . $i, $val['update_time']);
+
+            $spreadsheet->getActiveSheet()->setCellValue('AA' . $i, $val['is_thread_disposal']);
+            $spreadsheet->getActiveSheet()->setCellValue('AB' . $i, $val['disposal_method']);
+            $spreadsheet->getActiveSheet()->setCellValue('AC' . $i, $val['volume_number']);
+            $spreadsheet->getActiveSheet()->setCellValue('AD' . $i, $val['id_card']);
+            $spreadsheet->getActiveSheet()->setCellValue('AE' . $i, $val['disposal_year']);
 
 
             $i++;
