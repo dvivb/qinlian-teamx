@@ -289,9 +289,12 @@ class QinlianChallengeController extends BaseController
                             'second_form' =>  $value['Z'],
                             'third_form' =>  $value['AA'],
                             'fourth_form' =>  $value['AB'],
-    //                        'approval_time' =>  $value['AC'],
-    //
-    //                        'approval_status' =>  $value['AD'],
+
+                            'is_thread_disposal' =>  empty($value['AC']) ? '' : $value['AC'],
+                            'disposal_method' =>  empty($value['AD']) ? '' : $value['AD'],
+                            'volume_number' =>  empty($value['AE']) ? '' : $value['AE'],
+                            'id_card' =>  empty($value['AF']) ? '' : $value['AF'],
+                            'disposal_year' =>  empty($value['AG']) ? '' : $value['AG'],
                         ];
                     }
                 }
@@ -333,8 +336,12 @@ class QinlianChallengeController extends BaseController
                             'second_form',
                             'third_form',
                             'fourth_form',
-//                            'approval_time',
-//                            'approval_status',
+
+                            'is_thread_disposal',
+                            'disposal_method',
+                            'volume_number',
+                            'id_card',
+                            'disposal_year'
                         ],
                             $data)
                         ->execute();
@@ -396,12 +403,15 @@ class QinlianChallengeController extends BaseController
         $spreadsheet->getActiveSheet()->setCellValue('Z3', '第二种形态');
         $spreadsheet->getActiveSheet()->setCellValue('AA3', '第三种形态');
         $spreadsheet->getActiveSheet()->setCellValue('AB3', '第四种形态');
-        $spreadsheet->getActiveSheet()->setCellValue('AC3', '审批时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AD3', '审批状态');
 
-        $spreadsheet->getActiveSheet()->setCellValue('AE3', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('AF3', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AG3', '更新时间');
+
+        $spreadsheet->getActiveSheet()->setCellValue('AC3', '作为线索处置');
+        $spreadsheet->getActiveSheet()->setCellValue('AD3', '处置方式');
+        $spreadsheet->getActiveSheet()->setCellValue('AE3', '卷本数');
+        $spreadsheet->getActiveSheet()->setCellValue('AF3', '身份证号');
+        $spreadsheet->getActiveSheet()->setCellValue('AG3', '处置年份');
+
+
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -437,12 +447,13 @@ class QinlianChallengeController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AA')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AB')->setWidth(16);
+
         $spreadsheet->getActiveSheet()->getColumnDimension('AC')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AD')->setWidth(16);
-
         $spreadsheet->getActiveSheet()->getColumnDimension('AE')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(30);
-        $spreadsheet->getActiveSheet()->getColumnDimension('AG')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AG')->setWidth(16);
+
 
         $i = 4;
         foreach($data as $key=>$val){
@@ -480,12 +491,12 @@ class QinlianChallengeController extends BaseController
             $spreadsheet->getActiveSheet()->setCellValue('X' . $i, $val['second_form']);
             $spreadsheet->getActiveSheet()->setCellValue('AA' . $i, $val['third_form']);
             $spreadsheet->getActiveSheet()->setCellValue('AB' . $i, $val['fourth_form']);
-            $spreadsheet->getActiveSheet()->setCellValue('AC' . $i, $val['approval_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AD' . $i, $val['approval_status']);
 
-            $spreadsheet->getActiveSheet()->setCellValue('AE' . $i, $val['del_status']);
-            $spreadsheet->getActiveSheet()->setCellValue('AF' . $i, $val['create_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('AG' . $i, $val['update_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('AC' . $i, $val['is_thread_disposal']);
+            $spreadsheet->getActiveSheet()->setCellValue('AD' . $i, $val['disposal_method']);
+            $spreadsheet->getActiveSheet()->setCellValue('AE' . $i, $val['volume_number']);
+            $spreadsheet->getActiveSheet()->setCellValue('AF' . $i, $val['id_card']);
+            $spreadsheet->getActiveSheet()->setCellValue('AG' . $i, $val['disposal_year']);
 
             $i++;
         }

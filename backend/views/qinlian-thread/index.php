@@ -144,6 +144,7 @@ $modelLabel = new \backend\models\QinlianThread();
               echo '<th onclick="orderby(\'no_secondary_class_objects\', \'desc\')" '.CommonFun::sortClass($orderby, 'no_secondary_class_objects').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('no_secondary_class_objects').'</th>';
               echo '<th onclick="orderby(\'official_offences\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('official_offences').'</th>';
               echo '<th onclick="orderby(\'other_offences\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('other_offences').'</th>';
+              echo '<th onclick="orderby(\'organization_measure\', \'desc\')" '.CommonFun::sortClass($orderby, 'organization_measure').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organization_measure').'</th>';
               echo '<th onclick="orderby(\'organization_measure_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'organization_measure_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organization_measure_time').'</th>';
               echo '<th onclick="orderby(\'superiors_assigned\', \'desc\')" '.CommonFun::sortClass($orderby, 'superiors_assigned').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('superiors_assigned').'</th>';
               echo '<th onclick="orderby(\'department_charge\', \'desc\')" '.CommonFun::sortClass($orderby, 'department_charge').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('department_charge').'</th>';
@@ -212,6 +213,7 @@ $modelLabel = new \backend\models\QinlianThread();
                 echo '  <td>' . $model->no_secondary_class_objects . '</td>';
                 echo '  <td>' . mb_substr($model->official_offences, 0, 400) . '</td>';
                 echo '  <td>' . mb_substr($model->other_offences, 0, 400) . '</td>';
+                echo '  <td>' . mb_substr($model->organization_measure, 0, 400) . '</td>';
                 echo '  <td>' . $model->organization_measure_time . '</td>';
                 echo '  <td>' . $model->superiors_assigned . '</td>';
                 echo '  <td>' . $model->department_charge . '</td>';
@@ -286,6 +288,7 @@ $modelLabel = new \backend\models\QinlianThread();
                  echo '<th onclick="orderby(\'no_secondary_class_objects\', \'desc\')" '.CommonFun::sortClass($orderby, 'no_secondary_class_objects').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('no_secondary_class_objects').'</th>';
                  echo '<th onclick="orderby(\'official_offences\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('official_offences').'</th>';
                  echo '<th onclick="orderby(\'other_offences\', \'desc\')" class="th-width-1" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('other_offences').'</th>';
+                 echo '<th onclick="orderby(\'organization_measure\', \'desc\')" '.CommonFun::sortClass($orderby, 'organization_measure').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organization_measure').'</th>';
                  echo '<th onclick="orderby(\'organization_measure_time\', \'desc\')" '.CommonFun::sortClass($orderby, 'organization_measure_time').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('organization_measure_time').'</th>';
                  echo '<th onclick="orderby(\'superiors_assigned\', \'desc\')" '.CommonFun::sortClass($orderby, 'superiors_assigned').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('superiors_assigned').'</th>';
                  echo '<th onclick="orderby(\'department_charge\', \'desc\')" '.CommonFun::sortClass($orderby, 'department_charge').' tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('department_charge').'</th>';
@@ -640,6 +643,11 @@ $modelLabel = new \backend\models\QinlianThread();
                     <textarea type="text" class="form-control" id="disciplinary_offence" name="QinlianThread[disciplinary_offence]" placeholder="" ></textarea>
                 </div>
 
+                <label for="organization_measure" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("organization_measure")?></label>
+                <div class="col-xs-10">
+                    <textarea type="text" class="form-control" id="organization_measure" name="QinlianThread[organization_measure]" placeholder="" ></textarea>
+                </div>
+
                 <div class="clearfix"></div>
             </div>
 
@@ -884,6 +892,7 @@ function orderby(field, op){
         $("#no_secondary_class_objects").val("");
         $("#official_offences").val("");
         $("#other_offences").val("");
+        $("#organization_measure").val("");
         $("#organization_measure_time").val("");
         $("#superiors_assigned").val("");
         $("#department_charge").val("");
@@ -938,6 +947,7 @@ function orderby(field, op){
         $("#no_secondary_class_objects").val(data.no_secondary_class_objects)
         $("#official_offences").val(data.official_offences)
         $("#other_offences").val(data.other_offences)
+        $("#organization_measure").val(data.organization_measure)
         $("#organization_measure_time").val(data.organization_measure_time)
         $("#superiors_assigned").val(data.superiors_assigned)
         $("#department_charge").val(data.department_charge)
@@ -991,6 +1001,7 @@ function orderby(field, op){
       $("#no_secondary_class_objects").attr({readonly:true,disabled:true});
       $("#official_offences").attr({readonly:true,disabled:true});
       $("#other_offences").attr({readonly:true,disabled:true});
+      $("#organization_measure").attr({readonly:true,disabled:true});
       $("#organization_measure_time").attr({readonly:true,disabled:true});
       $("#superiors_assigned").attr({readonly:true,disabled:true});
       $("#department_charge").attr({readonly:true,disabled:true});
@@ -1045,6 +1056,7 @@ function orderby(field, op){
       $("#no_secondary_class_objects").attr({readonly:false,disabled:false});
       $("#official_offences").attr({readonly:false,disabled:false});
       $("#other_offences").attr({readonly:false,disabled:false});
+      $("#organization_measure").attr({readonly:false,disabled:false});
       $("#organization_measure_time").attr({readonly:false,disabled:false});
       $("#superiors_assigned").attr({readonly:false,disabled:false});
       $("#department_charge").attr({readonly:false,disabled:false});

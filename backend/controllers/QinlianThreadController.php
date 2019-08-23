@@ -293,12 +293,15 @@ class QinlianThreadController extends BaseController
                             'no_secondary_class_objects' =>  $value['AP'],
                             'official_offences' =>  $value['AQ'],
                             'other_offences' =>  $value['AR'],
-                            'organization_measure_time' =>  $value['AS'],
-                            'superiors_assigned' =>  $value['AT'],
-                            'department_charge' =>  $value['AU'],
-                            'del_status' =>  $value['AV'],
-                            'create_date' =>  $value['AW'],
-                            'update_time' =>  $value['AX'],
+                            'organization_measure' =>  $value['AS'],
+                            'organization_measure_time' =>  $value['AT'],
+                            'superiors_assigned' =>  $value['AU'],
+                            'department_charge' =>  $value['AV'],
+
+                            'disposal_method' =>  empty($value['AW']) ? '' : $value['AW'],
+                            'volume_number' =>  empty($value['AX']) ? '' : $value['AX'],
+                            'id_card' =>  empty($value['AY']) ? '' : $value['AY'],
+                            'disposal_year' =>  empty($value['AZ']) ? '' : $value['AZ'],
                         ];
                     }
                 }
@@ -355,13 +358,15 @@ class QinlianThreadController extends BaseController
                             'no_secondary_class_objects',
                             'official_offences',
                             'other_offences',
+                            'organization_measure',
                             'organization_measure_time',
                             'superiors_assigned',
                             'department_charge',
-                            'del_status',
-                            'create_date',
-                            'update_time',
 
+                            'disposal_method',
+                            'volume_number',
+                            'id_card',
+                            'disposal_year'
                         ],
                             $data)
                         ->execute();
@@ -435,12 +440,15 @@ class QinlianThreadController extends BaseController
         $spreadsheet->getActiveSheet()->setCellValue('AP3', '非党员非监察对象二级分类（万元）');
         $spreadsheet->getActiveSheet()->setCellValue('AQ3', '职务犯罪行为（万元）');
         $spreadsheet->getActiveSheet()->setCellValue('AR3', '其他违犯罪行为');
-        $spreadsheet->getActiveSheet()->setCellValue('AS3', '组织措施统计时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AT3', '上级交办');
-        $spreadsheet->getActiveSheet()->setCellValue('AU3', '分管科室');
-        $spreadsheet->getActiveSheet()->setCellValue('AV3', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('AW3', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('AX3', '更新时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AS3', '组织措施');
+        $spreadsheet->getActiveSheet()->setCellValue('AT3', '组织措施统计时间');
+        $spreadsheet->getActiveSheet()->setCellValue('AU3', '上级交办');
+        $spreadsheet->getActiveSheet()->setCellValue('AV3', '分管科室');
+
+        $spreadsheet->getActiveSheet()->setCellValue('AW3', '处置方式');
+        $spreadsheet->getActiveSheet()->setCellValue('AX3', '卷本数');
+        $spreadsheet->getActiveSheet()->setCellValue('AY3', '身份证号');
+        $spreadsheet->getActiveSheet()->setCellValue('AZ3', '处置年份');
 
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -493,8 +501,11 @@ class QinlianThreadController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('AT')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AU')->setWidth(12);
         $spreadsheet->getActiveSheet()->getColumnDimension('AV')->setWidth(16);
+
         $spreadsheet->getActiveSheet()->getColumnDimension('AW')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('AX')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AY')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AZ')->setWidth(16);
 
         $i = 4;
         foreach($data as $key=>$val){
@@ -544,12 +555,15 @@ class QinlianThreadController extends BaseController
             $spreadsheet->getActiveSheet()->setCellValue('AP' . $i, $val['no_secondary_class_objects']);
             $spreadsheet->getActiveSheet()->setCellValue('AQ' . $i, $val['official_offences']);
             $spreadsheet->getActiveSheet()->setCellValue('AR' . $i, $val['other_offences']);
-            $spreadsheet->getActiveSheet()->setCellValue('AS' . $i, $val['organization_measure_time']);
-            $spreadsheet->getActiveSheet()->setCellValue('AT' . $i, $val['superiors_assigned']);
-            $spreadsheet->getActiveSheet()->setCellValue('AU' . $i, $val['department_charge']);
-            $spreadsheet->getActiveSheet()->setCellValue('AV' . $i, $val['del_status']);
-            $spreadsheet->getActiveSheet()->setCellValue('AW' . $i, $val['create_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('AX' . $i, $val['update_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('AS' . $i, $val['organization_measure']);
+            $spreadsheet->getActiveSheet()->setCellValue('AT' . $i, $val['organization_measure_time']);
+            $spreadsheet->getActiveSheet()->setCellValue('AU' . $i, $val['superiors_assigned']);
+            $spreadsheet->getActiveSheet()->setCellValue('AV' . $i, $val['department_charge']);
+
+            $spreadsheet->getActiveSheet()->setCellValue('AW' . $i, $val['disposal_method']);
+            $spreadsheet->getActiveSheet()->setCellValue('AX' . $i, $val['volume_number']);
+            $spreadsheet->getActiveSheet()->setCellValue('AY' . $i, $val['id_card']);
+            $spreadsheet->getActiveSheet()->setCellValue('AZ' . $i, $val['disposal_year']);
 
             $i++;
         }

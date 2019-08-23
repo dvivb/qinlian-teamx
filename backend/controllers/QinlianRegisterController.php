@@ -387,9 +387,11 @@ class QinlianRegisterController extends BaseController
                             'confessional_books' => $value['EB'],
                             'department_charge' => $value['EC'],
                             'superiors_assigned' => $value['ED'],
-                            'del_status' => $value['EE'],
-                            'create_date' => $value['EF'],
-                            'update_time' => $value['EG'],
+
+                            'disposal_method' =>  empty($value['EE']) ? '' : $value['EE'],
+                            'volume_number' =>  empty($value['EF']) ? '' : $value['EF'],
+                            'id_card' =>  empty($value['EG']) ? '' : $value['EG'],
+                            'disposal_year' =>  empty($value['EH']) ? '' : $value['EH'],
                         ];
                     }
                 }
@@ -540,10 +542,11 @@ class QinlianRegisterController extends BaseController
                             'confessional_books',
                             'department_charge',
                             'superiors_assigned',
-                            'del_status',
-                            'create_date',
-                            'update_time',
 
+                            'disposal_method',
+                            'volume_number',
+                            'id_card',
+                            'disposal_year'
                         ],
                             $data)
                         ->execute();
@@ -711,9 +714,12 @@ class QinlianRegisterController extends BaseController
         $spreadsheet->getActiveSheet()->setCellValue('EB3', '忏悔书');
         $spreadsheet->getActiveSheet()->setCellValue('EC3', '分管科室');
         $spreadsheet->getActiveSheet()->setCellValue('ED3', '上级交办');
-        $spreadsheet->getActiveSheet()->setCellValue('EE3', '删除状态');
-        $spreadsheet->getActiveSheet()->setCellValue('EF3', '创建时间');
-        $spreadsheet->getActiveSheet()->setCellValue('EG3', '更新时间');
+
+        $spreadsheet->getActiveSheet()->setCellValue('EE3', '处置方式');
+        $spreadsheet->getActiveSheet()->setCellValue('EF3', '卷本数');
+        $spreadsheet->getActiveSheet()->setCellValue('EG3', '身份证号');
+        $spreadsheet->getActiveSheet()->setCellValue('EH3', '处置年份');
+
 
         // $spreadsheet->getDefaultStyle()->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
@@ -855,9 +861,12 @@ class QinlianRegisterController extends BaseController
         $spreadsheet->getActiveSheet()->getColumnDimension('EB')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('EC')->setWidth(16);
         $spreadsheet->getActiveSheet()->getColumnDimension('ED')->setWidth(16);
+
         $spreadsheet->getActiveSheet()->getColumnDimension('EE')->setWidth(16);
-        $spreadsheet->getActiveSheet()->getColumnDimension('EF')->setWidth(30);
-        $spreadsheet->getActiveSheet()->getColumnDimension('EG')->setWidth(12);
+        $spreadsheet->getActiveSheet()->getColumnDimension('EF')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('EG')->setWidth(16);
+        $spreadsheet->getActiveSheet()->getColumnDimension('EH')->setWidth(16);
+
 
         $i = 4;
         foreach($data as $key=>$val){
@@ -1001,9 +1010,11 @@ class QinlianRegisterController extends BaseController
             $spreadsheet->getActiveSheet()->setCellValue('EB' . $i, $val['confessional_books']);
             $spreadsheet->getActiveSheet()->setCellValue('EC' . $i, $val['department_charge']);
             $spreadsheet->getActiveSheet()->setCellValue('ED' . $i, $val['superiors_assigned']);
-            $spreadsheet->getActiveSheet()->setCellValue('EE' . $i, $val['del_status']);
-            $spreadsheet->getActiveSheet()->setCellValue('EF' . $i, $val['create_date']);
-            $spreadsheet->getActiveSheet()->setCellValue('EG' . $i, $val['update_time']);
+
+            $spreadsheet->getActiveSheet()->setCellValue('EE' . $i, $val['disposal_method']);
+            $spreadsheet->getActiveSheet()->setCellValue('EF' . $i, $val['volume_number']);
+            $spreadsheet->getActiveSheet()->setCellValue('EG' . $i, $val['id_card']);
+            $spreadsheet->getActiveSheet()->setCellValue('EH' . $i, $val['disposal_year']);
 
             $i++;
         }

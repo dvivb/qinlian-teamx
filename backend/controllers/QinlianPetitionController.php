@@ -292,13 +292,11 @@ class QinlianPetitionController extends BaseController
     //                        'approval_time' =>  $value['W'],
     //                        'approval_status' =>  $value['X'],
 //
-//                        if(!empty($value['AA'])){
                             'is_thread_disposal' =>  empty($value['AB']) ? '' : $value['AB'],
                             'disposal_method' =>  empty($value['AA']) ? '' : $value['AA'],
                             'volume_number' =>  empty($value['AC']) ? '' : $value['AC'],
                             'id_card' =>  empty($value['AD']) ? '' : $value['AD'],
                             'disposal_year' =>  empty($value['AE']) ? '' : $value['AE'],
-//                        }
 
                         ];
                     }
@@ -335,6 +333,7 @@ class QinlianPetitionController extends BaseController
                             'unit_responsibility',
 //                            'approval_time',
 //                            'approval_status',
+
                             'is_thread_disposal',
                             'disposal_method',
                             'volume_number',
