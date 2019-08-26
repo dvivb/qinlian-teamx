@@ -532,14 +532,19 @@ $modelLabel = new \backend\models\QinlianChallenge();
                         </select>
                     </div>
 
-                    <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
+                    <label for="id_card" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("id_card")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="create_date" name="QinlianChallenge[create_date]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
+                        <input type="text" class="form-control" id="id_card" name="QinlianChallenge[id_card]" placeholder=""/>
                     </div>
                     <div class="clearfix"></div>
                 </div>
 
                 <div id="update_time_div" class="form-group">
+                    <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="create_date" name="QinlianChallenge[create_date]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
+                    </div>
+
                     <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="update_time" name="QinlianChallenge[update_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd"  />
@@ -711,6 +716,7 @@ function orderby(field, op){
         $("#approval_time").val("");
         $("#approval_status").val("");
         $("#is_thread_disposal").val("");
+        $("#id_card").val("");
         $("#del_status").val("");
         $("#create_date").val("");
         $("#update_time").val("");
@@ -749,6 +755,7 @@ function orderby(field, op){
         $("#approval_time").val(data.approval_time)
         $("#approval_status").val(data.approval_status)
         $("#is_thread_disposal").val(data.is_thread_disposal)
+        $("#id_card").val(data.id_card)
         $("#del_status").val(data.del_status)
         $("#create_date").val(data.create_date)
         $("#update_time").val(data.update_time)
@@ -786,6 +793,7 @@ function orderby(field, op){
       $("#approval_time").attr({readonly:true,disabled:true});
       $("#approval_status").attr({readonly:true,disabled:true});
       $("#is_thread_disposal").attr({readonly:true,disabled:true});
+      $("#id_card").attr({readonly:true,disabled:true});
       $("#del_status").attr({readonly:true,disabled:true});
       $("#create_date").attr({readonly:true,disabled:true});
       $("#update_time").attr({readonly:true,disabled:true});
@@ -824,6 +832,7 @@ function orderby(field, op){
       $("#approval_time").attr({readonly:false,disabled:false});
       $("#approval_status").attr({readonly:false,disabled:false});
       $("#is_thread_disposal").attr({readonly:false,disabled:false});
+      $("#id_card").attr({readonly:false,disabled:false});
       $("#del_status").attr({readonly:false,disabled:false});
       $("#create_date").attr({readonly:false,disabled:false});
       $("#update_time").attr({readonly:false,disabled:false});

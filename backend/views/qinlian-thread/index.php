@@ -51,7 +51,7 @@ $modelLabel = new \backend\models\QinlianThread();
                 
                   <div class="form-group" style="margin: 5px;">
                       <label><?=$modelLabel->getAttributeLabel('number')?>:</label>
-                      <input type="text" class="form-control" id="query[number]" name="query[id]"  value="<?=isset($query["number"]) ? $query["number"] : "" ?>">
+                      <input type="text" class="form-control" id="query[number]" name="query[number]"  value="<?=isset($query["number"]) ? $query["number"] : "" ?>">
                   </div>
                 <div class="form-group" style="margin: 5px;">
                     <label><?=$modelLabel->getAttributeLabel('nuit_name')?>:</label>
@@ -703,17 +703,25 @@ $modelLabel = new \backend\models\QinlianThread();
             </div>
 
           <div id="create_date_div" class="form-group">
+              <label for="id_card" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("id_card")?></label>
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" id="id_card" name="QinlianThread[id_card]" placeholder=""/>
+              </div>
+
               <label for="create_date" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("create_date")?></label>
               <div class="col-sm-4">
                   <input type="text" class="form-control" id="create_date" name="QinlianThread[create_date]" placeholder="必填" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
               </div>
-
-              <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
-              <div class="col-sm-4">
-                  <input type="text" class="form-control" id="update_time" name="QinlianThread[update_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
-              </div>
               <div class="clearfix"></div>
           </div>
+
+            <div id="update_time_div" class="form-group">
+                <label for="update_time" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("update_time")?></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="update_time" name="QinlianThread[update_time]" placeholder="" data-provide="datepicker" data-date-format="yyyy-mm-dd" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
 
 
 			<?php ActiveForm::end(); ?>          
@@ -896,6 +904,7 @@ function orderby(field, op){
         $("#organization_measure_time").val("");
         $("#superiors_assigned").val("");
         $("#department_charge").val("");
+        $("#id_card").val("");
         $("#del_status").val("");
         $("#create_date").val("");
         $("#update_time").val("");
@@ -951,6 +960,7 @@ function orderby(field, op){
         $("#organization_measure_time").val(data.organization_measure_time)
         $("#superiors_assigned").val(data.superiors_assigned)
         $("#department_charge").val(data.department_charge)
+        $("#id_card").val(data.id_card)
         $("#del_status").val(data.del_status)
         $("#create_date").val(data.create_date)
         $("#update_time").val(data.update_time)
@@ -1005,6 +1015,7 @@ function orderby(field, op){
       $("#organization_measure_time").attr({readonly:true,disabled:true});
       $("#superiors_assigned").attr({readonly:true,disabled:true});
       $("#department_charge").attr({readonly:true,disabled:true});
+      $("#id_card").attr({readonly:true,disabled:true});
       $("#del_status").attr({readonly:true,disabled:true});
       $("#create_date").attr({readonly:true,disabled:true});
       $("#update_time").attr({readonly:true,disabled:true});
@@ -1060,6 +1071,7 @@ function orderby(field, op){
       $("#organization_measure_time").attr({readonly:false,disabled:false});
       $("#superiors_assigned").attr({readonly:false,disabled:false});
       $("#department_charge").attr({readonly:false,disabled:false});
+      $("#id_card").attr({readonly:false,disabled:false});
       $("#del_status").attr({readonly:false,disabled:false});
       $("#create_date").attr({readonly:false,disabled:false});
       $("#update_time").attr({readonly:false,disabled:false});
