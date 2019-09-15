@@ -11,7 +11,7 @@
             <div class="col-sm-12">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                     <tr>
-                        <td align="left" colspan="7" class="biaoti btbg" height="60">案件编号:<?=$model->case_code;?></td>
+                        <td align="left" colspan="7" class="biaoti btbg" height="60">档案号:<?=$model->number;?></td>
                         <td align="right" colspan="7" class="biaoti btbg" height="60">
                             <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>上传图片</a>
                         </td>
