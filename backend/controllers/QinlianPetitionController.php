@@ -547,4 +547,13 @@ class QinlianPetitionController extends BaseController
             'model'=>$model,
         ]);
     }
+
+
+    public function actionAnnex($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('annex', [
+            'model'=>$model,
+        ]);
+    }
 }

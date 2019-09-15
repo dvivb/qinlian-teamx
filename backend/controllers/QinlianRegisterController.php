@@ -1036,4 +1036,12 @@ class QinlianRegisterController extends BaseController
         $writer->save('php://output');
         exit;
     }
+
+    public function actionAnnex($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('annex', [
+            'model'=>$model,
+        ]);
+    }
 }
