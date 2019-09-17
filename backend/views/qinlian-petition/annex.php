@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 use common\utils\CommonFun;
 use yii\helpers\Url;
 
-use backend\models\QinlianPetition;
+use backend\models\QinlianAnnex;
 
 $modelLabel = new \backend\models\QinlianPetition();
 ?>
@@ -24,9 +24,9 @@ $modelLabel = new \backend\models\QinlianPetition();
             <div class="col-sm-12">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                     <tr>
-                        <td align="left" colspan="7" class="biaoti btbg" height="60">档案号:<?=$model->number;?></td>
+                        <td align="left" colspan="7" class="biaoti btbg" height="60">档案号:<?=$query['number'];?></td>
                         <td align="right" colspan="7" class="biaoti btbg" height="60">
-                            <a id="archives_btn" onclick="archivesAction(<?=$model->id;?>)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#archives" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>添加留档</a>
+                            <a id="archives_btn"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#archives" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>添加留档</a>
                         </td>
                     </tr>
                 </table>
@@ -36,19 +36,26 @@ $modelLabel = new \backend\models\QinlianPetition();
                         <th>案卷目录</th>
                         <th>页码</th>
                         <th>图片</th>
+                        <th>操作</th>
                     </tr>
-                    <tr>
-                        <td width="10%" class="btbg font-center titfont" ></td>
-                        <td width="10%" class="btbg font-center titfont" ></td>
-                        <td width="10%" class="btbg font-center titfont"></td>
-                        <td width="10%" class="btbg font-center titfont"><img src="/"/></td>
-                    </tr>
-                    <tr>
-                        <td width="10%" class="btbg font-center titfont" ></td>
-                        <td width="10%" class="btbg font-center titfont" ></td>
-                        <td width="10%" class="btbg font-center titfont"></td>
-                        <td width="10%" class="btbg font-center titfont"><img src="/"/></td>
-                    </tr>
+                    <?php
+                    foreach ($models as $model) {
+                        echo '<tr id="rowid_' . $model->id . '">';
+                        echo '  <td width="10%" class="btbg font-center titfont" >' . $model->code . '</td>';
+                        echo '  <td width="10%" class="btbg font-center titfont" >' . $model->catalog . '</td>';
+                        echo '  <td width="10%" class="btbg font-center titfont" >' . $model->page . '</td>';
+                        echo '  <td width="10%" class="btbg font-center titfont" ><a target="_blank" href="/uplaod/' . $model->url . '"> <img width="30" height="30" src="/uplaod/' . $model->url . '"/></a></td>';
+                        echo '  <td width="10%" class="right">';
+                        echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
+                        echo '  </td>';
+                        echo '</tr>';
+                    }
+
+                    if(empty($models)){
+                        echo ' <tr><td colspan="7" class="btbg font-center titfont" >没有数据</td></tr>';
+                    }
+                    ?>
+
                 </table>
             </div>
         </div>
@@ -65,19 +72,29 @@ $modelLabel = new \backend\models\QinlianPetition();
                     <h3>留档</h3>
                 </div>
                 <div class="modal-body">
-                    <?php $form = ActiveForm::begin(["id" => "qinlian-petition-archives-form", "class"=>"form-horizontal", "action"=>Url::toRoute("qinlian-petition/save")]); ?>
+<!--                    --><?php //$form = ActiveForm::begin(["id" => "qinlian-petition-archives-form", "class"=>"form-horizontal", "action"=>Url::toRoute("qinlian-petition/annex-save")]); ?>
+                    <?php $form = ActiveForm::begin(["id" => "qinlian-petition-archives-form", "class"=>"form-horizontal", "action"=>Url::toRoute("qinlian-petition/annex-save"), 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
-                    <input type="hidden" class="form-control" id="archives-id" name="id" />
+                    <input type="hidden" class="form-control" id="number" name="number" value="<?=$query['number'];?>" />
+                    <input type="hidden" class="form-control" id="type" name="type" value="<?=$query['type'];?>"/>
 
-                    <div id="is_thread_disposal_div" class="form-group">
-                        <label for="volume_number" class="col-sm-2 control-label">图片</label>
+                    <div id="catalog_div" class="form-group">
+                        <label for="catalog" class="col-sm-2 control-label">案卷目录</label>
                         <div class="col-sm-4">
-                            <input type="file" class="form-control" id="catalog" name="catalog"/>
+                            <input type="text" class="form-control" id="catalog" name="catalog"/>
                         </div>
 
-                        <label for="disposal_year" class="col-sm-2 control-label">页码</label>
+                        <label for="page" class="col-sm-2 control-label">页码</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="volume_number" name="page"/>
+                            <input type="text" class="form-control" id="page" name="page"/>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div id="url_div" class="form-group">
+                        <label for="url" class="col-sm-2 control-label">图片</label>
+                        <div class="col-sm-4">
+                            <input type="file" accept="image/jpeg" class="form-control" id="url" name="url"/>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -85,6 +102,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                     <?php ActiveForm::end(); ?>
                 </div>
                 <div class="modal-footer">
+                    <span id="error_msg" style="color: red; float: left;"></span>
                     <a href="#" class="btn btn-default" data-dismiss="modal">关闭</a>
                     <a id="archives_dialog_ok" href="#" class="btn btn-primary">确定</a>
                 </div>
@@ -96,30 +114,29 @@ $modelLabel = new \backend\models\QinlianPetition();
 <?php $this->beginBlock('footer');  ?>
 
 <script>
-    function archivesAction(id){
+    function deleteAction(id){
         $.ajax({
             type: "GET",
-            url: "<?=Url::toRoute('qinlian-petition/view')?>",
+            url: "<?=Url::toRoute('qinlian-petition/annex-delete')?>",
             data: {"id":id},
             cache: false,
             dataType:"json",
             error: function (xmlHttpRequest, textStatus, errorThrown) {
                 alert("出错了，" + textStatus);
             },
-            success: function(data){
-                console.log(data)
-                initArchivesmModule(data);
+            success: function(value){
+                if(value.errno == 0){
+                    admin_tool.alert('msg_info', '删除成功', 'success');
+                    window.location.reload();
+                }
             }
         });
     }
 
     function initArchivesmModule(data) {
-        $("#archives-id").val(data.id)
-        $("#disposal_method").val(data.disposal_method)
-        $("#volume_number").val(data.volume_number)
-        $("#disposal_year").val(data.disposal_year)
-        $("#archives-host_department").val(data.host_department)
-        $("#archives-number").val(data.number)
+        $("#code").val(data.code)
+        $("#catalog").val(data.catalog)
+        $("#page").val(data.page)
     }
 
     $('#archives_dialog_ok').click(function (e) {
@@ -127,10 +144,12 @@ $modelLabel = new \backend\models\QinlianPetition();
         $('#qinlian-petition-archives-form').submit();
     });
 
+
+
     $('#qinlian-petition-archives-form').bind('submit', function(e) {
         e.preventDefault();
         var id = $("#archives-id").val();
-        var action = "<?=Url::toRoute('qinlian-petition/update')?>";
+        var action = "<?=Url::toRoute('qinlian-petition/annex-create')?>";
         $(this).ajaxSubmit({
             type: "post",
             dataType:"json",
@@ -144,10 +163,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                 }
                 else{
                     var json = value.data;
-                    for(var key in json){
-                        $('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
-
-                    }
+                    $("#error_msg").text(value.msg);
                 }
 
             }

@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\models\QinlianAnnex;
+use backend\models\UploadForm;
 use Yii;
 use yii\data\Pagination;
 use backend\models\QinlianPetition;
@@ -11,6 +13,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use yii\web\UploadedFile;
 
 /**
  * QinlianPetitionController implements the CRUD actions for QinlianPetition model.
@@ -549,11 +552,110 @@ class QinlianPetitionController extends BaseController
     }
 
 
-    public function actionAnnex($id)
+    public function actionAnnex($number, $type)
     {
-        $model = $this->findModel($id);
+        $query = QinlianAnnex::find();
+
+        $condition['number'] = $number;
+        $condition['type'] = $type;
+        $query = $query->where($condition);
+
+        $orderby = Yii::$app->request->get('orderby', 'page');
+        if(empty($orderby) == false){
+            $query = $query->orderBy($orderby);
+        }
+
+
+        $models = $query
+            ->all();
+
+        $querys['number'] = $number;
+        $querys['type'] = $type;
         return $this->render('annex', [
-            'model'=>$model,
+            'models'=>$models,
+            'query'=>$querys,
         ]);
+    }
+
+    /**
+     * Creates a new QinlianPetition model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionAnnexCreate()
+    {
+        $model = new QinlianAnnex();
+        if (!$model->load(Yii::$app->request->post())) {
+
+            $param = Yii::$app->request->post();
+
+            $model->number = $param['number'];
+            $model->type = $param['type'];
+            $model->code = time();
+            $model->catalog = $param['catalog'];
+            $model->page = $param['page'];
+
+            if(empty($model->code) == true){
+                $model->code = 'CURRENT_TIMESTAMP';
+            }
+            if(empty($model->update_time) == true){
+                $model->update_time = 'CURRENT_TIMESTAMP';
+            }
+            if(empty($model->create_date) == true){
+                $model->create_date = 'CURRENT_TIMESTAMP';
+            }
+            $model->update_time = date('Y-m-d H:i:s');
+            $model->create_date = date('Y-m-d H:i:s');
+
+            $UploadedFile = new UploadedFile();
+
+            $file = $UploadedFile::getInstanceByName('url');
+
+            if ($file->type != 'image/jpeg'){
+                $msg = array('errno'=>2, 'msg'=>'上传文件类型错误');
+                return $this->asJson($msg);
+            }
+
+            $file_path = __DIR__ . '/../web/uplaod/';
+            $file_name = $model->code . '.'. $file->getExtension();
+
+
+            $model->url= $file_name;
+            if ($file->saveAs($file_path . $file_name)) {
+                $model->url = $file_name;
+            }else{
+                $msg = array('errno'=>2, 'msg'=>'上传文件错误');
+                return $this->asJson($msg);
+            }
+
+            if($model->validate() == true && $model->save()){
+                $msg = array('errno'=>0, 'msg'=>'保存成功');
+                return $this->asJson($msg);
+            }
+            else{
+                $msg = array('errno'=>2, 'data'=>$model->getErrors());
+                return $this->asJson($msg);
+            }
+        } else {
+            $msg = array('errno'=>2, 'msg'=>'数据出错');
+            return $this->asJson($msg);
+        }
+    }
+
+    /**
+     * Deletes an existing QinlianPetition model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionAnnexDelete($id)
+    {
+        if(count($id) > 0){
+            $c = QinlianAnnex::deleteAll(['in', 'id', $id]);
+            return $this->asJson(array('errno'=>0, 'data'=>$c, 'msg'=>json_encode($id)));
+        }
+        else{
+            return $this->asJson(array('errno'=>2, 'msg'=>''));
+        }
     }
 }
