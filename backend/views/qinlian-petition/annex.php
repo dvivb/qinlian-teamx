@@ -24,27 +24,29 @@ $modelLabel = new \backend\models\QinlianPetition();
             <div class="col-sm-12">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                     <tr>
-                        <td align="left" colspan="7" class="biaoti btbg" height="60">档案号:<?=$query['number'];?></td>
-                        <td align="right" colspan="7" class="biaoti btbg" height="60">
+                        <td align="left" colspan="6" class="biaoti btbg" height="60">档案号:<?=$query['number'];?></td>
+                        <td align="right" colspan="6" class="biaoti btbg" height="60">
                             <a id="archives_btn"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#archives" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>添加留档</a>
                         </td>
                     </tr>
                 </table>
                 <table width="100%" border="1" cellspacing="1" cellpadding="1" bgcolor="#cccccc" class="tabtop13" align="center">
                     <tr>
-                        <th>图片流水号</th>
+
                         <th>案卷目录</th>
                         <th>页码</th>
-                        <th>图片</th>
+                        <th>附属文件</th>
                         <th>操作</th>
                     </tr>
                     <?php
                     foreach ($models as $model) {
                         echo '<tr id="rowid_' . $model->id . '">';
-                        echo '  <td width="10%" class="btbg font-center titfont" >' . $model->code . '</td>';
                         echo '  <td width="10%" class="btbg font-center titfont" >' . $model->catalog . '</td>';
                         echo '  <td width="10%" class="btbg font-center titfont" >' . $model->page . '</td>';
-                        echo '  <td width="10%" class="btbg font-center titfont" ><a target="_blank" href="/uplaod/' . $model->url . '"> <img width="30" height="30" src="/uplaod/' . $model->url . '"/></a></td>';
+                        echo '  <td width="10%" class="right">';
+                        $url = Url::toRoute('qinlian-petition/files');
+                        echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&table_id='. $model->id .'&table_name=1" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>查看更多附属文件</a>';
+                        echo '  </td>';
                         echo '  <td width="10%" class="right">';
                         echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                         echo '  </td>';
@@ -94,7 +96,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                     <div id="url_div" class="form-group">
                         <label for="url" class="col-sm-2 control-label">图片</label>
                         <div class="col-sm-4">
-                            <input type="file" accept="image/jpeg" class="form-control" id="url" name="url"/>
+                            <input type="file" accept="image/jpeg" multiple="multiple" class="form-control" id="url" name="url[]"/>
                         </div>
                         <div class="clearfix"></div>
                     </div>

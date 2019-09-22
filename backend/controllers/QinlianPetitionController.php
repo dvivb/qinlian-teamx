@@ -3,11 +3,14 @@
 namespace backend\controllers;
 
 use backend\models\QinlianAnnex;
+use backend\models\QinlianUplaod;
 use backend\models\UploadForm;
+use Faker\Provider\Uuid;
 use Yii;
 use yii\data\Pagination;
 use backend\models\QinlianPetition;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -558,7 +561,7 @@ class QinlianPetitionController extends BaseController
 
         $condition['number'] = $number;
         $condition['type'] = $type;
-        $query = $query->where($condition);
+        $query = $query->select(['id','number','type','catalog','page'])->where($condition);
 
         $orderby = Yii::$app->request->get('orderby', 'page');
         if(empty($orderby) == false){
@@ -585,7 +588,7 @@ class QinlianPetitionController extends BaseController
     public function actionAnnexCreate()
     {
         $model = new QinlianAnnex();
-        if (!$model->load(Yii::$app->request->post())) {
+       if (!$model->load(Yii::$app->request->post())) {
 
             $param = Yii::$app->request->post();
 
@@ -607,28 +610,12 @@ class QinlianPetitionController extends BaseController
             $model->update_time = date('Y-m-d H:i:s');
             $model->create_date = date('Y-m-d H:i:s');
 
-            $UploadedFile = new UploadedFile();
-
-            $file = $UploadedFile::getInstanceByName('url');
-
-            if ($file->type != 'image/jpeg'){
-                $msg = array('errno'=>2, 'msg'=>'上传文件类型错误');
-                return $this->asJson($msg);
-            }
-
-            $file_path = __DIR__ . '/../web/uplaod/';
-            $file_name = $model->code . '.'. $file->getExtension();
-
-
-            $model->url= $file_name;
-            if ($file->saveAs($file_path . $file_name)) {
-                $model->url = $file_name;
-            }else{
-                $msg = array('errno'=>2, 'msg'=>'上传文件错误');
-                return $this->asJson($msg);
-            }
-
             if($model->validate() == true && $model->save()){
+
+                $UploadedFile = new UploadedFile();
+                $files = $UploadedFile::getInstancesByName('url');
+                $this->uplaodInstal($model->id, '1', $files);
+
                 $msg = array('errno'=>0, 'msg'=>'保存成功');
                 return $this->asJson($msg);
             }
@@ -657,5 +644,43 @@ class QinlianPetitionController extends BaseController
         else{
             return $this->asJson(array('errno'=>2, 'msg'=>''));
         }
+    }
+
+    private function uplaodInstal($table_id, $table_name, $files)
+    {
+        $model = new QinlianUplaod();
+        $file_path = __DIR__ . '/../web/uplaod/';
+        foreach($files as $file) {
+            $model->isNewRecord = true;
+            $model->table_id    = $table_id;
+            $model->table_name  = $table_name;
+
+            $code = Uuid::uuid();
+            $file_name = $code . '.'. $file->getExtension();
+            if ($file->saveAs($file_path . $file_name)) {
+                $model->url = $file_name;
+            }
+            $model->save() && $model->id = 0;
+        }
+    }
+
+    public function actionFiles($table_id, $table_name)
+    {
+        $query = QinlianUplaod::find();
+
+        $condition['table_id'] = $table_id;
+        $condition['table_name'] = $table_name;
+        $query = $query->select(['id','url'])->where($condition);
+
+        $models = $query
+            ->all();
+//        var_dump($models);
+
+        $querys['table_id'] = $table_id;
+        $querys['table_name'] = $table_name;
+        return $this->render('files', [
+            'models'=>$models,
+            'query'=>$querys,
+        ]);
     }
 }
