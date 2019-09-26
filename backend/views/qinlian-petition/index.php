@@ -190,7 +190,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                 echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
                 echo '      <a id="archives_btn" onclick="archivesAction(' . $model->id . ')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#archives" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>归档</a>';
                 $url = Url::toRoute('qinlian-petition/annex');
-                echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&number='. $model->id .'&type=1" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
+                echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&number='. $model->number .'&type=1" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
                 echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 $url = Url::toRoute('qinlian-petition/print');
                 echo '      <a id="print_btn"  class="btn btn-primary btn-sm" href="'. $url  .'&id='. $model->id .'" target="_self"> <i class="glyphicon glyphicon-print icon-white"></i>纪检监察机关来信来访登记卡</a>';
