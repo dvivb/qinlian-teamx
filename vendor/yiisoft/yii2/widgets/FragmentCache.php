@@ -8,35 +8,31 @@
 namespace yii\widgets;
 
 use Yii;
-use yii\base\DynamicContentAwareInterface;
-use yii\base\DynamicContentAwareTrait;
 use yii\base\Widget;
-use yii\caching\CacheInterface;
+use yii\caching\Cache;
 use yii\caching\Dependency;
 use yii\di\Instance;
 
 /**
  * FragmentCache is used by [[\yii\base\View]] to provide caching of page fragments.
  *
- * @property string|false $cachedContent The cached content. False is returned if valid content is not found
+ * @property string|boolean $cachedContent The cached content. False is returned if valid content is not found
  * in the cache. This property is read-only.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class FragmentCache extends Widget implements DynamicContentAwareInterface
+class FragmentCache extends Widget
 {
-    use DynamicContentAwareTrait;
-
     /**
-     * @var CacheInterface|array|string the cache object or the application component ID of the cache object.
+     * @var Cache|array|string the cache object or the application component ID of the cache object.
      * After the FragmentCache object is created, if you want to change this property,
      * you should only assign it with a cache object.
      * Starting from version 2.0.2, this can also be a configuration array for creating the object.
      */
     public $cache = 'cache';
     /**
-     * @var int number of seconds that the data can remain valid in cache.
+     * @var integer number of seconds that the data can remain valid in cache.
      * Use 0 to indicate that the cached data will never expire.
      */
     public $duration = 60;
@@ -57,7 +53,7 @@ class FragmentCache extends Widget implements DynamicContentAwareInterface
      */
     public $dependency;
     /**
-     * @var string[]|string list of factors that would cause the variation of the content being cached.
+     * @var array list of factors that would cause the variation of the content being cached.
      * Each factor is a string representing a variation (e.g. the language, a GET parameter).
      * The following variation setting will cause the content to be cached in different versions
      * according to the current application language:
@@ -70,10 +66,15 @@ class FragmentCache extends Widget implements DynamicContentAwareInterface
      */
     public $variations;
     /**
-     * @var bool whether to enable the fragment cache. You may use this property to turn on and off
+     * @var boolean whether to enable the fragment cache. You may use this property to turn on and off
      * the fragment cache according to specific setting (e.g. enable fragment cache only for GET requests).
      */
     public $enabled = true;
+    /**
+     * @var array a list of placeholders for embedding dynamic contents. This property
+     * is used internally to implement the content caching feature. Do not modify it.
+     */
+    public $dynamicPlaceholders;
 
 
     /**
@@ -83,10 +84,10 @@ class FragmentCache extends Widget implements DynamicContentAwareInterface
     {
         parent::init();
 
-        $this->cache = $this->enabled ? Instance::ensure($this->cache, 'yii\caching\CacheInterface') : null;
+        $this->cache = $this->enabled ? Instance::ensure($this->cache, Cache::className()) : null;
 
-        if ($this->cache instanceof CacheInterface && $this->getCachedContent() === false) {
-            $this->getView()->pushDynamicContent($this);
+        if ($this->cache instanceof Cache && $this->getCachedContent() === false) {
+            $this->getView()->cacheStack[] = $this;
             ob_start();
             ob_implicit_flush(false);
         }
@@ -102,9 +103,9 @@ class FragmentCache extends Widget implements DynamicContentAwareInterface
     {
         if (($content = $this->getCachedContent()) !== false) {
             echo $content;
-        } elseif ($this->cache instanceof CacheInterface) {
-            $this->getView()->popDynamicContent();
-
+        } elseif ($this->cache instanceof Cache) {
+            array_pop($this->getView()->cacheStack);
+            
             $content = ob_get_clean();
             if ($content === false || $content === '') {
                 return;
@@ -112,46 +113,65 @@ class FragmentCache extends Widget implements DynamicContentAwareInterface
             if (is_array($this->dependency)) {
                 $this->dependency = Yii::createObject($this->dependency);
             }
-            $data = [$content, $this->getDynamicPlaceholders()];
+            $data = [$content, $this->dynamicPlaceholders];
             $this->cache->set($this->calculateKey(), $data, $this->duration, $this->dependency);
-            echo $this->updateDynamicContent($content, $this->getDynamicPlaceholders());
+
+            if (empty($this->getView()->cacheStack) && !empty($this->dynamicPlaceholders)) {
+                $content = $this->updateDynamicContent($content, $this->dynamicPlaceholders);
+            }
+            echo $content;
         }
     }
 
     /**
-     * @var string|bool the cached content. False if the content is not cached.
+     * @var string|boolean the cached content. False if the content is not cached.
      */
     private $_content;
 
     /**
      * Returns the cached content if available.
-     * @return string|false the cached content. False is returned if valid content is not found in the cache.
+     * @return string|boolean the cached content. False is returned if valid content is not found in the cache.
      */
     public function getCachedContent()
     {
-        if ($this->_content !== null) {
-            return $this->_content;
+        if ($this->_content === null) {
+            $this->_content = false;
+            if ($this->cache instanceof Cache) {
+                $key = $this->calculateKey();
+                $data = $this->cache->get($key);
+                if (is_array($data) && count($data) === 2) {
+                    list ($content, $placeholders) = $data;
+                    if (is_array($placeholders) && count($placeholders) > 0) {
+                        if (empty($this->getView()->cacheStack)) {
+                            // outermost cache: replace placeholder with dynamic content
+                            $content = $this->updateDynamicContent($content, $placeholders);
+                        }
+                        foreach ($placeholders as $name => $statements) {
+                            $this->getView()->addDynamicPlaceholder($name, $statements);
+                        }
+                    }
+                    $this->_content = $content;
+                }
+            }
         }
 
-        $this->_content = false;
-
-        if (!($this->cache instanceof CacheInterface)) {
-            return $this->_content;
-        }
-
-        $key = $this->calculateKey();
-        $data = $this->cache->get($key);
-        if (!is_array($data) || count($data) !== 2) {
-            return $this->_content;
-        }
-
-        list($this->_content, $placeholders) = $data;
-        if (!is_array($placeholders) || count($placeholders) === 0) {
-            return $this->_content;
-        }
-
-        $this->_content = $this->updateDynamicContent($this->_content, $placeholders, true);
         return $this->_content;
+    }
+
+    /**
+     * Replaces placeholders in content by results of evaluated dynamic statements.
+     *
+     * @param string $content
+     * @param array $placeholders
+     * @return string final content
+     */
+    protected function updateDynamicContent($content, $placeholders)
+    {
+        foreach ($placeholders as $name => $statements) {
+            $placeholders[$name] = $this->getView()->evaluateDynamicContent($statements);
+        }
+
+        return strtr($content, $placeholders);
     }
 
     /**
@@ -161,6 +181,13 @@ class FragmentCache extends Widget implements DynamicContentAwareInterface
      */
     protected function calculateKey()
     {
-        return array_merge([__CLASS__, $this->getId()], (array)$this->variations);
+        $factors = [__CLASS__, $this->getId()];
+        if (is_array($this->variations)) {
+            foreach ($this->variations as $factor) {
+                $factors[] = $factor;
+            }
+        }
+
+        return $factors;
     }
 }

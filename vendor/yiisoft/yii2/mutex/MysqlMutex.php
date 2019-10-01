@@ -7,6 +7,7 @@
 
 namespace yii\mutex;
 
+use Yii;
 use yii\base\InvalidConfigException;
 
 /**
@@ -50,35 +51,27 @@ class MysqlMutex extends DbMutex
     /**
      * Acquires lock by given name.
      * @param string $name of the lock to be acquired.
-     * @param int $timeout time (in seconds) to wait for lock to become released.
-     * @return bool acquiring result.
+     * @param integer $timeout to wait for lock to become released.
+     * @return boolean acquiring result.
      * @see http://dev.mysql.com/doc/refman/5.0/en/miscellaneous-functions.html#function_get-lock
      */
     protected function acquireLock($name, $timeout = 0)
     {
-        return $this->db->useMaster(function ($db) use ($name, $timeout) {
-            /** @var \yii\db\Connection $db */
-            return (bool) $db->createCommand(
-                'SELECT GET_LOCK(:name, :timeout)',
-                [':name' => $name, ':timeout' => $timeout]
-            )->queryScalar();
-        });
+        return (bool) $this->db
+            ->createCommand('SELECT GET_LOCK(:name, :timeout)', [':name' => $name, ':timeout' => $timeout])
+            ->queryScalar();
     }
 
     /**
      * Releases lock by given name.
      * @param string $name of the lock to be released.
-     * @return bool release result.
+     * @return boolean release result.
      * @see http://dev.mysql.com/doc/refman/5.0/en/miscellaneous-functions.html#function_release-lock
      */
     protected function releaseLock($name)
     {
-        return $this->db->useMaster(function ($db) use ($name) {
-            /** @var \yii\db\Connection $db */
-            return (bool) $db->createCommand(
-                'SELECT RELEASE_LOCK(:name)',
-                [':name' => $name]
-            )->queryScalar();
-        });
+        return (bool) $this->db
+            ->createCommand('SELECT RELEASE_LOCK(:name)', [':name' => $name])
+            ->queryScalar();
     }
 }

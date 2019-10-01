@@ -19,8 +19,6 @@ use yii\base\InvalidConfigException;
  * Also, if the fixture is an instance of [[ActiveFixture]], you will be able to access AR models
  * through the syntax `$this->fixtureName('model name')`.
  *
- * For more details and usage information on FixtureTrait, see the [guide article on fixtures](guide:test-fixtures).
- *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
@@ -37,7 +35,6 @@ trait FixtureTrait
 
     /**
      * Declares the fixtures that are needed by the current test case.
-     *
      * The return value of this method must be an array of fixture configurations. For example,
      *
      * ```php
@@ -123,16 +120,6 @@ trait FixtureTrait
         foreach ($fixtures as $fixture) {
             $fixture->afterUnload();
         }
-    }
-
-    /**
-     * Initialize the fixtures.
-     * @since 2.0.12
-     */
-    public function initFixtures()
-    {
-        $this->unloadFixtures();
-        $this->loadFixtures();
     }
 
     /**

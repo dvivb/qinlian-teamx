@@ -39,7 +39,7 @@ use yii\base\Widget;
 class Block extends Widget
 {
     /**
-     * @var bool whether to render the block content in place. Defaults to false,
+     * @var boolean whether to render the block content in place. Defaults to false,
      * meaning the captured block content will not be displayed.
      */
     public $renderInPlace = false;
@@ -50,8 +50,6 @@ class Block extends Widget
      */
     public function init()
     {
-        parent::init();
-
         ob_start();
         ob_implicit_flush(false);
     }

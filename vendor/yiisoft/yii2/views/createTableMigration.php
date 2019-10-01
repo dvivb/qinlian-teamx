@@ -1,26 +1,20 @@
 <?php
 /**
- * This view is used by console/controllers/MigrateController.php.
- *
+ * This view is used by console/controllers/MigrateController.php
  * The following variables are available in this view:
  */
-/* @var $className string the new migration class name without namespace */
-/* @var $namespace string the new migration class namespace */
+/* @var $className string the new migration class name */
 /* @var $table string the name table */
-/* @var $tableComment string the comment table */
 /* @var $fields array the fields */
 /* @var $foreignKeys array the foreign keys */
 
 echo "<?php\n";
-if (!empty($namespace)) {
-    echo "\nnamespace {$namespace};\n";
-}
 ?>
 
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `<?= $table ?>`.
+ * Handles the creation for table `<?= $table ?>`.
 <?= $this->render('_foreignTables', [
     'foreignKeys' => $foreignKeys,
 ]) ?>
@@ -28,9 +22,9 @@ use yii\db\Migration;
 class <?= $className ?> extends Migration
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public function safeUp()
+    public function up()
     {
 <?= $this->render('_createTable', [
     'table' => $table,
@@ -38,19 +32,12 @@ class <?= $className ?> extends Migration
     'foreignKeys' => $foreignKeys,
 ])
 ?>
-<?php if (!empty($tableComment)) {
-    echo $this->render('_addComments', [
-        'table' => $table,
-        'tableComment' => $tableComment,
-    ]);
-}
-?>
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public function safeDown()
+    public function down()
     {
 <?= $this->render('_dropTable', [
     'table' => $table,

@@ -22,7 +22,7 @@ use yii\log\DbTarget;
 class m141106_185632_log_init extends Migration
 {
     /**
-     * @var DbTarget[] Targets to create log table for
+     * @var DbTarget[]
      */
     private $dbTargets = [];
 
@@ -35,18 +35,9 @@ class m141106_185632_log_init extends Migration
         if ($this->dbTargets === []) {
             $log = Yii::$app->getLog();
 
-            $usedTargets = [];
             foreach ($log->targets as $target) {
                 if ($target instanceof DbTarget) {
-                    $currentTarget = [
-                        $target->db,
-                        $target->logTable,
-                    ];
-                    if (!in_array($currentTarget, $usedTargets, true)) {
-                        // do not create same table twice
-                        $usedTargets[] = $currentTarget;
-                        $this->dbTargets[] = $target;
-                    }
+                    $this->dbTargets[] = $target;
                 }
             }
 
@@ -54,13 +45,13 @@ class m141106_185632_log_init extends Migration
                 throw new InvalidConfigException('You should configure "log" component to use one or more database targets before executing this migration.');
             }
         }
-
         return $this->dbTargets;
     }
 
     public function up()
     {
-        foreach ($this->getDbTargets() as $target) {
+        $targets = $this->getDbTargets();
+        foreach ($targets as $target) {
             $this->db = $target->db;
 
             $tableOptions = null;
@@ -85,7 +76,8 @@ class m141106_185632_log_init extends Migration
 
     public function down()
     {
-        foreach ($this->getDbTargets() as $target) {
+        $targets = $this->getDbTargets();
+        foreach ($targets as $target) {
             $this->db = $target->db;
 
             $this->dropTable($target->logTable);

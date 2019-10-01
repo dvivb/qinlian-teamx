@@ -7,8 +7,9 @@
 
 namespace yii\mutex;
 
-use yii\base\InvalidConfigException;
+use Yii;
 use yii\db\Connection;
+use yii\base\InvalidConfigException;
 use yii\di\Instance;
 
 /**

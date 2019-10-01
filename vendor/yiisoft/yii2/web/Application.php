@@ -9,12 +9,9 @@ namespace yii\web;
 
 use Yii;
 use yii\base\InvalidRouteException;
-use yii\helpers\Url;
 
 /**
  * Application is the base class for all web application classes.
- *
- * For more details and usage information on Application, see the [guide article on applications](guide:structure-applications).
  *
  * @property ErrorHandler $errorHandler The error handler application component. This property is read-only.
  * @property string $homeUrl The homepage URL.
@@ -58,7 +55,7 @@ class Application extends \yii\base\Application
 
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function bootstrap()
     {
@@ -78,39 +75,26 @@ class Application extends \yii\base\Application
     public function handleRequest($request)
     {
         if (empty($this->catchAll)) {
-            try {
-                list($route, $params) = $request->resolve();
-            } catch (UrlNormalizerRedirectException $e) {
-                $url = $e->url;
-                if (is_array($url)) {
-                    if (isset($url[0])) {
-                        // ensure the route is absolute
-                        $url[0] = '/' . ltrim($url[0], '/');
-                    }
-                    $url += $request->getQueryParams();
-                }
-
-                return $this->getResponse()->redirect(Url::to($url, $e->scheme), $e->statusCode);
-            }
+            list ($route, $params) = $request->resolve();
         } else {
             $route = $this->catchAll[0];
             $params = $this->catchAll;
             unset($params[0]);
         }
         try {
-            Yii::debug("Route requested: '$route'", __METHOD__);
+            Yii::trace("Route requested: '$route'", __METHOD__);
             $this->requestedRoute = $route;
             $result = $this->runAction($route, $params);
             if ($result instanceof Response) {
                 return $result;
-            }
+            } else {
+                $response = $this->getResponse();
+                if ($result !== null) {
+                    $response->data = $result;
+                }
 
-            $response = $this->getResponse();
-            if ($result !== null) {
-                $response->data = $result;
+                return $response;
             }
-
-            return $response;
         } catch (InvalidRouteException $e) {
             throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'), $e->getCode(), $e);
         }
@@ -126,12 +110,12 @@ class Application extends \yii\base\Application
         if ($this->_homeUrl === null) {
             if ($this->getUrlManager()->showScriptName) {
                 return $this->getRequest()->getScriptUrl();
+            } else {
+                return $this->getRequest()->getBaseUrl() . '/';
             }
-
-            return $this->getRequest()->getBaseUrl() . '/';
+        } else {
+            return $this->_homeUrl;
         }
-
-        return $this->_homeUrl;
     }
 
     /**
@@ -188,7 +172,7 @@ class Application extends \yii\base\Application
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function coreComponents()
     {

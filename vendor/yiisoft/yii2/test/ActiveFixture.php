@@ -7,6 +7,7 @@
 
 namespace yii\test;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\TableSchema;
 
@@ -21,8 +22,6 @@ use yii\db\TableSchema;
  *
  * After the fixture is loaded, you can access the loaded data via the [[data]] property. If you set [[modelClass]],
  * you will also be able to retrieve an instance of [[modelClass]] with the populated data via [[getModel()]].
- *
- * For more details and usage information on ActiveFixture, see the [guide article on fixtures](guide:test-fixtures).
  *
  * @property TableSchema $tableSchema The schema information of the database table associated with this
  * fixture. This property is read-only.
@@ -39,7 +38,7 @@ class ActiveFixture extends BaseActiveFixture
      */
     public $tableName;
     /**
-     * @var string|bool the file path or [path alias](guide:concept-aliases) of the data file that contains the fixture data
+     * @var string|boolean the file path or path alias of the data file that contains the fixture data
      * to be returned by [[getData()]]. If this is not set, it will default to `FixturePath/data/TableName.php`,
      * where `FixturePath` stands for the directory containing this fixture class, and `TableName` stands for the
      * name of the table associated with this fixture. You can set this property to be false to prevent loading any data.
@@ -53,7 +52,7 @@ class ActiveFixture extends BaseActiveFixture
 
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function init()
     {
@@ -66,13 +65,15 @@ class ActiveFixture extends BaseActiveFixture
     /**
      * Loads the fixture.
      *
-     * It populate the table with the data returned by [[getData()]].
+     * The default implementation will first clean up the table by calling [[resetTable()]].
+     * It will then populate the table with the data returned by [[getData()]].
      *
      * If you override this method, you should consider calling the parent implementation
      * so that the data returned by [[getData()]] can be populated into the table.
      */
     public function load()
     {
+        $this->resetTable();
         $this->data = [];
         $table = $this->getTableSchema();
         foreach ($this->getData() as $alias => $row) {
@@ -94,26 +95,13 @@ class ActiveFixture extends BaseActiveFixture
     protected function getData()
     {
         if ($this->dataFile === null) {
+            $class = new \ReflectionClass($this);
+            $dataFile = dirname($class->getFileName()) . '/data/' . $this->getTableSchema()->fullName . '.php';
 
-            if ($this->dataDirectory !== null) {
-                $dataFile = $this->getTableSchema()->fullName . '.php';
-            } else {
-                $class = new \ReflectionClass($this);
-                $dataFile = dirname($class->getFileName()) . '/data/' . $this->getTableSchema()->fullName . '.php';
-            }
-
-            return $this->loadData($dataFile, false);
+            return is_file($dataFile) ? require($dataFile) : [];
+        } else {
+            return parent::getData();
         }
-        return parent::getData();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unload()
-    {
-        $this->resetTable();
-        parent::unload();
     }
 
     /**

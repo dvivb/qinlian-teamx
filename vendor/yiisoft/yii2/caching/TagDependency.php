@@ -21,8 +21,6 @@ namespace yii\caching;
  * TagDependency::invalidate(Yii::$app->cache, 'user-123');
  * ```
  *
- * For more details and usage information on Cache, see the [guide article on caching](guide:caching-overview).
- *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
@@ -37,7 +35,7 @@ class TagDependency extends Dependency
     /**
      * Generates the data needed to determine if dependency has been changed.
      * This method does nothing in this class.
-     * @param CacheInterface $cache the cache component that is currently evaluating this dependency
+     * @param Cache $cache the cache component that is currently evaluating this dependency
      * @return mixed the data needed to determine if dependency has been changed.
      */
     protected function generateDependencyData($cache)
@@ -58,9 +56,11 @@ class TagDependency extends Dependency
     }
 
     /**
-     * {@inheritdoc}
+     * Performs the actual dependency checking.
+     * @param Cache $cache the cache component that is currently evaluating this dependency
+     * @return boolean whether the dependency is changed or not.
      */
-    public function isChanged($cache)
+    public function getHasChanged($cache)
     {
         $timestamps = $this->getTimestamps($cache, (array) $this->tags);
         return $timestamps !== $this->data;
@@ -68,7 +68,7 @@ class TagDependency extends Dependency
 
     /**
      * Invalidates all of the cached data items that are associated with any of the specified [[tags]].
-     * @param CacheInterface $cache the cache component that caches the data items
+     * @param Cache $cache the cache component that caches the data items
      * @param string|array $tags
      */
     public static function invalidate($cache, $tags)
@@ -82,7 +82,7 @@ class TagDependency extends Dependency
 
     /**
      * Generates the timestamp for the specified cache keys.
-     * @param CacheInterface $cache
+     * @param Cache $cache
      * @param string[] $keys
      * @return array the timestamp indexed by cache keys
      */
@@ -99,7 +99,7 @@ class TagDependency extends Dependency
 
     /**
      * Returns the timestamps for the specified tags.
-     * @param CacheInterface $cache
+     * @param Cache $cache
      * @param string[] $tags
      * @return array the timestamps indexed by the specified tags.
      */

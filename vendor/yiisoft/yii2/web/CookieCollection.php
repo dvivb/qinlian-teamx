@@ -7,34 +7,32 @@
 
 namespace yii\web;
 
-use ArrayIterator;
 use Yii;
-use yii\base\BaseObject;
+use ArrayIterator;
 use yii\base\InvalidCallException;
+use yii\base\Object;
 
 /**
  * CookieCollection maintains the cookies available in the current request.
  *
- * For more details and usage information on CookieCollection, see the [guide article on handling cookies](guide:runtime-sessions-cookies).
- *
- * @property int $count The number of cookies in the collection. This property is read-only.
+ * @property integer $count The number of cookies in the collection. This property is read-only.
  * @property ArrayIterator $iterator An iterator for traversing the cookies in the collection. This property
  * is read-only.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class CookieCollection extends BaseObject implements \IteratorAggregate, \ArrayAccess, \Countable
+class CookieCollection extends Object implements \IteratorAggregate, \ArrayAccess, \Countable
 {
     /**
-     * @var bool whether this collection is read only.
+     * @var boolean whether this collection is read only.
      */
     public $readOnly = false;
 
     /**
      * @var Cookie[] the cookies in this collection (indexed by the cookie names)
      */
-    private $_cookies;
+    private $_cookies = [];
 
 
     /**
@@ -64,7 +62,7 @@ class CookieCollection extends BaseObject implements \IteratorAggregate, \ArrayA
      * Returns the number of cookies in the collection.
      * This method is required by the SPL `Countable` interface.
      * It will be implicitly called when you use `count($collection)`.
-     * @return int the number of cookies in the collection.
+     * @return integer the number of cookies in the collection.
      */
     public function count()
     {
@@ -73,7 +71,7 @@ class CookieCollection extends BaseObject implements \IteratorAggregate, \ArrayA
 
     /**
      * Returns the number of cookies in the collection.
-     * @return int the number of cookies in the collection.
+     * @return integer the number of cookies in the collection.
      */
     public function getCount()
     {
@@ -107,7 +105,7 @@ class CookieCollection extends BaseObject implements \IteratorAggregate, \ArrayA
      * Returns whether there is a cookie with the specified name.
      * Note that if a cookie is marked for deletion from browser, this method will return false.
      * @param string $name the cookie name
-     * @return bool whether the named cookie exists
+     * @return boolean whether the named cookie exists
      * @see remove()
      */
     public function has($name)
@@ -135,7 +133,7 @@ class CookieCollection extends BaseObject implements \IteratorAggregate, \ArrayA
      * If `$removeFromBrowser` is true, the cookie will be removed from the browser.
      * In this case, a cookie with outdated expiry will be added to the collection.
      * @param Cookie|string $cookie the cookie object or the name of the cookie to be removed.
-     * @param bool $removeFromBrowser whether to remove the cookie from browser
+     * @param boolean $removeFromBrowser whether to remove the cookie from browser
      * @throws InvalidCallException if the cookie collection is read only
      */
     public function remove($cookie, $removeFromBrowser = true)
@@ -147,8 +145,7 @@ class CookieCollection extends BaseObject implements \IteratorAggregate, \ArrayA
             $cookie->expire = 1;
             $cookie->value = '';
         } else {
-            $cookie = Yii::createObject([
-                'class' => 'yii\web\Cookie',
+            $cookie = new Cookie([
                 'name' => $cookie,
                 'expire' => 1,
             ]);
@@ -197,7 +194,7 @@ class CookieCollection extends BaseObject implements \IteratorAggregate, \ArrayA
      * This method is required by the SPL interface [[\ArrayAccess]].
      * It is implicitly called when you use something like `isset($collection[$name])`.
      * @param string $name the cookie name
-     * @return bool whether the named cookie exists
+     * @return boolean whether the named cookie exists
      */
     public function offsetExists($name)
     {

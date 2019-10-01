@@ -100,15 +100,7 @@
          *  - jqXHR: a jqXHR object
          *  - textStatus: the status of the request ("success", "notmodified", "error", "timeout", "abort", or "parsererror").
          */
-        ajaxComplete: 'ajaxComplete',
-        /**
-         * afterInit event is triggered after yii activeForm init.
-         * The signature of the event handler should be:
-         *     function (event)
-         * where
-         *  - event: an Event object.
-         */
-        afterInit: 'afterInit'
+        ajaxComplete: 'ajaxComplete'
     };
 
     // NOTE: If you change any of these defaults, make sure you update yii\widgets\ActiveForm::getClientOptions() as well
@@ -132,11 +124,7 @@
         // the URL for performing AJAX-based validation. If not set, it will use the the form's action
         validationUrl: undefined,
         // whether to scroll to first visible error after validation.
-        scrollToError: true,
-        // offset in pixels that should be added when scrolling to the first error.
-        scrollToErrorOffset: 0,
-        // where to add validation class: container or input
-        validationStateOn: 'container'
+        scrollToError: true
     };
 
     // NOTE: If you change any of these defaults, make sure you update yii\widgets\ActiveField::getClientOptions() as well
@@ -170,9 +158,7 @@
         // whether the validation is cancelled by beforeValidateAttribute event handler
         cancelled: false,
         // the value of the input
-        value: undefined,
-        // whether to update aria-invalid attribute after validation
-        updateAriaInvalid: true
+        value: undefined
     };
 
 
@@ -216,14 +202,14 @@
                     attributes: attributes,
                     submitting: false,
                     validated: false,
-                    options: getFormOptions($form)
+                    target: $form.attr('target')
                 });
 
                 /**
                  * Clean up error status when the form is reset.
                  * Note that $form.on('reset', ...) does work because the "reset" event does not bubble on IE.
                  */
-                $form.on('reset.yiiActiveForm', methods.resetForm);
+                $form.bind('reset.yiiActiveForm', methods.resetForm);
 
                 if (settings.validateOnSubmit) {
                     $form.on('mouseup.yiiActiveForm keyup.yiiActiveForm', ':submit', function () {
@@ -231,8 +217,6 @@
                     });
                     $form.on('submit.yiiActiveForm', methods.submitForm);
                 }
-                var event = $.Event(events.afterInit);
-                $form.trigger(event);
             });
         },
 
@@ -262,7 +246,6 @@
                 attributes.splice(index, 1);
                 unwatchAttribute($form, attribute);
             }
-
             return attribute;
         },
 
@@ -289,7 +272,7 @@
 
         destroy: function () {
             return this.each(function () {
-                $(this).off('.yiiActiveForm');
+                $(this).unbind('.yiiActiveForm');
                 $(this).removeData('yiiActiveForm');
             });
         },
@@ -299,11 +282,7 @@
         },
 
         // validate all applicable inputs in the form
-        validate: function (forceValidate) {
-            if (forceValidate) {
-                $(this).data('yiiActiveForm').submitting = true;
-            }
-
+        validate: function () {
             var $form = $(this),
                 data = $form.data('yiiActiveForm'),
                 needAjaxValidation = false,
@@ -311,10 +290,9 @@
                 deferreds = deferredArray(),
                 submitting = data.submitting;
 
+            var event = $.Event(events.beforeValidate);
+            $form.trigger(event, [messages, deferreds]);
             if (submitting) {
-                var event = $.Event(events.beforeValidate);
-                $form.trigger(event, [messages, deferreds]);
-
                 if (event.result === false) {
                     data.submitting = false;
                     submitFinalize($form);
@@ -324,7 +302,6 @@
 
             // client-side validation
             $.each(data.attributes, function () {
-                this.$form = $form;
                 if (!$(this.input).is(":disabled")) {
                     this.cancelled = false;
                     // perform validation only if the form is being submitted or if an attribute is pending validation
@@ -358,7 +335,7 @@
                         delete messages[i];
                     }
                 }
-                if (needAjaxValidation && ($.isEmptyObject(messages) || data.submitting)) {
+                if ($.isEmptyObject(messages) && needAjaxValidation) {
                     var $button = data.submitObject,
                         extData = '&' + data.settings.ajaxParam + '=' + $form.attr('id');
                     if ($button && $button.length && $button.attr('name')) {
@@ -394,7 +371,7 @@
                     });
                 } else if (data.submitting) {
                     // delay callback so that the form can be submitted without problem
-                    window.setTimeout(function () {
+                    setTimeout(function () {
                         updateInputs($form, messages, submitting);
                     }, 200);
                 } else {
@@ -438,16 +415,13 @@
             // Because we bind directly to a form reset event instead of a reset button (that may not exist),
             // when this function is executed form input values have not been reset yet.
             // Therefore we do the actual reset work through setTimeout.
-            window.setTimeout(function () {
+            setTimeout(function () {
                 $.each(data.attributes, function () {
                     // Without setTimeout() we would get the input values that are not reset yet.
                     this.value = getValue($form, this);
                     this.status = 0;
-                    var $container = $form.find(this.container),
-                        $input = findInput($form, this),
-                        $errorElement = data.settings.validationStateOn === 'input' ? $input : $container;
-
-                    $errorElement.removeClass(
+                    var $container = $form.find(this.container);
+                    $container.removeClass(
                         data.settings.validatingCssClass + ' ' +
                             data.settings.errorCssClass + ' ' +
                             data.settings.successCssClass
@@ -541,7 +515,7 @@
         if (data.settings.timer !== undefined) {
             clearTimeout(data.settings.timer);
         }
-        data.settings.timer = window.setTimeout(function () {
+        data.settings.timer = setTimeout(function () {
             if (data.submitting || $form.is(':hidden')) {
                 return;
             }
@@ -568,48 +542,6 @@
         return array;
     };
 
-    var buttonOptions = ['action', 'target', 'method', 'enctype'];
-
-    /**
-     * Returns current form options
-     * @param $form
-     * @returns object Object with button of form options
-     */
-    var getFormOptions = function ($form) {
-        var attributes = {};
-        for (var i = 0; i < buttonOptions.length; i++) {
-            attributes[buttonOptions[i]] = $form.attr(buttonOptions[i]);
-        }
-
-        return attributes;
-    };
-
-    /**
-     * Applies temporary form options related to submit button
-     * @param $form the form jQuery object
-     * @param $button the button jQuery object
-     */
-    var applyButtonOptions = function ($form, $button) {
-        for (var i = 0; i < buttonOptions.length; i++) {
-            var value = $button.attr('form' + buttonOptions[i]);
-            if (value) {
-                $form.attr(buttonOptions[i], value);
-            }
-        }
-    };
-
-    /**
-     * Restores original form options
-     * @param $form the form jQuery object
-     */
-    var restoreButtonOptions = function ($form) {
-        var data = $form.data('yiiActiveForm');
-
-        for (var i = 0; i < buttonOptions.length; i++) {
-            $form.attr(buttonOptions[i], data.options[buttonOptions[i]] || null);
-        }
-    };
-
     /**
      * Updates the error messages and the input containers for all applicable attributes
      * @param $form the form jQuery object
@@ -618,10 +550,6 @@
      */
     var updateInputs = function ($form, messages, submitting) {
         var data = $form.data('yiiActiveForm');
-
-        if (data === undefined) {
-            return false;
-        }
 
         if (submitting) {
             var errorAttributes = [];
@@ -639,12 +567,7 @@
                 if (data.settings.scrollToError) {
                     var top = $form.find($.map(errorAttributes, function(attribute) {
                         return attribute.input;
-                    }).join(',')).first().closest(':visible').offset().top - data.settings.scrollToErrorOffset;
-                    if (top < 0) {
-                        top = 0;
-                    } else if (top > $(document).height()) {
-                        top = $(document).height();
-                    }
+                    }).join(',')).first().closest(':visible').offset().top;
                     var wtop = $(window).scrollTop();
                     if (top < wtop || top > wtop + $(window).height()) {
                         $(window).scrollTop(top);
@@ -653,13 +576,14 @@
                 data.submitting = false;
             } else {
                 data.validated = true;
-                if (data.submitObject) {
-                    applyButtonOptions($form, data.submitObject);
+                var buttonTarget = data.submitObject ? data.submitObject.attr('formtarget') : null;
+                if (buttonTarget) {
+                    // set target attribute to form tag before submit
+                    $form.attr('target', buttonTarget);
                 }
                 $form.submit();
-                if (data.submitObject) {
-                    restoreButtonOptions($form);
-                }
+                // restore original target attribute value
+                $form.attr('target', data.target);
             }
         } else {
             $.each(data.attributes, function () {
@@ -709,34 +633,28 @@
         if (!$.isArray(messages[attribute.id])) {
             messages[attribute.id] = [];
         }
+        $form.trigger(events.afterValidateAttribute, [attribute, messages[attribute.id]]);
 
         attribute.status = 1;
         if ($input.length) {
             hasError = messages[attribute.id].length > 0;
             var $container = $form.find(attribute.container);
             var $error = $container.find(attribute.error);
-            updateAriaInvalid($form, attribute, hasError);
-
-            var $errorElement = data.settings.validationStateOn === 'input' ? $input : $container;
-
             if (hasError) {
                 if (attribute.encodeError) {
                     $error.text(messages[attribute.id][0]);
                 } else {
                     $error.html(messages[attribute.id][0]);
                 }
-                $errorElement.removeClass(data.settings.validatingCssClass + ' ' + data.settings.successCssClass)
+                $container.removeClass(data.settings.validatingCssClass + ' ' + data.settings.successCssClass)
                     .addClass(data.settings.errorCssClass);
             } else {
                 $error.empty();
-                $errorElement.removeClass(data.settings.validatingCssClass + ' ' + data.settings.errorCssClass + ' ')
+                $container.removeClass(data.settings.validatingCssClass + ' ' + data.settings.errorCssClass + ' ')
                     .addClass(data.settings.successCssClass);
             }
             attribute.value = getValue($form, attribute);
         }
-
-        $form.trigger(events.afterValidateAttribute, [attribute, messages[attribute.id]]);
-
         return hasError;
     };
 
@@ -774,7 +692,6 @@
             if (!$realInput.length) {
                 $realInput = $form.find('input[type=hidden][name="' + $input.attr('name') + '"]');
             }
-
             return $realInput.val();
         } else {
             return $input.val();
@@ -791,9 +708,4 @@
         }
     };
 
-    var updateAriaInvalid = function ($form, attribute, hasError) {
-        if (attribute.updateAriaInvalid) {
-            $form.find(attribute.input).attr('aria-invalid', hasError ? 'true' : 'false');
-        }
-    }
 })(window.jQuery);
