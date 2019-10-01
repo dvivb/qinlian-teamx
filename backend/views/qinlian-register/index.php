@@ -396,7 +396,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                 echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
                 echo '      <a id="archives_btn" onclick="archivesAction(' . $model->id . ')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#archives" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>归档</a>';
                 $url = Url::toRoute('qinlian-register/annex');
-                echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&number='. $model->id .'&type=2" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
+                echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&table_id='. $model->id .'&number='. $model->id .'&type=2" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
 
                 echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 echo '  </td>';

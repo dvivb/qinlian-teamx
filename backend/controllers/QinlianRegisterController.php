@@ -1041,13 +1041,13 @@ class QinlianRegisterController extends BaseController
         exit;
     }
 
-    public function actionAnnex($number, $type)
+    public function actionAnnex($table_id, $number, $type)
     {
         $query = QinlianAnnex::find();
 
-        $condition['number'] = $number;
+        $condition['table_id'] = $table_id;
         $condition['type'] = $type;
-        $query = $query->select(['id','number','type','catalog','page'])->where($condition);
+        $query = $query->select(['id','number','type', 'table_id', 'catalog','page'])->where($condition);
 
         $orderby = Yii::$app->request->get('orderby', 'page');
         if(empty($orderby) == false){
@@ -1060,6 +1060,7 @@ class QinlianRegisterController extends BaseController
 
         $querys['number'] = $number;
         $querys['type'] = $type;
+        $querys['table_id'] = $table_id;
         return $this->render('annex', [
             'models'=>$models,
             'query'=>$querys,
@@ -1080,6 +1081,7 @@ class QinlianRegisterController extends BaseController
 
             $model->number = $param['number'];
             $model->type = $param['type'];
+            $model->table_id = $param['table_id'];
             $model->code = time();
             $model->catalog = $param['catalog'];
             $model->page = $param['page'];
@@ -1135,6 +1137,7 @@ class QinlianRegisterController extends BaseController
     private function uplaodInstal($table_id, $table_name, $files)
     {
         $model = new QinlianUplaod();
+        $model->code = time();
         $file_path = __DIR__ . '/../web/uplaod/';
         foreach($files as $file) {
             $model->isNewRecord = true;
@@ -1156,7 +1159,7 @@ class QinlianRegisterController extends BaseController
 
         $condition['table_id'] = $table_id;
         $condition['table_name'] = $table_name;
-        $query = $query->select(['id','url'])->where($condition);
+        $query = $query->select(['id','url', 'code'])->where($condition);
 
         $models = $query
             ->all();

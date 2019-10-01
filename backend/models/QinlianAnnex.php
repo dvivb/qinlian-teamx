@@ -23,7 +23,7 @@ class QinlianAnnex extends \backend\models\BaseModel
     {
         return [
             [['code', 'create_date', 'update_time'], 'safe'],
-            [['number', 'page', 'del_status'], 'integer'],
+            [['number', 'table_id', 'page', 'del_status'], 'integer'],
             [['catalog', 'url'], 'string', 'max' => 60]
         ];
     }
@@ -37,6 +37,7 @@ class QinlianAnnex extends \backend\models\BaseModel
             'id' => 'ID',
             'number' => '档案号',
             'type' => '类型',
+            'table_id' => '关联表ID',
             'code' => '流水号',
             'catalog' => '案卷目录',
             'page' => '页码',
@@ -127,6 +128,30 @@ class QinlianAnnex extends \backend\models\BaseModel
             'type' => 'integer',
             'unsigned' => false,
             'label'=>$this->getAttributeLabel('type'),
+            'inputType' => 'text',
+            'isEdit' => true,
+            'isSearch' => false,
+            'isDisplay' => true,
+            'isSort' => true,
+//                         'udc'=>'',
+        ),
+
+        'table_id' => array(
+            'name' => 'table_id',
+            'allowNull' => false,
+//                         'autoIncrement' => false,
+//                         'comment' => '关联表ID',
+//                         'dbType' => "int(3)",
+            'defaultValue' => '0',
+            'enumValues' => null,
+            'isPrimaryKey' => false,
+            'phpType' => 'integer',
+            'precision' => '8',
+            'scale' => '',
+            'size' => '8',
+            'type' => 'integer',
+            'unsigned' => false,
+            'label'=>$this->getAttributeLabel('table_id'),
             'inputType' => 'text',
             'isEdit' => true,
             'isSearch' => false,

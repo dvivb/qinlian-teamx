@@ -78,6 +78,7 @@ $modelLabel = new \backend\models\QinlianRegister();
 
                 <input type="hidden" class="form-control" id="number" name="number" value="<?=$query['number'];?>" />
                 <input type="hidden" class="form-control" id="type" name="type" value="<?=$query['type'];?>"/>
+                <input type="hidden" class="form-control" id="table_id" name="table_id" value="<?=$query['table_id'];?>" />
 
                 <div id="catalog_div" class="form-group">
                     <label for="catalog" class="col-sm-2 control-label">案卷目录</label>

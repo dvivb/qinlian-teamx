@@ -22,7 +22,7 @@ class QinlianUplaod extends \backend\models\BaseModel
     public function rules()
     {
         return [
-            [['create_date', 'update_time'], 'safe'],
+            [['code', 'create_date', 'update_time'], 'safe'],
             [['table_id', 'del_status'], 'integer'],
             [['table_name', 'url'], 'string', 'max' => 60]
         ];
@@ -38,6 +38,7 @@ class QinlianUplaod extends \backend\models\BaseModel
             'table_id' => '关联表ID',
             'table_name' => '关联表名',
             'url' => 'URL',
+            'code' => '文件编号',
             'del_status' => '删除状态',
             'create_date' => '创建时间',
             'update_time' => '更新时间',
@@ -90,7 +91,7 @@ class QinlianUplaod extends \backend\models\BaseModel
             'name' => 'table_id',
             'allowNull' => false,
 //                         'autoIncrement' => false,
-//                         'comment' => '类型',
+//                         'comment' => '关联表ID',
 //                         'dbType' => "int(3)",
             'defaultValue' => '0',
             'enumValues' => null,
@@ -159,6 +160,29 @@ class QinlianUplaod extends \backend\models\BaseModel
             'isSort' => true,
 //                         'udc'=>'',
         ),
+            'code' => array(
+                'name' => 'code',
+                'allowNull' => false,
+//                         'autoIncrement' => false,
+//                         'comment' => '文件编号',
+//                         'dbType' => "timestamp",
+                'defaultValue' => '',
+                'enumValues' => null,
+                'isPrimaryKey' => false,
+                'phpType' => 'string',
+                'precision' => '',
+                'scale' => '',
+                'size' => '',
+                'type' => 'timestamp',
+                'unsigned' => false,
+                'label'=>$this->getAttributeLabel('code'),
+                'inputType' => 'text',
+                'isEdit' => true,
+                'isSearch' => false,
+                'isDisplay' => true,
+                'isSort' => true,
+//                         'udc'=>'',
+            ),
 
 		'del_status' => array(
                         'name' => 'del_status',

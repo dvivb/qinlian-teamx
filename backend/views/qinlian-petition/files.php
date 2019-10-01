@@ -27,7 +27,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                     <?php
                     foreach ($models as $model) {
                         echo '<tr id="rowid_' . $model->id . '">';
-                        echo '  <td width="10%" class="btbg font-center titfont" ><a target="_blank" href="/uplaod/' . $model->url . '"> <img width="300" height="300" src="/uplaod/' . $model->url . '"/></a></td>';
+                        echo '  <td width="10%" class="btbg font-center titfont" ><a target="_blank" href="/uplaod/' . $model->url . '"> <img width="300" height="300" src="/uplaod/' . $model->url . '"/></a>&nbsp;&nbsp;文件编号:'. $model->code .'</td>';
                         echo '</tr>';
                     }
 

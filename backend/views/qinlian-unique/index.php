@@ -199,7 +199,7 @@ $RegisterModelLabel = new \backend\models\QinlianRegister();
                                         echo '  <td>' . $model->update_time . '</td>';
                                         echo '  <td class="center">';
                                         $url = Url::toRoute('qinlian-petition/annex');
-                                        echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&number='. $model->id .'&type=1" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
+                                        echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&table_id='. $model->id .'&number='. $model->number .'&type=1" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
                                         $url = Url::toRoute('qinlian-petition/print');
                                         echo '      <a id="print_btn"  class="btn btn-primary btn-sm" href="'. $url  .'&id='. $model->id .'" target="_self"> <i class="glyphicon glyphicon-print icon-white"></i>纪检监察机关来信来访登记卡</a>';
                                         $url = Url::toRoute('qinlian-petition/printb');
@@ -930,7 +930,7 @@ $RegisterModelLabel = new \backend\models\QinlianRegister();
                                         echo '  <td>' . $model->update_time . '</td>';
                                         echo '  <td class="center">';
                                         $url = Url::toRoute('qinlian-register/annex');
-                                        echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&number='. $model->id .'&type=2" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
+                                        echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&table_id='. $model->id .'&number='. $model->number .'&type=2" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>留档</a>';
                                         echo '  </td>';
                                         echo '</tr>';
                                     }
