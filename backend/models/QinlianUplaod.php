@@ -22,9 +22,9 @@ class QinlianUplaod extends \backend\models\BaseModel
     public function rules()
     {
         return [
-            [['code', 'create_date', 'update_time'], 'safe'],
+            [['create_date', 'update_time'], 'safe'],
             [['table_id', 'del_status'], 'integer'],
-            [['table_name', 'url'], 'string', 'max' => 60]
+            [['table_name', 'url', 'code'], 'string', 'max' => 60]
         ];
     }
 
@@ -172,8 +172,8 @@ class QinlianUplaod extends \backend\models\BaseModel
                 'phpType' => 'string',
                 'precision' => '',
                 'scale' => '',
-                'size' => '',
-                'type' => 'timestamp',
+                'size' => '30',
+                'type' => 'string',
                 'unsigned' => false,
                 'label'=>$this->getAttributeLabel('code'),
                 'inputType' => 'text',

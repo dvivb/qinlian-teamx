@@ -86,14 +86,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                         <input type="text" class="form-control" id="catalog" name="catalog"/>
                     </div>
 
-                    <label for="page" class="col-sm-2 control-label">页码</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="page" name="page"/>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
 
-                <div id="url_div" class="form-group">
                     <label for="url" class="col-sm-2 control-label">图片</label>
                     <div class="col-sm-4">
                         <input type="file" accept="image/jpeg" multiple="multiple" class="form-control" id="url" name="url[]"/>

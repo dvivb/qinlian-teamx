@@ -1047,13 +1047,7 @@ class QinlianRegisterController extends BaseController
 
         $condition['table_id'] = $table_id;
         $condition['type'] = $type;
-        $query = $query->select(['id','number','type', 'table_id', 'catalog','page'])->where($condition);
-
-        $orderby = Yii::$app->request->get('orderby', 'page');
-        if(empty($orderby) == false){
-            $query = $query->orderBy($orderby);
-        }
-
+        $query = $query->select(['id','number','type', 'table_id', 'catalog','page'])->where($condition)->orderBy('catalog DESC, create_date DESC');
 
         $models = $query
             ->all();
@@ -1084,7 +1078,9 @@ class QinlianRegisterController extends BaseController
             $model->table_id = $param['table_id'];
             $model->code = time();
             $model->catalog = $param['catalog'];
-            $model->page = $param['page'];
+
+            $code = Uuid::uuid();
+            $model->page = $code;
 
             if(empty($model->code) == true){
                 $model->code = 'CURRENT_TIMESTAMP';
@@ -1102,7 +1098,7 @@ class QinlianRegisterController extends BaseController
 
                 $UploadedFile = new UploadedFile();
                 $files = $UploadedFile::getInstancesByName('url');
-                $this->uplaodInstal($model->id, '2', $files);
+                $this->uplaodInstal($model->id, '2', $files, $code);
 
                 $msg = array('errno'=>0, 'msg'=>'保存成功');
                 return $this->asJson($msg);
@@ -1134,10 +1130,10 @@ class QinlianRegisterController extends BaseController
         }
     }
 
-    private function uplaodInstal($table_id, $table_name, $files)
+    private function uplaodInstal($table_id, $table_name, $files, $code)
     {
         $model = new QinlianUplaod();
-        $model->code = time();
+        $model->code = $code;
         $file_path = __DIR__ . '/../web/uplaod/';
         foreach($files as $file) {
             $model->isNewRecord = true;
@@ -1159,7 +1155,7 @@ class QinlianRegisterController extends BaseController
 
         $condition['table_id'] = $table_id;
         $condition['table_name'] = $table_name;
-        $query = $query->select(['id','url', 'code'])->where($condition);
+        $query = $query->select(['id','url', 'code'])->where($condition)->orderBy('id DESC');
 
         $models = $query
             ->all();

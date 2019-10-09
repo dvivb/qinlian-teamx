@@ -23,8 +23,8 @@ class QinlianAnnex extends \backend\models\BaseModel
     {
         return [
             [['code', 'create_date', 'update_time'], 'safe'],
-            [['number', 'table_id', 'page', 'del_status'], 'integer'],
-            [['catalog', 'url'], 'string', 'max' => 60]
+            [['number', 'table_id', 'del_status'], 'integer'],
+            [['catalog', 'url', 'page'], 'string', 'max' => 60]
         ];
     }
 
@@ -217,11 +217,11 @@ class QinlianAnnex extends \backend\models\BaseModel
             'defaultValue' => '0',
             'enumValues' => null,
             'isPrimaryKey' => false,
-            'phpType' => 'integer',
-            'precision' => '3',
+            'phpType' => 'string',
+            'precision' => '30',
             'scale' => '',
-            'size' => '3',
-            'type' => 'integer',
+            'size' => '30',
+            'type' => 'string',
             'unsigned' => false,
             'label'=>$this->getAttributeLabel('page'),
             'inputType' => 'text',
