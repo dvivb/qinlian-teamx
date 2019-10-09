@@ -77,17 +77,23 @@ $modelLabel = new \backend\models\QinlianPetition();
                           <option>二级</option>
                           <option>三级</option>
                       </select>
-<!--                      <input type="text" class="form-control" id="query[rank_job]" name="query[rank_job]"  value="--><?//=isset($query["rank_job"]) ? $query["rank_job"] : "" ?><!--">-->
+
                   </div>
                   <div class="form-group" style="margin: 4px;">
                       <label><?=$modelLabel->getAttributeLabel('host_department')?>:</label>
                       <select class="form-control" name="query[host_department]" id="query[host_department]" class="form-control">
                           <option value="">全部</option>
-                          <option>科室一</option>
-                          <option>科室二</option>
-                          <option>科室三</option>
+                          <?php
+                          foreach ($departments as $department) {
+                              if ($query["host_department"]== $department->department){
+                                  echo '<option selected>'. $query["host_department"] .'</option>';
+                              }else{
+                                  echo '  <option>' . $department->department . '</option>';
+                              }
+                          }
+                          ?>
                       </select>
-<!--                      <input type="text" class="form-control" id="query[host_department]" name="query[host_department]"  value="--><?//=isset($query["host_department"]) ? $query["host_department"] : "" ?><!--">-->
+
                   </div>
               <div class="form-group"  style="float: right;">
               	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i> 搜   索</a>
@@ -448,11 +454,12 @@ $modelLabel = new \backend\models\QinlianPetition();
               <label for="host_department" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("host_department")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="host_department" name="QinlianPetition[host_department]">
-                      <option>科室一</option>
-                      <option>科室二</option>
-                      <option>科室三</option>
+                      <?php
+                      foreach ($departments as $department) {
+                          echo '  <option>' . $department->department . '</option>';
+                      }
+                      ?>
                   </select>
-                  <!--                  <input type="text" class="form-control" id="host_department" name="QinlianPetition[host_department]" placeholder="" />-->
               </div>
 
 

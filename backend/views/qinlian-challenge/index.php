@@ -74,7 +74,18 @@ $modelLabel = new \backend\models\QinlianChallenge();
                 </div>
                 <div class="form-group" style="margin: 4px;">
                     <label><?=$modelLabel->getAttributeLabel('host_department')?>:</label>
-                    <input type="text" class="form-control" id="query[host_department]" name="query[host_department]"  value="<?=isset($query["host_department"]) ? $query["host_department"] : "" ?>">
+                    <select class="form-control" name="query[host_department]" id="query[host_department]" class="form-control">
+                        <option value="">全部</option>
+                        <?php
+                        foreach ($departments as $department) {
+                            if ($query["host_department"]== $department->department){
+                                echo '<option selected>'. $query["host_department"] .'</option>';
+                            }else{
+                                echo '  <option>' . $department->department . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="form-group" style="margin: 4px;">
                     <label><?=$modelLabel->getAttributeLabel('transfer_organ')?>:</label>
@@ -422,7 +433,13 @@ $modelLabel = new \backend\models\QinlianChallenge();
 
                     <label for="host_department" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("host_department")?></label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="host_department" name="QinlianChallenge[host_department]" placeholder="" />
+                        <select class="form-control" id="host_department" name="QinlianChallenge[host_department]">
+                            <?php
+                            foreach ($departments as $department) {
+                                echo '  <option>' . $department->department . '</option>';
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="clearfix"></div>
                 </div>

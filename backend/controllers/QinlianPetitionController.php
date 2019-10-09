@@ -72,10 +72,13 @@ class QinlianPetitionController extends BaseController
         ->limit($pagination->limit)
         ->all();
 
+        $departments = $this->getDepartment();
+
         return $this->render('index', [
             'models'=>$models,
             'pages'=>$pagination,
             'query'=>$querys,
+            'departments'=>$departments,
         ]);
     }
 

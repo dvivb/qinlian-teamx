@@ -79,7 +79,18 @@ $modelLabel = new \backend\models\QinlianThread();
                 </div>
                 <div class="form-group" style="margin: 5px;">
                     <label><?=$modelLabel->getAttributeLabel('department_charge')?>:</label>
-                    <input type="text" class="form-control" id="query[department_charge]" name="query[department_charge]"  value="<?=isset($query["department_charge"]) ? $query["department_charge"] : "" ?>">
+                    <select class="form-control" name="query[department_charge]" id="query[department_charge]" class="form-control">
+                        <option value="">全部</option>
+                        <?php
+                        foreach ($departments as $department) {
+                            if ($query["department_charge"]== $department->department){
+                                echo '<option selected>'. $query["department_charge"] .'</option>';
+                            }else{
+                                echo '  <option>' . $department->department . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
               <div class="form-group" style="float: right;">
               	<a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i> 搜   索</a>
@@ -682,7 +693,13 @@ $modelLabel = new \backend\models\QinlianThread();
 
                 <label for="department_charge" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("department_charge")?></label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="department_charge" name="QinlianThread[department_charge]" placeholder="" />
+                    <select class="form-control" id="department_charge" name="QinlianThread[department_charge]">
+                        <?php
+                        foreach ($departments as $department) {
+                            echo '  <option>' . $department->department . '</option>';
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="clearfix"></div>
             </div>

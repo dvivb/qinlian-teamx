@@ -176,6 +176,7 @@ class QinlianUniqueController extends BaseController
             ->limit($RegisterPagination->limit)
             ->all();
 
+        $departments = $this->getDepartment();
         return $this->render('index', [
             'models'=>$models,
             'pages'=>$pagination,
@@ -186,6 +187,7 @@ class QinlianUniqueController extends BaseController
             'ThreadPages'=>$ThreadPagination,
             'RegisterModels'=>$RegisterModels,
             'RegisterPages'=>$RegisterPagination,
+            'departments'=>$departments,
         ]);
 
     }

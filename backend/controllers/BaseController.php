@@ -1,5 +1,6 @@
 <?php
 namespace backend\controllers;
+use backend\models\QinlianDepartment;
 use Yii;
 use yii\web\Controller;
 use yii\web\BadRequestHttpException;
@@ -97,6 +98,13 @@ class BaseController extends Controller
             }
         }
         return $rightActionData;
+    }
+
+    public function getDepartment()
+    {
+        $query = QinlianDepartment::find();
+        $models = $query->select('department')->all();;
+        return $models;
     }
 }
 

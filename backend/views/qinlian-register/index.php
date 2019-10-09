@@ -71,7 +71,18 @@ $modelLabel = new \backend\models\QinlianRegister();
                 </div>
                 <div class="form-group" style="margin: 4px;">
                     <label><?=$modelLabel->getAttributeLabel('department_charge')?>:</label>
-                    <input type="text" class="form-control" id="query[department_charge]" name="query[department_charge]"  value="<?=isset($query["department_charge"]) ? $query["department_charge"] : "" ?>">
+                    <select class="form-control" name="query[department_charge]" id="query[department_charge]" class="form-control">
+                        <option value="">全部</option>
+                        <?php
+                        foreach ($departments as $department) {
+                            if ($query["department_charge"]== $department->department){
+                                echo '<option selected>'. $query["department_charge"] .'</option>';
+                            }else{
+                                echo '  <option>' . $department->department . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="form-group" style="margin: 4px;">
                     <label><?=$modelLabel->getAttributeLabel('superiors_assigned')?>:</label>
@@ -1518,7 +1529,14 @@ $modelLabel = new \backend\models\QinlianRegister();
 
               <label for="department_charge" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("department_charge")?></label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="department_charge" name="QinlianRegister[department_charge]" placeholder="" />
+                  <select class="form-control" id="department_charge" name="QinlianRegister[department_charge]">
+                      <?php
+                      foreach ($departments as $department) {
+                          echo '  <option>' . $department->department . '</option>';
+                      }
+                      ?>
+                  </select>
+<!--                  <input type="text" class="form-control" id="department_charge" name="QinlianRegister[department_charge]" placeholder="" />-->
               </div>
 
               <div class="clearfix"></div>
