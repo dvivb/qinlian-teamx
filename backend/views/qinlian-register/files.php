@@ -27,7 +27,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                     <?php
                     foreach ($models as $model) {
                         echo '<tr id="rowid_' . $model->id . '">';
-                        echo '  <td width="10%" class="btbg font-center titfont" ><a target="_blank" href="/uplaod/' . $model->url . '"> <img width="300" height="300" src="/uplaod/' . $model->url . '"/></a>&nbsp;&nbsp;文件编号:'. $model->code .'</td>';
+                        echo '  <td width="10%" class="btbg font-center titfont" ><a target="_blank" href="/uplaod/' . $model->url . '"> <img width="300" height="300" src="/uplaod/' . $model->url . '"/></a>&nbsp;&nbsp;留档页码:'. $model->code .'</td>';
                         echo '</tr>';
                     }
 
@@ -40,6 +40,29 @@ $modelLabel = new \backend\models\QinlianRegister();
             </div>
         </div>
         <!-- /.row -->
+
+        <!-- row start -->
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="dataTables_info" id="data_table_info" role="status" aria-live="polite">
+                    <div class="infos">
+                        从<?= $pages->getPage() * $pages->getPageSize() + 1 ?>            		到 <?= ($pageCount = ($pages->getPage() + 1) * $pages->getPageSize()) < $pages->totalCount ?  $pageCount : $pages->totalCount?>            		 共 <?= $pages->totalCount?> 条记录</div>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="data_table_paginate">
+                    <?= \yii\widgets\LinkPager::widget([
+                        'pagination' => $pages,
+                        'nextPageLabel' => '»',
+                        'prevPageLabel' => '«',
+                        'firstPageLabel' => '首页',
+                        'lastPageLabel' => '尾页',
+                    ]); ?>
+
+                </div>
+            </div>
+        </div>
+        <!-- row end -->
     </section>
     <!-- /.content -->
 

@@ -34,6 +34,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                 <tr>
                     <th>案卷目录</th>
                     <th>页码</th>
+                    <th>创建时间</th>
                     <th>附属文件</th>
                     <th>操作</th>
                 </tr>
@@ -42,6 +43,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                     echo '<tr id="rowid_' . $model->id . '">';
                     echo '  <td width="10%" class="btbg font-center titfont" >' . $model->catalog . '</td>';
                     echo '  <td width="10%" class="btbg font-center titfont" >' . $model->page . '</td>';
+                    echo '  <td width="10%" class="btbg font-center titfont" >' . $model->create_date . '</td>';
                     $url = Url::toRoute('qinlian-register/files');
                     echo '  <td width="10%" class="right">';
                     echo '      <a id=""  class="btn btn-primary btn-sm" href="'. $url  .'&table_id='. $model->id .'&table_name=2" target="_self"> <i class="glyphicon glyphicon-save-file icon-white"></i>查看更多附属文件</a>';
@@ -61,6 +63,29 @@ $modelLabel = new \backend\models\QinlianRegister();
         </div>
     </div>
     <!-- /.row -->
+
+    <!-- row start -->
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="dataTables_info" id="data_table_info" role="status" aria-live="polite">
+                <div class="infos">
+                    从<?= $pages->getPage() * $pages->getPageSize() + 1 ?>            		到 <?= ($pageCount = ($pages->getPage() + 1) * $pages->getPageSize()) < $pages->totalCount ?  $pageCount : $pages->totalCount?>            		 共 <?= $pages->totalCount?> 条记录</div>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="data_table_paginate">
+                <?= LinkPager::widget([
+                    'pagination' => $pages,
+                    'nextPageLabel' => '»',
+                    'prevPageLabel' => '«',
+                    'firstPageLabel' => '首页',
+                    'lastPageLabel' => '尾页',
+                ]); ?>
+
+            </div>
+        </div>
+    </div>
+    <!-- row end -->
 </section>
 <!-- /.content -->
 
@@ -90,6 +115,7 @@ $modelLabel = new \backend\models\QinlianRegister();
                     <label for="url" class="col-sm-2 control-label">图片</label>
                     <div class="col-sm-4">
                         <input type="file" accept="image/jpeg" multiple="multiple" class="form-control" id="url" name="url[]"/>
+                        (单次上传限制20张内)
                     </div>
                     <div class="clearfix"></div>
                 </div>

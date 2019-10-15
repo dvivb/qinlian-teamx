@@ -561,12 +561,30 @@ class QinlianPetitionController extends BaseController
     public function actionAnnex($table_id, $type, $number)
     {
         $query = QinlianAnnex::find();
+        $querys = Yii::$app->request->get('query');
+
+        $parame = array();
 
         $condition['table_id'] = $table_id;
         $condition['type'] = $type;
-        $query = $query->select(['id','number','type', 'table_id', 'catalog','page'])->where($condition)->orderBy('catalog DESC, create_date DESC');
+        $query = $query->where($condition, $parame);
+
+        $pagination = new Pagination([
+                'totalCount' =>$query->count(),
+                'pageSize' => '10',
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page']
+        );
+
+        $orderby = Yii::$app->request->get('orderby', '');
+        if(empty($orderby) == false){
+            $query = $query->orderBy($orderby);
+        }
+
 
         $models = $query
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
             ->all();
 
         $querys['number'] = $number;
@@ -574,6 +592,7 @@ class QinlianPetitionController extends BaseController
         $querys['table_id'] = $table_id;
         return $this->render('annex', [
             'models'=>$models,
+            'pages'=>$pagination,
             'query'=>$querys,
         ]);
     }
@@ -596,7 +615,7 @@ class QinlianPetitionController extends BaseController
             $model->code = time();
             $model->catalog = $param['catalog'];
 
-            $code = Uuid::uuid();
+            $code = time();
             $model->page = $code;
 
             if(empty($model->code) == true){
@@ -669,18 +688,37 @@ class QinlianPetitionController extends BaseController
     public function actionFiles($table_id, $table_name)
     {
         $query = QinlianUplaod::find();
+        $querys = Yii::$app->request->get('query');
+
+        $parame = array();
 
         $condition['table_id'] = $table_id;
         $condition['table_name'] = $table_name;
-        $query = $query->select(['id','url', 'code'])->where($condition)->orderBy('id DESC');
+        $query = $query->where($condition, $parame);
+
+        $pagination = new Pagination([
+                'totalCount' =>$query->count(),
+                'pageSize' => '10',
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page']
+        );
+
+        $orderby = Yii::$app->request->get('orderby', 'id');
+        if(empty($orderby) == false){
+            $query = $query->orderBy($orderby);
+        }
+
 
         $models = $query
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
             ->all();
 
         $querys['table_id'] = $table_id;
         $querys['table_name'] = $table_name;
         return $this->render('files', [
             'models'=>$models,
+            'pages'=>$pagination,
             'query'=>$querys,
         ]);
     }

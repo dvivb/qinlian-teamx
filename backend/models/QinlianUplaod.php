@@ -24,7 +24,7 @@ class QinlianUplaod extends \backend\models\BaseModel
         return [
             [['create_date', 'update_time'], 'safe'],
             [['table_id', 'del_status'], 'integer'],
-            [['table_name', 'url', 'code'], 'string', 'max' => 60]
+            [['table_name', 'url'], 'string', 'max' => 60]
         ];
     }
 

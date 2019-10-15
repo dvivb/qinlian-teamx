@@ -24,7 +24,7 @@ class QinlianAnnex extends \backend\models\BaseModel
         return [
             [['code', 'create_date', 'update_time'], 'safe'],
             [['number', 'table_id', 'del_status'], 'integer'],
-            [['catalog', 'url', 'page'], 'string', 'max' => 60]
+            [['catalog', 'url'], 'string', 'max' => 60]
         ];
     }
 

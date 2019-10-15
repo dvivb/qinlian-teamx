@@ -100,7 +100,9 @@ class QinlianUniqueController extends BaseController
                             $RegisterCondition = " person_investigated LIKE :{$key} ";
                         }elseif ($key == 'case_keyword'){
                             $RegisterCondition = " brief_case_report LIKE :{$key} ";
-                        }else{
+                        }elseif ($key == 'id_card'){
+                            $RegisterCondition = " credentials_number LIKE :{$key} ";
+                        } else{
                             $RegisterCondition = " {$key} LIKE :{$key} ";
                         }
                     } else{
@@ -108,6 +110,8 @@ class QinlianUniqueController extends BaseController
                             $RegisterCondition = $RegisterCondition . " AND person_investigated LIKE :{$key} ";
                         }elseif ($key == 'case_keyword'){
                             $RegisterCondition = $RegisterCondition . " AND brief_case_report LIKE :{$key} ";
+                        }elseif ($key == 'id_card'){
+                            $RegisterCondition = $RegisterCondition . " AND credentials_number LIKE :{$key} ";
                         }else{
                             $RegisterCondition = $RegisterCondition . " AND {$key} LIKE :{$key} ";
                         }
