@@ -728,8 +728,8 @@ $modelLabel = new \backend\models\QinlianRegister();
               <label for="is_supervises_object" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("is_supervises_object")?></label>
               <div class="col-sm-4">
                   <select class="form-control" id="is_supervises_object" name="QinlianRegister[is_supervises_object]" >
-                      <option>党员</option>
-                      <option>非党员</option>
+                      <option>是</option>
+                      <option>否</option>
                   </select>
 <!--                  <input type="text" class="form-control" id="is_supervises_object" name="QinlianRegister[is_supervises_object]" placeholder="" />-->
               </div>
