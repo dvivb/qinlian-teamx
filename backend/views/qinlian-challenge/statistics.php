@@ -47,10 +47,10 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="clue_level" id="clue_level" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="1">一级</option>
-                                    <option value="2">二级</option>
-                                    <option value="3">三级</option>
+                                    <option value="">全部</option>
+                                    <option value="一级">一级</option>
+                                    <option value="二级">二级</option>
+                                    <option value="三级">三级</option>
                                 </select>
                             </div>
                         </div>
@@ -60,10 +60,10 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="clue_category" id="clue_category" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="1">一般</option>
-                                    <option value="2">违纪</option>
-                                    <option value="3">违法</option>
+                                    <option value="">全部</option>
+                                    <option value="一般">一般</option>
+                                    <option value="违纪">违纪</option>
+                                    <option value="违法">违法</option>
                                 </select>
                             </div>
                         </div>
@@ -75,10 +75,10 @@ $modelLabel = new \backend\models\QinlianPetition();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="duty_job" id="duty_job" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="1">一级</option>
-                                    <option value="2">二级</option>
-                                    <option value="3">三级</option>
+                                    <option value="">全部</option>
+                                    <option value="一级">一级</option>
+                                    <option value="二级">二级</option>
+                                    <option value="三级">三级</option>
                                 </select>
                             </div>
                         </div>
@@ -149,15 +149,15 @@ $modelLabel = new \backend\models\QinlianPetition();
     app.title = '折线图';
 
     option = {
+
         title : {
             text: '案件进度柱状图',
-            // subtext: '纯属虚构'
         },
         tooltip : {
             trigger: 'axis'
         },
         legend: {
-            data:['完成','未完成']
+            data: <?php echo json_encode($data['name'],true);?>
         },
         toolbox: {
             show : true,
@@ -172,7 +172,7 @@ $modelLabel = new \backend\models\QinlianPetition();
         xAxis : [
             {
                 type : 'category',
-                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                data : <?php echo json_encode($data['category'],true);?>
             }
         ],
         yAxis : [
@@ -180,40 +180,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                 type : 'value'
             }
         ],
-        series : [
-            {
-                name:'完成',
-                type:'bar',
-                data:[2, 5, 12, 26, 28, 60, 165, 162, 68, 18, 6, 4],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name: '平均值'}
-                    ]
-                }
-            },
-            {
-                name:'未完成',
-                type:'bar',
-                data:[3, 7, 9, 29, 28, 70, 175, 182, 48, 18, 6, 2],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name : '平均值'}
-                    ]
-                }
-            },
-        ]
+        series : <?php echo json_encode($data['series_bar'],true);?>
     };
 
 
@@ -234,7 +201,16 @@ $modelLabel = new \backend\models\QinlianPetition();
             trigger: 'axis'
         },
         legend: {
-            data:['完成','未完成']
+            data:<?php echo json_encode($data['name'],true);?>
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
         },
         grid: {
             left: '3%',
@@ -243,32 +219,23 @@ $modelLabel = new \backend\models\QinlianPetition();
             containLabel: true
         },
         toolbox: {
-            feature: {
-                saveAsImage: {}
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
             }
         },
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            data : <?php echo json_encode($data['category'],true);?>
         },
         yAxis: {
             type: 'value'
         },
-        series: [
-            {
-                name:'完成',
-                type:'line',
-                stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name:'未完成',
-                type:'line',
-                stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
-            },
-        ]
+        series: <?php echo json_encode($data['series_line'],true);?>
     };
 
 

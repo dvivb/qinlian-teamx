@@ -19,7 +19,7 @@ class QinlianPetitionService extends QinlianPetition{
         $params = [];
         $sql = "SELECT host_department,
         DATE_FORMAT(create_date, '%Y-%m' ) as yearmonth,
-        count(id) as count_tital
+        count(id) as count_total
         FROM qinlian_petition
         WHERE 1=1";
 
@@ -42,11 +42,6 @@ class QinlianPetitionService extends QinlianPetition{
             $sql .= " and host_department = :host_department";
             $params[":host_department"] = $condition["host_department"];
         }
-
-//        if (!empty($condition["duty_job"])) {
-//            $sql .= " and duty_job = :duty_job";
-//            $params[":duty_job"] = $condition["duty_job"];
-//        }
 
         if (!empty($condition["start_time"]) && !empty($condition["end_time"])) {
             $sql .= " and create_date between :start_time and :end_time";

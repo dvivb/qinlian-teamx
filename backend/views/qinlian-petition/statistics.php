@@ -90,10 +90,18 @@ $modelLabel = new \backend\models\QinlianPetition();
                             <div class="col-sm-8">
                                 <select class="form-control" name="host_department" id="host_department" class="form-control">
                                     <option value="">全部</option>
-                                    <option>科室一</option>
-                                    <option>科室二</option>
-                                    <option>科室三</option>
+                                    <?php
+
+                                    foreach ($departments as $department) {
+//                                        if ($query["host_department"]== $department->department){
+//                                            echo '<option selected>'. $query["host_department"] .'</option>';
+//                                        }else{
+                                            echo '  <option>' . $department->department . '</option>';
+//                                        }
+                                    }
+                                    ?>
                                 </select>
+
                             </div>
                         </div>
 
@@ -161,11 +169,7 @@ $modelLabel = new \backend\models\QinlianPetition();
 
 
 <?php $this->beginBlock('footer');  ?>
-<?php
-$var = json_encode($data,true);
 
-//var_dump($var);die;
-?>
 <!-- <body></body>后代码块 -->
 <script type="text/javascript">
     $('#sandbox-container .input-daterange').datepicker({
@@ -174,7 +178,6 @@ $var = json_encode($data,true);
     });
 
 
-    //data =  eval('('+ <?//=$var;?>//+')')
 
     var app = echarts.init(document.getElementById('main'));
 

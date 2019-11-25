@@ -2,10 +2,12 @@
 
 namespace backend\controllers;
 
+use backend\services\QinlianThreadService;
 use Yii;
 use yii\data\Pagination;
 use backend\models\QinlianThread;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -193,48 +195,50 @@ class QinlianThreadController extends BaseController
      */
     public function actionStatistics()
     {
-        $query = QinlianThread::find();
-        $querys = Yii::$app->request->get('query');
-        if(count($querys) > 0){
-            $condition = "";
-            $parame = array();
-            foreach($querys as $key=>$value){
-                $value = trim($value);
-                if(empty($value) == false){
-                    $parame[":{$key}"]=$value;
-                    if(empty($condition) == true){
-                        $condition = " {$key}=:{$key} ";
-                    }
-                    else{
-                        $condition = $condition . " AND {$key}=:{$key} ";
-                    }
-                }
-            }
-            if(count($parame) > 0){
-                $query = $query->where($condition, $parame);
-            }
+        $query = Yii::$app->request->post();
+        $ps = new QinlianThreadService();
+        $req = $ps->getStat($query);
+        $group = ArrayHelper::getColumn($req['group'],'superiors_assigned');
+        $category = ArrayHelper::getColumn($req['category'],'yearmonth');
+        $all_data = ArrayHelper::map($req['all_data'],'yearmonth', 'count_total', 'superiors_assigned');
+        $data['name'] = $group;
+        $data['category'] = $category;
+        $data['all_data'] = $all_data;
+
+        $category_def = [];
+        foreach ($data['category'] as $key => $val){
+            $category_def[$val] = 0;
         }
 
-        $pagination = new Pagination([
-                'totalCount' =>$query->count(),
-                'pageSize' => '10',
-                'pageParam'=>'page',
-                'pageSizeParam'=>'per-page']
-        );
-
-        $orderby = Yii::$app->request->get('orderby', '');
-        if(empty($orderby) == false){
-            $query = $query->orderBy($orderby);
+        $new_all_data = [];
+        foreach ($data['all_data'] as $key =>$val){
+            $new_val = $category_def;
+            foreach ($val as $k => $v){
+                $new_val[$k] =  $v;
+            }
+            $new_all_data[$key] = $new_val;
         }
 
-        $models = $query
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
+        $series_bar = [];
+        $series_line = [];
+        foreach ($new_all_data as $key => $val){
+            $serie['name'] = $key;
+            $serie['type'] = 'bar';
+            $serie['data'] =  array_values($val);
+            $series_bar[] = $serie;
+            $serie['type'] = 'line';
+            $series_line[] = $serie;
+        }
+
+        $data['series_bar'] = $series_bar;
+        $data['series_line'] = $series_line;
+
+        $data['all_data'] = $new_all_data;
+        return json_encode($data,true);
         return $this->render('statistics', [
-            'models'=>$models,
-            'pages'=>$pagination,
-            'query'=>$querys,
+            'data' => $data,
+            'query' => $query,
+            'departments'=> $this->getDepartment(),
         ]);
     }
 

@@ -47,10 +47,10 @@ $modelLabel = new \backend\models\QinlianRegister();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="is_discipline_transfer" id="is_discipline_transfer" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="0">未知</option>
-                                    <option value="1">党员</option>
-                                    <option value="2">非党员</option>
+                                    <option value="">全部</option>
+                                    <option value="未知">未知</option>
+                                    <option value="党员">党员</option>
+                                    <option value="非党员">非党员</option>
                                 </select>
                             </div>
                         </div>
@@ -60,10 +60,10 @@ $modelLabel = new \backend\models\QinlianRegister();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="is_supervises_object" id="is_supervises_object" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="0">未知</option>
-                                    <option value="1">是</option>
-                                    <option value="2"> 否</option>
+                                    <option value="">全部</option>
+                                    <option value="未知">未知</option>
+                                    <option value="是">是</option>
+                                    <option value="否">否</option>
                                 </select>
                             </div>
                         </div>
@@ -73,10 +73,10 @@ $modelLabel = new \backend\models\QinlianRegister();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="disciplinary_offence" id="disciplinary_offence" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="1">一般</option>
-                                    <option value="2">违纪</option>
-                                    <option value="3">违法</option>
+                                    <option value="">全部</option>
+                                    <option value="一般">一般</option>
+                                    <option value="违纪">违纪</option>
+                                    <option value="违法">违法</option>
                                 </select>
                             </div>
                         </div>
@@ -88,11 +88,32 @@ $modelLabel = new \backend\models\QinlianRegister();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="duty_job" id="duty_job" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="1">一级</option>
-                                    <option value="2">二级</option>
-                                    <option value="3">三级</option>
+                                    <option value="">全部</option>
+                                    <option value="一级">一级</option>
+                                    <option value="二级">二级</option>
+                                    <option value="三级">三级</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duty_job" class="col-sm-2 control-label">承办科室</label>
+
+                            <div class="col-sm-8">
+                                <select class="form-control" name="department_charge" id="department_charge" class="form-control">
+                                    <option value="">全部</option>
+                                    <?php
+
+                                    foreach ($departments as $department) {
+//                                        if ($query["host_department"]== $department->department){
+//                                            echo '<option selected>'. $query["host_department"] .'</option>';
+//                                        }else{
+                                        echo '  <option>' . $department->department . '</option>';
+//                                        }
+                                    }
+                                    ?>
+                                </select>
+
                             </div>
                         </div>
 
@@ -101,13 +122,13 @@ $modelLabel = new \backend\models\QinlianRegister();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="academic" id="academic" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="0">未知</option>
-                                    <option value="1">高中</option>
-                                    <option value="2">大专</option>
-                                    <option value="3">本科</option>
-                                    <option value="4">研究</option>
-                                    <option value="5">博士</option>
+                                    <option value="">全部</option>
+                                    <option value="未知">未知</option>
+                                    <option value="高中">高中</option>
+                                    <option value="大专">大专</option>
+                                    <option value="本科">本科</option>
+                                    <option value="研究">研究</option>
+                                    <option value="博士">博士</option>
                                 </select>
                             </div>
                         </div>
@@ -176,54 +197,38 @@ $modelLabel = new \backend\models\QinlianRegister();
     app.title = '折线图';
 
     option = {
-        title: {
-            text: '案管立案数量折线图'
+
+        title : {
+            text: '案管立案数量折线图',
         },
-        tooltip: {
+        tooltip : {
             trigger: 'axis'
         },
         legend: {
-            data:['科室一','科室二','科室三']
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+            data: <?php echo json_encode($data['name'],true);?>
         },
         toolbox: {
-            feature: {
-                saveAsImage: {}
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
             }
         },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
+        calculable : true,
+        xAxis : [
             {
-                name:'科室一',
-                type:'line',
-                stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
-            },
+                type : 'category',
+                data : <?php echo json_encode($data['category'],true);?>
+            }
+        ],
+        yAxis : [
             {
-                name:'科室二',
-                type:'line',
-                stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-                name:'科室三',
-                type:'line',
-                stack: '总量',
-                data:[150, 232, 201, 154, 190, 330, 410]
-            },
-        ]
+                type : 'value'
+            }
+        ],
+        series : <?php echo json_encode($data['series_bar'],true);?>
     };
 
 
@@ -244,7 +249,16 @@ $modelLabel = new \backend\models\QinlianRegister();
             trigger: 'axis'
         },
         legend: {
-            data:['科室一','科室二','科室三']
+            data:<?php echo json_encode($data['name'],true);?>
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
         },
         grid: {
             left: '3%',
@@ -253,38 +267,23 @@ $modelLabel = new \backend\models\QinlianRegister();
             containLabel: true
         },
         toolbox: {
-            feature: {
-                saveAsImage: {}
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
             }
         },
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            data : <?php echo json_encode($data['category'],true);?>
         },
         yAxis: {
             type: 'value'
         },
-        series: [
-            {
-                name:'科室一',
-                type:'line',
-                stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name:'科室二',
-                type:'line',
-                stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-                name:'科室三',
-                type:'line',
-                stack: '总量',
-                data:[150, 232, 201, 154, 190, 330, 410]
-            },
-        ]
+        series: <?php echo json_encode($data['series_line'],true);?>
     };
 
 

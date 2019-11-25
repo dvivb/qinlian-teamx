@@ -47,10 +47,10 @@ $modelLabel = new \backend\models\QinlianThread();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="is_nuit" id="is_nuit" class="form-control">
-                                    <option value="-1">全部</option>
+                                    <option value="">全部</option>
                                     <option value="0">未知</option>
-                                    <option value="1">是</option>
-                                    <option value="2"> 否</option>
+                                    <option value="是">是</option>
+                                    <option value="否">否</option>
                                 </select>
                             </div>
                         </div>
@@ -60,10 +60,10 @@ $modelLabel = new \backend\models\QinlianThread();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="is_supervises_object" id="is_supervises_object" class="form-control">
-                                    <option value="-1">全部</option>
-                                    <option value="0">未知</option>
-                                    <option value="1">是</option>
-                                    <option value="2"> 否</option>
+                                    <option value="">全部</option>
+                                    <option value="未知">未知</option>
+                                    <option value="是">是</option>
+                                    <option value="否">否</option>
                                 </select>
                             </div>
                         </div>
@@ -88,7 +88,7 @@ $modelLabel = new \backend\models\QinlianThread();
 
                             <div class="col-sm-8">
                                 <select class="form-control" name="disciplinary_offence" id="disciplinary_offence" class="form-control">
-                                    <option value="-1">全部</option>
+                                    <option value="">全部</option>
                                     <option value="1">一般</option>
                                     <option value="2">违纪</option>
                                     <option value="3">违法</option>
@@ -152,15 +152,15 @@ $modelLabel = new \backend\models\QinlianThread();
     app.title = '折线图';
 
     option = {
+
         title : {
             text: '案管线索上级交办柱状图',
-            // subtext: '纯属虚构'
         },
         tooltip : {
             trigger: 'axis'
         },
         legend: {
-            data:['一级','二级','三级']
+            data: <?php echo json_encode($data['name'],true);?>
         },
         toolbox: {
             show : true,
@@ -175,7 +175,7 @@ $modelLabel = new \backend\models\QinlianThread();
         xAxis : [
             {
                 type : 'category',
-                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                data : <?php echo json_encode($data['category'],true);?>
             }
         ],
         yAxis : [
@@ -183,56 +183,7 @@ $modelLabel = new \backend\models\QinlianThread();
                 type : 'value'
             }
         ],
-        series : [
-            {
-                name:'一级',
-                type:'bar',
-                data:[2, 5, 12, 26, 28, 60, 165, 162, 68, 18, 6, 4],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name: '平均值'}
-                    ]
-                }
-            },
-            {
-                name:'二级',
-                type:'bar',
-                data:[3, 7, 9, 29, 28, 70, 175, 182, 48, 18, 6, 2],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name : '平均值'}
-                    ]
-                }
-            },
-            {
-                name:'三级',
-                type:'bar',
-                data:[2, 5, 7, 22, 26, 40, 135, 162, 38, 28, 16, 12],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name : '平均值'}
-                    ]
-                }
-            }
-        ]
+        series : <?php echo json_encode($data['series_bar'],true);?>
     };
 
 
@@ -253,7 +204,16 @@ $modelLabel = new \backend\models\QinlianThread();
             trigger: 'axis'
         },
         legend: {
-            data:['一级','科室二','三级']
+            data:<?php echo json_encode($data['name'],true);?>
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
         },
         grid: {
             left: '3%',
@@ -262,38 +222,23 @@ $modelLabel = new \backend\models\QinlianThread();
             containLabel: true
         },
         toolbox: {
-            feature: {
-                saveAsImage: {}
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
             }
         },
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            data : <?php echo json_encode($data['category'],true);?>
         },
         yAxis: {
             type: 'value'
         },
-        series: [
-            {
-                name:'一级',
-                type:'line',
-                stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name:'二级',
-                type:'line',
-                stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-                name:'三级',
-                type:'line',
-                stack: '总量',
-                data:[150, 232, 201, 154, 190, 330, 410]
-            },
-        ]
+        series: <?php echo json_encode($data['series_line'],true);?>
     };
 
 

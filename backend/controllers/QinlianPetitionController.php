@@ -202,75 +202,16 @@ class QinlianPetitionController extends BaseController
         }
     }
 
-    /**
-     * Statistics all models.
-     * @return mixed
-     */
-    public function actionStatisticsb()
-    {
-        $query = QinlianPetition::find();
-        $querys = Yii::$app->request->post();
-
-        $start = empty($querys['start'])? '2019-7-1' : $querys['start'];
-        $end = empty($querys['end'])? '2019-8-31' : $querys['end'];
-
-        unset($querys['start']);
-        unset($querys['end']);
-//        var_dump($start);die;
-        if(count($querys) > 0){
-            $condition = "";
-            $parame = array();
-            foreach($querys as $key=>$value){
-                $value = trim($value);
-                if($value != 'start' || $value != 'end'){
-                    if(empty($value) == false){
-                        $parame[":{$key}"]=$value;
-                        if(empty($condition) == true){
-                            $condition = " {$key}=:{$key} ";
-                        }
-                        else{
-                            $condition = $condition . " AND {$key}=:{$key} ";
-                        }
-                    }
-                }else{
-                }
-            }
-            if(count($parame) > 0){
-                $query = $query->where($condition, $parame);
-            }
-        }
-
-        $query = $query->andwhere('receipt_time between '. $start .' and ' . $end );
-
-
-//        $orderby = Yii::$app->request->get('orderby', '');
-//        if(empty($orderby) == false){
-//            $query = $query->orderBy($orderby);
-//        }
-
-        $data = $query->select('count(id) as total, host_department')->groupBy('host_department')->one();
-//        $sql = $query->createCommand()->getSql();var_dump($sql);die();
-//        var_dump($data);die;
-
-//        $sql = $query->createCommand()->getSql();
-//        var_dump($sql);die();
-//        var_dump($models);die;
-        return $this->render('statistics', [
-            'query'=>$querys,
-        ]);
-    }
 
     public function actionStatistics()
     {
-        $querys = Yii::$app->request->post();
+        $query = Yii::$app->request->post();
         $ps = new QinlianPetitionService();
-        $req = $ps->getStat($querys);
+        $req = $ps->getStat($query);
         $group = ArrayHelper::getColumn($req['group'],'host_department');
         $category = ArrayHelper::getColumn($req['category'],'yearmonth');
-        $all_data = ArrayHelper::map($req['all_data'],'yearmonth', 'count_tital', 'host_department');
-//        $count_tital = ArrayHelper::index($req,'yearmonth', ['host_department']);
-//        echo '<pre>';
-//        var_dump($data);
+        $all_data = ArrayHelper::map($req['all_data'],'yearmonth', 'count_total', 'host_department');
+
         $data['name'] = $group;
         $data['category'] = $category;
         $data['all_data'] = $all_data;
@@ -282,7 +223,6 @@ class QinlianPetitionController extends BaseController
 
         $new_all_data = [];
         foreach ($data['all_data'] as $key =>$val){
-//
             $new_val = $category_def;
             foreach ($val as $k => $v){
                 $new_val[$k] =  $v;
@@ -304,16 +244,15 @@ class QinlianPetitionController extends BaseController
         $data['series_bar'] = $series_bar;
         $data['series_line'] = $series_line;
 
-//        echo '<pre>';var_dump($series);die;
-//        echo '<pre>';var_dump($category_def);die;
-//        echo '<pre>';var_dump($new_all_data);die;
-//        echo '<pre>';var_dump($new_all_data);die;
         $data['all_data'] = $new_all_data;
 //        return json_encode($data,true);
         return $this->render('statistics', [
-            'data'=>$data,
+            'data' => $data,
+            'query' => $query,
+            'departments'=> $this->getDepartment(),
         ]);
     }
+
     public function actionImport()
     {
         if (Yii::$app->request->isPost && isset($_FILES['importExcelFile']['tmp_name'])) {
