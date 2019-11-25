@@ -108,9 +108,9 @@ $modelLabel = new \backend\models\QinlianPetition();
 <!--                                -->
 <!--                            </div>-->
                             <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" class="input-sm form-control" name="start" data-provide="datepicker" data-date-format="yyyy-mm"/>
+                                <input type="text" class="input-sm form-control" name="start_time" data-provide="datepicker" data-date-format="yyyy-mm"/>
                                 <span class="input-group-addon">to</span>
-                                <input type="text" class="input-sm form-control" name="end" data-provide="datepicker" data-date-format="yyyy-mm"/>
+                                <input type="text" class="input-sm form-control" name="end_time" data-provide="datepicker" data-date-format="yyyy-mm"/>
                             </div>
                             <!-- /.input group -->
                         </div>
@@ -161,6 +161,11 @@ $modelLabel = new \backend\models\QinlianPetition();
 
 
 <?php $this->beginBlock('footer');  ?>
+<?php
+$var = json_encode($data,true);
+
+//var_dump($var);die;
+?>
 <!-- <body></body>后代码块 -->
 <script type="text/javascript">
     $('#sandbox-container .input-daterange').datepicker({
@@ -168,20 +173,23 @@ $modelLabel = new \backend\models\QinlianPetition();
         autoclose: true
     });
 
+
+    //data =  eval('('+ <?//=$var;?>//+')')
+
     var app = echarts.init(document.getElementById('main'));
 
     app.title = '折线图';
 
     option = {
+
         title : {
             text: '信访承办科室柱状图',
-            // subtext: '纯属虚构'
         },
         tooltip : {
             trigger: 'axis'
         },
         legend: {
-            data:['科室一','科室二','科室三']
+            data: <?php echo json_encode($data['name'],true);?>
         },
         toolbox: {
             show : true,
@@ -196,7 +204,7 @@ $modelLabel = new \backend\models\QinlianPetition();
         xAxis : [
             {
                 type : 'category',
-                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                data : <?php echo json_encode($data['category'],true);?>
             }
         ],
         yAxis : [
@@ -204,56 +212,7 @@ $modelLabel = new \backend\models\QinlianPetition();
                 type : 'value'
             }
         ],
-        series : [
-            {
-                name:'科室一',
-                type:'bar',
-                data:[2, 5, 12, 26, 28, 60, 165, 162, 68, 18, 6, 4],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name: '平均值'}
-                    ]
-                }
-            },
-            {
-                name:'科室二',
-                type:'bar',
-                data:[3, 7, 9, 29, 28, 70, 175, 182, 48, 18, 6, 2],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name : '平均值'}
-                    ]
-                }
-            },
-            {
-                name:'科室三',
-                type:'bar',
-                data:[2, 5, 7, 22, 26, 40, 135, 162, 38, 28, 16, 12],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name : '平均值'}
-                    ]
-                }
-            }
-        ]
+        series : <?php echo json_encode($data['series_bar'],true);?>
     };
 
 
@@ -274,7 +233,16 @@ $modelLabel = new \backend\models\QinlianPetition();
             trigger: 'axis'
         },
         legend: {
-            data:['科室一','科室二','科室三']
+            data:<?php echo json_encode($data['name'],true);?>
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
         },
         grid: {
             left: '3%',
@@ -283,38 +251,23 @@ $modelLabel = new \backend\models\QinlianPetition();
             containLabel: true
         },
         toolbox: {
-            feature: {
-                saveAsImage: {}
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
             }
         },
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            data : <?php echo json_encode($data['category'],true);?>
         },
         yAxis: {
             type: 'value'
         },
-        series: [
-            {
-                name:'科室一',
-                type:'line',
-                stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name:'科室二',
-                type:'line',
-                stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-                name:'科室三',
-                type:'line',
-                stack: '总量',
-                data:[150, 232, 201, 154, 190, 330, 410]
-            },
-        ]
+        series: <?php echo json_encode($data['series_line'],true);?>
     };
 
 

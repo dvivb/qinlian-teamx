@@ -5,12 +5,14 @@ namespace backend\controllers;
 use backend\models\QinlianAnnex;
 use backend\models\QinlianUplaod;
 use backend\models\UploadForm;
+use backend\services\QinlianPetitionService;
 use Faker\Provider\Uuid;
 use Yii;
 use yii\data\Pagination;
 use backend\models\QinlianPetition;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -204,7 +206,7 @@ class QinlianPetitionController extends BaseController
      * Statistics all models.
      * @return mixed
      */
-    public function actionStatistics()
+    public function actionStatisticsb()
     {
         $query = QinlianPetition::find();
         $querys = Yii::$app->request->post();
@@ -258,6 +260,60 @@ class QinlianPetitionController extends BaseController
         ]);
     }
 
+    public function actionStatistics()
+    {
+        $querys = Yii::$app->request->post();
+        $ps = new QinlianPetitionService();
+        $req = $ps->getStat($querys);
+        $group = ArrayHelper::getColumn($req['group'],'host_department');
+        $category = ArrayHelper::getColumn($req['category'],'yearmonth');
+        $all_data = ArrayHelper::map($req['all_data'],'yearmonth', 'count_tital', 'host_department');
+//        $count_tital = ArrayHelper::index($req,'yearmonth', ['host_department']);
+//        echo '<pre>';
+//        var_dump($data);
+        $data['name'] = $group;
+        $data['category'] = $category;
+        $data['all_data'] = $all_data;
+
+        $category_def = [];
+        foreach ($data['category'] as $key => $val){
+            $category_def[$val] = 0;
+        }
+
+        $new_all_data = [];
+        foreach ($data['all_data'] as $key =>$val){
+//
+            $new_val = $category_def;
+            foreach ($val as $k => $v){
+                $new_val[$k] =  $v;
+            }
+            $new_all_data[$key] = $new_val;
+        }
+
+        $series_bar = [];
+        $series_line = [];
+        foreach ($new_all_data as $key => $val){
+            $serie['name'] = $key;
+            $serie['type'] = 'bar';
+            $serie['data'] =  array_values($val);
+            $series_bar[] = $serie;
+            $serie['type'] = 'line';
+            $series_line[] = $serie;
+        }
+
+        $data['series_bar'] = $series_bar;
+        $data['series_line'] = $series_line;
+
+//        echo '<pre>';var_dump($series);die;
+//        echo '<pre>';var_dump($category_def);die;
+//        echo '<pre>';var_dump($new_all_data);die;
+//        echo '<pre>';var_dump($new_all_data);die;
+        $data['all_data'] = $new_all_data;
+//        return json_encode($data,true);
+        return $this->render('statistics', [
+            'data'=>$data,
+        ]);
+    }
     public function actionImport()
     {
         if (Yii::$app->request->isPost && isset($_FILES['importExcelFile']['tmp_name'])) {
