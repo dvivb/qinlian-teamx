@@ -234,7 +234,7 @@ class QinlianThreadController extends BaseController
         $data['series_line'] = $series_line;
 
         $data['all_data'] = $new_all_data;
-        return json_encode($data,true);
+//        return json_encode($data,true);
         return $this->render('statistics', [
             'data' => $data,
             'query' => $query,
