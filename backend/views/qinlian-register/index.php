@@ -34,10 +34,60 @@ $modelLabel = new \backend\models\QinlianRegister();
                   |
                   <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile"><i class="glyphicon glyphicon-import icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;入</button>
                   |
-                  <a href="<?=Url::toRoute('qinlian-register/export')?>" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-export icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;出</a>
+                  <a onclick="exportAction()" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-export icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;出</a>
                   |
                   <button id="delete_btn" type="button" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;&nbsp;批量删除</button>
               </div>
+
+              <!-- row start export-->
+              <div class="row" style="display: none;">
+                  <div class="col-sm-12">
+                      <?php ActiveForm::begin(['id' => 'qinlian-register-export-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('qinlian-register/export')]); ?>
+
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('number')?>:</label>
+                          <input type="text" class="form-control" id="query[number]" name="query[number]"  value="<?=isset($query["number"]) ? $query["number"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('nuit_name')?>:</label>
+                          <input type="text" class="form-control" id="query[nuit_name]" name="query[nuit_name]"  value="<?=isset($query["nuit_name"]) ? $query["nuit_name"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('case_code')?>:</label>
+                          <input type="text" class="form-control" id="query[case_code]" name="query[case_code]"  value="<?=isset($query["case_code"]) ? $query["case_code"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('credentials_number')?>:</label>
+                          <input type="text" class="form-control" id="query[credentials_number]" name="query[credentials_number]"  value="<?=isset($query["credentials_number"]) ? $query["credentials_number"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('discipline_organ')?>:</label>
+                          <input type="text" class="form-control" id="query[discipline_organ]" name="query[discipline_organ]"  value="<?=isset($query["discipline_organ"]) ? $query["discipline_organ"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('department_charge')?>:</label>
+                          <select class="form-control" name="query[department_charge]" id="query[department_charge]" class="form-control">
+                              <option value="">全部</option>
+                              <?php
+                              foreach ($departments as $department) {
+                                  if ($query["department_charge"]== $department->department){
+                                      echo '<option selected>'. $query["department_charge"] .'</option>';
+                                  }else{
+                                      echo '  <option>' . $department->department . '</option>';
+                                  }
+                              }
+                              ?>
+                          </select>
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('superiors_assigned')?>:</label>
+                          <input type="text" class="form-control" id="query[superiors_assigned]" name="query[superiors_assigned]"  value="<?=isset($query["superiors_assigned"]) ? $query["superiors_assigned"] : "" ?>">
+                      </div>
+                      <?php ActiveForm::end(); ?>
+                  </div>
+              </div>
+              <!-- row end export -->
+
           </div>
         </div>
         <!-- /.box-header -->
@@ -1697,6 +1747,9 @@ function orderby(field, op){
  function searchAction(){
 		$('#qinlian-register-search-form').submit();
 	}
+function exportAction(){
+    $('#qinlian-register-export-form').submit();
+}
  function viewAction(id){
 		initModel(id, 'view', 'fun');
 	}

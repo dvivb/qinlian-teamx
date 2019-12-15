@@ -34,10 +34,67 @@ $modelLabel = new \backend\models\QinlianPetition();
                   |
                   <button id="import_btn" type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#uploadFile"><i class="glyphicon glyphicon-import icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;入</button>
                   |
-                  <a href="<?=Url::toRoute('qinlian-petition/export')?>" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-export icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;出</a>
+                  <a onclick="exportAction()" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-export icon-white"></i>&nbsp;&nbsp;导&nbsp;&emsp;出</a>
                   |
                   <button id="delete_btn" type="button" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;&nbsp;批量删除</button>
               </div>
+              <!-- row start export-->
+              <div class="row" style="display: none;">
+                  <div class="col-sm-12">
+                      <?php ActiveForm::begin(['id' => 'qinlian-petition-export-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('qinlian-petition/export')]); ?>
+
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('number')?>:</label>
+                          <input type="text" class="form-control" id="query[number]" name="query[number]"  value="<?=isset($query["number"]) ? $query["number"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('name_report')?>:</label>
+                          <input type="text" class="form-control" id="query[name_report]" name="query[name_report]"  value="<?=isset($query["name_report"]) ? $query["name_report"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('transfer_organ')?>:</label>
+                          <input type="text" class="form-control" id="query[transfer_organ]" name="query[transfer_organ]"  value="<?=isset($query["transfer_organ"]) ? $query["transfer_organ"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('name_reported')?>:</label>
+                          <input type="text" class="form-control" id="query[name_reported]" name="query[name_reported]"  value="<?=isset($query["name_reported"]) ? $query["name_reported"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('unit_job')?>:</label>
+                          <input type="text" class="form-control" id="query[unit_job]" name="query[unit_job]"  value="<?=isset($query["unit_job"]) ? $query["unit_job"] : "" ?>">
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('rank_job')?>:</label>
+                          <select class="form-control" id="duty_job" id="query[rank_job]" name="query[rank_job]">
+                              <option value="">全部</option>
+                              <option>一级</option>
+                              <option>二级</option>
+                              <option>三级</option>
+                          </select>
+
+                      </div>
+                      <div class="form-group" style="margin: 4px;">
+                          <label><?=$modelLabel->getAttributeLabel('host_department')?>:</label>
+                          <select class="form-control" name="query[host_department]" id="query[host_department]" class="form-control">
+                              <option value="">全部</option>
+                              <?php
+                              foreach ($departments as $department) {
+                                  if ($query["host_department"]== $department->department){
+                                      echo '<option selected>'. $query["host_department"] .'</option>';
+                                  }else{
+                                      echo '  <option>' . $department->department . '</option>';
+                                  }
+                              }
+                              ?>
+                          </select>
+
+                      </div>
+                      <div class="form-group"  style="float: right;">
+                      </div>
+                      <?php ActiveForm::end(); ?>
+                  </div>
+              </div>
+              <!-- row end export -->
           </div>
         </div>
         <!-- /.box-header -->
@@ -47,7 +104,7 @@ $modelLabel = new \backend\models\QinlianPetition();
             <!-- row start search-->
           	<div class="row">
           	<div class="col-sm-12">
-                <?php ActiveForm::begin(['id' => 'qinlian-petition-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('qinlian-petition/index')]); ?>     
+                <?php ActiveForm::begin(['id' => 'qinlian-petition-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('qinlian-petition/index')]); ?>
                 
                   <div class="form-group" style="margin: 4px;">
                       <label><?=$modelLabel->getAttributeLabel('number')?>:</label>
@@ -640,6 +697,16 @@ function orderby(field, op){
  function searchAction(){
 		$('#qinlian-petition-search-form').submit();
 	}
+
+function exportAction(){
+    ////var url = "<?////=Url::toRoute('qinlian-petition/export')?>////";
+    //var export_url = "<?//=Url::toRoute('qinlian-petition/export')?>//";
+    //// alert(1)
+    //$('#qinlian-petition-search-form').attr("action", export_url);
+    //$('#query[number]').val('qinlian-petition/export');
+    $('#qinlian-petition-export-form').submit();
+}
+
  function viewAction(id){
 		initModel(id, 'view', 'fun');
 	}

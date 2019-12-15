@@ -582,8 +582,27 @@ class QinlianRegisterController extends BaseController
     public function actionExport()
     {
         $query = QinlianRegister::find();
-        $data = $query
-            ->all();
+        $querys = Yii::$app->request->get('query');
+        if(empty($querys)== false && count($querys) > 0){
+            $condition = "";
+            $parame = array();
+            foreach($querys as $key=>$value){
+                $value = trim($value);
+                if(empty($value) == false){
+                    $parame[":{$key}"]= '%'.$value.'%';
+                    if(empty($condition) == true){//
+                        $condition = " {$key} LIKE :{$key} ";
+                    }
+                    else{
+                        $condition = $condition . " AND {$key} LIKE :{$key} ";
+                    }
+                }
+            }
+            if(count($parame) > 0){
+                $query = $query->where($condition, $parame);
+            }
+        }
+        $data = $query->limit(1000)->all();
 
         $spreadsheet = new Spreadsheet();
         $spreadsheet->getActiveSheet()->mergeCells('A1:EG2')->setCellValue('A1', date('Y'). '案管立案导出数据');
